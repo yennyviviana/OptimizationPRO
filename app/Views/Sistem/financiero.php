@@ -67,7 +67,6 @@
             <canvas id="miGraficoCircular" width="400" height="400"></canvas>
         </div>
     </div>
-
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <h2 class="mb-4">Listado de Pedidos</h2>
       <div class="table-responsive">
@@ -91,52 +90,46 @@
               <td>Efectivo</td>
               <td>Finanzas</td>
               <td>
-                <button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detalles</button>
-                <button type="button" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</button>
-                <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Borrar</button>
+                <div class="btn-group" role="group" aria-label="Acciones">
+                  <button type="button" class="btn btn-outline-success btn-lg" data-toggle="tooltip" data-placement="top" title="Ver Detalles"><i class="fas fa-eye"></i></button>
+                  <button type="button" class="btn btn-outline-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-lg ml-2" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fas fa-trash-alt"></i></button>
+                </div>
               </td>
             </tr>
-            <td>1</td>
-            <td>Se despacha la venta al cliente A</td>
-            <td>Analisis financiero solo para la empresa A</td>
-            <td>Efectivo</td>
-            <td>Finanzas</td>
-            <td>
-              <button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detalles</button>
-              <button type="button" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</button>
-              <button type="button" class="btn btn-danger btn-sm ml-2"><i class="fas fa-trash-alt"></i> Borrar</button>
-
-            </td>
-          </tr>
-          <td>2</td>
+            <tr>
+              <td>2</td>
               <td>Se despacha la venta al cliente A</td>
               <td>Analisis financiero solo para la empresa A</td>
               <td>Efectivo</td>
               <td>Finanzas</td>
               <td>
-                <button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detalles</button>
-                <button type="button" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</button>
-                <button type="button" class="btn btn-danger btn-sm ml-2"><i class="fas fa-trash-alt"></i> Borrar</button>
-
+                <div class="btn-group" role="group" aria-label="Acciones">
+                  <button type="button" class="btn btn-outline-success btn-lg" data-toggle="tooltip" data-placement="top" title="Ver Detalles"><i class="fas fa-eye"></i></button>
+                  <button type="button" class="btn btn-outline-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-lg ml-2" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fas fa-trash-alt"></i></button>
+                </div>
               </td>
             </tr>
-            <td>3</td>
+            <tr>
+              <td>3</td>
               <td>Se despacha la venta al cliente A</td>
               <td>Analisis financiero solo para la empresa A</td>
               <td>Efectivo</td>
               <td>Finanzas</td>
               <td>
-                <button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Detalles</button>
-                <button type="button" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</button>
-                <button type="button" class="btn btn-danger btn-sm ml-2"><i class="fas fa-trash-alt"></i> Borrar</button>
-
+                <div class="btn-group" role="group" aria-label="Acciones">
+                  <button type="button" class="btn btn-outline-success btn-lg" data-toggle="tooltip" data-placement="top" title="Ver Detalles"><i class="fas fa-eye"></i></button>
+                  <button type="button" class="btn btn-outline-warning btn-lg" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger btn-lg ml-2" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fas fa-trash-alt"></i></button>
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </main>
-  
+    
   <script>
     
 

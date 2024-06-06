@@ -1,3 +1,19 @@
+<?php
+
+    session_start();
+
+
+    if(!isset($_SESSION['id_usuario'])){
+        header("Location: index.php");
+    }
+    
+    $nombre_usuario     = $_SESSION['nombre_usuario'];
+    $correo_electronico     = $_SESSION['correo_electronico'];
+    $tipo_usuario     = $_SESSION['tipo_usuario'];
+
+  
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -10,7 +26,6 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   <script src="https://unpkg.com/feather-icons"></script>
-    <link href="public/css/style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
 <style>
@@ -29,6 +44,8 @@ body.dark-theme {
 }
 }
 </style>
+
+
     <div class="container">
 
       <div class="container-fluid">
@@ -42,6 +59,10 @@ body.dark-theme {
                     Home<span class="sr-only">(current)</span>
                   </a>
                 </li>
+
+                <!--************************INICIA MENÚ ADMINISTRADOR************************-->
+
+              <?php if($tipo_usuario == 9) { ?>
                 <li class="nav-item">
                   <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/pedido.html">
                     <span data-feather="shopping-cart"></span>
@@ -89,20 +110,36 @@ body.dark-theme {
               </ul>
             </div>
           </nav>
-      
+          <?php } ?>
+
+          
+
+<!--************************MENÚ************************-->
+    <?php if($tipo_usuario == 2) { ?>
+   
+   <?php } ?>
+
+<!--************************MENÚ VENTANILLA - NUEVA - MOVIMIENTOS************************-->
+
+   <?php if($tipo_usuario == 3) { ?>
+  
+   <?php } ?>
+
+
           <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Sistema Empresarial</h1>
               <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
-                  <button class="btn btn-sm btn-outline-secondary">Agregar Elemento</button>
+               <button class="btn btn-sm btn-outline-secondary">Agregar Elemento</button>
                 </div>
               
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
                   <span data-feather="moon"></span> Cambiar Tema
                 </button>
-                
+        </div>
+    </div>
               </div>
             </div>
       
