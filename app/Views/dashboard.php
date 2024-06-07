@@ -63,53 +63,61 @@ body.dark-theme {
                 <!--************************INICIA MENÚ ADMINISTRADOR************************-->
 
               <?php if($tipo_usuario == 9) { ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/pedido.html">
-                    <span data-feather="shopping-cart"></span>
-                    Pedidos
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/inventario.html">
-                    <span data-feather="box"></span>
-                    Inventarios
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/administracion.html">
-                    <span data-feather="settings"></span>
-                    Administracion
-                  </a>
-                </li>
-                <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/financiero.html">
-                    <span data-feather="bar-chart-2"></span>
-                    Financiero
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/compra.html">
-                    <span data-feather="shopping-bag"></span>
-                    Compras
-                  </a>
-                </li>
-              </ul>
-      
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Usuario</span>
-                <a class="d-flex align-items-center text-muted" href="#">
-                  <span data-feather="settings"></span>
-                </a>
-              </h6>
-              <ul class="nav flex-column mb-2">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="user"></span>
-                    Perfil
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+                <nav>
+  <div class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Orders/create.php">
+          <span data-feather="shopping-cart"></span>
+          Pedidos
+        </a>
+      </li>
+    </ul>
+  </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/">
+          <span data-feather="box"></span>
+          Inventarios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/administracion.html">
+          <span data-feather="settings"></span>
+          Administracion
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/financiero.html">
+          <span data-feather="bar-chart-2"></span>
+          Financiero
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/compra.html">
+          <span data-feather="shopping-bag"></span>
+          Compras
+        </a>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Usuario</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="settings"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="user"></span>
+          Perfil
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
           <?php } ?>
 
           

@@ -3,49 +3,45 @@
 date_default_timezone_set("America/Bogota");
 require_once('Config/database.php');
 
+
 // If form submitted, insert values into the database
-if (isset($_POST['nombre_usuario'], $_POST['apellido_usuario'], $_POST['correo_electronico'], $_POST['contrasena'])) {
-    $nombre_usuario = mysqli_real_escape_string($mysqli, stripslashes($_POST['nombre_usuario']));
-    $apellido_usuario = mysqli_real_escape_string($mysqli, stripslashes($_POST['apellido_usuario']));
-    $correo_electronico = mysqli_real_escape_string($mysqli, stripslashes($_POST['correo_electronico']));
-    $contrasena = mysqli_real_escape_string($mysqli, stripslashes($_POST['contrasena']));
+if (isset($_REQUEST['nombre_usuario'])){
+    $nombre_usuario = stripslashes($_POST['nombre_usuario']); // removes backslashes
+    $apellido_usuario = stripslashes($_POST['apellido_usuario']);
+    $correo_electronico = stripslashes($_POST['correo_electronico']);
+    $contrasena = stripslashes($_POST['contrasena']);
     $tipo_usuario = 9;
 
-    // Validar correo electrónico
-    if (!filter_var($correo_electronico, FILTER_VALIDATE_EMAIL)) {
-        echo "<center><p style='border-radius: 20px;box-shadow: 10px 10px 5px #c68615; font-size: 23px; font-weight: bold;'>El correo electrónico no es válido.</p></center>";
-        exit;
-    }
 
-    // Verificar si el usuario ya existe
+    // Escapar caracteres especiales para evitar SQL Injection
+    if (isset($_REQUEST['nombre_usuario'])){
+    $nombre_usuario = mysqli_real_escape_string($mysqli, $nombre_usuario);
+    $apellido_usuario = mysqli_real_escape_string($mysqli, $apellido_usuario);
+    $correo_electronico = mysqli_real_escape_string($mysqli, $correo_electronico);
+    $contrasena = mysqli_real_escape_string($mysqli, $contrasena);
+    $tipo_usuario = 9;
+
+    
+
+    // Check if the username already exists in the database
     $check_query = "SELECT * FROM usuarios WHERE nombre_usuario = '$nombre_usuario'";
     $check_result = mysqli_query($mysqli, $check_query);
-    
+
     if (mysqli_num_rows($check_result) > 0) {
-        echo "<center><p style='border-radius: 20px;box-shadow: 10px 10px 5px #c68615; font-size: 23px; font-weight: bold;'>El usuario ya está registrado. Por favor, elija otro nombre de usuario.</p></center>";
-    } else {
-        // Hash de la contraseña
-        $hashed_password = password_hash($contrasena, PASSWORD_DEFAULT);
+      // If the username already exists, show a message
+      echo "<center><p style='border-radius: 20px;box-shadow: 10px 10px 5px #c68615; font-size: 23px; font-weight: bold;'>El usuario ya está registrado. Por favor, elija otro nombre de usuario.</p></center>";
+  } else {
+      // If the username doesn't exist, proceed with the registration
+      $query = "INSERT INTO `usuarios` (nombre_usuario, apellido_usuario, correo_electronico, contrasena, tipo_usuario) VALUES ('$nombre_usuario', '$apellido_usuario', '$correo_electronico',  '"  .  sha1($contrasena) ."',  '$tipo_usuario')";
+      $result = mysqli_query($mysqli, $query);
 
-        // Insertar usuario en la base de datos
-        $query = "INSERT INTO `usuarios` (nombre_usuario, apellido_usuario, correo_electronico, contrasena, tipo_usuario) VALUES ('$nombre_usuario', '$apellido_usuario', '$correo_electronico', '$hashed_password', '$tipo_usuario')";
-        $result = mysqli_query($mysqli, $query);
+  }
 
-        if ($result) {
-            header("Location: registro_exitoso.php");
-            exit;
-        } else {
-            echo "<center><p style='border-radius: 20px;box-shadow: 10px 10px 5px #c68615; font-size: 23px; font-weight: bold;'>Error al registrar al usuario. Por favor, inténtelo de nuevo más tarde.</p></center>";
-        }
     }
 } else {
-    echo "<center><p style='border-radius: 20px;box-shadow: 10px 10px 5px #c68615; font-size: 23px; font-weight: bold;'>Todos los campos son obligatorios.</p></center>";
 
 ?>
 
-
-    <!DOCTYPE html>
-    <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,7 +88,7 @@ if (isset($_POST['nombre_usuario'], $_POST['apellido_usuario'], $_POST['correo_e
                     </div>
                 </div>
                 <div class="form-group">
-                <label for="apellido">* Apellido:</label>
+                <label for="apellido_usuario">* Apellido:</label>
                 <input type="text" name="apellido_usuario" class="form-control" id="apellido_usuario" required>
             </div>
                </div>
@@ -136,4 +132,3 @@ if (isset($_POST['nombre_usuario'], $_POST['apellido_usuario'], $_POST['correo_e
     <?php
     }
 ?>
-

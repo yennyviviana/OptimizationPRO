@@ -5,7 +5,7 @@
 define('db_host', 'localhost');
 define('db_username', 'root');
 define('db_password','');
-define('db_dbname', 'tareas');
+define('db_dbname', 'sofware_erp');
 
 
 
