@@ -76,9 +76,9 @@ body.dark-theme {
   </div>
 
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Suppliers/create.php">
           <span data-feather="box"></span>
-          Inventarios
+          Proveedores
         </a>
       </li>
       <li class="nav-item">

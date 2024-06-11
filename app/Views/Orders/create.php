@@ -170,7 +170,7 @@ while ($pedido = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
              <td>
                 <!-- Botón para editar -->
-                <a href="main.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn-custom btn-custom-edit">
+                <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn-custom btn-custom-edit">
                     <i class="fas fa-pencil-alt"></i> Editar
                 </a>
                 <!-- Separador entre botones -->
@@ -202,11 +202,11 @@ $(document).ready(function() {
         if (confirm("¿Estás seguro de que deseas borrar este elemento?")) {
             $.ajax({
                 type: "POST",
-                url: "borrar_elemento.php",
+                url: "delete.php",
                 data: { id: id },
                 success: function(response) {
-                    // Manejar la respuesta del servidor, como actualizar la interfaz de usuario
-                    // Puedes eliminar la fila de la tabla correspondiente si se elimina correctamente
+                    // respuesta del servidor, como actualizar la interfaz de usuario
+                    //  eliminar la fila de la tabla correspondiente si se elimina correctamente
                 }
             });
         }

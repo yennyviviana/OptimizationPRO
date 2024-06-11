@@ -1,6 +1,7 @@
 <?php
-require_once      ("../../Controllers/PedidoControler.php");
-require_once      ("../../Models/PedidoModel.php");
+
+require_once __DIR__ . '/../../Models/PedidoModel.php';
+require_once __DIR__ . '/../../Controllers/PedidoController.php';
 
 
 
@@ -119,10 +120,10 @@ require_once      ("../../Models/PedidoModel.php");
                 </select>
 
                 <div class="form-group">
-                    <label for="archivo">Archivo</label>
-                    <input type="file" id="archivo" name="archivo" class="form-control-file" required>
-                    <div class="invalid-feedback">Por favor seleccione el archivo.</div>
-                </div>
+    <label for="archivos">Archivos</label>
+    <input type="file" id="archivos" name="archivo" class="form-control-file" multiple required>
+    <div class="invalid-feedback">Por favor seleccione al menos un archivo.</div>
+</div>
 
                 
                 <div class="form-group">
