@@ -90,17 +90,17 @@ if(!isset($_SESSION['id_usuario'])){
         <div class="column">
             <h2>Módulo de pedidos</h2>
             <ul class="nav">
-                <li><i class="fas fa-plus icon"></i><a href="create.php">Nuevo Proveedor</a></li>
-                <li><i class="fas fa-edit icon"></i><a href="list.php">Insertar Proveedor</a></li>
-                <li><i class="fas fa-trash-alt icon"></i><a href="delete.php">Eliminar Proveedor</a></li>
+              
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar Proveedor</a></li>
+    
+
             </ul>
         </div>
-        <div class="column">
-            <button class="btn" name="botonc" type="button" onclick="document.location='insert.php?da=2'">
-                <i class="fas fa-plus"></i> Ingresar nuevo proveedor
-            </button>
-        </div>
     </div>
+
+    
+    
+
 
     <table class="table">
         <thead class="thead-light">
@@ -129,6 +129,8 @@ define('db_dbname', 'sofware_erp');
 
 // Conectar a MySQL y seleccionar la base de datos.
 $mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
+
+
 
 // Verificar que la conexión sea exitosa
 if (!$mysqli) {
@@ -168,55 +170,59 @@ while ($pedido = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
         <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
         <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
-             <td>
-                <!-- Botón para editar -->
-                <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn-custom btn-custom-edit">
-                    <i class="fas fa-pencil-alt"></i> Editar
-                </a>
-                <!-- Separador entre botones -->
-                |
-                <!-- Botón para borrar -->
-                <a href="#" onclick="pregunta(<?php echo $pedido['id_pedido']; ?>)" class="btn-custom btn-custom-delete">
-                    <i class="fas fa-trash-alt"></i> Borrar
-                </a>
-            </td>
-        </tr>
-        <?php
+            
+        <td>
+              
+                  <!-- Botón para editar -->  
+                <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-custom-green">
+                <i class="fas fa-edit icon"></i> Editar
+
+
+                <!-- Botón de Borrar -->
+<a href="#" class="btn btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo']; ?>')">
+    <i class="fas fa-trash-alt"></i> Borrar
+</a>
+
+<script>
+function borrarPedido(id, imagen) {
+    if (confirm('¿Está seguro de borrar el pedido?')) {
+        // Realizar una petición AJAX para borrar el pedido
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Éxito en la eliminación del pedido
+                    alert('Pedido eliminado correctamente.');
+                    // Recargar la página para reflejar los cambios
+                    location.reload();
+                } else {
+                    // Error al eliminar el pedido
+                    alert('Error al eliminar el pedido.');
+                }
+            }
+        };
+
+        // Configurar la petición AJAX
+        xhr.open('GET', 'delete.php?lla=' + id + '&imagen=' + imagen, true);
+        // Enviar la petición
+        xhr.send();
+    }
+}
+</script>
+
+
+</tr>
+            <?php
         }
+
+        // Cerrar la conexión
+        $mysqli->close();
         ?>
     </tbody>
 </table>
 
-<script>
-function pregunta(id) {
-    if (confirm('¿Estás seguro de borrar esta tarea?')) {
-        location.href = "main.php?da=4&lla=" + id;
-    } else {
-        location.href = "main.php?da=2";
-    }
-}
 
-$(document).ready(function() {
-    $(".delete-btn").click(function() {
-        var id = $(this).data("id");
-        if (confirm("¿Estás seguro de que deseas borrar este elemento?")) {
-            $.ajax({
-                type: "POST",
-                url: "delete.php",
-                data: { id: id },
-                success: function(response) {
-                    // respuesta del servidor, como actualizar la interfaz de usuario
-                    //  eliminar la fila de la tabla correspondiente si se elimina correctamente
-                }
-            });
-        }
-    });
-});
-</script>
 
-<?php
-// Cerrar la conexión
-$mysqli->close();
-?>
 </body>
 </html>
