@@ -91,7 +91,7 @@ if(!isset($_SESSION['id_usuario'])){
             <h2>Módulo de pedidos</h2>
             <ul class="nav">
               
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar Proveedor</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Orders</a></li>
     
 
             </ul>
@@ -119,6 +119,7 @@ if(!isset($_SESSION['id_usuario'])){
                 <th scope="col">Fecha pedido</th>
                 <th scope="col">Fecha entrega</th>
                 <th scope="col">Id</th>
+                <th scope="col">Historial</th>
     </thead>
     <tbody>
     <?php      
@@ -142,8 +143,6 @@ mysqli_set_charset($mysqli, 'utf8');
 
 // Consulta utilizando MySQLi
 $consulta = "SELECT * FROM pedidos ORDER BY id_pedido";
-$resultados = $mysqli->query($consulta);
-
 $resultados = $mysqli->query($consulta);
 
 
@@ -170,6 +169,8 @@ while ($pedido = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
         <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
         <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
+        <td><?php echo htmlspecialchars($pedido['historial_pedidos']); ?></td>
+        
             
         <td>
               

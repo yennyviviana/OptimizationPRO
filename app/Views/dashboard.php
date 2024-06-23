@@ -69,7 +69,7 @@ body.dark-theme {
       <li class="nav-item">
         <a class="nav-link" href="/Sistem_ERP/app/Views/Orders/create.php">
           <span data-feather="shopping-cart"></span>
-          Pedidos
+          Area de pedidos
         </a>
       </li>
     </ul>
@@ -82,24 +82,43 @@ body.dark-theme {
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/administracion.html">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Shopping/create.php">
           <span data-feather="settings"></span>
-          Administracion
+         Area de Compras
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/financiero.html">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Customers/create.php">
           <span data-feather="bar-chart-2"></span>
-          Financiero
+          Clientes
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/ERP_maquetacion/app/Views/Sistema/compra.html">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Employees/create.php">
           <span data-feather="shopping-bag"></span>
-          Compras
+          Recursos humanos
         </a>
       </li>
     </ul>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Products/create.php">
+          <span data-feather="shopping-bag"></span>
+          Productos
+        </a>
+      </li>
+    </ul>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/Sistem_ERP/app/Views/Employees/create.php">
+          <span data-feather="shopping-bag"></span>
+          Empleados
+        </a>
+      </li>
+    </ul>
+
+
+
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
       <span>Usuario</span>

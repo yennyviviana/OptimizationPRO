@@ -64,21 +64,38 @@ if(!isset($_SESSION['id_usuario'])){
 }
 
 
+.btn-borrar {
+    display: inline-block;
+    padding: 7px 10px; /* Ajusta el relleno para hacerlo más pequeño */
+    font-size: 14px; /* Ajusta el tamaño de la fuente para hacerlo más pequeño */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #000; /* Cambiado a color rojo */
+    color: #fff;
+    transition: background-color 0.3s; /* Agregado transición suave */
+}
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-        }
+.btn-borrar:hover {
+    background-color: #c82333; /* Cambiado a tono más oscuro de rojo en hover */
+}
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+
+.btn-editar {
+    display: inline-block;
+    padding: 7px 10px; /* Ajusta el relleno para hacerlo más pequeño */
+    font-size: 14px; /* Ajusta el tamaño de la fuente para hacerlo más pequeño */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:  green; /* Cambiado a color rojo */
+    color: #fff;
+    transition: background-color 0.3s; /* Agregado transición suave */
+}
+
+.btn-editar:hover {
+    background-color: #A0CD60; /* Cambiado a tono más oscuro de rojo en hover */
+}
 
     </style>
 </head>
@@ -88,10 +105,10 @@ if(!isset($_SESSION['id_usuario'])){
 
     <div class="panel">
         <div class="column">
-            <h2>Módulo de pedidos</h2>
+            <h2>Módulo de proveedores</h2>
             <ul class="nav">
               
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar Proveedor</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Supplier</a></li>
     
 
             </ul>
@@ -113,10 +130,11 @@ if(!isset($_SESSION['id_usuario'])){
                 <th scope="col">Condiciones de pago</th>
                 <th scope="col">metodo de pago</th>
                 <th scope="col">Descripcion</th>
-                <th scope="col">Historial</th>
-                <th scope="col">Id pedido</th>
                 <th scope="col">archivo</th>
+                
     </thead>
+
+   
     
     <tbody>
     <?php      
@@ -135,7 +153,7 @@ if (!$mysqli) {
     die('Error al conectarse a MySQL: ' . mysqli_connect_error());
 }
 
-// Establecer juego de caracteres UTF-8zvc c
+// Establecer juego de caracteres UTF-8zvc 
 mysqli_set_charset($mysqli, 'utf8');
 
 // Consulta utilizando MySQLi
@@ -158,29 +176,30 @@ while ($proveedor = $resultados->fetch_assoc()) {
 <tr>
         <td><?php echo htmlspecialchars($proveedor['id_proveedor']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['nombre_empresa']); ?></td>
-        <td><?php echo htmlspecialchars($pedido['direccion']); ?></td>
+        <td><?php echo htmlspecialchars($proveedor['direccion']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['telefono']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['correo_electronico']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['lista_productos']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['condiciones_pago']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['metodo_pago']); ?></td>
         <td><?php echo htmlspecialchars($proveedor['descripcion']); ?></td>
-        <td><?php echo htmlspecialchars($proveedor['historial_pedidos']); ?></td>
-        <td><?php echo htmlspecialchars($proveedor['id_producto']); ?></td>
-        <td><img src="../../public/img/proveedores-imagen/<?php echo $pedido['archivo']; ?>" width="100" alt=""></td>
-        
+        <td><img src="../../public/img/proveedores-imagen/<?php echo $proveedor['archivo']; ?>" width="100" alt=""></td>
+       
             
         <td>
               
-                  <!-- Botón para editar -->  
-                <a href="edit.php?da=3&lla=<?php echo $proveedor['id_proveedor']; ?>" class="btn btn-custom-green">
+                <!-- Botón para editar -->  
+                <a href="edit.php?da=3&lla=<?php echo $proveedor['id_proveedor']; ?>" class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
-
+           <!-- Espacio entre los botones -->
+         <span style="margin-right: 10px;"></span>
                 <!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger" onclick="borrarProveedor(<?php echo $proveedor['id_proveedor']; ?>, '<?php echo $pedido['archivo']; ?>')">
+<a href="#"  class="btn btn-danger btn-borrar" onclick="borrarProveedor(<?php echo $proveedor['id_proveedor']; ?>, '<?php echo $proveedor['archivo']; ?>')">
     <i class="fas fa-trash-alt"></i> Borrar
+
 </a>
+
 
 <script>
 function borrarProveedor(id, imagen) {

@@ -117,3 +117,61 @@ $(document).ready(function() {
 
 });
 
+
+    const cameraContainer = document.getElementById('camera-container');
+    const cameraPreview = document.getElementById('camera-preview');
+    const cameraCanvas = document.getElementById('camera-canvas');
+    const capturedImage = document.getElementById('captured-image');
+    const toggleCameraButton = document.getElementById('toggle-camera');
+    const deletePhotoButton = document.getElementById('delete-photo');
+    const inputImagen = document.getElementById('imagen');
+
+    let videoStream;
+
+    async function initCamera() {
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            cameraPreview.srcObject = videoStream;
+            cameraPreview.style.display = 'block';
+            cameraContainer.style.display = 'block';
+            toggleCameraButton.textContent = 'Capturar Foto';
+        } catch (err) {
+            console.error('Error al acceder a la cámara: ', err);
+        }
+    }
+
+    function stopCamera() {
+        if (videoStream) {
+            let tracks = videoStream.getTracks();
+            tracks.forEach(track => track.stop());
+            cameraContainer.style.display = 'none';
+            cameraPreview.style.display = 'none';
+            toggleCameraButton.textContent = 'Tomar Foto';
+        }
+    }
+
+    toggleCameraButton.addEventListener('click', () => {
+        if (cameraContainer.style.display === 'none') {
+            initCamera();
+        } else {
+            const context = cameraCanvas.getContext('2d');
+            cameraCanvas.width = cameraPreview.videoWidth;
+            cameraCanvas.height = cameraPreview.videoHeight;
+            context.drawImage(cameraPreview, 0, 0, cameraCanvas.width, cameraCanvas.height);
+            const imageDataURL = cameraCanvas.toDataURL('image/png');
+            capturedImage.src = imageDataURL;
+            capturedImage.style.display = 'block';
+            inputImagen.value = imageDataURL;
+            stopCamera();
+            deletePhotoButton.style.display = 'inline-block';
+        }
+    });
+
+    deletePhotoButton.addEventListener('click', () => {
+        capturedImage.style.display = 'none';
+        inputImagen.value = '';
+        deletePhotoButton.style.display = 'none';
+        toggleCameraButton.style.display = 'inline-block';
+        toggleCameraButton.textContent = 'Tomar Foto';
+    });
+
