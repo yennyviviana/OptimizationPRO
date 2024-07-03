@@ -118,21 +118,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
                     <option value="transfarencia">Transferencia</option>
                 </select>
 
-                <label for="historial_pedidos"><i class="fas fa-users"></i> Historial:</label>
-                <select id="historial_pedidos" name="historial_pedidos" required class="form-control">
-                    <option value="producto 1">Producto 1</option>
-                    <option value="producto 2">Producto 2</option>
-                    <option value="producto 3">Producto 3</option>
-                    <option value="producto 4">Producto 4</option>
-                    <option value="producto 5">Producto 5</option>
-                  <!--- mas opciones -->
-                  <option value="producto 5">Producto 5</option>
-                  <option value="producto 6">Producto 6</option>
-                  <option value="producto 7">Producto 7</option>
-                  <option value="producto 8">Producto 8</option>
-                  <option value="producto 9">Producto 9</option>
-                  <option value="producto 10">Producto 10</option>
-                </select>
+            
 
                 <div class="form-group">
     <label for="archivos">Archivos</label>

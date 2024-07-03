@@ -101,10 +101,10 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
                 <label for="condiciones_pago"><i class="fas fa-users"></i> Condicion de Pago:</label>
                 <select id="condiciones_pago" name="condiciones_pago" required class="form-control">
                     <option value="">Seleccione una opcion</option>
-                    <option value="pago por adelantado">Pago por adelantado</option>
-                    <option value="pago contra entrega ">Pago contra entrega </option>
-                    <option value="pago a crédito ">Pago a crédito </option>
-                    <option value="consignación ">Consignación</option>
+                    <option value="Pago anticipado">Pago anticipado</option>
+                    <option value="Pago a plazos">Pago a plazos</option>
+                    <option value="Pago contra entrega">Pago contra entrega</option>
+                    
                   
                 </select>
 

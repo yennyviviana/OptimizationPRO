@@ -176,9 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="condiciones_pago"><i class="fas fa-users"></i> Condicion de Pago:</label>
                 <select id="condiciones_pago" name="condiciones_pago" required class="form-control">
                     <option value="">Seleccione una opcion</option>
-                    <option value="pago por adelantado" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'pago por adelantado') echo 'selected'; ?>>Pago por adelantado</option>
-                    <option value="consignacion" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'consignacion') echo 'selected'; ?>>consignacion</option>
-                    <option value="pago a credito" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'pago a credito') echo 'selected'; ?>>Pago a credito</option>
+                    <option value="Pago anticipado" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'Pago anticipado') echo 'selected'; ?>>Pago anticipado</option>
+                    <option value="Pago a plazos" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'Pago a plazos') echo 'selected'; ?>>Pago a plazos</option>
+                    <option value="Pago contra entrega" <?php if (isset($proveedor['condiciones_pago']) && $proveedor['condiciones_pago'] == 'Pago contra entrega') echo 'selected'; ?>>Pago contra entrega</option>
                    
                   
                 </select>

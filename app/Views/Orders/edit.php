@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $metodo_pago = $_POST['metodo_pago'];
     $archivo = $_FILES['archivo'];
     $id_usuario = $_SESSION['id_usuario'];
-    $historial_pedidos = $_POST['historial_pedidos'];
+    
 
     // Capturar la fecha de entrega proporcionada por el usuario
     $fecha_pedido = date('Y-m-d H:i:s');
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Actualizar el pedido en la base de datos
-        $resultado = $pedidoModel->actualizarPedido($llave, $nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario, $historial_pedidos);
+        $resultado = $pedidoModel->actualizarPedido($llave,$nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
         if ($resultado) {
             echo "Pedido actualizado correctamente.";
         } else {
@@ -212,17 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="invalid-feedback">Por favor seleccione al menos un archivo.</div>
                 </div>
 
-                <label for="historial_pedidos"><i class="fas fa-users"></i>Historial:</label>
-                <select id="historial_pedidos" name="historial_pedidos" required class="form-control">
-                    <option value="producto 1" <?php if ($pedido['historial_pedidos'] == 'producto 1') echo 'selected'; ?>>Producto 1</option>
-                    <option value="producto 2" <?php if ($pedido['historial_pedidos'] == 'producto 2') echo 'selected'; ?>>Producto 2</option>
-                    <option value="producto 3" <?php if ($pedido['historial_pedidos'] == 'producto 3') echo 'selected'; ?>>Producto 3</option>
-                </select>
-                <div class="form-group">
-                    <label for="fecha_pedido">Fecha del pedido:</label>
-                    <input type="date" id="fecha_pedido" name="fecha_pedido" value="<?php echo htmlspecialchars($pedido['fecha_pedido']); ?>" class="form-control" required>
-                </div>
-
+              
                 <div class="form-group">
                     <label for="fecha_entrega">Fecha de entrega:</label>
                     <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>

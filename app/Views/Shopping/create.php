@@ -121,10 +121,10 @@ if(!isset($_SESSION['id_usuario'])){
 
     <div class="panel">
         <div class="column">
-            <h2>Módulo de clientes</h2>
+            <h2>Módulo de compras</h2>
             <ul class="nav">
               
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Products</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Shopping</a></li>
     
 
             </ul>
@@ -148,9 +148,10 @@ if(!isset($_SESSION['id_usuario'])){
                 <th>Fecha de compra</th>
                 <th>Fecha de entrega</th>
                 <th>Factura</th>
-                <th>Usuario</th>
-                <th>Pedido</th>
                 <th>Producto</th>
+                <th>Proveedor</th>
+                <th>Usuario</th>
+
                 <th scope="col">Acciones</th>
     </thead>
     <tbody>
@@ -198,6 +199,10 @@ while ($compra = $resultados->fetch_assoc()) {
        <td><?php echo htmlspecialchars($compra['fecha_compra']); ?></td>
        <td><?php echo htmlspecialchars($compra['fecha_entrega']); ?></td>
        <td><?php echo htmlspecialchars($compra['factura']); ?></td>
+       <td><?php echo htmlspecialchars($compra['id_producto']); ?></td>
+       <td><?php echo htmlspecialchars($compra['id_proveedor']); ?></td>
+       <td><?php echo htmlspecialchars($compra['id_usuario']); ?></td>
+
      
        <td><img src="../../public/img/Facturas/<?php echo $compra['factura']; ?>" width="150" alt=""></td>
        <td><?php echo htmlspecialchars($producto['id_compra']); ?></td>

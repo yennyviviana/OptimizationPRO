@@ -95,17 +95,12 @@ require_once __DIR__ . '/../../Controllers/ProductoController.php';
 
                 <div class="form-group">
                     <label for="descripcion">Descripcion detallada</label>
-                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="Detalles"></textarea>
+                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="detalles"></textarea>
                     <div class="invalid-feedback">Por favor ingrese la descripcion.</div>
                 </div>
 
 
     
-      
-
-
-           
-
                 <label for="categoria_productos"><i class="fas fa-users"></i> Categoria:</label>
                 <select id="categoria_productos" name="categoria_productos" required class="form-control">
                     <option value="producto 1">Producto 1</option>
@@ -129,7 +124,14 @@ require_once __DIR__ . '/../../Controllers/ProductoController.php';
 </div>
 
                 
-        
+<label for="id_proveedor">Proveedor:</label>
+    <select name="id_proveedor" required>
+        <?php foreach ($providers as $provider) { ?>
+            <option value="<?php echo $provider['id_proveedor']; ?>">
+                <?php echo $provider['nombre_empresa']; ?>
+            </option>
+        <?php } ?>
+    </select><br>
     
     <button type="submit" name="boton" class="btn btn-primary">Guardar</button>
             </form>

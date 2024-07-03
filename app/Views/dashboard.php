@@ -67,7 +67,7 @@ body.dark-theme {
   <div class="sidebar">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Orders/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Orders/create.php">
           <span data-feather="shopping-cart"></span>
           Area de pedidos
         </a>
@@ -76,25 +76,25 @@ body.dark-theme {
   </div>
 
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Suppliers/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Suppliers/create.php">
           <span data-feather="box"></span>
           Proveedores
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Shopping/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Shopping/create.php">
           <span data-feather="settings"></span>
          Area de Compras
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Customers/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Customers/create.php">
           <span data-feather="bar-chart-2"></span>
           Clientes
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Employees/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Employees/create.php">
           <span data-feather="shopping-bag"></span>
           Recursos humanos
         </a>
@@ -102,7 +102,7 @@ body.dark-theme {
     </ul>
 
     <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Products/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Products/create.php">
           <span data-feather="shopping-bag"></span>
           Productos
         </a>
@@ -110,7 +110,7 @@ body.dark-theme {
     </ul>
 
     <li class="nav-item">
-        <a class="nav-link" href="/Sistem_ERP/app/Views/Employees/create.php">
+        <a class="nav-link" href="/ERP_MAQUETACION/create.php">
           <span data-feather="shopping-bag"></span>
           Empleados
         </a>

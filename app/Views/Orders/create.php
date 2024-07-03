@@ -119,7 +119,7 @@ if(!isset($_SESSION['id_usuario'])){
                 <th scope="col">Fecha pedido</th>
                 <th scope="col">Fecha entrega</th>
                 <th scope="col">Id</th>
-                <th scope="col">Historial</th>
+                
     </thead>
     <tbody>
     <?php      
@@ -169,7 +169,7 @@ while ($pedido = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
         <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
         <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
-        <td><?php echo htmlspecialchars($pedido['historial_pedidos']); ?></td>
+       
         
             
         <td>

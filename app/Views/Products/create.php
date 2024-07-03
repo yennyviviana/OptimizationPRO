@@ -121,7 +121,7 @@ if(!isset($_SESSION['id_usuario'])){
 
     <div class="panel">
         <div class="column">
-            <h2>Módulo de clientes</h2>
+            <h2>Módulo de Productos</h2>
             <ul class="nav">
               
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Products</a></li>

@@ -16,7 +16,7 @@ class PedidoModel {
 
 
     //insertando base datos tabla pedidos
-    public function insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario, $historial_pedidos) {
+    public function insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario) {
         // Escapar los datos para evitar inyecciones SQL
         $nombre_pedido = mysqli_real_escape_string($this->conexion, $nombre_pedido);
         $precio = mysqli_real_escape_string($this->conexion, $precio);
@@ -29,7 +29,7 @@ class PedidoModel {
         $metodo_pago = mysqli_real_escape_string($this->conexion, $metodo_pago);
         $fecha_pedido = mysqli_real_escape_string($this->conexion, $fecha_pedido);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
-        $historial_pedidos = mysqli_real_escape_string($this->conexion, $historial_pedidos);
+      
     
         // Verificar si el usuario existe antes de insertar el pedido
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
@@ -44,7 +44,7 @@ class PedidoModel {
           $nombreArchivo = $this->procesarImagen($archivo);
        
           // Preparar la consulta SQL
-          $consulta = "INSERT INTO pedidos (nombre_pedido, precio, estado, direccion, descripcion, numero_seguimiento, tiempo_entrega_horas, informacion_pedido, metodo_pago, archivo, fecha_pedido, fecha_entrega, id_usuario,historial_pedidos) VALUES ('$nombre_pedido', '$precio', '$estado', '$direccion', '$descripcion', '$numero_seguimiento', '$tiempo_entrega_horas', '$informacion_pedido', '$metodo_pago', '$nombreArchivo', '$fecha_pedido', '$fecha_entrega', '$id_usuario','$historial_pedidos')";
+          $consulta = "INSERT INTO pedidos (nombre_pedido, precio, estado, direccion, descripcion, numero_seguimiento, tiempo_entrega_horas, informacion_pedido, metodo_pago, archivo, fecha_pedido, fecha_entrega, id_usuario) VALUES ('$nombre_pedido', '$precio', '$estado', '$direccion', '$descripcion', '$numero_seguimiento', '$tiempo_entrega_horas', '$informacion_pedido', '$metodo_pago', '$nombreArchivo', '$fecha_pedido', '$fecha_entrega', '$id_usuario')";
       
           // Ejecutar la consulta
           if (mysqli_query($this->conexion, $consulta)) {
@@ -55,7 +55,7 @@ class PedidoModel {
       }
   
 
-      public function actualizarPedido($id_pedido, $nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario, $historial_pedidos) {
+      public function actualizarPedido($id_pedido, $nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario) {
         // Escapar los datos para evitar inyecciones SQL
         $nombre_pedido = mysqli_real_escape_string($this->conexion, $nombre_pedido);
         $precio = mysqli_real_escape_string($this->conexion, $precio);
@@ -68,8 +68,7 @@ class PedidoModel {
         $metodo_pago = mysqli_real_escape_string($this->conexion, $metodo_pago);
         $fecha_pedido = mysqli_real_escape_string($this->conexion, $fecha_pedido);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
-        $historial_pedidos = mysqli_real_escape_string($this->conexion, $historial_pedidos);
-
+       
 
         // Verificar si el usuario existe antes de insertar el pedido
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
@@ -82,10 +81,10 @@ class PedidoModel {
         // Procesar la nueva imagen si se proporciona
         if ($archivo['error'] === UPLOAD_ERR_OK) {
             $nombreArchivo = $this->procesarImagen($archivo);
-            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', archivo = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario', historial_pedidos = '$historial_pedidos' WHERE id_pedido = '$id_pedido'";
+            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', archivo = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
         } else {
             // Aquí estaba faltando el signo de igual antes de la cadena de consulta
-            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario',historial_pedidos = '$historial_pedidos' WHERE id_pedido = '$id_pedido'";
+            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
         }
     
         // Ejecutar la consulta
