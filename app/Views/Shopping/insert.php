@@ -70,8 +70,8 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
 
     
                 <div class="form-group">
-                    <label for="detalles_productos">Detalles</label>
-                    <textarea id="detalles_productos" name="detalles_productos" class="form-control" required placeholder="Detalles_productos"></textarea>
+                    <label for="detalles">Detalles</label>
+                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="detalles"></textarea>
                     <div class="invalid-feedback">Detalles del producto.</div>
                 </div>
 
@@ -131,6 +131,30 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
     <div class="invalid-feedback">seleccione al menos un archivo.</div>
 </div>
 
+
+             
+<label for="id_proveedor">Proveedor:</label>
+    <select name="id_proveedor" required>
+        <?php foreach ($providers as $provider) { ?>
+            <option value="<?php echo $provider['id_proveedor']; ?>">
+                <?php echo $provider['nombre_empresa']; ?>
+            </option>
+        <?php } ?>
+    </select><br>
+
+
+    <label for="id_producto">Producto:</label>
+<select name="id_producto" id="id_producto" required>
+    <?php foreach ($products as $product) { ?>
+        <option value="<?php echo $product['id_producto']; ?>">
+            <?php echo $product['nombre_producto']; ?>
+        </option>
+    <?php } ?>
+</select><br>
+
+    
+    
+
     <button type="submit" name="boton"  class= "btn-success">Guardar</button>
             </form>
         </div>
@@ -184,6 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
         // Inicializamos CKEditor en el textarea con ID "descripcion"
-        CKEDITOR.replace('detalles_productos');
+        CKEDITOR.replace('detalles');
          // Inicializa CKEditor en el textarea con ID "informacion"
     </script>
