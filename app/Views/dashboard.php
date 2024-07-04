@@ -130,6 +130,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                         <button class="btn btn-sm btn-outline-secondary">Agregar Elemento</button>
                     </div>
                     <div class="btn-group mr-2">
+                    <button class="btn btn-sm btn-outline-secondary">Eliminar</button>
                         <button class="btn btn-sm btn-outline-secondary">Exportar Pdf</button>
                         <button class="btn btn-sm btn-outline-secondary">Ayuda</button>
                     </div>
