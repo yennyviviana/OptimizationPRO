@@ -102,14 +102,7 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
                     <option value="finalizado">Finalizado</option>
                 </select>
 
-                    <label for="metodo_pago"><i class="fas fa-users"></i> Metodo Pago:</label>
-                <select id="metodo_pago" name="metodo_pago" required class="form-control">
-                    <option value="">Seleccione una opcion</option>
-                    <option value="credito">Credito</option>
-                    <option value="Paypal">Paypal</option>
-                    <option value="transfarencia">Transferencia</option>
-                </select>
-
+                  
 
                 <div class="form-group">
         <label for="fecha_compra">Fecha de compra:</label>
