@@ -45,7 +45,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Datos Personales</h5>
-                        <form action="actualizar_perfil.php" method="POST">
+                        <form action="edit.php?da=3" method="POST">
                             <div class="mb-3">
                                 <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
                                 <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="<?php echo htmlspecialchars($nombre_usuario); ?>" required>

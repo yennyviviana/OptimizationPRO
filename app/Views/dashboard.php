@@ -23,7 +23,8 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
         body {
-            background: rgb(245, 238, 238);
+            background-color: #BFBDA8;
+            
         } 
         body.dark-theme {
             background-color: #080808;
@@ -46,7 +47,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">
+                        <a class="nav-link active" href="/">
                             <span data-feather="home"></span>
                             Home<span class="sr-only">(current)</span>
                         </a>
@@ -126,15 +127,18 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Sistema Empresarial</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary">Agregar Elemento</button>
-                    </div>
-                    <div class="btn-group mr-2">
-                    <button class="btn btn-sm btn-outline-secondary">Eliminar</button>
-                        <button class="btn btn-sm btn-outline-secondary">Exportar Pdf</button>
-                        <button class="btn btn-sm btn-outline-secondary">Ayuda</button>
-                    </div>
-                </div>
+    <div class="btn-group mr-2">
+        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
+    </div>
+    <div class="btn-group mr-2">
+        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
+        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
+        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
+    </div>
+</div>
+
+<!-- Div para mostrar resultados de las acciones -->
+<div id="results"></div>
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
                     <span data-feather="moon"></span> Cambiar Tema
@@ -243,6 +247,39 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         });
     });
 </script>
+
+<script>
+
+document.getElementById('addElement').addEventListener('click', function() {
+    // Código para agregar un elemento
+    const resultsDiv = document.getElementById('results');
+    const newElement = document.createElement('div');
+    newElement.textContent = 'Nuevo elemento agregado';
+    resultsDiv.appendChild(newElement);
+});
+
+document.getElementById('deleteElement').addEventListener('click', function() {
+    // Código para eliminar un elemento
+    const resultsDiv = document.getElementById('results');
+    if (resultsDiv.lastChild) {
+        resultsDiv.removeChild(resultsDiv.lastChild);
+    }
+});
+
+document.getElementById('exportPdf').addEventListener('click', function() {
+    // Código para exportar a PDF
+    alert('Funcionalidad de exportar a PDF no implementada.');
+});
+
+document.getElementById('help').addEventListener('click', function() {
+    // Código para mostrar ayuda
+    alert('Ayuda no disponible.');
+});
+</script>
+
+
+
+
 
 <footer>Copyright @ Yenny Bibiana 2024</footer>
 
