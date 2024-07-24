@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  $empleadoModel = new  EmpleadoModel($mysqli);
 
  try {
-     // Actualizar el cliente en la base de datos
+     // Actualizar el clienten la base de datos
      $consulta = "UPDATE empleados SET nombre_completo='$nombre_completo', cargo='$cargo',   fecha_contratacion='$fecha_contratacion', numero_horas,='$numero_horas,', precio_hora, ='$precio_hora, ', salario='$salario', estado='$estado', departamento='$departamento', documento_identidad='$documento_identidad',direccion='$direccion', ciudad='$ciudad', telefono= '$telefono', pais='$pais', fecha_creacion='$fecha_creacion', fecha_modificacion='$fecha_modificacion', descripcion_profesional ='$descripcion_profesional' WHERE id_empleado='$llave'";
      $resultado = $mysqli->query($consulta);
      

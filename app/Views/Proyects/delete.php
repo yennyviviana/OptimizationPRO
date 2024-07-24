@@ -5,6 +5,7 @@ require_once ("../../Config/database.php");
 $llave = $_GET['lla'];
 $imagen = $_GET['imagen'];
 
+
 define('db_host', 'localhost');
 define('db_username', 'root');
 define('db_password', '');
@@ -22,16 +23,16 @@ if ($mysqli->connect_error) {
 $mysqli->set_charset('utf8');
 
 // Preparar la consulta SQL para eliminar el registro de la base de datos
-$borrarConsulta = "DELETE FROM  empleados WHERE id_empleado = $llave";
+$borrarConsulta = "DELETE FROM  proyectos WHERE id_proyecto = $llave";
 
 // Ejecutar la consulta para eliminar el registro
 if ($mysqli->query($borrarConsulta) === TRUE) {
     // Eliminar la imagen asociada al registro si la consulta de eliminación fue exitosa
     if (!empty($imagen)) {
-        unlink("../../public/img/empleados/" . $imagen);
+        unlink("../../public/img/proyecto/" . $imagen);
     }
     // Imprimir un mensaje de confirmación
-    echo "Empleado eliminado correctamente.";
+    echo "Proyecto eliminado correctamente.";
 } else {
     // Imprimir mensaje de error si la consulta de eliminación falla
     echo "Error al intentar eliminar el registro: " . $mysqli->error;

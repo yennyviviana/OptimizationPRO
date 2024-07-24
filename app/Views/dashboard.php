@@ -92,9 +92,22 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/create.php">
+                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Financials/create.php">
                                 <span data-feather="shopping-bag"></span>
                                 Financiera
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Inventorys/create.php">
+                                <span data-feather="shopping-bag"></span>
+                                  Inventarios
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Proyects/create.php">
+                                <span data-feather="shopping-bag"></span>
+                                  Proyectos
                             </a>
                         </li>
                     <?php } ?>

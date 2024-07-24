@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Models/ProductoModel.php';
 require_once __DIR__ . '/../Config/database.php';
 
-session_start(); // Ensure the session is started
+session_start(); 
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
@@ -38,14 +38,18 @@ if ($_POST) {
     // Capture POST data
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre_producto = $_POST['nombre_producto'];
-        $categoria_productos = $_POST['categoria_productos'];
         $precio = $_POST['precio'];
+        $cantidad_stock = $_POST['cantidad_stock'];
+        $categoria_productos = $_POST['categoria_productos'];
         $estado = $_POST['estado'];
-        $detalles = $_POST['detalles'];
+        $fecha_adquisicion = $_POST['fecha_adquisicion'];
+        $fecha_vencimiento = $_POST['fecha_vencimiento'];
+        $fecha_vencimiento = $_POST['detalles'];
+        $detalles= $_POST['detalles'];
         $archivo = $_FILES['archivo'];
-
+        $codigo_barras= $_POST['codigo_barras'];
         // Insert product using the corresponding model method
-        $resultado = $modelo->insertarProducto($nombre_producto, $categoria_productos, $precio, $estado, $detalles, $archivo, $id_proveedor);
+        $resultado = $modelo->insertarProducto($nombre_producto,$precio,$cantidad_stock,$categoria_productos,$estado,$fecha_adquisicion,$fecha_vencimiento,$id_proveedor,$detalles,$archivo,$codigo_barras);
 
         // Verify if the insertion was successful
         if ($resultado) {

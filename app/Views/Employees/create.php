@@ -212,16 +212,16 @@ while ($empleado= $resultados->fetch_assoc()) {
         <td>
               
                   <!-- Botón para editar -->  
-                <a href="edit.php?da=3&lla=<?php echo $cliente['id_empleado']; ?>"  class="btn btn-custom-green btn-editar">
+                <a href="edit.php?da=3&lla=<?php echo $empleado['id_empleado']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
 <!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarCliente(<?php echo $cliente['id_empleado']; ?>, '<?php echo $empleado['imagen']; ?>', '<?php echo $empleado['documentacion_archivo']; ?>')">
+<a href="#" class="btn btn-danger btn-borrar" onclick="borrarEmpleado(<?php echo $empleado['id_empleado']; ?>, '<?php echo $empleado['imagen']; ?>', '<?php echo $empleado['documentacion_archivo']; ?>')">
     <i class="fas fa-trash-alt"></i> Borrar
 </a>
 
 <script>
-function borrarCliente(id, imagen, documentacionArchivo) {
+function borrarEmpleado(id, imagen, documentacionArchivo) {
     if (confirm('¿Está seguro de borrar el empleado?')) {
         // Realizar una petición AJAX para borrar el pedido
         var xhr = new XMLHttpRequest();

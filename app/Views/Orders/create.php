@@ -93,7 +93,12 @@ if(!isset($_SESSION['id_usuario'])){
               
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Orders</a></li>
     
-
+                <li class="nav-item">
+                            <a class="nav-link" href="main.php">
+                                <span data-feather="Home"></span>
+                                 Regresar
+                            </a>
+                        </li>
             </ul>
         </div>
     </div>

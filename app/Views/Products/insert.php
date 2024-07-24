@@ -81,26 +81,13 @@ require_once __DIR__ . '/../../Controllers/ProductoController.php';
                     <div class="invalid-feedback">Por favor ingrese el precio</div>
                 </div>
 
-                <label for="estado"><i class="fas fa-users"></i> Estado:</label>
-                <select id="estado" name="estado" required class="form-control">
-                    <option value="">Seleccione una opcion</option>
-                    <option value="aprobado">Aprobado</option>
-                    <option value="cancelado">Cancelado</option>
-                    <option value="en stock">en stock</option>
-                <option value="entregado">Entregado</option>
-                </select>
-    </div>
-                  
-               
-
                 <div class="form-group">
-                    <label for="descripcion">Descripcion detallada</label>
-                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="detalles"></textarea>
-                    <div class="invalid-feedback">Por favor ingrese la descripcion.</div>
+                    <label for="precio">Stock</label>
+                    <input type="number" id="cantidad_stock" name="cantidad_stock" class="form-control" required placeholder="Precio">
+                    <div class="invalid-feedback">Por favor ingrese el  numero del stock</div>
                 </div>
 
 
-    
                 <label for="categoria_productos"><i class="fas fa-users"></i> Categoria:</label>
                 <select id="categoria_productos" name="categoria_productos" required class="form-control">
                     <option value="producto 1">Producto 1</option>
@@ -117,9 +104,48 @@ require_once __DIR__ . '/../../Controllers/ProductoController.php';
                   <option value="producto 10">Producto 10</option>
                 </select>
 
+
+
+
+
+                <div class="form-group">
+                <label for="estado"><i class="fas fa-toggle-on"></i> Estado:</label>
+                <select id="estado" name="estado" required class="form-control">
+                    <option value="Disponible">Disponible</option>
+                    <option value="No disponible">No disponible</option>
+                    <option value="En espera">En espera</option>
+                </select>
+            </div>
+                  
+               
+
+
+    <div class="form-group">
+        <label for="fecha_adquisicion">Fecha de adquisicion:</label>
+        <input type="date" id="fecha_adquisicion" name="fecha_adquisicion" class="form-control" min="0" required>
+    </div>
+
+          
+    <div class="form-group">
+        <label for="fecha_entrega">Fecha vencimiento:</label>
+        <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" class="form-control" min="0" required>
+    </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripcion detallada</label>
+                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="detalles"></textarea>
+                    <div class="invalid-feedback">Por favor ingrese la descripcion.</div>
+                </div>
+
+                <div class="form-group">
+                <label for="codigo_barras">Código de Barras:</label><br>
+                <input type="number" id="codigo_barras" name="codigo_barras" class="form-control" required placeholder="Codigo barras">
+    
+                </div>   
+
                 <div class="form-group">
     <label for="archivos">Archivos</label>
-    <input type="file" id="archivo" name="archivo" class="form-control-file" multiple required>
+    <input type="file" id="archivo" name="archivo" class="form-control-file" required>
     <div class="invalid-feedback">Por favor seleccione al menos un archivo.</div>
 </div>
 
@@ -145,22 +171,6 @@ require_once __DIR__ . '/../../Controllers/ProductoController.php';
     </script>
 
 
-<script>
-   document.getElementById('fecha_entrega').addEventListener('change', function() {
-    var fechaEntrega = new Date(this.value); // Obtener la fecha de entrega seleccionada
-    var fechaPedido = new Date(); // Obtener la fecha actual
-    var  tiempo_entrega_horas = fechaEntrega - fechaPedido; // Calcular la diferencia en milisegundos
-
-    // Convertir la diferencia de milisegundos a días y horas
-    var dias = Math.floor(tiempo_entrega_horas / (1000 * 60 * 60 * 24));
-    var horas = Math.floor((tiempo_entrega_horas % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-    // Mostrar el tiempo transcurrido en el span correspondiente
-    document.getElementById('tiempo_entrega_horas').textContent = dias + " días y " + horas + " horas";
-});
-
-</script>
- 
 
 </body>
 </html>

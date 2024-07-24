@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['id_usuario'])) {
@@ -16,7 +17,6 @@ if (!isset($_SESSION['id_usuario'])) {
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Tu Página</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="public/css/style.css" type="text/css" rel="stylesheet">
     <style>
         .panel {
             display: flex;
@@ -107,9 +107,9 @@ if (!isset($_SESSION['id_usuario'])) {
 <body>
     <div class="panel">
         <div class="column">
-            <h2>Módulo de productos</h2>
+            <h2>Módulo de proyects</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Products</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar proyectos</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="main.php">
                         <span data-feather="Home"></span> Regresar
@@ -123,17 +123,13 @@ if (!isset($_SESSION['id_usuario'])) {
         <thead class="thead-light">
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Cantidad stock</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Nombre proyecto</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Fecha inicio</th>
+                <th scope="col">Fecha fin</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Fecha adquisicion</th>
-                <th scope="col">Fecha de vencimiento</th>
-                <th scope="col">Proveedor</th>
-                <th scope="col">Detalles</th>
-                <th scope="col">Archivo</th>
-                <th scope="col">Codigo Barras</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Imagen</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -156,7 +152,7 @@ if (!isset($_SESSION['id_usuario'])) {
         mysqli_set_charset($mysqli, 'utf8');
 
         // Consulta utilizando MySQLi
-        $consulta = "SELECT * FROM productos ORDER BY id_producto";
+        $consulta = "SELECT * FROM proyectos ORDER BY id_proyecto";
         $resultados = $mysqli->query($consulta);
 
         // Comprobación de errores en la ejecución de la consulta
@@ -165,32 +161,25 @@ if (!isset($_SESSION['id_usuario'])) {
         }
 
         // Iterar sobre los resultados y mostrarlos
-        while ($producto = $resultados->fetch_assoc()) {
+        while ($proyecto = $resultados->fetch_assoc()) {
         ?>
             <tr>
-                <td><?php echo htmlspecialchars($producto['id_producto']); ?></td>
-                <td><?php echo htmlspecialchars($producto['nombre_producto']); ?></td>
-                <td>$ <?php echo number_format($producto['precio'], 2, ',', '.'); ?></td>
-                <td><?php echo htmlspecialchars($producto['cantidad_stock']); ?></td>
-                <td><?php echo htmlspecialchars($producto['categoria_productos']); ?></td>
-                <td><?php echo htmlspecialchars($producto['estado']); ?></td>
-                <td><?php echo htmlspecialchars($producto['fecha_adquisicion']); ?></td>
-                <td><?php echo htmlspecialchars($producto['fecha_vencimiento']); ?></td>
-                <td><?php echo htmlspecialchars($producto['id_proveedor']); ?></td>
-                <td><?php echo htmlspecialchars($producto['detalles']); ?></td>
-                <td><img src="../../public/img/Catalogo/<?php echo $producto['archivo']; ?>" width="100" alt=""></td>
-                <td><?php echo htmlspecialchars($producto['codigo_barras']); ?></td>
-                
-                
-                <td> 
-                   <!-- Botón para editar -->  
-                   <a href="edit.php?da=3&lla=<?php echo $producto['id_producto']; ?>"  class="btn btn-custom-green btn-editar">
-                <i class="fas fa-edit icon"></i> Editar
-
-<!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarProducto(<?php echo $producto['id_producto']; ?>, '<?php echo $producto['archivo'];  ?>')">
-    <i class="fas fa-trash-alt"></i> Borrar
-</a>
+                <td><?php echo htmlspecialchars($proyecto['id_proyecto']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['nombre_proyecto']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['descripcion']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['fecha_inicio']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['fecha_fin']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['estado']); ?></td>
+                <td><?php echo htmlspecialchars($proyecto['id_usuario']); ?></td>
+                <td><img src="../../public/img/proyecto/<?php echo htmlspecialchars($proyecto['imagen_proyecto']); ?>" width="100" alt=""></td>
+                <td>
+                    <a href="edit.php?da=3&lla=<?php echo $proyecto['id_proyecto']; ?>" class="btn btn-custom-green btn-editar">
+                        <i class="fas fa-edit icon"></i> Editar
+                    </a>
+                    <a href="#" class="btn btn-danger btn-borrar" onclick="borrarProyecto(<?php echo $proyecto['id_proyecto']; ?>, '<?php echo $proyecto['imagen_proyecto']; ?>')">
+                        <i class="fas fa-trash-alt"></i> Borrar
+                    </a>
+                </td>
             </tr>
         <?php
         }
@@ -201,34 +190,24 @@ if (!isset($_SESSION['id_usuario'])) {
         </tbody>
     </table>
 
-   
-
     <script>
-    function borrarProducto(id, imagen) {
-        if (confirm('¿Está seguro de borrar el producto?')) {
-            // Realizar una petición AJAX para borrar el producto
-            var xhr = new XMLHttpRequest();
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Éxito en la eliminación del producto
-                        alert('Producto eliminado correctamente.');
-                        // Recargar la página para reflejar los cambios
-                        location.reload();
-                    } else {
-                        // Error al eliminar el producto
-                        alert('Error al eliminar el producto.');
+        function borrarProyecto(id, imagen) {
+            if (confirm('¿Está seguro de borrar  ?')) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            alert('Proyecto eliminado correctamente.');
+                            location.reload();
+                        } else {
+                            alert('Error al eliminar el estado financiero.');
+                        }
                     }
-                }
-            };
-
-            // Configurar la petición AJAX
-            xhr.open('GET', 'delete.php?lla=' + id + '&imagen=' + imagen, true);
-            // Enviar la petición
-            xhr.send();
+                };
+                xhr.open('GET', 'delete.php?lla=' + id + '&imagen=' + imagen, true);
+                xhr.send();
+            }
         }
-    }
     </script>
 </body>
 </html>

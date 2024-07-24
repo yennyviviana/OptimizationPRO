@@ -126,7 +126,12 @@ if(!isset($_SESSION['id_usuario'])){
               
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Customers</a></li>
     
-
+                <li class="nav-item">
+                            <a class="nav-link" href="/ERP_MAQUETACION/app/main.php">
+                                <span data-feather="Home"></span>
+                                 Regresar
+                            </a>
+                        </li>
             </ul>
         </div>
     </div>
@@ -200,37 +205,35 @@ while ($cliente = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($cliente['fecha_creacion']); ?></td>
         <td><?php echo htmlspecialchars($cliente['fecha_modificacion']); ?></td>
        
-       
         <td>
               
-                  <!-- Botón para editar -->  
-                <a href="edit.php?da=3&lla=<?php echo $cliente['id_cliente']; ?>"  class="btn btn-custom-green btn-editar">
+                <a href="edit.php?da=3&lla=<?php echo $financiera['id_transaccion']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
 
-                <!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarCliente(<?php echo $cliente['id_cliente']; ?>)">
+    <a href="#" class="btn btn-danger btn-borrar" onclick="borrarCliente(<?php echo $financiera['id_cliente']; ?>)">
     <i class="fas fa-trash-alt"></i> Borrar
 </a>
+           
              
 
 
 <script>
 function borrarCliente(id, imagen) {
-    if (confirm('¿Está seguro de borrar el cliente?')) {
-        // Realizar una petición AJAX para borrar el pedido
+    if (confirm('¿Está seguro de borrar  ?')) {
+        // Realizar una petición AJAX para borrar el cliente
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    // Éxito en la eliminación del pedido
-                    alert('Pedido eliminado correctamente.');
+                    // Éxito en la eliminación estado financiero
+                    alert('Dato cliente eliminado correctamente.');
                     // Recargar la página para reflejar los cambios
                     location.reload();
                 } else {
-                    // Error al eliminar el pedido
-                    alert('Error al eliminar el pedido.');
+                    // Error al eliminar el  cliente
+                    alert('Error al eliminar el  estado finananciero.');
                 }
             }
         };

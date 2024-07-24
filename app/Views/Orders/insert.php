@@ -21,6 +21,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Incluimos el CSS de CKEditor -->
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
     <style>
         #form-background {
             background-color: #f9f9f9;
@@ -122,7 +123,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
 
                 <div class="form-group">
     <label for="archivos">Archivos</label>
-    <input type="file" id="archivo" name="archivo" class="form-control-file" multiple required>
+    <input type="file" id="archivo" name="archivo" class="form-control-file" required>
     <div class="invalid-feedback">Por favor seleccione al menos un archivo.</div>
 </div>
 
@@ -151,8 +152,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
     <script>
         // Inicializamos CKEditor en el textarea con ID "descripcion"
         CKEDITOR.replace('descripcion');
-         // Inicializa CKEditor en el textarea con ID "informacion"
-         CKEDITOR.replace('informacion');
+       
     </script>
 
 

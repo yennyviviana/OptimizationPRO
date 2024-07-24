@@ -107,9 +107,9 @@ if (!isset($_SESSION['id_usuario'])) {
 <body>
     <div class="panel">
         <div class="column">
-            <h2>Módulo de productos</h2>
+            <h2>Módulo de financiera</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Products</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar financiera</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="main.php">
                         <span data-feather="Home"></span> Regresar
@@ -123,17 +123,18 @@ if (!isset($_SESSION['id_usuario'])) {
         <thead class="thead-light">
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Cantidad stock</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Fecha adquisicion</th>
-                <th scope="col">Fecha de vencimiento</th>
+                <th scope="col">Fecha_transaccion</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Tipo_transaccion</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Usuario</th>
                 <th scope="col">Proveedor</th>
-                <th scope="col">Detalles</th>
-                <th scope="col">Archivo</th>
-                <th scope="col">Codigo Barras</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Pedido</th>
+                <th scope="col">Codigo inventario</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Compra</th>
+                <th scope="col">Proyecto</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -156,7 +157,7 @@ if (!isset($_SESSION['id_usuario'])) {
         mysqli_set_charset($mysqli, 'utf8');
 
         // Consulta utilizando MySQLi
-        $consulta = "SELECT * FROM productos ORDER BY id_producto";
+        $consulta = "SELECT * FROM financieras ORDER BY  id_transaccion";
         $resultados = $mysqli->query($consulta);
 
         // Comprobación de errores en la ejecución de la consulta
@@ -165,70 +166,72 @@ if (!isset($_SESSION['id_usuario'])) {
         }
 
         // Iterar sobre los resultados y mostrarlos
-        while ($producto = $resultados->fetch_assoc()) {
+        while ($financiera = $resultados->fetch_assoc()) {
         ?>
             <tr>
-                <td><?php echo htmlspecialchars($producto['id_producto']); ?></td>
-                <td><?php echo htmlspecialchars($producto['nombre_producto']); ?></td>
-                <td>$ <?php echo number_format($producto['precio'], 2, ',', '.'); ?></td>
-                <td><?php echo htmlspecialchars($producto['cantidad_stock']); ?></td>
-                <td><?php echo htmlspecialchars($producto['categoria_productos']); ?></td>
-                <td><?php echo htmlspecialchars($producto['estado']); ?></td>
-                <td><?php echo htmlspecialchars($producto['fecha_adquisicion']); ?></td>
-                <td><?php echo htmlspecialchars($producto['fecha_vencimiento']); ?></td>
-                <td><?php echo htmlspecialchars($producto['id_proveedor']); ?></td>
-                <td><?php echo htmlspecialchars($producto['detalles']); ?></td>
-                <td><img src="../../public/img/Catalogo/<?php echo $producto['archivo']; ?>" width="100" alt=""></td>
-                <td><?php echo htmlspecialchars($producto['codigo_barras']); ?></td>
-                
-                
+                <td><?php echo htmlspecialchars($financiera['id_transaccion']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['fecha_transaccion']); ?></td>
+                <td>$ <?php echo number_format($financiera['monto'], 2, ',', '.'); ?></td>
+                <td><?php echo htmlspecialchars($financiera['tipo_transaccion']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['descripcion']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_usuario']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_proveedor']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_cliente']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_pedido']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['codigo_inventario']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_producto']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_compra']); ?></td>
+                <td><?php echo htmlspecialchars($financiera['id_proyecto']); ?></td>
+               
                 <td> 
-                   <!-- Botón para editar -->  
-                   <a href="edit.php?da=3&lla=<?php echo $producto['id_producto']; ?>"  class="btn btn-custom-green btn-editar">
+                <a href="edit.php?da=3&lla=<?php echo $financiera['id_transaccion']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
+                </a>
 
-<!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarProducto(<?php echo $producto['id_producto']; ?>, '<?php echo $producto['archivo'];  ?>')">
+    <a href="#" class="btn btn-danger btn-borrar" onclick="borrarFinanciera(<?php echo $financiera['id_transaccion']; ?>)">
     <i class="fas fa-trash-alt"></i> Borrar
 </a>
-            </tr>
-        <?php
+           
+             
+ <script>
+function borrarFinanciera(id, imagen) {
+    if (confirm('¿Está seguro de borrar  ?')) {
+        // Realizar una petición AJAX para borrar  estado financiero....
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Éxito en la eliminación estado financiero
+                    alert('Dato Financiero eliminado correctamente.');
+                    // Recargar la página para reflejar los cambios
+                    location.reload();
+                } else {
+                    // Error al eliminar el  estado financiero.....
+                    alert('Error al eliminar el  estado finananciero.');
+                }
+            }
+        };
+
+        // Configurar la petición AJAX.......
+        xhr.open('GET', 'delete.php?lla=' + id + '&imagen=' + imagen, true);
+        // Enviar la petición........
+        xhr.send();
+    }
+}
+</script>
+
+</tr>
+            <?php
         }
 
         // Cerrar la conexión
         $mysqli->close();
         ?>
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-   
 
-    <script>
-    function borrarProducto(id, imagen) {
-        if (confirm('¿Está seguro de borrar el producto?')) {
-            // Realizar una petición AJAX para borrar el producto
-            var xhr = new XMLHttpRequest();
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Éxito en la eliminación del producto
-                        alert('Producto eliminado correctamente.');
-                        // Recargar la página para reflejar los cambios
-                        location.reload();
-                    } else {
-                        // Error al eliminar el producto
-                        alert('Error al eliminar el producto.');
-                    }
-                }
-            };
-
-            // Configurar la petición AJAX
-            xhr.open('GET', 'delete.php?lla=' + id + '&imagen=' + imagen, true);
-            // Enviar la petición
-            xhr.send();
-        }
-    }
-    </script>
 </body>
 </html>

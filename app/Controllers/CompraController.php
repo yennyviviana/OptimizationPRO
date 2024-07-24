@@ -20,67 +20,56 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Fetch products from the database
-$sql = "SELECT id_producto, nombre_producto FROM productos";
-$result = $mysqli->query($sql);
 
-$products = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $products[] = $row;
+// Fetch inventory codes from the database
+$sqlInventory = "SELECT codigo_inventario, nombre_producto FROM inventarios";
+$resultInventory = $mysqli->query($sqlInventory);
+$inventory = [];
+if ($resultInventory->num_rows > 0) {
+    while ($row = $resultInventory->fetch_assoc()) {
+        $inventory[] = $row;
     }
 }
 
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Debugging: Print POST data for debugging purposes
     echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+     print_r($_POST);
+     print_r($_FILES);
+     echo '</pre>';
 
-    if (isset($_POST['id_proveedor'])) {
-        $id_proveedor = $_POST['id_proveedor'];
-    } else {
-        echo "id_proveedor no está presente en el POST.";
-        exit();
-    }
-
-    if (isset($_POST['id_producto'])) {
-        $id_producto = $_POST['id_producto'];
-    } else {
-        echo "id_producto no está presente en el POST.";
-        exit();
-    }
+    // Validate and capture POST data
+    $productos_comprados = $_POST['productos_comprados'] ?? '';
+    $detalles_productos = $_POST['detalles_productos'] ?? '';
+    $precio_unitario = $_POST['precio_unitario'] ?? '';
+    $precio_compra = $_POST['precio_compra'] ?? '';
+    $total_compra = $_POST['total_compra'] ?? '';
+    $estado_actual = $_POST['estado_actual'] ?? '';
+    $metodo_pago = $_POST['metodo_pago'] ?? '';
+    $fecha_compra = date('Y-m-d H:i:s'); // Fecha de compra actual
+    $fecha_entrega = $_POST['fecha_entrega'] ?? '';
+    $factura = $_FILES['factura'] ?? '';
+    $id_proveedor = $_POST['id_proveedor'] ?? '';
+    $id_usuario = $_SESSION['id_usuario'];
+    $codigo_inventario = $_POST['codigo_inventario'] ?? '';
 
     // Instantiate the model
     $modelo = new CompraModel($mysqli);
 
-    // Capture POST data
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $productos_comprados = $_POST['productos_comprados'];
-        $detalles = $_POST['detalles'];
-        $precio_unitario = $_POST['precio_unitario'];
-        $precio_compra = $_POST['precio_compra'];
-        $total_compra = $_POST['total_compra'];
-        $estado_actual = $_POST['estado_actual'];
-        $fecha_compra = date('Y-m-d H:i:s');
-        $fecha_entrega = $_POST['fecha_entrega'];
-        $factura = $_FILES['factura'];
-        $id_usuario = $_SESSION['id_usuario'];
+    // Insert product using the corresponding model method
+    $resultado = $modelo->insertarCompra($productos_comprados, $detalles_productos, $precio_unitario, $precio_compra, $total_compra, $estado_actual, $metodo_pago, $fecha_compra, $fecha_entrega, $codigo_inventario, $id_proveedor, $id_usuario, $factura);
 
-        // Insert product using the corresponding model method
-        $resultado = $modelo->insertarCompra($productos_comprados, $detalles, $precio_unitario, $precio_compra, $total_compra, $estado_actual, $fecha_compra, $fecha_entrega, $factura, $id_producto, $id_proveedor, $id_usuario);
-
-        // Verify if the insertion was successful
-        if ($resultado) {
-            // Redirect the user to the main page with a success message
-            header("Location: create.php?da=2");
-            exit();
-        } else {
-            // In case of error, display a message to the user
-            echo "Error al insertar el producto.";
-        }
-
-        // Close the database connection
-        mysqli_close($mysqli);
+    // Verify if the insertion was successful
+    if ($resultado) {
+        // Redirect the user to the main page with a success message
+        header("Location: create.php?da=2");
+        exit();
+    } else {
+        // In case of error, display a message to the user
+        echo "Error al insertar el producto.";
     }
+
+    // Close the database connection
+    mysqli_close($mysqli);
 }
 ?>

@@ -17,8 +17,8 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
     <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Incluimos el CSS de CKEditor -->
-    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <!-- CSS de CKEditor -->
+   <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
     <style>
         #form-background {
             background-color: #f9f9f9;
@@ -52,155 +52,134 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="form-background">
-            <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-               
-            <div class="form-group">
-                <label for="productos_comprados">Productos:</label>
-            <select id="productos_comprados" name="productos_comprados" class="form-control" required>
-                 <option value="">Selecciona un producto</option>
-                   <option value="producto1">Producto 1</option>
-                    <option value="producto2">Producto 2</option>
-                          <option value="producto3">Producto 3</option>
-                       <!--- más opciones según sea necesario --->
-                             </select>
-             <div class="invalid-feedback">Selecciona un producto.</div>
-       </div>
+   
 
-    
-                <div class="form-group">
-                    <label for="detalles">Detalles</label>
-                    <textarea id="detalles" name="detalles" class="form-control" required placeholder="detalles"></textarea>
-                    <div class="invalid-feedback">Detalles del producto.</div>
-                </div>
-
-          
-                <div class="form-group">
-                    <label for="precio_unitario">Precio Unitario</label>
-                    <input type="number" id="precio_unitario" name="precio_unitario" class="form-control" required placeholder="Precio unitario">
-                    <div class="invalid-feedback">Por favor ingrese el precio unitario</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="precio_compra">Precio Compra</label>
-                    <input type="number" id="precio_compra" name="precio_compra" class="form-control" required placeholder="Precio compra">
-                    <div class="invalid-feedback">Por favor ingrese el precio compra</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="total_compra">Total Compra</label>
-                    <input type="number" id="total_compra" name="total_compra" class="form-control" required placeholder="Total compra">
-                    <div class="invalid-feedback">Por favor ingrese el total compra</div>
-                </div>
-
-                <label for="estado_actual"><i class="fas fa-users"></i> Estado Actual:</label>
-                <select id="estado_actual" name="estado_actual" required class="form-control">
-                    <option value="">Seleccione una opcion</option>
-                    <option value="aprobado">Aprobado</option>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="finalizado">Finalizado</option>
+<
+<div class="container">
+    <div id="form-background">
+        <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+           
+        <div class="form-group">
+                <label for="productos_comprados"><i class="fas fa-users"></i>Productos:</label>
+                <select id="productos_comprados" name="productos_comprados" required class="form-control">
+                    <option value="Televisor LED">Televisor LED</option>
+                    <option value="Lavadora automática">Lavadora automática</option>
+                    <option value="Smartphone de última generación">Smartphone de última generación</option>
+                    <option value="Ordenador portátil ultradelgado">Ordenador portátil ultradelgado</option>
+                    <option value="Auriculares inalámbricos">Auriculares inalámbricos</option>
+                    <option value="Cámara digital profesional">Cámara digital profesional</option>
+                    <option value="Consola de videojuegos de nueva generación">Consola de videojuegos de nueva generación</option>
+                    <option value="Altavoces Bluetooth impermeables">Altavoces Bluetooth impermeables</option>
+                    <option value="Tableta digital para diseño gráfico">Tableta digital para diseño gráfico</option>
+                    <option value="Impresora multifunción a color">Impresora multifunción a color</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <textarea id="detalles_productos" name="detalles_productos" class="form-control" required placeholder="detalles_productos"></textarea>
+                <div class="invalid-feedback">Por favor ingrese la detalles productos.</div>
+            </div>
+            <div class="form-group">
+                <label for="precio_unitario">Precio Unitario</label>
+                <input type="number" id="precio_unitario" name="precio_unitario" class="form-control" required placeholder="Precio unitario">
+                <div class="invalid-feedback">Por favor ingrese el precio unitario</div>
+            </div>
+            <div class="form-group">
+                <label for="precio_compra">Precio Compra</label>
+                <input type="number" id="precio_compra" name="precio_compra" class="form-control" required placeholder="Precio compra">
+                <div class="invalid-feedback">Por favor ingrese el precio compra</div>
+            </div>
+            <div class="form-group">
+                <label for="total_compra">Total Compra</label>
+                <input type="number" id="total_compra" name="total_compra" class="form-control" required placeholder="Total compra">
+                <div class="invalid-feedback">Por favor ingrese el total compra</div>
+            </div>
+            <label for="estado_actual"><i class="fas fa-users"></i> Estado Actual:</label>
+            <select id="estado_actual" name="estado_actual" required class="form-control">
+                <option value="">Seleccione una opcion</option>
+                <option value="aprobado">Aprobado</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+            <div class="form-group">
+                <label for="metodo_pago">Método de Pago</label>
+                <input type="text" id="metodo_pago" name="metodo_pago" class="form-control" required placeholder="Método de pago">
+                <div class="invalid-feedback">Por favor ingrese el método de pago</div>
+            </div>
+            <div class="form-group">
+                <label for="fecha_compra">Fecha de compra:</label>
+                <input type="date" id="fecha_compra" name="fecha_compra" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha_entrega">Fecha de entrega:</label>
+                <input type="datetime-local" id="fecha_entrega" name="fecha_entrega" class="form-control" required>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="codigo_inventario">Inventario:</label>
+                <select class="form-control" id="codigo_inventario" name="codigo_inventario" required>
+                    <option value="">Seleccione un Inventario</option>
+                    <?php foreach ($inventory as $item): ?>
+                        <option value="<?php echo htmlspecialchars($item['codigo_inventario']); ?>"><?php echo htmlspecialchars($item['nombre_producto']); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione un inventario.</div>
+            </div>
 
-                  
 
-                <div class="form-group">
-        <label for="fecha_compra">Fecha de compra:</label>
-        <input type="date" id="fecha_compra" name="fecha_compra" class="form-control" min="0" required>
+            <div class="form-group">
+                <label for="id_proveedor">Proveedor:</label>
+                <select class="form-control" id="id_proveedor" name="id_proveedor" required>
+                    <option value="">Selecciona un Proveedor</option>
+                    <?php foreach ($providers as $provider): ?>
+                        <option value="<?php echo htmlspecialchars($provider['id_proveedor']); ?>"><?php echo htmlspecialchars($provider['nombre_empresa']); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="factura">Factura (Archivo):</label>
+                <input type="file" id="factura" name="factura" class="form-control-file" required>
+                <div class="invalid-feedback">Seleccione al menos un archivo.</div>
+            </div>
+            <button type="submit" name="boton" class="btn btn-success">Guardar</button>
+        </form>
     </div>
-
- 
-
-<div class="form-group">
-    <label for="fecha_entrega">Fecha de entrega:</label>
-    <input type="datetime-local" id="fecha_entrega" name="fecha_entrega" class="form-control" required>
 </div>
 
-<button type="button" class="btn btn-danger" id="ver_tiempo">Ver Tiempo Transcurrido</button>
-
-    <div class="form-group">
-    <label for="archivos">Archivos</label>
-    <input type="file" id="factura" name="factura" class="form-control-file"  required>
-    <div class="invalid-feedback">seleccione al menos un archivo.</div>
-</div>
-
-
-             
-<label for="id_proveedor">Proveedor:</label>
-    <select name="id_proveedor" required>
-        <?php foreach ($providers as $provider) { ?>
-            <option value="<?php echo $provider['id_proveedor']; ?>">
-                <?php echo $provider['nombre_empresa']; ?>
-            </option>
-        <?php } ?>
-    </select><br>
-
-
-    <label for="id_producto">Producto:</label>
-<select name="id_producto" id="id_producto" required>
-    <?php foreach ($products as $product) { ?>
-        <option value="<?php echo $product['id_producto']; ?>">
-            <?php echo $product['nombre_producto']; ?>
-        </option>
-    <?php } ?>
-</select><br>
-
-    
-    
-
-    <button type="submit" name="boton"  class= "btn-success">Guardar</button>
-            </form>
-        </div>
-    </div>
-    </form>
-
-    
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('ver_tiempo').addEventListener('click', function() {
-        var fechaEntrega = new Date(document.getElementById('fecha_entrega').value); // Obtener la fecha de entrega seleccionada
-        var fechaCompra = new Date(); // Obtener la fecha actual
+   
+    // Inicializar CKEditor
+    CKEDITOR.replace('detalles_productos');
 
-        // Calcular la diferencia de tiempo en milisegundos
-        var tiempo_entrega_milisegundos = fechaEntrega - fechaCompra;
+    // Validar formulario
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-        // Convertir la diferencia de milisegundos a días y horas
-        var dias = Math.floor(tiempo_entrega_milisegundos / (1000 * 60 * 60 * 24));
-        var horas = Math.floor((tiempo_entrega_milisegundos % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    // Calcular el total de compra
+    document.getElementById('precio_unitario').addEventListener('input', calcularTotal);
+    document.getElementById('precio_compra').addEventListener('input', calcularTotal);
 
-        // Mostrar el tiempo transcurrido en un diálogo de alerta
-        alert(dias + " días y " + horas + " horas");
-    });
-});
-</script>
-
-
-
-<script>
-    document.getElementById('precio_unitario').addEventListener('input', function() {
-        calcularTotalCompra();
-    });
-
-    document.getElementById('precio_compra').addEventListener('input', function() {
-        calcularTotalCompra();
-    });
-
-    function calcularTotalCompra() {
-        // Obtener el precio unitario y el precio de compra
-        var precioUnitario = parseFloat(document.getElementById('precio_unitario').value);
-        var precioCompra = parseFloat(document.getElementById('precio_compra').value);
-
-        // Calcular el total de la compra
-        var totalCompra = precioUnitario * precioCompra;
-
-        // Mostrar el total de la compra en el campo correspondiente
+    function calcularTotal() {
+        var precioUnitario = parseFloat(document.getElementById('precio_unitario').value) || 0;
+        var precioCompra = parseFloat(document.getElementById('precio_compra').value) || 0;
+        var totalCompra = precioUnitario + precioCompra;
         document.getElementById('total_compra').value = totalCompra.toFixed(2);
     }
 </script>
+</body>
+</html>
 
-
-<script>
-        // Inicializamos CKEditor en el textarea con ID "descripcion"
-        CKEDITOR.replace('detalles');
-         // Inicializa CKEditor en el textarea con ID "informacion"
-    </script>

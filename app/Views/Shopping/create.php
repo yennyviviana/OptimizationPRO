@@ -139,19 +139,19 @@ if(!isset($_SESSION['id_usuario'])){
         <thead class="thead-light">
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Compras</th>
-                <th>Detalles</th>
-                <th>precio_unitario</th>
-                <th>precio_compra</th>
-                <th>Total compra</th>
-                <th>estado actual</th>
-                <th>Fecha de compra</th>
-                <th>Fecha de entrega</th>
-                <th>Factura</th>
-                <th>Producto</th>
-                <th>Proveedor</th>
-                <th>Usuario</th>
-
+                <th scope="col">Productos</th>
+                <th scope="col">Detalles</th>
+                <th scope="col">Precio unitario</th>
+                <th scope="col">Precio compra</th>
+                <th scope="col">Total compra</th>
+                <th scope="col">Estado actual</th>
+                <th scope="col">Metodo compra</th>
+                <th scope="col">Fecha de compra</th>
+                <th scope="col">Fecha de entrega</th>
+                <th scope="col">Codigo inventario</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Factura</th>
                 <th scope="col">Acciones</th>
     </thead>
     <tbody>
@@ -191,31 +191,28 @@ while ($compra = $resultados->fetch_assoc()) {
     <tr>
     <td><?php echo htmlspecialchars($compra['id_compra']); ?></td>
     <td><?php echo htmlspecialchars($compra['productos_comprados']); ?></td>
-       <td><?php echo htmlspecialchars($compra['detalles']); ?></td>
+       <td><?php echo htmlspecialchars($compra['detalles_productos']); ?></td>
        <td><?php echo number_format($compra['precio_unitario']); ?></td>
-       <td><?php echo htmlspecialchars($compra['precio__compra']); ?></td>
+       <td><?php echo htmlspecialchars($compra['precio_compra']); ?></td>
        <td><?php echo htmlspecialchars($compra['total_compra']); ?></td>
        <td><?php echo htmlspecialchars($compra['estado_actual']); ?></td>
+       <td><?php echo htmlspecialchars($compra['metodo_pago']); ?></td>
        <td><?php echo htmlspecialchars($compra['fecha_compra']); ?></td>
        <td><?php echo htmlspecialchars($compra['fecha_entrega']); ?></td>
-       <td><?php echo htmlspecialchars($compra['factura']); ?></td>
-       <td><?php echo htmlspecialchars($compra['id_producto']); ?></td>
+       <td><?php echo htmlspecialchars($compra['codigo_inventario']); ?></td>
        <td><?php echo htmlspecialchars($compra['id_proveedor']); ?></td>
        <td><?php echo htmlspecialchars($compra['id_usuario']); ?></td>
-
-     
-       <td><img src="../../public/img/Facturas/<?php echo $compra['factura']; ?>" width="150" alt=""></td>
-       <td><?php echo htmlspecialchars($producto['id_compra']); ?></td>
-       
+       <td><?php echo htmlspecialchars($compra['factura']); ?></td>
+       <td><img src="../../public/img/factura-compra/<?php echo $inventario['facctura']; ?>" width="100" alt=""></td>
+            
+                
         <td>
               
-                  <!-- Botón para editar -->  
                 <a href="edit.php?da=3&lla=<?php echo $compra['id_compra']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
 
-                <!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarCompra(<?php echo $producto['id_compra']; ?>)">
+<a href="#" class="btn btn-danger btn-borrar" onclick="borrarCompra(<?php echo $compra['id_compra']; ?>)">
     <i class="fas fa-trash-alt"></i> Borrar
 </a>
              
@@ -224,18 +221,18 @@ while ($compra = $resultados->fetch_assoc()) {
 <script>
 function borrarCompra(id, imagen) {
     if (confirm('¿Está seguro de borrar el cliente?')) {
-        // Realizar una petición AJAX para borrar el pedido
+        // Realizar una petición AJAX para borrar  compra
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    // Éxito en la eliminación del pedido
+                    // Éxito en la eliminación de la compra
                     alert('Pedido eliminado correctamente.');
                     // Recargar la página para reflejar los cambios
                     location.reload();
                 } else {
-                    // Error al eliminar el pedido
+                    // Error al eliminar la compra
                     alert('Error al eliminar el pedido.');
                 }
             }
