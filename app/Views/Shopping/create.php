@@ -133,11 +133,10 @@ if(!isset($_SESSION['id_usuario'])){
 
     
     
-
-
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
+    <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+     <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Productos</th>
                 <th scope="col">Detalles</th>

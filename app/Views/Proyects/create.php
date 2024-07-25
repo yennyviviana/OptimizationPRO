@@ -119,9 +119,10 @@ if (!isset($_SESSION['id_usuario'])) {
         </div>
     </div>
 
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
+    <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+ <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre proyecto</th>
                 <th scope="col">Descripcion</th>
