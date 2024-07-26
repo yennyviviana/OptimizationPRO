@@ -23,13 +23,16 @@ if(!isset($_SESSION['id_usuario'])){
     </head>
     <body>
 <style>
+    body{
+      background-color: #000;
+    }
 .panel {
             display: flex;
             justify-content: space-between;
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: gray;
         }
 
         .column {
@@ -47,7 +50,7 @@ if(!isset($_SESSION['id_usuario'])){
 }
 
 .nav a {
-    color: rgb(33, 138, 170);
+    color: whitesmoke;
     text-decoration: none;
     padding: 10px;
     font-size: 16px;
@@ -63,16 +66,14 @@ if(!isset($_SESSION['id_usuario'])){
     color: #0f6146;
 }
 
-
-
-        .btn {
+.btn {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #007bff;
+            background-color: #fff;
             color: #fff;
         }
 
@@ -80,6 +81,37 @@ if(!isset($_SESSION['id_usuario'])){
             background-color: #0056b3;
         }
 
+        .btn-borrar {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #0071FA;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .btn-borrar:hover {
+            background-color: #c82333;
+        }
+
+        .btn-editar {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: blue;
+            color:  grapheme_substr;
+            transition: background-color 0.3s;
+        }
+
+        .btn-editar:hover {
+            background-color: #59A3F7;
+        }
     </style>
 </head>
 <body>
@@ -123,6 +155,8 @@ if(!isset($_SESSION['id_usuario'])){
                 <th scope="col">Fecha pedido</th>
                 <th scope="col">Fecha entrega</th>
                 <th scope="col">Id</th>
+                <th scope="col">Acciones</th>
+                <th scope="col">Acciones</th>
                 
     </thead>
     <tbody>
@@ -175,19 +209,18 @@ while ($pedido = $resultados->fetch_assoc()) {
         <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
        
         
-            
-        <td>
-              
-                  <!-- Botón para editar -->  
-                <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-custom-green">
+        <td> 
+                   <!-- Botón para editar -->  
+                   <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
+</td>
 
-
-                <!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo']; ?>')">
+<td>
+<!-- Botón de Borrar -->
+<a href="#" class="btn btn-danger btn-borrar" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo'];  ?>')">
     <i class="fas fa-trash-alt"></i> Borrar
 </a>
-
+</td>
 <script>
 function borrarPedido(id, imagen) {
     if (confirm('¿Está seguro de borrar el pedido?')) {

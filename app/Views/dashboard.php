@@ -62,54 +62,54 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Suppliers/create.php">
-                                <span data-feather="box"></span>
-                                Proveedores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Shopping/create.php">
-                                <span data-feather="settings"></span>
-                                Area de Compras
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Customers/create.php">
-                                <span data-feather="bar-chart-2"></span>
-                                Clientes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Employees/create.php">
-                                <span data-feather="shopping-bag"></span>
-                                Recursos humanos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Products/create.php">
-                                <span data-feather="shopping-bag"></span>
-                                Productos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Financials/create.php">
-                                <span data-feather="shopping-bag"></span>
-                                Financiera
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Inventorys/create.php">
-                                <span data-feather="shopping-bag"></span>
-                                  Inventarios
-                            </a>
-                        </li>
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Suppliers/create.php">
+        <span data-feather="users"></span>
+        Proveedores
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Shopping/create.php">
+        <span data-feather="shopping-cart"></span>
+        Área de Compras
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Customers/create.php">
+        <span data-feather="user-check"></span>
+        Clientes
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Employees/create.php">
+        <span data-feather="user-plus"></span>
+        Recursos Humanos
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Products/create.php">
+        <span data-feather="package"></span>
+        Productos
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Financials/create.php">
+        <span data-feather="dollar-sign"></span>
+        Financiera
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Inventorys/create.php">
+        <span data-feather="archive"></span>
+        Inventarios
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Proyects/create.php">
+        <span data-feather="briefcase"></span>
+        Proyectos
+    </a>
+</li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Proyects/create.php">
-                                <span data-feather="shopping-bag"></span>
-                                  Proyectos
-                            </a>
-                        </li>
                     <?php } ?>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

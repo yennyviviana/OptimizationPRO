@@ -101,7 +101,7 @@ $dato = isset($_GET['da']) ? $_GET['da'] : null;
                
 
                 
- //case of Customers
+ //case of Empleados....
  case 1:
     require_once('Views/Employees/create.php');
     break;
@@ -146,7 +146,73 @@ $dato = isset($_GET['da']) ? $_GET['da'] : null;
 
                
 
-                }
+              
 
+
+                //case of Financials
+ case 1:
+    require_once('Views/Financials/create.php');
+    break;
+
+
+    case 2:
+        require_once('Views/Financials/insert.php');
+        break;
+
+
+        case 3:
+            require_once('Views/Financials/edit.php');
+            break;
+
+
+            case 4:
+                require_once('Views/Financials/delete.php');
+                break;
+
+
+
+
+                //case of Inventorys
+                case 1:
+                    require_once('Views/Inventorys/create.php');
+                    break;
+                
+                
+                    case 2:
+                        require_once('Views/Inventorys/insert.php');
+                        break;
+                
+                
+                        case 3:
+                            require_once('Views/Inventorys/edit.php');
+                            break;
+                
+                
+                            case 4:
+                                require_once('Views/Inventorys/delete.php');
+                                break;
+                
+
+ //case of Proyects
+ case 1:
+    require_once('Views/Proyects/create.php');
+    break;
+
+
+    case 2:
+        require_once('Views/Proyects/insert.php');
+        break;
+
+
+        case 3:
+            require_once('Views/Proyects/edit.php');
+            break;
+
+
+            case 4:
+                require_once('Views/Proyects/delete.php');
+                break;
+
+            }
 
     ?>

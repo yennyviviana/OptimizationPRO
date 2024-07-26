@@ -39,7 +39,6 @@ mysqli_set_charset($mysqli, 'utf8');
     $descripcion = $_POST['descripcion'];
     $numero_seguimiento = $_POST['numero_seguimiento'];
     $informacion_pedido = $_POST['informacion_pedido'];
-    $condiciones_pago = $_POST['condiciones_pago'];
     $metodo_pago = $_POST['metodo_pago'];
     $archivo = $_FILES['archivo'];
     $id_usuario = $_SESSION['id_usuario'];
@@ -59,7 +58,7 @@ mysqli_set_charset($mysqli, 'utf8');
     $tiempo_entrega_horas = $diferencia->format('%d días y %h horas');
 
     // Inserta el pedido usando el método correspondiente del modelo
-    $resultado = $modelo->insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $condiciones_pago,$metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
+    $resultado = $modelo->insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido,$metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
 
     // Verifica si la inserción fue exitosa
     if ($resultado) {
