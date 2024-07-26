@@ -56,55 +56,55 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                     <!-- Admin Menu -->
                     <?php if ($tipo_usuario == 9) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Orders/create.php">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Orders/create.php">
                                 <span data-feather="shopping-cart"></span>
                                 Area de pedidos
                             </a>
                         </li>
                         <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Suppliers/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Suppliers/create.php">
         <span data-feather="users"></span>
         Proveedores
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Shopping/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Shopping/create.php">
         <span data-feather="shopping-cart"></span>
         Área de Compras
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Customers/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Customers/create.php">
         <span data-feather="user-check"></span>
         Clientes
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Employees/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Employees/create.php">
         <span data-feather="user-plus"></span>
         Recursos Humanos
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Products/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Products/create.php">
         <span data-feather="package"></span>
         Productos
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Financials/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Financials/create.php">
         <span data-feather="dollar-sign"></span>
         Financiera
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Inventorys/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Inventorys/create.php">
         <span data-feather="archive"></span>
         Inventarios
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/ERP_MAQUETACION/app/Views/Proyects/create.php">
+    <a class="nav-link" href="/OptimizationPRO/app/Views/Proyects/create.php">
         <span data-feather="briefcase"></span>
         Proyectos
     </a>
