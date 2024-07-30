@@ -6,64 +6,79 @@ if (!isset($_SESSION['id_usuario'])) {
     exit;
 }
 ?>
+
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Tu Página</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="public/css/style.css" type="text/css" rel="stylesheet">
-    <style>
-        .panel {
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Tu Página</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+<style>
+    body{
+      background-color: #000;
+    }
+.panel {
             display: flex;
             justify-content: space-between;
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color:  #234DF0;
         }
 
         .column {
             width: 48%;
         }
 
-        .nav {
-            display: flex;
-            align-items: center;
-            float: left;
-            margin-left: 20px;
-            text-align: none;
+       
+        h2{
+          color: whitesmoke;
         }
+     
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px; 
+    text-align: none;
+}
 
-        .nav a {
-            color: rgb(33, 138, 170);
-            text-decoration: none;
-            padding: 10px;
-            font-size: 16px;
-            margin-left: 10px;
-        }
+.nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+}
 
-        .nav a:hover {
-            background-color: rgb(10, 18, 125);
-            color: #f7f0f0;
-        }
+.nav a:hover {
+    background-color: rgb(10, 18, 125);
+    color: #f7f0f0;
+}
 
-        .nav .active {
-            color: #0f6146;
-        }
+.nav .active {
+    color: #0f6146;
+}
 
-        .btn {
+.btn {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #007bff;
+            background-color: #fff;
             color: #fff;
         }
 
@@ -78,7 +93,7 @@ if (!isset($_SESSION['id_usuario'])) {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #000;
+            background-color: #0071FA;
             color: #fff;
             transition: background-color 0.3s;
         }
@@ -94,16 +109,17 @@ if (!isset($_SESSION['id_usuario'])) {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: green;
-            color: #fff;
+            background-color: blue;
+            color:  grapheme_substr;
             transition: background-color 0.3s;
         }
 
         .btn-editar:hover {
-            background-color: #A0CD60;
+            background-color: #59A3F7;
         }
     </style>
 </head>
+
 <body>
     <div class="panel">
         <div class="column">

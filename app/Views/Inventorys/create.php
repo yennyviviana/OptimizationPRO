@@ -9,62 +9,60 @@ if(!isset($_SESSION['id_usuario'])){
 }
 
 ?>
+
+
+
 <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <title>Tu Página</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-        <link href="public/css/style.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-<style>
-.panel {
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Tu Página</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+        }
+        .panel {
             display: flex;
             justify-content: space-between;
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #234DF0;
         }
-
         .column {
             width: 48%;
         }
-
-        
-     
-.nav {
-    display: flex;
-    align-items: center;
-    float: left;
-    margin-left: 20px; 
-    text-align: none;
-}
-
-.nav a {
-    color: rgb(33, 138, 170);
-    text-decoration: none;
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 10px;
-}
-
-.nav a:hover {
-    background-color: rgb(10, 18, 125);
-    color: #f7f0f0;
-}
-
-.nav .active {
-    color: #0f6146;
-}
-
-
-
+        h2, h3 {
+            color: whitesmoke;
+        }
+        h2 {
+            text-align: left; /* Alineación del título a la izquierda */
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            float: left;
+            margin-left: 20px; 
+        }
+        .nav a {
+            color: whitesmoke;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .nav a:hover {
+            background-color: rgb(10, 18, 125);
+            color: #f7f0f0;
+        }
+        .nav .active {
+            color: #0f6146;
+        }
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -72,17 +70,58 @@ if(!isset($_SESSION['id_usuario'])){
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #007bff;
+            background-color: #fff;
             color: #fff;
         }
-
         .btn:hover {
             background-color: #0056b3;
         }
-
+        .btn-borrar {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #0071FA;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        .btn-borrar:hover {
+            background-color: #c82333;
+        }
+        .btn-editar {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: blue;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        .btn-editar:hover {
+            background-color: #59A3F7;
+        }
+        .chart-container {
+            width: 50%;
+            margin: 0 auto; 
+        }
+        canvas {
+            width: 100% !important; /* Asegura que el canvas ocupe todo el ancho del contenedor */
+        }
     </style>
 </head>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
+
 
            
 
@@ -128,6 +167,7 @@ if(!isset($_SESSION['id_usuario'])){
             <th scope="col">Fecha Adquisición</th>
             <th scope="col">Fecha Vencimiento</th>
             <th scope="col">Tipo Documento</th>
+            <th scope="col">Acciones</th>
         </tr>
                 
     </thead>
@@ -184,15 +224,15 @@ while ($inventario = $resultados->fetch_assoc()) {
         <td><img src="../../public/img/TipoDocumento/<?php echo $inventario['tipo_documento']; ?>" width="100" alt=""></td>
     
         
-            
         <td>
-                <a href="edit.php?da=3&lla=<?php echo $inventario['codigo_inventario']; ?>" class="btn btn-custom-green">
-                <i class="fas fa-edit icon"></i> Editar
+                            <a href="edit.php?da=3&lla=<?php echo $inventario['codigo_inventario']; ?>" class="btn btn-custom-green btn-editar">
+                                <i class="fas fa-edit icon"></i> Editar
+                            </a>
 
-             <a href="#" class="btn btn-danger" onclick="borrarInventario(<?php echo $inventario['codigo_inventario']; ?>, '<?php echo $inventario['codigo_inventario']; ?>')">
-                             <i class="fas fa-trash-alt"></i> Borrar
-</a>
-
+                            <a href="#" class="btn btn-danger btn-borrar" onclick="borrarFinanciera(<?php echo $inventario['codigo_inventario']; ?>)">
+                                <i class="fas fa-trash-alt"></i> Borrar
+                            </a>
+                        </td>
 <script>
 function borrarInventario(id, imagen) {
     if (confirm('¿Está seguro de borrar el  inventario?')) {

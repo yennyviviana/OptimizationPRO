@@ -8,6 +8,13 @@ if(!isset($_SESSION['id_usuario'])){
 }
 
 ?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -18,24 +25,29 @@ if(!isset($_SESSION['id_usuario'])){
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <title>Tu Página</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-        <link href="public/css/style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
 <style>
+    body{
+      background-color: #000;
+    }
 .panel {
             display: flex;
             justify-content: space-between;
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color:  #234DF0;
         }
 
         .column {
             width: 48%;
         }
 
-        
+       
+        h2{
+          color: whitesmoke;
+        }
      
 .nav {
     display: flex;
@@ -46,7 +58,7 @@ if(!isset($_SESSION['id_usuario'])){
 }
 
 .nav a {
-    color: rgb(33, 138, 170);
+    color: whitesmoke;
     text-decoration: none;
     padding: 10px;
     font-size: 16px;
@@ -62,16 +74,14 @@ if(!isset($_SESSION['id_usuario'])){
     color: #0f6146;
 }
 
-
-
-        .btn {
+.btn {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            background-color: #007bff;
+            background-color: #fff;
             color: #fff;
         }
 
@@ -79,42 +89,41 @@ if(!isset($_SESSION['id_usuario'])){
             background-color: #0056b3;
         }
 
-
         .btn-borrar {
-    display: inline-block;
-    padding: 7px 10px; /* Ajusta el relleno para hacerlo más pequeño */
-    font-size: 14px; /* Ajusta el tamaño de la fuente para hacerlo más pequeño */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #000; /* Cambiado a color rojo */
-    color: #fff;
-    transition: background-color 0.3s; /* Agregado transición suave */
-}
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #0071FA;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
 
-.btn-borrar:hover {
-    background-color: #c82333; /* Cambiado a tono más oscuro de rojo en hover */
-}
+        .btn-borrar:hover {
+            background-color: #c82333;
+        }
 
+        .btn-editar {
+            display: inline-block;
+            padding: 7px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: blue;
+            color:  grapheme_substr;
+            transition: background-color 0.3s;
+        }
 
-.btn-editar {
-    display: inline-block;
-    padding: 7px 10px; /* Ajusta el relleno para hacerlo más pequeño */
-    font-size: 14px; /* Ajusta el tamaño de la fuente para hacerlo más pequeño */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color:  green; /* Cambiado a color rojo */
-    color: #fff;
-    transition: background-color 0.3s; /* Agregado transición suave */
-}
-
-.btn-editar:hover {
-    background-color: #A0CD60; /* Cambiado a tono más oscuro de rojo en hover */
-}
-
+        .btn-editar:hover {
+            background-color: #59A3F7;
+        }
     </style>
 </head>
+<body>
+
 <body>
 
            
@@ -124,10 +133,11 @@ if(!isset($_SESSION['id_usuario'])){
             <h2>Módulo de clientes</h2>
             <ul class="nav">
               
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Customers</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar clientes</a></li>
     
                 <li class="nav-item">
-                            <a class="nav-link" href="/ERP_MAQUETACION/app/main.php">
+                            <a class="nav-link" href="/OptimizationPRO/app/main.php">
+                           
                                 <span data-feather="Home"></span>
                                  Regresar
                             </a>
