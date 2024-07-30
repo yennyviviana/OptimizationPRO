@@ -12,105 +12,156 @@ if(!isset($_SESSION['id_usuario'])){
 
 
 
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Tu Página</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #000;
-        }
-        .panel {
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #234DF0;
-        }
-        .column {
-            width: 48%;
-        }
-        h2, h3 {
-            color: whitesmoke;
-        }
-        h2 {
-            text-align: left; /* Alineación del título a la izquierda */
-        }
-        .nav {
-            display: flex;
-            align-items: center;
-            float: left;
-            margin-left: 20px; 
-        }
-        .nav a {
-            color: whitesmoke;
-            text-decoration: none;
-            padding: 10px;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        .nav a:hover {
-            background-color: rgb(10, 18, 125);
-            color: #f7f0f0;
-        }
-        .nav .active {
-            color: #0f6146;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #fff;
-            color: #fff;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn-borrar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #0071FA;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-        .btn-borrar:hover {
-            background-color: #c82333;
-        }
-        .btn-editar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: blue;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-        .btn-editar:hover {
-            background-color: #59A3F7;
-        }
-        .chart-container {
-            width: 50%;
-            margin: 0 auto; 
-        }
-        canvas {
-            width: 100% !important; /* Asegura que el canvas ocupe todo el ancho del contenedor */
-        }
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Tu Página</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+<style>
+    body {
+    background-color: #000;
+    color: #f5f5f5; 
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #234DF0; 
+}
+
+.column {
+    width: 48%;
+}
+
+h2 {
+    color: whitesmoke; 
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: whitesmoke; 
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.nav a:hover {
+    background-color: darkblue;
+    color: #000; 
+}
+.nav .active {
+    color: #ff6f61;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61; 
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff; 
+}
+
+
+.btn-borrar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ff4d4d; 
+    color: #fff;
+}
+
+.btn-borrar:hover {
+    background-color: #c82333;
+}
+
+.btn-editar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:  blue;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color:  #0B1CDB;
+}
+
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+    word-wrap: break-word;
+    color: #fff; 
+    background-color: #818274; 
+}
+
+.table th, .table td {
+    border: 1px solid #444;
+    padding: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.table th {
+    background-color: #000000;
+    color:  #65D8DB; 
+    font-weight: bold;
+    border-bottom: 3px solid #ff6f61;
+}
+
+.table tbody tr {
+    background-color: #000;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color:  #fff; 
+    color:  #000;
+}
+
+
+
+.table-responsive {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+
+
     </style>
 </head>
 
@@ -143,9 +194,12 @@ if(!isset($_SESSION['id_usuario'])){
         </div>
     </div>
 
-    <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
+   
+    <div class="container-fluid">
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
                         
             <tr>
             <th scope="col">Id Producto</th>

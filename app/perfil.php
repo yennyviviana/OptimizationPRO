@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['id_usuario'])){
+if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
     exit();
 }
@@ -16,24 +16,26 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Perfil de Usuario</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
     <style>
         body {
-            background: rgb(245, 238, 238);
+            background: #fff; /* Color de fondo claro por defecto */
+            color: #333; /* Color de texto oscuro por defecto */
         }
-        body.dark-theme {
-            background-color: #080808;
-            color: #fff;
+        .card {
+            background: #fff; /* Fondo blanco para las tarjetas */
+            border: 1px solid #ddd; /* Borde gris claro */
         }
-        body.dark-theme h1 {
-            color: #ffa500; 
+        .btn-primary {
+            background-color: #007bff; /* Color de fondo para el botón primario */
+            color: #fff; /* Color de texto blanco para el botón primario */
         }
-        body.dark-theme .btn {
-            background-color: hsl(239, 88%, 16%);
-            color: #fff;
+        .btn-warning {
+            background-color: #ffc107; /* Color de fondo para el botón de advertencia */
+            color: #000; /* Color de texto negro para el botón de advertencia */
         }
     </style>
 </head>
@@ -45,7 +47,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Datos Personales</h5>
-                        <form action="edit.php?da=3" method="POST">
+                        <form action="edit.php?da=1" method="POST">
                             <div class="mb-3">
                                 <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
                                 <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="<?php echo htmlspecialchars($nombre_usuario); ?>" required>
@@ -55,6 +57,24 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                                 <input type="email" class="form-control" id="correo_electronico" name="correo_electronico" value="<?php echo htmlspecialchars($correo_electronico); ?>" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cambiar Contraseña</h5>
+                        <form action="edit.php?da=2" method="POST">
+                            <div class="mb-3">
+                                <label for="current_password" class="form-label">Contraseña Actual</label>
+                                <input type="password" class="form-control" id="current_password" name="current_password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new_password" class="form-label">Nueva Contraseña</label>
+                                <input type="password" class="form-control" id="new_password" name="new_password" required>
+                            </div>
+                            <button type="submit" class="btn btn-warning">Cambiar Contraseña</button>
                         </form>
                     </div>
                 </div>

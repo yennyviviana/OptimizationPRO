@@ -7,105 +7,159 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 ?>
 
+
+
+
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Tu Página</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #000;
-        }
-        .panel {
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #234DF0;
-        }
-        .column {
-            width: 48%;
-        }
-        h2, h3 {
-            color: whitesmoke;
-        }
-        h2 {
-            text-align: left; /* Alineación del título a la izquierda */
-        }
-        .nav {
-            display: flex;
-            align-items: center;
-            float: left;
-            margin-left: 20px; 
-        }
-        .nav a {
-            color: whitesmoke;
-            text-decoration: none;
-            padding: 10px;
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        .nav a:hover {
-            background-color: rgb(10, 18, 125);
-            color: #f7f0f0;
-        }
-        .nav .active {
-            color: #0f6146;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #fff;
-            color: #fff;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn-borrar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #0071FA;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-        .btn-borrar:hover {
-            background-color: #c82333;
-        }
-        .btn-editar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: blue;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-        .btn-editar:hover {
-            background-color: #59A3F7;
-        }
-        .chart-container {
-            width: 50%;
-            margin: 0 auto; 
-        }
-        canvas {
-            width: 100% !important; /* Asegura que el canvas ocupe todo el ancho del contenedor */
-        }
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Tu Página</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+<style>
+    body {
+    background-color: #000;
+    color: #f5f5f5; 
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #234DF0; 
+}
+
+.column {
+    width: 48%;
+}
+
+h2 {
+    color: whitesmoke; 
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: whitesmoke; 
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.nav a:hover {
+    background-color: darkblue;
+    color: #000; 
+}
+.nav .active {
+    color: #ff6f61;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61; 
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff; 
+}
+
+
+.btn-borrar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ff4d4d; 
+    color: #fff;
+}
+
+.btn-borrar:hover {
+    background-color: #c82333;
+}
+
+.btn-editar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:  blue;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color:  #0B1CDB;
+}
+
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+    word-wrap: break-word;
+    color: #fff; 
+    background-color: #818274; 
+}
+
+.table th, .table td {
+    border: 1px solid #444;
+    padding: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.table th {
+    background-color: #000000;
+    color:  #65D8DB; 
+    font-weight: bold;
+    border-bottom: 3px solid #ff6f61;
+}
+
+.table tbody tr {
+    background-color: #000;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color:  #fff; 
+    color:  #000;
+}
+
+
+
+.table-responsive {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -126,11 +180,12 @@ if (!isset($_SESSION['id_usuario'])) {
 
 
 
+    <div class="container-fluid">
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
 
-
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Fecha_transaccion</th>
@@ -229,127 +284,128 @@ if (!isset($_SESSION['id_usuario'])) {
         </table>
     </div>
 
-    <div class="container mt-5 chart-container">
-        <h3>Gráfico de Monto por Fecha</h3>
-        <canvas id="financialChartDoughnut"></canvas>
+    
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 chart-column">
+            <div class="chart-container">
+                <h3 class="text-center text-white">Gráfico de Monto por Fecha</h3>
+                <canvas id="financialChartDoughnut"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6 chart-column">
+            <div class="chart-container">
+                <h3 class="text-center text-white">Gráfico de Monto por Tipo de Transacción</h3>
+                <canvas id="financialChartBar"></canvas>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="container mt-5 chart-container">
-        <h3>Gráfico de Monto por Tipo de Transacción</h3>
-        <canvas id="financialChartBar"></canvas>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        function borrarFinanciera(id) {
-            if (confirm('¿Está seguro de borrar?')) {
-                // Realizar una petición AJAX para borrar estado financiero
-                var xhr = new XMLHttpRequest();
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function borrarFinanciera(id) {
+        if (confirm('¿Está seguro de borrar?')) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert('Dato Financiero eliminado correctamente.');
+                        location.reload();
+                    } else {
+                        alert('Error al eliminar el dato financiero.');
+                    }
+                }
+            };
+            xhr.open('GET', 'delete.php?lla=' + id, true);
+            xhr.send();
+        }
+    }
 
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            // Éxito en la eliminación estado financiero
-                            alert('Dato Financiero eliminado correctamente.');
-                            // Recargar la página para reflejar los cambios
-                            location.reload();
-                        } else {
-                            // Error al eliminar el estado financiero
-                            alert('Error al eliminar el estado financiero.');
+    // Gráfico de Doughnut
+    var ctxDoughnut = document.getElementById('financialChartDoughnut').getContext('2d');
+    var financialChartDoughnut = new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+            labels: <?php echo json_encode($fecha); ?>,
+            datasets: [{
+                label: 'Monto',
+                data: <?php echo json_encode($monto); ?>,
+                backgroundColor: [
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(40, 167, 69, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(0, 123, 255, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(0, 123, 255, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(0, 123, 255, 1)',
+                    'rgba(40, 167, 69, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': $' + tooltipItem.raw.toLocaleString();
                         }
                     }
-                };
-
-                // Configurar la petición AJAX
-                xhr.open('GET', 'delete.php?lla=' + id, true);
-                // Enviar la petición
-                xhr.send();
+                }
             }
         }
+    });
 
-        // Gráfico de Doughnut
-        var ctxDoughnut = document.getElementById('financialChartDoughnut').getContext('2d');
-        var financialChartDoughnut = new Chart(ctxDoughnut, {
-            type: 'doughnut',
-            data: {
-                labels: <?php echo json_encode($fecha); ?>,
-                datasets: [{
-                    label: 'Monto',
-                    data: <?php echo json_encode($monto); ?>,
-                    backgroundColor: [
-                        'rgba(0, 123, 255, 0.2)',
-                        'rgba(40, 167, 69, 0.2)',
-                        'rgba(0, 123, 255, 0.2)',
-                        'rgba(40, 167, 69, 0.2)',
-                        'rgba(0, 123, 255, 0.2)',
-                        'rgba(40, 167, 69, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(0, 123, 255, 1)',
-                        'rgba(40, 167, 69, 1)',
-                        'rgba(0, 123, 255, 1)',
-                        'rgba(40, 167, 69, 1)',
-                        'rgba(0, 123, 255, 1)',
-                        'rgba(40, 167, 69, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return tooltipItem.label + ': $' + tooltipItem.raw.toLocaleString();
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // Gráfico de Barras
-        var ctxBar = document.getElementById('financialChartBar').getContext('2d');
-        var financialChartBar = new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: <?php echo json_encode($tipos); ?>,
-                datasets: [{
-                    label: 'Monto por Tipo de Transacción',
-                    data: <?php echo json_encode($monto_tipos); ?>,
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                    borderColor: 'rgba(0, 123, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return tooltipItem.label + ': $' + tooltipItem.raw.toLocaleString();
-                            }
-                        }
-                    }
+    // Gráfico de Barras
+    var ctxBar = document.getElementById('financialChartBar').getContext('2d');
+    var financialChartBar = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($tipos); ?>,
+            datasets: [{
+                label: 'Monto por Tipo de Transacción',
+                data: <?php echo json_encode($monto_tipos); ?>,
+                backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
                 },
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': $' + tooltipItem.raw.toLocaleString();
+                        }
                     }
                 }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>

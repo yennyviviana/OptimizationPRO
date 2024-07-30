@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// No necesitamos manejar el archivo aquí, ya que lo estamos actualizando por separado en el bloque POST
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -227,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" name="boton" class="btn btn-primary">Guardar</button>
             </form>
             <?php else: ?>
-                <div class="alert alert-danger">No se encontraron datos del pedido.</div>
+              
             <?php endif; ?>
         </div>
     </div>

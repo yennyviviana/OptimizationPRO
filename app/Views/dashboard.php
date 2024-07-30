@@ -23,7 +23,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
         body {
-            background-color: #BFBDA8;
+            background-color: #F5F5F5;
             
         } 
         body.dark-theme {

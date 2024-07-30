@@ -154,11 +154,6 @@ require_once __DIR__ . '/../../Controllers/FinancieraController.php';
     </div>
 
 
-
-
-
-
-    
     <button type="submit" name="boton" class="btn btn-primary">Guardar</button>
             </form>
         </div>

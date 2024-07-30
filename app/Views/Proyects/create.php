@@ -25,37 +25,37 @@ if (!isset($_SESSION['id_usuario'])) {
     </head>
     <body>
 <style>
-    body{
-      background-color: #000;
-    }
+    body {
+    background-color: #000;
+    color: #f5f5f5; 
+}
+
 .panel {
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            background-color:  #234DF0;
-        }
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #234DF0; 
+}
 
-        .column {
-            width: 48%;
-        }
+.column {
+    width: 48%;
+}
 
-       
-        h2{
-          color: whitesmoke;
-        }
-     
+h2 {
+    color: whitesmoke; 
+}
+
 .nav {
     display: flex;
     align-items: center;
     float: left;
-    margin-left: 20px; 
-    text-align: none;
+    margin-left: 20px;
 }
 
 .nav a {
-    color: whitesmoke;
+    color: whitesmoke; 
     text-decoration: none;
     padding: 10px;
     font-size: 16px;
@@ -63,60 +63,104 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 .nav a:hover {
-    background-color: rgb(10, 18, 125);
-    color: #f7f0f0;
+    background-color: darkblue;
+    color: #000; 
 }
-
 .nav .active {
-    color: #0f6146;
+    color: #ff6f61;
 }
 
 .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #fff;
-            color: #fff;
-        }
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61; 
+}
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff; 
+}
 
-        .btn-borrar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #0071FA;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
 
-        .btn-borrar:hover {
-            background-color: #c82333;
-        }
+.btn-borrar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ff4d4d; 
+    color: #fff;
+}
 
-        .btn-editar {
-            display: inline-block;
-            padding: 7px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: blue;
-            color:  grapheme_substr;
-            transition: background-color 0.3s;
-        }
+.btn-borrar:hover {
+    background-color: #c82333;
+}
 
-        .btn-editar:hover {
-            background-color: #59A3F7;
-        }
+.btn-editar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color:  blue;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color:  #0B1CDB;
+}
+
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+    word-wrap: break-word;
+    color: #fff; 
+    background-color: #818274; 
+}
+
+.table th, .table td {
+    border: 1px solid #444;
+    padding: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.table th {
+    background-color: #000000;
+    color:  #65D8DB; 
+    font-weight: bold;
+    border-bottom: 3px solid #ff6f61;
+}
+
+.table tbody tr {
+    background-color: #000;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color:  #fff; 
+    color:  #000;
+}
+
+
+
+.table-responsive {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+
+
     </style>
 </head>
 
@@ -136,9 +180,13 @@ if (!isset($_SESSION['id_usuario'])) {
         </div>
     </div>
 
-    <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
+    
+
+    <div class="container-fluid">
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
  <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre proyecto</th>
