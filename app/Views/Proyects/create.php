@@ -123,14 +123,15 @@ if (!isset($_SESSION['id_usuario'])) {
 <body>
     <div class="panel">
         <div class="column">
-            <h2>Módulo de proyects</h2>
+            <h2>Módulo de proyectos</h2>
             <ul class="nav">
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar proyectos</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="main.php">
-                        <span data-feather="Home"></span> Regresar
-                    </a>
-                </li>
+                <a class="nav-link" href="/OptimizationPRO/app/main.php">
+                                <span data-feather="Home"></span>
+                                 Regresar
+                            </a>
+                        </li>
             </ul>
         </div>
     </div>

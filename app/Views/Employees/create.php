@@ -134,12 +134,15 @@ if(!isset($_SESSION['id_usuario'])){
               
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Employees</a></li>
     
-
+                <li class="nav-item">
+                <a class="nav-link" href="/OptimizationPRO/app/main.php">
+                                <span data-feather="Home"></span>
+                                 Regresar
+                            </a>
+                        </li>
             </ul>
         </div>
     </div>
-
-    
     <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">

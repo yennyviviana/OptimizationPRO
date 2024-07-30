@@ -133,7 +133,8 @@ if(!isset($_SESSION['id_usuario'])){
                 <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar inventarios</a></li>
     
                 <li class="nav-item">
-                            <a class="nav-link" href="main.php">
+                <li class="nav-item">
+                <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
                                  Regresar
                             </a>
@@ -141,9 +142,6 @@ if(!isset($_SESSION['id_usuario'])){
             </ul>
         </div>
     </div>
-
-    
-    
 
     <div class="table-responsive">
                 <table class="table table-striped table-bordered">
