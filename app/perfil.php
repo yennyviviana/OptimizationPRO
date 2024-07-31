@@ -22,20 +22,20 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
     <style>
         body {
-            background: #fff; /* Color de fondo claro por defecto */
-            color: #333; /* Color de texto oscuro por defecto */
+            background: #fff; 
+            color: #333; 
         }
         .card {
-            background: #fff; /* Fondo blanco para las tarjetas */
-            border: 1px solid #ddd; /* Borde gris claro */
+            background: #fff; 
+            border: 1px solid #ddd; 
         }
         .btn-primary {
-            background-color: #007bff; /* Color de fondo para el botón primario */
-            color: #fff; /* Color de texto blanco para el botón primario */
+            background-color: #007bff; 
+            color: #fff; 
         }
         .btn-warning {
-            background-color: #ffc107; /* Color de fondo para el botón de advertencia */
-            color: #000; /* Color de texto negro para el botón de advertencia */
+            background-color: #ffc107; 
+            color: #000; 
         }
     </style>
 </head>

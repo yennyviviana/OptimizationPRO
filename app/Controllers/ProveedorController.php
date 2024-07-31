@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Models/ProveedorModel.php';
 require_once __DIR__ . '/../Config/database.php';
 
-session_start(); // Ensure the session is started
+session_start(); 
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
@@ -25,7 +25,7 @@ if (isset($_POST['boton'])) {
     $archivo = $_FILES['archivo'];
 
     
-        // Inserta el pedido usando el método correspondiente del modelo
+        // Inserta el pedido usando el método  del modelo
     $resultado = $modelo->insertarProveedor($nombre_empresa, $direccion, $telefono, $correo_electronico, $lista_productos, $condiciones_pago, $metodo_pago, $descripcion,  $archivo);
 
 

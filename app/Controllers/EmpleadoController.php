@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../Models/EmpleadoModel.php';
 
-session_start(); // Asegúrate de iniciar la sesión
+session_start(); 
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");

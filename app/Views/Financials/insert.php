@@ -47,7 +47,6 @@ require_once __DIR__ . '/../../Controllers/FinancieraController.php';
             border-color: #0056b3;
         }
 
-        /* Ajuste de estilos para el editor CKEditor */
         .ck-editor__editable {
             min-height: 150px;
         }

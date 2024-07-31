@@ -7,7 +7,7 @@
 
 body {
     align-items: center;
-    background-color: rgb(5, 5, 5);
+    background-color: hsl(251, 86%, 14%);
     display: flex;
     min-height: 100vh;
     justify-content: center;
@@ -120,8 +120,8 @@ header {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(8, 8, 8, 0.102);
     width: 100%;
-    max-width: 50%; 
-    margin-left: 70px; 
+    max-width: 30%; 
+    margin-left: 60px; 
 }
 
 h1 {

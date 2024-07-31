@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../Models/ClienteModel.php';
 
-session_start(); // Asegúrate de iniciar la sesión
+session_start(); 
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha_modificacion = $_POST['fecha_modificacion'];
 
     // Instancia el modelo
-    $modelo = new ClienteModel($mysqli); // Asegúrate de que $mysqli esté definido antes de esta línea
+    $modelo = new ClienteModel($mysqli);
 
-    // Intenta insertar el cliente usando el método del modelo
+    //  insertar el cliente usando el método del modelo
     $resultado = $modelo->insertarCliente($nombre, $apellido, $email, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion);
 
     // Verifica si la inserción fue exitosa

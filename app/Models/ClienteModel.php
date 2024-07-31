@@ -71,5 +71,5 @@ if (mysqli_query($this->conexion, $consulta)) {
 }
 }
 
-
+    
 ?>

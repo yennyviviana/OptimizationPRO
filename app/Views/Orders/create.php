@@ -160,35 +160,60 @@ h2 {
     overflow-x: auto;
 }
 
+.search-button {
+    margin-left: auto; 
+    margin-right: 20px; 
+    width: 150px; 
+    height: 35px;
+    border-radius: 20px; 
+    text-align: center; 
+}
+
+.btn-search {
+    background-color: #ffffff; 
+    color: #007bff; 
+    border: 2px solid #007bff; 
+    padding: 0; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    font-size: 14px; 
+    font-weight: bold; 
+}
+
+.btn-search:hover {
+    background-color: #f8f9fa; 
+    color: #0056b3;
+    border-color: #0056b3; 
+}
+
 
 
     </style>
 
-
-    </style>
 </head>
 <body>
 
-           
 
-    <div class="panel">
-        <div class="column">
-            <h2>Módulo de pedidos</h2>
-            <ul class="nav">
-              
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar Pedidos</a></li>
-    
-                <li class="nav-item">
+<div class="panel">
+    <div class="column">
+        <h2>Módulo de pedidos</h2>
+        <ul class="nav">
+            <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar Pedidos</a></li>
+            <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
-                                <span data-feather="Home"></span>
-                                 Regresar
-                            </a>
-                        </li>
-            </ul>
-        </div>
+                    <span data-feather="Home"></span>
+                    Regresar
+                </a>
+            </li>
+        </ul>
     </div>
+    <!-- Botón de Búsqueda -->
+    <button type="button" class="btn btn-search search-button">
+        <i class="fas fa-search"></i> Buscar
+    </button>
+</div>
 
-    
     <div class="container-fluid">
     <div class="table-container">
         <div class="table-responsive">
@@ -304,7 +329,10 @@ function borrarPedido(id, imagen) {
 }
 </script>
 
-
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </tr>
             <?php

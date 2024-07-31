@@ -2,8 +2,7 @@
 
 include_once __DIR__ . '/../Models/PedidoModel.php';
 
-session_start(); // Asegúrate de que la sesión está iniciada
-
+session_start(); 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
     exit();
