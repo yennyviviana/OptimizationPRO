@@ -92,9 +92,8 @@ header("Location: index.php");
     </div>
       
     
-			<form method="POST"  class="form-background  action="<?php echo $_SERVER['PHP_SELF']; ?>">
-			
-    
+    <form method="POST" class="form-background" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
         <h2><i class="fa fa-sign-in-alt"></i><h2>Iniciar session</h2>
 
         <label for="nombre_usuario"><i class="fa fa-envelope"></i>Usuario:</label>
@@ -108,7 +107,7 @@ header("Location: index.php");
 
 <br>
 
-      <!-- Por ejemplo, en tu página de inicio de sesión (login.html) -->
+    
 <a href="recuperar_contrasena.php"><i class="fa fa-question-circle"></i> ¿Olvidaste tu contraseña?</a>
 
 
