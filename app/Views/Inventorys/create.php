@@ -281,7 +281,7 @@ while ($inventario = $resultados->fetch_assoc()) {
                                 <i class="fas fa-edit icon"></i> Editar
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-borrar" onclick="borrarFinanciera(<?php echo $inventario['codigo_inventario']; ?>)">
+                            <a href="#" class="btn btn-danger btn-borrar" onclick="borrarInventario(<?php echo $inventario['codigo_inventario']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Borrar
                             </a>
                         </td>

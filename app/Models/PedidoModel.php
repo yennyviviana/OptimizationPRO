@@ -68,24 +68,27 @@ class PedidoModel {
         $metodo_pago = mysqli_real_escape_string($this->conexion, $metodo_pago);
         $fecha_pedido = mysqli_real_escape_string($this->conexion, $fecha_pedido);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
-       
-
+    
         // Verificar si el usuario existe antes de insertar el pedido
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
-     if (mysqli_num_rows($resultado_usuario) == 0) {
-            // El usuario no existe, retorna fso
-            return false;
+        if (mysqli_num_rows($resultado_usuario) == 0) {
+            return false; // El usuario no existe
         }
+    
+        // Obtener el nombre del archivo anterior
+        $consulta_anterior = "SELECT archivo FROM pedidos WHERE id_pedido = '$id_pedido'";
+        $resultado_anterior = mysqli_query($this->conexion, $consulta_anterior);
+        $fila_anterior = mysqli_fetch_assoc($resultado_anterior);
+        $nombreArchivo = $fila_anterior['archivo']; // Valor por defecto es el anterior
     
         // Procesar la nueva imagen si se proporciona
         if ($archivo['error'] === UPLOAD_ERR_OK) {
-            $nombreArchivo = $this->procesarImagen($archivo);
-            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', archivo = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
-        } else {
-            // Aquí estaba faltando el signo de igual antes de la cadena de consulta
-            $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
+            $nombreArchivo = $this->procesarImagen($archivo); // Procesar nueva imagen
         }
+    
+        // Construir la consulta de actualización
+        $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', archivo = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
     
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
@@ -93,8 +96,8 @@ class PedidoModel {
         } else {
             return false; // Hubo un error en la actualización
         }
-}
-
+    }
+    
 private function procesarImagen($imagen) {
     $destino = __DIR__ . '/../public/img/pedidos-imagen/';
     $nombreImagen = basename($imagen['name']);

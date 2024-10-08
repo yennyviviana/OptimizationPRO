@@ -261,7 +261,7 @@ while ($cliente = $resultados->fetch_assoc()) {
        
         <td>
               
-                <a href="edit.php?da=3&lla=<?php echo $cliente['id_transaccion']; ?>"  class="btn btn-custom-green btn-editar">
+                <a href="edit.php?da=3&lla=<?php echo $cliente['id_cliente']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
 
