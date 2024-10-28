@@ -10,6 +10,7 @@ $correo_electronico = $_SESSION['correo_electronico'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,10 +22,11 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <style>
         body {
-            background-color: #F5F5F5;
-            
+            background-color: #F5F5F5;   
         } 
         body.dark-theme {
             background-color: #080808;
@@ -36,6 +38,22 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         body.dark-theme .btn {
             background-color: hsl(239, 88%, 16%); 
             color: #fff; 
+        }
+        .main-content {
+            margin-left: 250px; /* Dejar espacio para el menú */
+            padding: 20px;
+        }
+        .main-content .container {
+            max-width: 1200px;
+        }
+        .dark-theme {
+            background-color: #080808;
+            color: #fff;
+        }
+        #calendar {
+            max-width: 800px;
+            margin: 20px auto; /* Espacio alrededor del calendario */
+            padding: 10px;
         }
     </style>
 </head>
@@ -62,54 +80,53 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                             </a>
                         </li>
                         <li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Suppliers/create.php">
-        <span data-feather="users"></span>
-        Proveedores
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Shopping/create.php">
-        <span data-feather="shopping-cart"></span>
-        Área de Compras
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Customers/create.php">
-        <span data-feather="user-check"></span>
-        Clientes
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Employees/create.php">
-        <span data-feather="user-plus"></span>
-        Recursos Humanos
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Products/create.php">
-        <span data-feather="package"></span>
-        Productos
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Financials/create.php">
-        <span data-feather="dollar-sign"></span>
-        Financiera
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Inventorys/create.php">
-        <span data-feather="archive"></span>
-        Inventarios
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/OptimizationPRO/app/Views/Proyects/create.php">
-        <span data-feather="briefcase"></span>
-        Proyectos
-    </a>
-</li>
-
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Suppliers/create.php">
+                                <span data-feather="users"></span>
+                                Proveedores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Shopping/create.php">
+                                <span data-feather="shopping-cart"></span>
+                                Área de Compras
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Customers/create.php">
+                                <span data-feather="user-check"></span>
+                                Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Employees/create.php">
+                                <span data-feather="user-plus"></span>
+                                Recursos Humanos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Products/create.php">
+                                <span data-feather="package"></span>
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Financials/create.php">
+                                <span data-feather="dollar-sign"></span>
+                                Financiera
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Inventorys/create.php">
+                                <span data-feather="archive"></span>
+                                Inventarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/OptimizationPRO/app/Views/Proyects/create.php">
+                                <span data-feather="briefcase"></span>
+                                Proyectos
+                            </a>
+                        </li>
                     <?php } ?>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -140,18 +157,18 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">OptimizationPro</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-    <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
-    </div>
-    <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
-        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
-        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
-    </div>
-</div>
+                    <div class="btn-group mr-2">
+                        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
+                    </div>
+                    <div class="btn-group mr-2">
+                        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
+                        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
+                        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
+                    </div>
+                </div>
 
-<!-- Div para mostrar resultados de las acciones -->
-<div id="results"></div>
+                <!-- Div para mostrar resultados de las acciones -->
+                <div id="results"></div>
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
                     <span data-feather="moon"></span> Cambiar Tema
@@ -165,102 +182,70 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                     <canvas id="graficoDona" width="400" height="400"></canvas>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody id="miTabla">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Producto 1</td>
-                            <td>Descripción del producto 1</td>
-                            <td>$20.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Producto 2</td>
-                            <td>Descripción del producto 2</td>
-                            <td>$25900.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Producto 3</td>
-                            <td>Descripción del producto 3</td>
-                            <td>$2587.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Producto 4</td>
-                            <td>Descripción del producto 4</td>
-                            <td>$259.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>            
+
+            <!-- Aquí se agrega el calendario -->
+            <div id="calendar"></div>
+
         </main>
     </div>
 </div>
 
-<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        feather.replace(); // Inicializando feather-icons.......
+        feather.replace(); // Inicializando feather-icons
 
-        // Gráfico de barras
-        var ctxBar = document.getElementById('graficoBarra').getContext('2d');
-        var barChart = new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-                datasets: [{
-                    label: 'Ventas',
-                    data: [12, 19, 3, 5, 2],
-                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
+        const toggleButton = document.getElementById('toggle-theme');
+        const body = document.body;
+        toggleButton.addEventListener('click', () => body.classList.toggle('dark-theme'));
+
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            events: 'cargar_eventos.php',
+            editable: true,
+            selectable: true,
+            dateClick: function (info) {
+                let titulo = prompt('Introduce el título del evento:');
+                if (titulo) {
+                    fetch('guardar_evento.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ fecha: info.dateStr, titulo: titulo }),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            calendar.addEvent({ title: titulo, start: info.dateStr });
+                        } else {
+                            alert('Error al guardar el evento');
+                        }
+                    });
+                }
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+            eventClick: function(info) {
+                if (confirm('¿Eliminar este evento?')) {
+                    fetch('eliminar_evento.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: info.event.id }),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            info.event.remove();
+                        } else {
+                            alert('Error al eliminar el evento');
+                        }
+                    });
                 }
             }
         });
-
-        // Gráfico circular...
-        var ctxDoughnut = document.getElementById('graficoDona').getContext('2d');
-        var doughnutChart = new Chart(ctxDoughnut, {
-            type: 'doughnut',
-            data: {
-                labels: ['Rojo', 'Verde', 'Azul'],
-                datasets: [{
-                    data: [30, 40, 30],
-                    backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
-                }]
-            }
-        });
-
-        // Toggle theme
-        const toggleButton = document.getElementById('toggle-theme');
-        const body = document.body;
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-        });
+        calendar.render();
     });
 </script>
-
 <script>
 
 document.getElementById('addElement').addEventListener('click', function() {
@@ -290,11 +275,6 @@ document.getElementById('help').addEventListener('click', function() {
 });
 </script>
 
-
-
-
-
-<footer>Copyright @ Yenny Bibiana 2024</footer>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 require 'Config/database.php';
 session_start();
 
@@ -69,7 +69,8 @@ header("Location: index.php");
  echo "NO existe usuario";
  }
 }
-?>
+?> 
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -88,7 +89,7 @@ header("Location: index.php");
     
 
     <div class="logo-container">
-        <img src="public/img/logo.png" width="1000" height="600" alt="imagen de de la ERP">
+        <img src="public/img/ia.jpg" width="1000" height="600" alt="imagen de de la ERP">
     </div>
       
     
@@ -107,15 +108,16 @@ header("Location: index.php");
 
 <br>
 
-    
-<a href="recuperar_contrasena.php"><i class="fa fa-question-circle"></i> ¿Olvidaste tu contraseña?</a>
+              <a href="recuperar_contrasena.php"><i class="fa fa-question-circle"></i> 
+              ¿Olvidaste tu contraseña?</a>
 
 
-        <!-- Enlace para mostrar el formulario de registro -->
-        <p>¿No tienes una cuenta? <a href="register.php" id="showRegister"><i class="fa fa-user-plus"></i>Regístrate aquí</a></p>
+
+           <p>¿No tienes una cuenta? <a href="register.php" id="showRegister"><i class="fa fa-user-plus"></i>Regístrate aquí</a></p>
     </form>
-</div>
+   </div>
 
+      
   
 
     </body>
