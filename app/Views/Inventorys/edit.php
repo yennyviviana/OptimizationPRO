@@ -93,13 +93,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($resultado) {
             echo "Inventario actualizadado correctamente.";
         } else {
-            echo "Error al actualizar el inventario.";
+             //"Error al actualizar el inventario.";
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {
-    // Obtener los datos del  invenatrio para mostrar en el formulario
+    // Obtener los datos del  invenatrio para mostrar en el formulario.....
     $query = "SELECT * FROM inventarios WHERE  codigo_inventario = ?";
     $stmt = $mysqli->prepare($query);
 
@@ -183,8 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container">
         <div id="form-background">
         <?php if ($inventario): ?>
-            <form action="edit.php?da=2&lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-
+            <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
 
                 <div class="form-group">
                     <label for="nombre_producto"><i class="fas fa-box"></i> Nombre del Producto:</label>
@@ -241,11 +240,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="categoria 10" <?php echo ($inventario['categoria_productos'] == 'categoria 10') ? 'selected' : ''; ?>>Categoría 10</option>
                 </select>
 
-                <div class="form-group">
-                    <label for="descripcion">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" required placeholder="Descripción"><?php echo $inventario['descripcion']; ?></textarea>
-                    <div class="invalid-feedback">Por favor ingrese la descripción.</div>
-                </div>
+                <textarea id="descripcion" name="descripcion" class="form-control" required><?php echo $inventario['descripcion']; ?></textarea>
+
 
                 <div class="form-group">
                     <label for="codigo_barras">Código de Barras:</label>
@@ -315,7 +311,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary">Actualizar Inventario</button>
             </form>
         <?php else: ?>
-            <p>Inventario no encontrado.</p>
+            <p>Inventario encontrado.</p>
         <?php endif; ?>
     </div>
 </div>

@@ -107,4 +107,3 @@ private function procesarImagen($imagen) {
 }
 
 }
-?>

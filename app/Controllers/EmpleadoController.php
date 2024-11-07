@@ -54,4 +54,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Cierra la conexión a la base de datos
     mysqli_close($mysqli);
 }
-?>
+

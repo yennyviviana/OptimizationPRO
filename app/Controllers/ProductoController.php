@@ -65,4 +65,3 @@ if ($_POST) {
         mysqli_close($mysqli);
     }
 }
-?>

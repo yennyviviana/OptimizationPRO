@@ -76,4 +76,4 @@ class ProveedorModel {
         return $nombreImagen;
     }
 }
-?>
+

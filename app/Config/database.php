@@ -17,4 +17,4 @@ if (!$mysqli) {
 // Establecer el juego de caracteres a UTF-8
 mysqli_set_charset($mysqli, 'utf8');
 
-?>
+

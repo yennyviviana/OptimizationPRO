@@ -72,4 +72,3 @@ mysqli_set_charset($mysqli, 'utf8');
     // Cierra la conexión a la base de datos
     mysqli_close($mysqli);
 }
-?>

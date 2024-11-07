@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: create.php?da=2");
         exit();
     } else {
-        echo "Error al insertar el inventario.";
+        //echo "Error al insertar el inventario.";
     }
 
     mysqli_close($mysqli);
 }
-?>
+

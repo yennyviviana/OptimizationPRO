@@ -37,4 +37,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si no es una solicitud POST, redirigir o mostrar un mensaje de error
     echo "Solicitud no válida.";
 }
-?>

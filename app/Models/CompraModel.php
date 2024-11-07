@@ -136,4 +136,3 @@ class CompraModel {
 
 }
 //var_dump($_POST);
-?>

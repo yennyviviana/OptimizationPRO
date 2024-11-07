@@ -112,4 +112,4 @@ class ProductoModel {
 }
 
 //var_dump($_POST);
-?>
+

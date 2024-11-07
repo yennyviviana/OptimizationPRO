@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-07-2024 a las 16:31:26
+-- Tiempo de generación: 06-11-2024 a las 17:03:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -48,7 +48,9 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `email`, `documento_identidad`, `telefono`, `direccion`, `ciudad`, `estado`, `codigo_postal`, `pais`, `fecha_creacion`, `fecha_modificacion`) VALUES
-(1, 'FORTALECIMIENTO DEL MANEJO DE HERRAMIENTAS CLAVES PARA EL MEJORAMIENTO EMPRESARIAL', 'mendez', 'cyennyviviana23@hotmail.com', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', 'aprobado', '763777000', 'colombia', '2024-07-09 19:32:01', '2024-07-11');
+(1, 'viviana', 'mendezz', 'cyennyviviana23@hotmail.com', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', 'colombia', '763777000', '', '2024-11-05 20:34:15', '2024-07-11'),
+(2, 'Juan', 'Pérez', 'juan.perez@example.com', '12345678', '555-1234', 'Calle Falsa 123', 'Ciudad de México', 'CDMX', '01000', 'México', '2024-10-01 00:00:00', '2024-10-05'),
+(4, 'Carlos', 'López', 'carlos.lopez@example.com', '11223344', '555-6789', 'Calle Central 500', 'Guadalajara', 'Jalisco', '44100', 'México', '2024-10-03 00:00:00', '2024-10-07');
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,8 @@ CREATE TABLE `compras` (
 
 INSERT INTO `compras` (`id_compra`, `productos_comprados`, `detalles_productos`, `precio_unitario`, `precio_compra`, `total_compra`, `estado_actual`, `metodo_pago`, `fecha_compra`, `fecha_entrega`, `codigo_inventario`, `id_proveedor`, `id_usuario`, `factura`) VALUES
 (1, 'Auriculares inalámbricos', 'ssssssssss', 555555.00, 55555555.00, 50000000.00, '', 'efectivo', '2024-07-24 05:04:58', '2024-07-23', 1, 1, 59, '3dc1d89a-96f1-4aed-a1c2-4e644ac61b0d.jpeg'),
-(2, 'Auriculares inalámbricos', 'ssssssssss', 555555.00, 55555555.00, 50000000.00, '', 'efectivo', '2024-07-24 05:15:58', '2024-07-23', 1, 1, 59, '3dc1d89a-96f1-4aed-a1c2-4e644ac61b0d.jpeg');
+(3, 'Televisor LED', 'ssssssssss', 555555.00, 55555555.00, 50000000.00, 'aprobado', 'efectivo', '2024-11-05 20:30:33', '2024-10-29', 1, 1, 59, 'Captura de pantalla (214).png'),
+(5, 'Televisor LED', 'ssssssssss', 555555.00, 55555555.00, 50000000.00, 'aprobado', 'efectivo', '2024-11-05 20:31:43', '2024-11-05', 1, 1, 59, 'Captura de pantalla (21).png');
 
 -- --------------------------------------------------------
 
@@ -132,9 +135,20 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`id_empleado`, `nombre_completo`, `cargo`, `fecha_contratacion`, `numero_horas`, `precio_hora`, `salario`, `estado`, `departamento`, `documento_identidad`, `telefono`, `direccion`, `ciudad`, `codigo_postal`, `pais`, `fecha_creacion`, `fecha_modificacion`, `imagen`, `documentacion_archivo`, `descripcion_profesional`) VALUES
-(4, 'jose vaxc', 'ingeniera de sistemas', '2024-07-16', 47.00, 1000000.00, 3000000.00, 'activo', 'valle_del_cauca', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', NULL, 'colombia', '2024-07-16 18:05:09', NULL, 'empleado_66969a35e61ee_imagen.jpg', 'empleado_66969a35e8435_documento.jpg', '<p>sssssssssssssssssssssss</p>\\r\\n'),
-(6, 'jose vaxc', 'ingeniera de sistemas', '2024-07-16', 47.00, 1000000.00, 3000000.00, '', 'antioquia', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', NULL, 'colombia', '2024-07-16 18:31:28', NULL, 'empleado_6696a060a2bce_imagen.png', 'empleado_6696a060a887b_documento.png', '<p>siiiiiiiii conservar mi paz espiritual</p>\\r\\n'),
-(7, 'jose vaxc', 'ingeniera de sistemas', '2024-07-16', 47.00, 1000000.00, 3000000.00, '', 'antioquia', '22222222228', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', NULL, 'colombia', '2024-07-16 18:33:14', NULL, 'empleado_6696a0ca2c89e_imagen.png', 'empleado_6696a0caae410_documento.png', '<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>\\r\\n');
+(4, 'veolia', 'ingeniera de sistemas', '2024-11-05', 47.00, 1000000.00, 3000000.00, 'activo', 'valle_del_cauca', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', NULL, 'colombia', '2024-11-05 20:38:47', NULL, 'empleado_66969a35e61ee_imagen.jpg', 'empleado_66969a35e8435_documento.jpg', '<p>sssssssssssssssssssssss</p>\\r\\n'),
+(6, 'jose vaxc', 'ingeniera de sistemas', '2024-07-16', 47.00, 1000000.00, 3000000.00, '', 'antioquia', '222222222223', '3154288231', 'MANZANA U CASA 16', 'Palmira, Valle Del Cauca, Colombia', NULL, 'colombia', '2024-07-16 18:31:28', NULL, 'empleado_6696a060a2bce_imagen.png', 'empleado_6696a060a887b_documento.png', '<p>siiiiiiiii conservar mi paz espiritual</p>\\r\\n');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -157,6 +171,13 @@ CREATE TABLE `financieras` (
   `id_compra` int(11) DEFAULT NULL,
   `id_proyecto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `financieras`
+--
+
+INSERT INTO `financieras` (`id_transaccion`, `fecha_transaccion`, `monto`, `tipo_transaccion`, `descripcion`, `id_usuario`, `id_proveedor`, `id_cliente`, `id_pedido`, `codigo_inventario`, `id_producto`, `id_compra`, `id_proyecto`) VALUES
+(15, '2024-11-06', 0.00, 'egreso', 'ffffffffffffffffff', 59, 4, 2, 7, 4, 15, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +210,7 @@ CREATE TABLE `inventarios` (
 --
 
 INSERT INTO `inventarios` (`codigo_inventario`, `nombre_producto`, `cantidad_stock`, `precio_unitario`, `costo_unitario`, `precio_compra`, `precio_venta`, `categoria_productos`, `descripcion`, `codigo_barras`, `ubicacion`, `estado`, `id_producto`, `id_proveedor`, `fecha_adquisicion`, `fecha_vencimiento`, `tipo_documento`) VALUES
-(1, 'Lavadora automática', 123456, 12235.00, 566332.00, 99999999.99, 99999999.99, 'producto 3', 'kkkkkkkkkkkkk', '12222222', 'colombia', 'disponible', 13, 1, '2022-07-14 00:00:00', '2024-07-11', '¿Quieres adoptar un perrito_ ¡Te decimos dónde!.jpeg');
+(4, 'Smartphone de última generación', 12, 2000.00, 2000.00, 3000000.00, 49000000.00, 'producto 6', 'kkkkkkk', '009123456', 'colombia', '', 15, 4, '2024-11-13 00:00:00', '2024-11-20', 'Captura de pantalla (228).png');
 
 -- --------------------------------------------------------
 
@@ -219,7 +240,10 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `nombre_pedido`, `precio`, `estado`, `direccion`, `descripcion`, `numero_seguimiento`, `tiempo_entrega_horas`, `informacion_pedido`, `id_usuario`, `metodo_pago`, `archivo`, `fecha_pedido`, `fecha_entrega`) VALUES
-(1, 'annnn', 50000.00, 'aprobado', 'CR 18 CL 1 MU CASA 1009', '<p>hola</p>\r\n', 123564, 9, '<p>jjjjjjjjjjjj</p>\r\n', 59, 'credito', 'Participate in a 30-Day Glow-Up Challenge.jpg', '2024-07-16 00:58:10', '2024-06-07');
+(5, 'Pedido A', 150.50, 'aprobado', 'Calle 123, Ciudad', '<p>Descripci&oacute;n del Pedido A</p>\r\n', 23, 2, '<p>Informaci&oacute;n adicional A</p>\r\n', 59, 'credito', '5.png', '2024-11-05 20:08:42', '2024-11-03'),
+(6, 'Pedido B', 200.00, '', 'Av. Siempre Viva 742', 'Descripción del Pedido B', 0, 72, 'Información adicional B', 2, 'PayPal', 'archivoB.pdf', '2024-11-02', '2024-11-05'),
+(7, 'Pedido C', 99.99, 'entregado', 'Carrera 45 #20-10', 'Descripción del Pedido C', 0, 24, 'Información adicional C', 3, 'Efectivo', 'archivoC.pdf', '2024-11-03', '2024-11-04'),
+(8, 'Pedido D', 50.75, 'cancelado', 'Calle de los Cerezos 55', 'Descripción del Pedido D', 0, 36, 'Información adicional D', 4, 'Transferencia Bancaria', 'archivoD.pdf', '2024-11-04', '2024-11-06');
 
 -- --------------------------------------------------------
 
@@ -247,8 +271,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre_producto`, `precio`, `cantidad_stock`, `categoria_productos`, `estado`, `fecha_adquisicion`, `fecha_vencimiento`, `id_proveedor`, `detalles`, `archivo`, `codigo_barras`) VALUES
-(13, 'Lavadora automática', 500000.00, 123456, 'Electrodomésticos', 'Disponible', '2024-07-09 00:00:00', '2028-06-30', 1, '<p>que interesante video sobre desarollar personal</p>\r\n', '11.jpg', '2589745632'),
-(14, 'Televisor LED', 55555555.00, 123, 'producto 1', 'Disponible', '2024-07-09 00:00:00', '0000-00-00', 1, '<p>sssssssssssssssssssssssssss</p>\r\n', '0da13c47-1c79-4c66-9560-29f0acb626eb.jpeg', '1111111111111');
+(15, 'Lavadora automática', 400000.00, 123, 'producto 8', 'En espera', '2024-11-06 00:00:00', '0000-00-00', 4, '<p>estamos aqui.....pero confianza en Dios&nbsp; en mi MISMA sigue creciendo</p>\r\n', 'Captura de pantalla (236).png', '000012345678');
 
 -- --------------------------------------------------------
 
@@ -276,7 +299,7 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id_proveedor`, `nombre_empresa`, `direccion`, `telefono`, `correo_electronico`, `lista_productos`, `condiciones_pago`, `metodo_pago`, `descripcion`, `historial_pedidos`, `id_producto`, `archivo`) VALUES
-(1, 'brimaniek', '3154288231', '3154288231', 'pruebast@gmail.com', 'producto 1', 'Pago anticipado', 'credito', '<p>fffffffffffffffffffffffffffffsi conserva tu paz</p>\r\n', '', NULL, 'self care aesthetic ideas self care trending 2023 march.jpg');
+(4, 'bibiC', 'manzana  X 200-100', '3154288231', 'yennyvivianannncaicedo23@hotmail.com', 'producto 1', 'Pago a plazos', 'transfarencia', '<p>HOLA VAMOS POR EXITO.</p>\r\n', '', NULL, 'Captura de pantalla (195).png');
 
 -- --------------------------------------------------------
 
@@ -291,8 +314,16 @@ CREATE TABLE `proyectos` (
   `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
   `estado` enum('pendiente','en progreso','completado') NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL
+  `id_usuario` int(11) DEFAULT NULL,
+  `imagen_proyecto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proyectos`
+--
+
+INSERT INTO `proyectos` (`id_proyecto`, `nombre_proyecto`, `descripcion`, `fecha_inicio`, `fecha_fin`, `estado`, `id_usuario`, `imagen_proyecto`) VALUES
+(1, 'erp', 'si prioridad media', '2024-08-31', '2025-03-28', 'pendiente', 59, 'Captura de pantalla (229).png');
 
 -- --------------------------------------------------------
 
@@ -348,6 +379,12 @@ ALTER TABLE `compras`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id_empleado`);
+
+--
+-- Indices de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `financieras`
@@ -412,7 +449,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cola_mensajes`
@@ -424,7 +461,7 @@ ALTER TABLE `cola_mensajes`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -433,40 +470,46 @@ ALTER TABLE `empleados`
   MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `financieras`
 --
 ALTER TABLE `financieras`
-  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `codigo_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -508,7 +551,7 @@ ALTER TABLE `inventarios`
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `fk_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`);
+  ADD CONSTRAINT `fk_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`) ON DELETE SET NULL;
 
 --
 -- Filtros para la tabla `proveedores`
