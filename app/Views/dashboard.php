@@ -136,6 +136,41 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
+
+
+<div id="eventModal" class="modal fade" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="eventModalLabel" class="modal-title">Crear Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm" action="Views/eventos.php" method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Título:</label>
+                        <input type="text" id="title" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="start" class="form-label">Inicio:</label>
+                        <input type="datetime-local" id="start" name="start" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="end" class="form-label">Fin:</label>
+                        <input type="datetime-local" id="end" name="end" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Evento</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         feather.replace();
@@ -148,12 +183,16 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         let calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
-            events: 'cargar_eventos.php',
+            events: 'eventos.php',
             editable: true,
             selectable: true,
             dateClick: function(info) {
-                alert('Fecha: ' + info.dateStr);
-            }
+    const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+    document.getElementById('start').value = info.dateStr + "T00:00"; // Asigna fecha seleccionada
+    modal.show(); // Muestra el modal
+}
+
+            
         });
         calendar.render();
 
