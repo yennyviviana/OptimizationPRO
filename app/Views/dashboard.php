@@ -131,10 +131,12 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/feather-icons"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
 
 
 
@@ -169,32 +171,33 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
 
 
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        feather.replace();
+   document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendar');
+    const modalEl = document.getElementById('eventModal');
+    const modalBootstrap = new bootstrap.Modal(modalEl); // Inicializa el modal de Bootstrap
 
-        const toggleButton = document.getElementById('toggle-theme');
-        const body = document.body;
-        toggleButton.addEventListener('click', () => body.classList.toggle('dark-theme'));
+    // Configuración del calendario
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', // Vista inicial
+        locale: 'es', // Idioma en español
+        editable: true, // Permite arrastrar y soltar eventos
+        selectable: true, // Permite seleccionar fechas
+        dateClick: function (info) {
+            // Mostrar el modal al hacer clic en una fecha
+            modalBootstrap.show();
 
-        let calendarEl = document.getElementById('calendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            events: 'eventos.php',
-            editable: true,
-            selectable: true,
-            dateClick: function(info) {
-    const modal = new bootstrap.Modal(document.getElementById('eventModal'));
-    document.getElementById('start').value = info.dateStr + "T00:00"; // Asigna fecha seleccionada
-    modal.show(); // Muestra el modal
-}
+            // Asignar la fecha seleccionada al campo del formulario
+            const fechaInput = document.getElementById('start');
+            fechaInput.value = info.dateStr; // Formato ISO (YYYY-MM-DD)
+        }
+    });
 
-            
-        });
-        calendar.render();
+    // Renderizar el calendario
+    calendar.render();
+
+ 
+
 
         // Gráficos
         const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
