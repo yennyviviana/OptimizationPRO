@@ -30,7 +30,11 @@ $dato = isset($_GET['da']) ? $_GET['da'] : null;
                         break;
 
                        
-        
+                        case 5:
+                            require_once('Views/Orders/search.php');
+                            break;
+    
+                           
                         
                         
          //case of Suppliers

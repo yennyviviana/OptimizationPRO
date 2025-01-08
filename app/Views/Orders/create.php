@@ -160,32 +160,6 @@ h2 {
     overflow-x: auto;
 }
 
-.search-button {
-    margin-left: auto; 
-    margin-right: 20px; 
-    width: 150px; 
-    height: 35px;
-    border-radius: 20px; 
-    text-align: center; 
-}
-
-.btn-search {
-    background-color: #ffffff; 
-    color: #007bff; 
-    border: 2px solid #007bff; 
-    padding: 0; 
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
-    font-size: 14px; 
-    font-weight: bold; 
-}
-
-.btn-search:hover {
-    background-color: #f8f9fa; 
-    color: #0056b3;
-    border-color: #0056b3; 
-}
 
 
 
@@ -208,11 +182,34 @@ h2 {
             </li>
         </ul>
     </div>
-    <!-- Botón de Búsqueda -->
-    <button type="button" class="btn btn-search search-button">
-        <i class="fas fa-search"></i> Buscar
-    </button>
+    
+    
+    <!-- Contenedor de Búsqueda -->
+<div id="search" class="d-flex justify-content-center my-3">
+    <div class="input-group">
+        <!-- Campo de texto -->
+        <input type="text" 
+               id="search-query" 
+               class="form-control" 
+               placeholder="Ingrese datos a buscar" 
+               aria-label="Buscar">
+    </div>
 </div>
+
+<!-- Resultados de la búsqueda -->
+<div id="results" class="mt-3">
+    <!-- Aquí se mostrarán los resultados en tiempo real -->
+</div>
+
+
+</form>
+
+
+</div>
+
+
+
+
 
     <div class="container-fluid">
     <div class="table-container">
@@ -327,6 +324,39 @@ function borrarPedido(id, imagen) {
         xhr.send();
     }
 }
+</script>
+
+
+<script>
+// Capturar elementos
+const searchQuery = document.getElementById("search-query");
+const resultsDiv = document.getElementById("results");
+
+// Escuchar el evento 'input' en el campo de texto
+searchQuery.addEventListener("input", function () {
+    const query = searchQuery.value.trim(); // Obtener el valor ingresado
+
+    if (query.length > 2) { // Realizar búsqueda solo si hay más de 2 caracteres
+        fetch("search.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `query=${encodeURIComponent(query)}`,
+        })
+            .then(response => response.text()) // Procesar la respuesta como texto
+            .then(data => {
+                resultsDiv.innerHTML = data; // Mostrar resultados
+            })
+            .catch(error => {
+                console.error("Error en la búsqueda:", error);
+                resultsDiv.innerHTML = "<p>Error al cargar los resultados.</p>";
+            });
+    } else {
+        resultsDiv.innerHTML = ""; // Limpiar resultados si no hay suficiente texto
+    }
+});
+
 </script>
 
 <!-- Scripts -->

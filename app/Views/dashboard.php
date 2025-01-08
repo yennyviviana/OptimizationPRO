@@ -107,9 +107,9 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 </div>
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
-                    <span data-feather="moon"></span> Cambiar Tema
-                </button>
-            </div>
+          <i data-feather="moon"></i> Cambiar Tema
+       </button>
+ </div>
 
             <div class="row">
                 <div class="col-md-6">
@@ -240,6 +240,41 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             }
         });
     });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Inicializamos Feather Icons para renderizar el ícono
+    feather.replace();
+
+    // Función para cambiar el tema
+    const toggleThemeButton = document.getElementById('toggle-theme');
+    const body = document.body;
+
+    // Si ya hay un tema oscuro en la sesión (en caso de recargar la página), lo aplicamos
+    if (localStorage.getItem('dark-theme') === 'true') {
+        body.classList.add('dark-theme');
+        feather.replace(); // Vuelve a cargar el ícono si es necesario
+    }
+
+    toggleThemeButton.addEventListener('click', function () {
+        body.classList.toggle('dark-theme');
+
+        // Guardamos la preferencia del tema en el almacenamiento local para futuras visitas
+        const isDarkTheme = body.classList.contains('dark-theme');
+        localStorage.setItem('dark-theme', isDarkTheme);
+
+        // Cambiar el ícono de luna a sol dependiendo del tema
+        if (isDarkTheme) {
+            toggleThemeButton.innerHTML = '<i data-feather="sun"></i> Cambiar Tema'; // Muestra el ícono de sol
+        } else {
+            toggleThemeButton.innerHTML = '<i data-feather="moon"></i> Cambiar Tema'; // Vuelve a mostrar la luna
+        }
+
+        feather.replace(); // Vuelve a cargar los íconos después del cambio
+    });
+});
+
+
 </script>
 </body>
 </html>
