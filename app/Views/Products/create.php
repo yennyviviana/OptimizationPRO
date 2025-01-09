@@ -5,6 +5,53 @@ if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
     exit;
 }
+
+
+define('db_host', 'localhost');
+        define('db_username', 'root');
+        define('db_password', '');
+        define('db_dbname', 'sofware_erp');
+
+        // Conectar a MySQL y seleccionar la base de datos.
+        $mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
+
+        // Verificar que la conexión sea exitosa
+        if (!$mysqli) {
+            die('Error al conectarse a MySQL: ' . mysqli_connect_error());
+        }
+
+        // Establecer juego de caracteres UTF-8
+        mysqli_set_charset($mysqli, 'utf8');
+
+        // Consulta utilizando MySQLi
+        $consulta = "SELECT * FROM productos ORDER BY id_producto";
+        $resultados = $mysqli->query($consulta);
+
+        // Comprobación de errores en la ejecución de la consulta
+        if (!$resultados) {
+            die("Error al ejecutar la consulta: " . $mysqli->error);
+        }
+
+// Obtener el término de búsqueda
+$searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
+
+// Construir la consulta SQL con filtro si hay búsqueda
+if (!empty($searchQuery)) {
+    $consulta = "SELECT * FROM productos WHERE 
+                 nombre_producto LIKE '%$searchQuery%' OR 
+                 estado LIKE '%$searchQuery%' OR 
+                 detalles LIKE '%$searchQuery%'
+                 ORDER BY id_producto";
+} else {
+    $consulta = "SELECT * FROM productos ORDER BY id_producto";
+}
+
+$resultados = $mysqli->query($consulta);
+
+if (!$resultados) {
+    die("Error al ejecutar la consulta: " . $mysqli->error);
+}
+
 ?>
 
 
@@ -22,13 +69,18 @@ if (!isset($_SESSION['id_usuario'])) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     </head>
     <body>
-<style>
-    body {
-    background-color: #000;
-    color: #f5f5f5; 
-}
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #000;
+            color: #f5f5f5;
+        }
+        .table th, .table td {
+            color: #fff;
+        }
 
-.panel {
+
+        .panel {
     display: flex;
     justify-content: space-between;
     border: 1px solid #333;
@@ -115,50 +167,8 @@ h2 {
     background-color:  #0B1CDB;
 }
 
-.table-container {
-    width: 100%;
-    margin: 0 auto;
-}
 
-.table {
-    width: 100%;
-    table-layout: auto;
-    word-wrap: break-word;
-    color: #fff; 
-    background-color: #818274; 
-}
-
-.table th, .table td {
-    border: 1px solid #444;
-    padding: 1rem;
-    font-size: 1.1rem;
-    text-align: center;
-}
-.table th {
-    background-color: #000000;
-    color:  #65D8DB; 
-    font-weight: bold;
-    border-bottom: 3px solid #ff6f61;
-}
-
-.table tbody tr {
-    background-color: #000;
-}
-
-.table tbody tr:nth-of-type(odd) {
-    background-color:  #fff; 
-    color:  #000;
-}
-
-
-
-.table-responsive {
-    margin-top: 1.5rem;
-    overflow-x: auto;
-}
-
-
-
+.
     </style>
 </head>
 
@@ -179,6 +189,18 @@ h2 {
     </div>
 
    
+    <br>
+<div class="container-fluid">
+    
+
+    <!-- Formulario de búsqueda -->
+    <form method="GET" class="d-flex justify-content-center mb-3">
+        <input type="text" name="search-query" class="form-control w-50 me-2" 
+               placeholder="Buscar productos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i> Buscar
+        </button>
+    </form>
  
 
                 <div class="container-fluid">
@@ -206,30 +228,7 @@ h2 {
 
         <tbody>
         <?php
-        define('db_host', 'localhost');
-        define('db_username', 'root');
-        define('db_password', '');
-        define('db_dbname', 'sofware_erp');
-
-        // Conectar a MySQL y seleccionar la base de datos.
-        $mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
-
-        // Verificar que la conexión sea exitosa
-        if (!$mysqli) {
-            die('Error al conectarse a MySQL: ' . mysqli_connect_error());
-        }
-
-        // Establecer juego de caracteres UTF-8
-        mysqli_set_charset($mysqli, 'utf8');
-
-        // Consulta utilizando MySQLi
-        $consulta = "SELECT * FROM productos ORDER BY id_producto";
-        $resultados = $mysqli->query($consulta);
-
-        // Comprobación de errores en la ejecución de la consulta
-        if (!$resultados) {
-            die("Error al ejecutar la consulta: " . $mysqli->error);
-        }
+        
 
         // Iterar sobre los resultados y mostrarlos
         while ($producto = $resultados->fetch_assoc()) {
@@ -297,5 +296,38 @@ h2 {
         }
     }
     </script>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[name="search-query"]');
+    const resultsTable = document.querySelector('tbody');
+
+    searchInput.addEventListener('input', function () {
+        const searchQuery = searchInput.value;
+
+        // Crear una solicitud AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Actualizar la tabla con los resultados
+                resultsTable.innerHTML = xhr.responseText;
+            } else {
+                console.error('Error al realizar la búsqueda.');
+            }
+        };
+
+        xhr.send('searchQuery=' + encodeURIComponent(searchQuery));
+    });
+});
+</script>
+
 </body>
 </html>
+
