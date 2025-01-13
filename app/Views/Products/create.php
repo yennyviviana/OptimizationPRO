@@ -71,7 +71,8 @@ if (!$resultados) {
     <body>
     <style>
         /* Estilos personalizados */
-        body {
+       /* Estilos personalizados */
+       body {
             background-color: #000;
             color: #f5f5f5;
         }
@@ -168,16 +169,18 @@ h2 {
 }
 
 
-.
     </style>
 </head>
 
+   
+
 <body>
+
     <div class="panel">
         <div class="column">
-            <h2>Módulo de productos</h2>
+            <h2>Módulo de pedidos</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Products</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Pedidos</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
@@ -188,12 +191,11 @@ h2 {
         </div>
     </div>
 
-   
     <br>
 <div class="container-fluid">
     
 
-    <!-- Formulario de búsqueda -->
+    <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
                placeholder="Buscar productos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
@@ -201,7 +203,7 @@ h2 {
             <i class="fas fa-search"></i> Buscar
         </button>
     </form>
- 
+
 
                 <div class="container-fluid">
     <div class="table-container">

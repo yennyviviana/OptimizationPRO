@@ -170,7 +170,7 @@ h2 {
 <div class="container-fluid">
     
 
-    <!-- Formulario de búsqueda -->
+    <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
                placeholder="Buscar pedidos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
@@ -179,9 +179,13 @@ h2 {
         </button>
     </form>
 
-    <div class="table-responsive">
-        <table class="table table-dark table-striped">
-            <thead>
+    
+    
+    <div class="container-fluid">
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
                 <tr>
                     <th>Id</th>
                     <th>Pedido</th>
