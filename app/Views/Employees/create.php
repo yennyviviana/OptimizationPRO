@@ -23,6 +23,33 @@ if (!$mysqli) {
 
 mysqli_set_charset($mysqli, 'utf8');
 
+
+
+// Establecer los valores de paginación
+$registros_por_pagina = 10;  // Número de registros por página
+$página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
+$inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor de OFFSET
+
+// Consulta SQL para obtener los registros
+$consulta = "SELECT * FROM  empleados LIMIT $inicio, $registros_por_pagina";
+$resultados = $mysqli->query($consulta);
+
+// Verificar si la consulta fue exitosa
+if (!$resultados) {
+    die("Error al ejecutar la consulta: " . $mysqli->error);
+}
+
+// Calcular el número total de registros
+$total_registros_query = "SELECT COUNT(*) AS total FROM  empleados";
+$total_resultados = $mysqli->query($total_registros_query);
+$total_registros = $total_resultados->fetch_assoc()['total'];
+
+// Calcular el número total de páginas
+$total_paginas = ceil($total_registros / $registros_por_pagina);
+
+
+
+
 // Obtener el término de búsqueda
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
@@ -254,6 +281,46 @@ h2 {
             </tbody>
         </table>
     </div>
+</div>
+
+
+ <!-- Paginación -->
+ <nav>
+        <ul class="pagination">
+            <?php if ($página_actual > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="Primera">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?= $página_actual - 1 ?>" aria-label="Anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                <li class="page-item <?= ($i == $página_actual) ? 'active' : '' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($página_actual < $total_paginas): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?= $página_actual + 1 ?>" aria-label="Siguiente">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?= $total_paginas ?>" aria-label="Última">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
 </div>
 
 
