@@ -18,7 +18,7 @@ if (isset($_GET['query'])) {
     $query = "%" . $query . "%";  // Para hacer la búsqueda flexible
 
     // Consulta SQL para buscar productos
-    $sql = "SELECT * FROM pedidos WHERE nombre_pedido LIKE ? OR descripcion LIKE ?";
+    $sql = "SELECT * FROM  compras WHERE   productos_comprados LIKE ? OR detalles_productos LIKE ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param('ss', $query, $query);
     $stmt->execute();
@@ -26,7 +26,7 @@ if (isset($_GET['query'])) {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo "<p>" . htmlspecialchars($row['nombre_pedido']) . " - $" . number_format($row['direccion'], 2, ',', '.') . "</p>";
+            echo "<p>" . htmlspecialchars($row['productos_comprados']) . " - $" . number_format($row['precio_unitario'], 2, ',', '.') . "</p>";
         }
     } else {
         echo "No se encontraron resultados.";

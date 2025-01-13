@@ -8,30 +8,63 @@ if(!isset($_SESSION['id_usuario'])){
     header("Location: index.php");
 }
 
-?>
 
 
+define('db_host', 'localhost');
+define('db_username', 'root');
+define('db_password', '');
+define('db_dbname', 'sofware_erp');
 
+// Conectar a MySQL
+$mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
 
-<!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <title>Tu Página</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    </head>
-    <body>
-<style>
-    body {
-    background-color: #000;
-    color: #f5f5f5; 
+if (!$mysqli) {
+    die('Error al conectarse a MySQL: ' . mysqli_connect_error());
 }
 
-.panel {
+mysqli_set_charset($mysqli, 'utf8');
+
+// Obtener el término de búsqueda
+$searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
+
+// Construir la consulta SQL con filtro si hay búsqueda
+if (!empty($searchQuery)) {
+    $consulta = "SELECT * FROM  inventarios WHERE 
+                 nombre_producto LIKE '%$searchQuery%' OR 
+                 descripcion LIKE '%$searchQuery%' OR 
+                 categoria_productos LIKE '%$searchQuery%'
+                 ORDER BY  codigo_inventario";
+} else {
+    $consulta = "SELECT * FROM inventarios ORDER BY  codigo_inventario";
+}
+
+$resultados = $mysqli->query($consulta);
+
+if (!$resultados) {
+    die("Error al ejecutar la consulta: " . $mysqli->error);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de pedidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #000;
+            color: #f5f5f5;
+        }
+        .table th, .table td {
+            color: #fff;
+        }
+
+
+        .panel {
     display: flex;
     justify-content: space-between;
     border: 1px solid #333;
@@ -118,52 +151,39 @@ h2 {
     background-color:  #0B1CDB;
 }
 
-.table-container {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.table {
-    width: 100%;
-    table-layout: auto;
-    word-wrap: break-word;
-    color: #fff; 
-    background-color: #818274; 
-}
-
-.table th, .table td {
-    border: 1px solid #444;
-    padding: 1rem;
-    font-size: 1.1rem;
-    text-align: center;
-}
-.table th {
-    background-color: #000000;
-    color:  #65D8DB; 
-    font-weight: bold;
-    border-bottom: 3px solid #ff6f61;
-}
-
-.table tbody tr {
-    background-color: #000;
-}
-
-.table tbody tr:nth-of-type(odd) {
-    background-color:  #fff; 
-    color:  #000;
-}
-
-
-
-.table-responsive {
-    margin-top: 1.5rem;
-    overflow-x: auto;
-}
-
-
 
     </style>
 </head>
+<body>
+
+    <div class="panel">
+        <div class="column">
+            <h2>Módulo de inventarios</h2>
+            <ul class="nav">
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert inventory</a></li>
+                <li class="nav-item">
+                <a class="nav-link" href="/OptimizationPRO/app/main.php">
+                                <span data-feather="Home"></span>
+                                 Regresar
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+<div class="container-fluid">
+    
+
+    <!-- Formulario de búsqueda.....-->
+    <form method="GET" class="d-flex justify-content-center mb-3">
+        <input type="text" name="search-query" class="form-control w-50 me-2" 
+               placeholder="Buscar pedidos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i> Buscar
+        </button>
+    </form>
+
 
 
 
@@ -175,24 +195,6 @@ h2 {
 
 
            
-
-    <div class="panel">
-        <div class="column">
-            <h2>Módulo de inventarios.</h2>
-            <ul class="nav">
-              
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insertar inventarios</a></li>
-    
-                <li class="nav-item">
-                <li class="nav-item">
-                <a class="nav-link" href="/OptimizationPRO/app/main.php">
-                                <span data-feather="Home"></span>
-                                 Regresar
-                            </a>
-                        </li>
-            </ul>
-        </div>
-    </div>
 
    
     <div class="container-fluid">
@@ -224,39 +226,10 @@ h2 {
                 
     </thead>
     <tbody>
-    <?php      
-define('db_host', 'localhost');
-define('db_username', 'root');
-define('db_password', '');
-define('db_dbname', 'sofware_erp');
-
-// Conectar a MySQL y seleccionar la base de datos.
-$mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
+    <?php while ($inventario = $resultados->fetch_assoc()): ?>
 
 
-
-// Verificar que la conexión sea exitosa
-if (!$mysqli) {
-    die('Error al conectarse a MySQL: ' . mysqli_connect_error());
-}
-
-// Establecer juego de caracteres UTF-8zvc c
-mysqli_set_charset($mysqli, 'utf8');
-
-// Consulta utilizando MySQLi
-$consulta = "SELECT * FROM  inventarios ORDER BY  codigo_inventario";
-$resultados = $mysqli->query($consulta);
-
-
-// Comprobación de errores en la ejecución de la consulta
-if (!$resultados) {
-    die("Error al ejecutar la consulta: " . $mysqli->error);
-}
-
-// Iterar sobre los resultados y mostrarlos
-while ($inventario = $resultados->fetch_assoc()) {
-?>
-    
+        <tr>
     <td><?php echo htmlspecialchars($inventario['codigo_inventario']); ?></td>
         <td><?php echo htmlspecialchars($inventario['nombre_producto']); ?></td>
         <td><?php echo htmlspecialchars($inventario['cantidad_stock']); ?></td>
@@ -284,7 +257,14 @@ while ($inventario = $resultados->fetch_assoc()) {
                             <a href="#" class="btn btn-danger btn-borrar" onclick="borrarInventario(<?php echo $inventario['codigo_inventario']; ?>)">
                                 <i class="fas fa-trash-alt"></i> Borrar
                             </a>
-                        </td>
+                            </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <script>
 function borrarInventario(id, imagen) {
     if (confirm('¿Está seguro de borrar el  inventario?')) {
@@ -314,17 +294,34 @@ function borrarInventario(id, imagen) {
 </script>
 
 
-</tr>
-            <?php
-        }
-
-        // Cerrar la conexión
-        $mysqli->close();
-        ?>
-    </tbody>
-</table>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[name="search-query"]');
+    const resultsTable = document.querySelector('tbody');
+
+    searchInput.addEventListener('input', function () {
+        const searchQuery = searchInput.value;
+
+        // Crear una solicitud AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Actualizar la tabla con los resultados
+                resultsTable.innerHTML = xhr.responseText;
+            } else {
+                console.error('Error al realizar la búsqueda.');
+            }
+        };
+
+        xhr.send('searchQuery=' + encodeURIComponent(searchQuery));
+    });
+});
+</script>
 
 </body>
 </html>
