@@ -117,7 +117,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Escribe opcion que buscas.</p>
+        <p>Escoge opcion.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -329,7 +329,7 @@ document.getElementById('exportPdf').addEventListener('click', function (e) {
 document.getElementById('help').addEventListener('click', function (e) {
     e.preventDefault();
     const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
-    helpModal.show("escribe tu solicitud");
+    helpModal.show();
 });
 
 
