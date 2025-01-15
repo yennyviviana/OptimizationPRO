@@ -391,5 +391,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </body>
 </html>
 
-</body>
-</html>
+

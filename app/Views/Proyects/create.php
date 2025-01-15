@@ -24,8 +24,7 @@ mysqli_set_charset($mysqli, 'utf8');
 
 
 
-        
-
+    
 // Establecer los valores de paginación
 $registros_por_pagina = 10;  // Número de registros por página
 $página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
@@ -35,7 +34,7 @@ $inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor d
 $consulta = "SELECT * FROM  proyectos LIMIT $inicio, $registros_por_pagina";
 $resultados = $mysqli->query($consulta);
 
-// Verificar si la consulta fue exitosa
+// Verificar si la consulta fue exitosa.....
 if (!$resultados) {
     die("Error al ejecutar la consulta: " . $mysqli->error);
 }
@@ -50,7 +49,7 @@ $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 
 
-// Obtener el término de búsqueda
+// Obtener el término de búsqueda........
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
 // Construir la consulta SQL con filtro si hay búsqueda
@@ -257,12 +256,12 @@ h2 {
         </table>
     </div>
 </div>
+s
 
 
 
 
-
- <!-- Paginación -->
+ <!-- Paginación....... -->
  <nav>
         <ul class="pagination">
             <?php if ($página_actual > 1): ?>

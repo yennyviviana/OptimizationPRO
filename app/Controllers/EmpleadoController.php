@@ -35,10 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha_creacion = date('Y-m-d H:i:s');
     $descripcion_profesional = $_POST['descripcion_profesional'] ?? '';
     
-    // Instancia el modelo
+    // Instancia el modelo.....
     $modelo = new EmpleadoModel($mysqli);
 
-    // Insertar el empleado usando el método del modelo
+    // Insertar el empleado usando el método del modelo.....
     $resultado = $modelo->insertarEmpleado($nombre_completo, $cargo, $fecha_contratacion, $numero_horas, $precio_hora, $salario, $estado, $departamento, $documento_identidad, $direccion, $ciudad, $telefono, $pais, $imagen, $documentacion_archivo, $fecha_creacion, $descripcion_profesional);
 
     // Verifica si la inserción fue exitosa

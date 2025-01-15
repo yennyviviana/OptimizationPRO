@@ -19,6 +19,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <title>Panel ERP</title>
     <style>
         body {
@@ -67,7 +68,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                         </a>
                     </li>
 
-                    <!-- Menú de Admin -->
+                    <!-- Menú de Admin..... -->
                     <?php if ($tipo_usuario == 9) { ?>
                         <li class="nav-item"><a class="nav-link" href="/OptimizationPRO/app/Views/Orders/create.php"><span data-feather="shopping-cart"></span>Área de pedidos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/OptimizationPRO/app/Views/Suppliers/create.php"><span data-feather="users"></span>Proveedores</a></li>
@@ -82,10 +83,10 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Usuario</span>
-                        <a class="d-flex align-items-center text-muted" href="perfil.php"><span data-feather="settings"></span></a>
+                        <a class="d-flex align-items-center text-muted" href="/OptimizationPRO/app/Views/Users_config/perfil.php"><span data-feather="settings"></span></a>
                     </h6>
                     <ul class="nav flex-column mb-2">
-                        <li class="nav-item"><a class="nav-link" href="perfil.php"><span data-feather="user"></span>Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/OptimizationPRO/app/Views/Users_config/perfil.php"><span data-feather="user"></span>Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.php"><span data-feather="log-out"></span>Cerrar Sesión</a></li>
                     </ul>
                 </ul>
@@ -102,12 +103,30 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
                         <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
-                        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
+                       
+                        <div class="modal" id="helpModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ayuda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Aquí puedes agregar información de ayuda para el usuario.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
                     </div>
                 </div>
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
-          <i data-feather="moon"></i> Cambiar Tema
+          <i data-feather="moon"></i> Cambiar Tema......
        </button>
  </div>
 
@@ -272,6 +291,43 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
         feather.replace(); // Vuelve a cargar los íconos después del cambio
     });
+});
+
+
+document.getElementById('addElement').addEventListener('click', function (e) {
+    e.preventDefault(); // Evitar el comportamiento por defecto (si es necesario)
+    alert('Elemento agregado con éxito');
+    // Puedes agregar elementos dinámicamente aquí, por ejemplo:
+    const newElement = document.createElement('div');
+    newElement.textContent = 'Nuevo Elemento';
+    document.body.appendChild(newElement); // Lo agrega al body (puedes elegir otro contenedor)
+});
+
+
+document.getElementById('deleteElement').addEventListener('click', function (e) {
+    e.preventDefault();
+    alert('Elemento eliminado con éxito');
+    // Ejemplo: eliminar el último elemento de un contenedor
+    const container = document.body; // Cambia a un contenedor específico
+    if (container.lastChild) {
+        container.removeChild(container.lastChild);
+    } else {
+        alert('No hay más elementos para eliminar');
+    }
+});
+
+document.getElementById('exportPdf').addEventListener('click', function (e) {
+    e.preventDefault();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("Este es un PDF generado con jsPDF", 10, 10);
+    doc.save('documento.pdf');
+});
+
+document.getElementById('help').addEventListener('click', function (e) {
+    e.preventDefault();
+    const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
+    helpModal.show();
 });
 
 

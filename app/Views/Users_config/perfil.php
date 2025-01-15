@@ -9,7 +9,10 @@ if (!isset($_SESSION['id_usuario'])) {
 $nombre_usuario = $_SESSION['nombre_usuario'];
 $correo_electronico = $_SESSION['correo_electronico'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -47,7 +50,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Datos Personales</h5>
-                        <form action="edit.php?da=1" method="POST">
+                        <form method="POST" class="form-background" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <div class="mb-3">
                                 <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
                                 <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="<?php echo htmlspecialchars($nombre_usuario); ?>" required>
@@ -65,7 +68,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Cambiar Contraseña</h5>
-                        <form action="edit.php?da=2" method="POST">
+                        <form method="POST" class="form-background" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <div class="mb-3">
                                 <label for="current_password" class="form-label">Contraseña Actual</label>
                                 <input type="password" class="form-control" id="current_password" name="current_password" required>

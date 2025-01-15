@@ -255,7 +255,7 @@ h2 {
     </div>
 </div>
 
- <!-- Paginación -->
+ <!-- Paginación....... -->
  <nav>
         <ul class="pagination">
             <?php if ($página_actual > 1): ?>
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         xhr.onload = function () {
             if (xhr.status === 200) {
-                // Actualizar la tabla con los resultados
+                // Actualizar la tabla con los resultados......
                 resultsTable.innerHTML = xhr.responseText;
             } else {
                 console.error('Error al realizar la búsqueda.');

@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Fetch inventory codes from the database
+// Fetch inventory codes from the database.....
 $sqlInventory = "SELECT codigo_inventario, nombre_producto FROM inventarios";
 $resultInventory = $mysqli->query($sqlInventory);
 $inventory = [];
@@ -30,7 +30,7 @@ if ($resultInventory->num_rows > 0) {
     }
 }
 
-// Fetch products from the database
+// Fetch products from the database.....
 $sqlProducts = "SELECT id_producto, nombre_producto FROM productos";
 $resultProducts = $mysqli->query($sqlProducts);
 
@@ -86,7 +86,7 @@ if ($resultPurchases->num_rows > 0) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Debugging: Print POST data for debugging purposes
+    // Debugging: Print POST data for debugging purposes....
     echo '<pre>';
     print_r($_POST);
     echo '</pre>';
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigo_inventario = isset($_POST['codigo_inventario']) ? $_POST['codigo_inventario'] : '';
     $id_compra = isset($_POST['id_compra']) ? $_POST['id_compra'] : '';
 
-    // Insert data using the model
+    // Insert data using the model.....
     $resultado = $modelo->insertarFinanciera(
         $fecha_transaccion,
         $monto,
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_proyecto
     );
 
-    // Verify if the insertion was successful
+    // Verify if the insertion was successful...
     if ($resultado) {
         header("Location: create.php?da=2");
         exit();

@@ -78,7 +78,7 @@ class InventarioModel {
                 return false;
             }
         } else {
-            $nombreArchivo = ''; // No se procesa imagen nueva
+            $nombreArchivo = ''; // No se procesa imagen nueva....
         }
     
         // Consulta para actualizar el inventario

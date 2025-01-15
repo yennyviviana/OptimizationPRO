@@ -11,7 +11,7 @@ if (!isset($_SESSION['id_usuario'])) {
 
 
     
-// Fetch providers from the database
+// Fetch providers from the database...
 $sql = "SELECT id_proveedor, nombre_empresa FROM proveedores";
 $result = $mysqli->query($sql);
 
@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Fetch products from the database
+// Fetch products from the database.....
 $sql = "SELECT id_producto, nombre_producto FROM productos";
 $result = $mysqli->query($sql);
 

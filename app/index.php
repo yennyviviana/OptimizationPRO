@@ -19,7 +19,9 @@ if($num>0)
  $row = $resultado->fetch_assoc();
  $password_bd = $row['contrasena'];
 
+
 $password_contrasena = sha1($contrasena);
+
 
 if($password_bd == $password_contrasena)
  {

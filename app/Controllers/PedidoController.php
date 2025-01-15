@@ -56,7 +56,7 @@ mysqli_set_charset($mysqli, 'utf8');
     // Formatear la diferencia en días y horas
     $tiempo_entrega_horas = $diferencia->format('%d días y %h horas');
 
-    // Inserta el pedido usando el método correspondiente del modelo
+    // Inserta el pedido usando el método correspondiente del modelo......
     $resultado = $modelo->insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido,$metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
 
     // Verifica si la inserción fue exitosa
