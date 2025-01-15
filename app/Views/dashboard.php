@@ -97,14 +97,19 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">OptimizationPro</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
-                    </div>
-                    <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
-                        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
-                       
-                        <div class="modal" id="helpModal" tabindex="-1" role="dialog">
+    <div class="btn-group mr-2">
+        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
+    </div>
+    <div class="btn-group mr-2">
+        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
+        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
+        <!-- Botón para abrir el modal de ayuda -->
+        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
+    </div>
+</div>
+
+<!-- Modal de Ayuda -->
+<div class="modal" id="helpModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -112,7 +117,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Aquí puedes agregar información de ayuda para el usuario.</p>
+        <p>Escribe opcion que buscas.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -121,9 +126,6 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
   </div>
 </div>
 
-
-                    </div>
-                </div>
 
                 <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
           <i data-feather="moon"></i> Cambiar Tema......
@@ -327,7 +329,7 @@ document.getElementById('exportPdf').addEventListener('click', function (e) {
 document.getElementById('help').addEventListener('click', function (e) {
     e.preventDefault();
     const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
-    helpModal.show();
+    helpModal.show("escribe tu solicitud");
 });
 
 
