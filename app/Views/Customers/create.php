@@ -26,7 +26,7 @@ mysqli_set_charset($mysqli, 'utf8');
 
 
 
-// Establecer los valores de paginación
+// Establecer los valores de paginación......
 $registros_por_pagina = 10;  // Número de registros por página
 $página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
 $inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor de OFFSET

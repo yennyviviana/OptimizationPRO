@@ -20,6 +20,18 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS (con Popper.js) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+
     <title>Panel ERP</title>
     <style>
         body {
@@ -52,6 +64,16 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             max-width: 400px;
             margin: 20px auto;
         }
+
+
+        .toast {
+    transition: opacity 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1 !important;
+}
+
     </style>
 </head>
 <body>
@@ -159,66 +181,164 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 
-
-
-<div id="eventModal" class="modal fade" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="eventModalLabel" class="modal-title">Crear Evento</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form id="eventForm" action="Views/eventos.php" method="POST">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Título:</label>
-                        <input type="text" id="title" name="title" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="start" class="form-label">Inicio:</label>
-                        <input type="datetime-local" id="start" name="start" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="end" class="form-label">Fin:</label>
-                        <input type="datetime-local" id="end" name="end" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Crear Evento</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="eventForm">
+      <div class="modal-header">
+  <h5 class="modal-title" id="eventModalLabel">Gestionar Evento</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
-
-
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título del Evento</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="start" class="form-label">Fecha y Hora de Inicio</label>
+            <input type="datetime-local" class="form-control" id="start" name="start" required>
+          </div>
+          <div class="mb-3">
+            <label for="end" class="form-label">Fecha y Hora de Fin</label>
+            <input type="datetime-local" class="form-control" id="end" name="end">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Botones dinámicos -->
+          <button type="button" id="saveEventButton" class="btn btn-primary">Crear</button>
+          <button type="button" id="editEventButton" class="btn btn-success" style="display: none;">Guardar Cambios</button>
+          <button type="button" id="deleteEventButton" class="btn btn-danger" style="display: none;">Eliminar</button>
+          <button type="button" class="btn btn-secondary" id="closeModalButton">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
     const modalEl = document.getElementById('eventModal');
-    const modalBootstrap = new bootstrap.Modal(modalEl); // Inicializa el modal de Bootstrap
+    const modalBootstrap = new bootstrap.Modal(modalEl);
+    let selectedEventId = null; 
 
-    // Configuración del calendario
+    const events = [ // Ejemplo de eventos
+        { title: 'Evento 1', start: '2025-01-20T10:00:00', end: '2025-01-20T12:00:00', id: 1 },
+        { title: 'Evento 2', start: '2025-01-20T14:00:00', end: '2025-01-20T16:00:00', id: 2 },
+    ];
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // Vista inicial
-        locale: 'es', // Idioma en español
-        editable: true, // Permite arrastrar y soltar eventos
-        selectable: true, // Permite seleccionar fechas
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        editable: true,
+        selectable: true,
+        events: events,
         dateClick: function (info) {
-            // Mostrar el modal al hacer clic en una fecha
+            // Limpiar formulario para Crear
+            document.getElementById('eventForm').reset();
+            document.getElementById('start').value = info.dateStr + "T09:00";
+            document.getElementById('end').value = info.dateStr + "T10:00";
+
+            selectedEventId = null;
             modalBootstrap.show();
 
-            // Asignar la fecha seleccionada al campo del formulario
-            const fechaInput = document.getElementById('start');
-            fechaInput.value = info.dateStr; // Formato ISO (YYYY-MM-DD)
+            // Mostrar solo el botón Crear
+            toggleButtons({ save: true });
+        },
+        eventClick: function (info) {
+            const event = info.event;
+            document.getElementById('title').value = event.title;
+            document.getElementById('start').value = event.start.toISOString().slice(0, 16);
+            document.getElementById('end').value = event.end ? event.end.toISOString().slice(0, 16) : '';
+
+            selectedEventId = event.id;
+            modalBootstrap.show();
+
+            // Mostrar los botones Editar y Eliminar
+            toggleButtons({ edit: true, delete: true });
         }
     });
 
-    // Renderizar el calendario
     calendar.render();
 
- 
+    // Botón Crear
+    document.getElementById('saveEventButton').addEventListener('click', function () {
+        const title = document.getElementById('title').value;
+        const start = document.getElementById('start').value;
+        const end = document.getElementById('end').value;
 
+        fetch('Views/eventos.php', {
+            method: 'POST',
+            body: new URLSearchParams({ title, start, end, action: 'create' }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                calendar.addEvent({ title, start, end, id: data.eventId });
+                modalBootstrap.hide();
+            } else {
+                alert('Error al crear el evento.');
+            }
+        });
+    });
+
+    // Botón Editar
+    document.getElementById('editEventButton').addEventListener('click', function () {
+        const title = document.getElementById('title').value;
+        const start = document.getElementById('start').value;
+        const end = document.getElementById('end').value;
+
+        fetch('Views/eventos.php', {
+            method: 'POST',
+            body: new URLSearchParams({ id: selectedEventId, title, start, end, action: 'edit' }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const event = calendar.getEventById(selectedEventId);
+                event.setProp('title', title);
+                event.setStart(start);
+                event.setEnd(end);
+                modalBootstrap.hide();
+            } else {
+                alert('Error al editar el evento.');
+            }
+        });
+    });
+
+    // Botón Eliminar
+    document.getElementById('deleteEventButton').addEventListener('click', function () {
+        fetch('Views/eventos.php', {
+            method: 'POST',
+            body: new URLSearchParams({ id: selectedEventId, action: 'delete' }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const event = calendar.getEventById(selectedEventId);
+                event.remove();
+                modalBootstrap.hide();
+            } else {
+                alert('Error al eliminar el evento.');
+            }
+        });
+    });
+
+    // Botón Cerrar (cerrar el modal con JavaScript)
+    document.getElementById('closeModalButton').addEventListener('click', function () {
+        modalBootstrap.hide(); // Cerrar el modal programáticamente
+    });
+    // Función para alternar botones según la acción
+    function toggleButtons({ save = false, edit = false, delete: del = false }) {
+        document.getElementById('saveEventButton').style.display = save ? 'block' : 'none';
+        document.getElementById('editEventButton').style.display = edit ? 'block' : 'none';
+        document.getElementById('deleteEventButton').style.display = del ? 'block' : 'none';
+    }
+});
 
         // Gráficos
         const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
@@ -260,7 +380,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 responsive: true
             }
         });
-    });
+    
 
 
     document.addEventListener('DOMContentLoaded', function () {

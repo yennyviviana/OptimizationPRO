@@ -334,11 +334,6 @@ h2 {
 </div>
 
 
-
-
-
-
-
 <script>
 function borrarCompra(id) {
     if (confirm('¿Está seguro de borrar la compra?')) {

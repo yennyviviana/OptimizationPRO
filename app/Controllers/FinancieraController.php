@@ -9,7 +9,7 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Fetch providers from the database
+// Fetch providers from the database.....
 $sql = "SELECT id_proveedor, nombre_empresa FROM proveedores";
 $result = $mysqli->query($sql);
 
@@ -41,7 +41,7 @@ if ($resultProducts->num_rows > 0) {
     }
 }
 
-// Fetch clients from the database
+// Fetch clients from the database.....
 $sqlClients = "SELECT id_cliente, nombre FROM clientes";
 $resultClients = $mysqli->query($sqlClients);
 
@@ -52,7 +52,7 @@ if ($resultClients->num_rows > 0) {
     }
 }
 
-// Fetch projects from the database
+// Fetch projects from the database.....
 $sqlProjects = "SELECT id_proyecto, nombre_proyecto FROM proyectos";
 $resultProjects = $mysqli->query($sqlProjects);
 
@@ -63,7 +63,7 @@ if ($resultProjects->num_rows > 0) {
     }
 }
 
-// Fetch orders from the database
+// Fetch orders from the database......
 $sqlOrders = "SELECT id_pedido, nombre_pedido FROM pedidos";
 $resultOrders = $mysqli->query($sqlOrders);
 
@@ -74,7 +74,7 @@ if ($resultOrders->num_rows > 0) {
     }
 }
 
-// Fetch purchases from the database
+// Fetch purchases from the database.......
 $sqlPurchases = "SELECT id_compra, productos_comprados FROM compras";
 $resultPurchases = $mysqli->query($sqlPurchases);
 
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     print_r($_POST);
     echo '</pre>';
 
-    // Instantiate the model
+    // Instantiate the model.......
     $modelo = new FinancieraModel($mysqli);
 
     // Capture POST data with default values
