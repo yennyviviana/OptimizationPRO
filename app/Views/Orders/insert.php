@@ -57,7 +57,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
 <body>
     <div class="container">
         <div id="form-background">
-            <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form action="insert.php?da=Orders-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="nombre_pedido">Nombre</label>
                     <input type="text" id="nombre_pedido" name="nombre_pedido" class="form-control" required placeholder="Ingresar nombre pedido">

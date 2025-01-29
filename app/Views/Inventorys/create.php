@@ -188,7 +188,7 @@ h2 {
         <div class="column">
             <h2>Módulo de inventarios</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert inventory</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Inventorys-2'>Insert inventory</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>

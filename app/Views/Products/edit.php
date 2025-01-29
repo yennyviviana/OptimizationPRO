@@ -1,6 +1,6 @@
 <?php
 // Incluir el modelo y el archivo de configuración de la base de datos
-require_once __DIR__ . '/../../Models/PedidoModel.php';
+require_once __DIR__ . '/../../Models/ProductoModel.php';
 require_once __DIR__ . '/../../Config/database.php';
 
 session_start();
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Actualizar el pedido en la base de datos
-        $resultado = $productoModel->actualizarProducto($llave,$nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
+        $resultado = $productoModel->actualizarProducto($llave, $nombre_producto, $precio, $cantidad_stock, $categoria_productos, $estado, $fecha_adquisicion, $fecha_vencimiento, $id_proveedor, $detalles, $archivo, $codigo_barras);
         if ($resultado) {
             echo "Pedido actualizado correctamente.";
         } else {
@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <div id="form-background">
-            <?php if ($pedido): ?>
+            <?php if ($producto): ?>
             <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="nombre_pedido">Nombre</label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2024 a las 17:03:11
+-- Tiempo de generación: 20-01-2025 a las 22:12:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -146,9 +146,21 @@ INSERT INTO `empleados` (`id_empleado`, `nombre_completo`, `cargo`, `fecha_contr
 
 CREATE TABLE `eventos` (
   `id` int(11) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `fecha` date NOT NULL
+  `title` varchar(255) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime DEFAULT NULL,
+  `notify_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `title`, `start`, `end`, `notify_at`) VALUES
+(43, 'Evento de prueba 1', '2025-01-20 09:00:00', '2025-01-20 11:00:00', NULL),
+(44, 'Evento de prueba 2', '2025-01-21 10:00:00', '2025-01-21 12:00:00', NULL),
+(45, 'Evento de prueba 3', '2025-01-22 14:00:00', '2025-01-22 16:00:00', NULL),
+(46, 'respeto', '2025-01-20 09:00:00', '2025-01-20 10:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -243,7 +255,8 @@ INSERT INTO `pedidos` (`id_pedido`, `nombre_pedido`, `precio`, `estado`, `direcc
 (5, 'Pedido A', 150.50, 'aprobado', 'Calle 123, Ciudad', '<p>Descripci&oacute;n del Pedido A</p>\r\n', 23, 2, '<p>Informaci&oacute;n adicional A</p>\r\n', 59, 'credito', '5.png', '2024-11-05 20:08:42', '2024-11-03'),
 (6, 'Pedido B', 200.00, '', 'Av. Siempre Viva 742', 'Descripción del Pedido B', 0, 72, 'Información adicional B', 2, 'PayPal', 'archivoB.pdf', '2024-11-02', '2024-11-05'),
 (7, 'Pedido C', 99.99, 'entregado', 'Carrera 45 #20-10', 'Descripción del Pedido C', 0, 24, 'Información adicional C', 3, 'Efectivo', 'archivoC.pdf', '2024-11-03', '2024-11-04'),
-(8, 'Pedido D', 50.75, 'cancelado', 'Calle de los Cerezos 55', 'Descripción del Pedido D', 0, 36, 'Información adicional D', 4, 'Transferencia Bancaria', 'archivoD.pdf', '2024-11-04', '2024-11-06');
+(8, 'Pedido D', 50.75, 'cancelado', 'Calle de los Cerezos 55', 'Descripción del Pedido D', 0, 36, 'Información adicional D', 4, 'Transferencia Bancaria', 'archivoD.pdf', '2024-11-04', '2024-11-06'),
+(10, 'caja grande4', 66666666.00, 'aprobado', 'MANZANA U CASA 16', '<p>dddddddddddddddddddddddddddddddd</p>\r\n', 0, 0, 'ddddddddddddddddddd', 59, 'credito', '2.png', '2025-01-16 06:46:28', '2025-01-17');
 
 -- --------------------------------------------------------
 
@@ -473,7 +486,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `financieras`
@@ -491,7 +504,7 @@ ALTER TABLE `inventarios`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

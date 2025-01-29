@@ -54,7 +54,7 @@ require_once __DIR__ . '/../../Controllers/ProyectoController.php';
 <body>
     <div class="container">
         <div id="form-background">
-            <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form action="insert.php?da=Financials-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                
 
             <div class="form-group">

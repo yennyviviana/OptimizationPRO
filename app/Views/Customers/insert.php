@@ -124,7 +124,7 @@ require_once __DIR__ . '/../../Controllers/ClienteController.php';
         <h1>Cliente</h1>
         <div class="container">
         <div id="form-background">
-            <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation"> 
+            <form action="insert.php?da=Customers-2" method="POST" enctype="multipart/form-data" class="needs-validation"> 
            
             <div class="form-group">
                 <label for="nombre">Nombre</label>

@@ -180,7 +180,7 @@ h2 {
         <div class="column">
             <h2>Módulo de pedidos</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Pedidos</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Orders-2'>Insert Pedidos</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
@@ -245,7 +245,7 @@ h2 {
                         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
                         <td>
-                            <a href="edit.php?da=3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="edit.php?da=Orders-3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-sm btn-primary">Editar</a>
                             <a href="#" class="btn btn-sm btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo']; ?>')">Borrar</a>
                         </td>
                     </tr>

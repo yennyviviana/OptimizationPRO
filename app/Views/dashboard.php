@@ -10,6 +10,7 @@ $correo_electronico = $_SESSION['correo_electronico'];
 $tipo_usuario = $_SESSION['tipo_usuario'];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,18 +22,14 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JS (con Popper.js) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
-
-    <title>Panel ERP</title>
+   <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+  <title>Panel ERP</title>
     <style>
         body {
             background-color: #F5F5F5;   
@@ -64,8 +61,6 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             max-width: 400px;
             margin: 20px auto;
         }
-
-
         .toast {
     transition: opacity 0.3s ease;
 }
@@ -74,7 +69,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     opacity: 1 !important;
 }
 
-    </style>
+</style>
 </head>
 <body>
 
@@ -120,11 +115,12 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
                 <h1 class="h2">OptimizationPro</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento</button>
+        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento.</button>
     </div>
+
     <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar</button>
-        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf</button>
+        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar.</button>
+        <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf.</button>
         <!-- Botón para abrir el modal de ayuda -->
         <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
     </div>
@@ -235,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         events: events,
         dateClick: function (info) {
-            // Limpiar formulario para Crear
+            // Limpiar formulario para Crear.....
             document.getElementById('eventForm').reset();
             document.getElementById('start').value = info.dateStr + "T09:00";
             document.getElementById('end').value = info.dateStr + "T10:00";
@@ -243,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedEventId = null;
             modalBootstrap.show();
 
-            // Mostrar solo el botón Crear
+            // Mostrar solo el botón Crear.......
             toggleButtons({ save: true });
         },
         eventClick: function (info) {
@@ -255,14 +251,14 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedEventId = event.id;
             modalBootstrap.show();
 
-            // Mostrar los botones Editar y Eliminar
+            // Mostrar los botones Editar y Eliminar........
             toggleButtons({ edit: true, delete: true });
         }
     });
 
     calendar.render();
 
-    // Botón Crear
+    // Botón Crear..........
     document.getElementById('saveEventButton').addEventListener('click', function () {
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
@@ -284,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Editar
+    // Botón Editar........
     document.getElementById('editEventButton').addEventListener('click', function () {
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
@@ -309,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Eliminar
+    // Botón Eliminar........
     document.getElementById('deleteEventButton').addEventListener('click', function () {
         fetch('Views/eventos.php', {
             method: 'POST',
@@ -328,11 +324,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Cerrar (cerrar el modal con JavaScript)
+    // Botón Cerrar (cerrar el modal con JavaScript).....
     document.getElementById('closeModalButton').addEventListener('click', function () {
         modalBootstrap.hide(); // Cerrar el modal programáticamente
     });
-    // Función para alternar botones según la acción
+    // Función para alternar botones según la acción..........
     function toggleButtons({ save = false, edit = false, delete: del = false }) {
         document.getElementById('saveEventButton').style.display = save ? 'block' : 'none';
         document.getElementById('editEventButton').style.display = edit ? 'block' : 'none';
@@ -340,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-        // Gráficos
+        // Gráficos..........
         const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
         const graficoBarra = new Chart(ctxBarra, {
             type: 'bar',
@@ -384,17 +380,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     document.addEventListener('DOMContentLoaded', function () {
-    // Inicializamos Feather Icons para renderizar el ícono
+    // Inicializamos Feather Icons para renderizar el ícono........
     feather.replace();
 
-    // Función para cambiar el tema
+    // Función para cambiar el tema.........
     const toggleThemeButton = document.getElementById('toggle-theme');
     const body = document.body;
 
     // Si ya hay un tema oscuro en la sesión (en caso de recargar la página), lo aplicamos
     if (localStorage.getItem('dark-theme') === 'true') {
         body.classList.add('dark-theme');
-        feather.replace(); // Vuelve a cargar el ícono si es necesario
+        feather.replace(); // Vuelve a cargar el ícono si es necesario.......
     }
 
     toggleThemeButton.addEventListener('click', function () {
@@ -404,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isDarkTheme = body.classList.contains('dark-theme');
         localStorage.setItem('dark-theme', isDarkTheme);
 
-        // Cambiar el ícono de luna a sol dependiendo del tema
+        // Cambiar el ícono de luna a sol dependiendo del tema..........
         if (isDarkTheme) {
             toggleThemeButton.innerHTML = '<i data-feather="sun"></i> Cambiar Tema'; // Muestra el ícono de sol
         } else {
@@ -429,7 +425,7 @@ document.getElementById('addElement').addEventListener('click', function (e) {
 document.getElementById('deleteElement').addEventListener('click', function (e) {
     e.preventDefault();
     alert('Elemento eliminado con éxito');
-    // Ejemplo: eliminar el último elemento de un contenedor
+    //  eliminar el último elemento de un contenedor
     const container = document.body; // Cambia a un contenedor específico
     if (container.lastChild) {
         container.removeChild(container.lastChild);

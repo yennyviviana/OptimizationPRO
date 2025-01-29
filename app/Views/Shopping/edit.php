@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <div id="form-background">
-            <form action="edit.php?da=2&lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form action="edit.php?da=Shopping-3&lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="productos_comprados"><i class="fas fa-users"></i> Productos:</label>
                     <select id="productos_comprados" name="productos_comprados" required class="form-control">

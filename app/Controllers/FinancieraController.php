@@ -95,11 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $modelo = new FinancieraModel($mysqli);
 
     // Capture POST data with default values
-    $fecha_transaccion = date('Y-m-d H:i:s'); // Set this from the form if needed
+    $fecha_transaccion = date('Y-m-d H:i:s'); 
     $monto = isset($_POST['monto']) ? $_POST['monto'] : '';
     $tipo_transaccion = isset($_POST['tipo_transaccion']) ? $_POST['tipo_transaccion'] : '';
     $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
-    $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : $_SESSION['id_usuario']; // Use session user ID if POST ID is not present
+    $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : $_SESSION['id_usuario']; 
     $id_proveedor = isset($_POST['id_proveedor']) ? $_POST['id_proveedor'] : '';
     $id_cliente = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
     $id_producto = isset($_POST['id_producto']) ? $_POST['id_producto'] : '';
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigo_inventario = isset($_POST['codigo_inventario']) ? $_POST['codigo_inventario'] : '';
     $id_compra = isset($_POST['id_compra']) ? $_POST['id_compra'] : '';
 
-    // Insert data using the model.....
+    // Insert data using the model.........
     $resultado = $modelo->insertarFinanciera(
         $fecha_transaccion,
         $monto,

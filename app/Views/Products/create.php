@@ -209,7 +209,7 @@ h2 {
         <div class="column">
             <h2>Módulo de pedidos</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=2'>Insert Pedidos</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Products-2'>Insert Pedidos</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
@@ -281,7 +281,7 @@ h2 {
                 
                 <td> 
                    <!-- Botón para editar -->  
-                   <a href="edit.php?da=3&lla=<?php echo $producto['id_producto']; ?>"  class="btn btn-custom-green btn-editar">
+                   <a href="edit.php?da=Products-3&lla=<?php echo $producto['id_producto']; ?>"  class="btn btn-custom-green btn-editar">
                 <i class="fas fa-edit icon"></i> Editar
 
 <!-- Botón de Borrar -->
