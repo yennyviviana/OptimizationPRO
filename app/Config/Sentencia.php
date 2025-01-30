@@ -5,9 +5,9 @@ class  Sentencia{
 	public  $sentencia;
     public  $conexion;
 	public  $tabla;
-	public  $resultado;
+	public  $Resultado;
 
-	function __construct($sentencia, $conexion, $tabla) {
+	function __construct($sentencia, $conexion, $Resultado,$tabla) {
 	
 		$this->sentencia = $sentencia;
 		$this->conexion = $conexion;
@@ -15,14 +15,14 @@ class  Sentencia{
 	
 	}
 	
-	//ejecuta la consulta sql
+	//ejecuta la consulta sql......
 	public function con() {
 		$this->resultado = mysqli_query($this->conexion, $this->sentencia) or die('No se ejecuto la consulta a la tabla '. $this->tabla);
 	}
 	
 	//insertar, editar y borrar
-	public function insertarBdo() {
+	/*public function insertarBdo() {
 		mysqli_query($this->conexion, $this->sentencia) or die('no se inserto en la tabla'. $this->tabla);	
-	}
+	}*/
 
 }

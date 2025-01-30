@@ -15,7 +15,7 @@ class ClienteModel {
     }
 
     public function insertarCliente($nombre, $apellido, $email, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion) {
-        // Escapa las variables para prevenir inyección SQL
+        // Escapa las variables para prevenir inyección SQL....
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
         $email = mysqli_real_escape_string($this->conexion, $email);
@@ -28,11 +28,11 @@ class ClienteModel {
         $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
         $fecha_modificacion = mysqli_real_escape_string($this->conexion, $fecha_modificacion);
 
-        // Preparar la consulta SQL....
+        // Preparar la consulta SQL.......
         $consulta = "INSERT INTO clientes (nombre, apellido, email, telefono, direccion, ciudad, estado, codigo_postal, pais, fecha_creacion, fecha_modificacion) 
                      VALUES ('$nombre', '$apellido', '$email', '$telefono', '$direccion', '$ciudad', '$estado', '$codigo_postal', '$pais', '$fecha_creacion', '$fecha_modificacion')";
 
-        // Ejecutar la consulta
+        // Ejecutar la consulta.....
         if (mysqli_query($this->conexion, $consulta)) {
             return true; // La inserción fue exitosa
         } else {
@@ -42,7 +42,7 @@ class ClienteModel {
 
 
     public function ActualizarCliente($id_cliente,$nombre, $apellido, $email, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion) {
-        // Escapa las variables para prevenir inyección SQL
+        // Escapa las variables para prevenir inyección SQL.....
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
         $email = mysqli_real_escape_string($this->conexion, $email);
@@ -62,7 +62,7 @@ $consulta = "UPDATE clientes SET nombre= '$nombre', apellido = '$apellido', emai
 
 // Ejecutar la consulta
 if (mysqli_query($this->conexion, $consulta)) {
-    return true; // La actualización fue exitosa
+    return true; // La actualización fue exitosa.....
 } else {
     return false; // Hubo un error en la actualización.......
 }

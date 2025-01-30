@@ -6,7 +6,7 @@ require_once('Views/dashboard.php');
 $dato = isset($_GET['da']) ? $_GET['da'] : null;
 
 switch ($dato) {
-    // Case of Orders
+    // Case of Orders......
     case 'Orders-1':
         require_once('Views/Orders/create.php');
         break;
@@ -24,7 +24,7 @@ switch ($dato) {
         break;
 
 
-    // Case of Products
+    // Case of Products......
     case 'Products-1':
         require_once('Views/Products/create.php');
         break;

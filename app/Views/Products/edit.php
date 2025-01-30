@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha_pedido = date('Y-m-d H:i:s');
     $fecha_entrega = $_POST['fecha_entrega'];
 
-    // Convertir las fechas a objetos DateTime
+    // Convertir las fechas a objetos DateTime.....
     $fecha_pedido_objeto = new DateTime($fecha_pedido);
     $fecha_entrega_objeto = new DateTime($fecha_entrega);
 

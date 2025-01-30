@@ -87,14 +87,14 @@ class PedidoModel {
             $nombreArchivo = $this->procesarImagen($archivo); // Procesar nueva imagen
         }
     
-        // Construir la consulta de actualización
+        // Construir la consulta de actualización......                                                                                                                                                                                                                                                       
         $consulta = "UPDATE pedidos SET nombre_pedido = '$nombre_pedido', precio = '$precio', estado = '$estado', direccion = '$direccion', descripcion = '$descripcion', numero_seguimiento = '$numero_seguimiento', tiempo_entrega_horas = '$tiempo_entrega_horas', informacion_pedido = '$informacion_pedido', metodo_pago = '$metodo_pago', archivo = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
     
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
             return true; // La actualización fue exitosa
         } else {
-            return false; // Hubo un error en la actualización
+            return false; // error en la actualización
         }
     }
     

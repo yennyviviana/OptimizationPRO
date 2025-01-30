@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
 if ($_POST) {
     echo '<pre>'; // Add these lines for debugging
     print_r($_POST); // Add these lines for debugging
-    echo '</pre>'; //  lines for debugging
+    echo '</pre>'; //  lines for debugging.....
 
     if (isset($_POST['id_proveedor'])) {
         $id_proveedor = $_POST['id_proveedor'];

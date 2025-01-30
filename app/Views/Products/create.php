@@ -50,9 +50,7 @@ $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 
 
-
-
-        // Consulta utilizando MySQLi
+        // Consulta utilizando MySQLi.......
         $consulta = "SELECT * FROM productos ORDER BY id_producto";
         $resultados = $mysqli->query($consulta);
 
@@ -64,7 +62,7 @@ $total_paginas = ceil($total_registros / $registros_por_pagina);
 // Obtener el término de búsqueda
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
-// Construir la consulta SQL con filtro si hay búsqueda
+// Construir la consulta SQL con filtro si hay búsqueda..........
 if (!empty($searchQuery)) {
     $consulta = "SELECT * FROM productos WHERE 
                  nombre_producto LIKE '%$searchQuery%' OR 

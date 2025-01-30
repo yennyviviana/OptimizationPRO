@@ -42,7 +42,7 @@ mysqli_set_charset($mysqli, 'utf8');
     $archivo = $_FILES['archivo'];
     $id_usuario = $_SESSION['id_usuario'];
 
-    // Capturar la fecha de entrega proporcionada por el usuario
+    // Capturar la fecha de entrega proporcionada por el usuario.....
     $fecha_pedido = date('Y-m-d h:i:s');
     $fecha_entrega = $_POST['fecha_entrega'];
 

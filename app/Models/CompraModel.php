@@ -14,7 +14,7 @@ class CompraModel {
         }
     }
 
-    // Insertando datos en la tabla compras
+    // Insertando datos en la tabla compras.....
     public function insertarCompra($productos_comprados, $detalles_productos, $precio_unitario, $precio_compra, $total_compra, $estado_actual, $metodo_pago, $fecha_compra, $fecha_entrega, $codigo_inventario, $id_proveedor, $id_usuario, $factura) {
         // Escapar los datos para evitar inyecciones SQL
         $productos_comprados = mysqli_real_escape_string($this->conexion, $productos_comprados);
@@ -27,24 +27,24 @@ class CompraModel {
         $fecha_compra = mysqli_real_escape_string($this->conexion, $fecha_compra);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
       
-        // Verificar si el usuario existe antes de insertar la compra
+        // Verificar si el usuario existe antes de insertar la compra.........
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
         if (mysqli_num_rows($resultado_usuario) == 0) {
-            // El usuario no existe, retorna falso
+            // El usuario no existe, retorna falso.........
             return false;
         }
 
-        // Verificar si el proveedor existe antes de insertar la compra
+        // Verificar si el proveedor existe antes de insertar la compra.....
         $consulta_proveedor = "SELECT * FROM proveedores WHERE id_proveedor = '$id_proveedor'";
         $resultado_proveedor = mysqli_query($this->conexion, $consulta_proveedor);
         if (mysqli_num_rows($resultado_proveedor) == 0) {
-            // El proveedor no existe, retorna falso
+            // El proveedor no existe, retorna falso.........
             return false;
         }
 
 
-          // Verificar si el proveedor existe antes de insertar la compra
+          // Verificar si el proveedor existe antes de insertar la compra......
           $consulta_inventario = "SELECT * FROM  inventarios WHERE  codigo_inventario = '$codigo_inventario'";
           $resultado_inventario = mysqli_query($this->conexion, $consulta_inventario);
           if (mysqli_num_rows($resultado_inventario) == 0) {
@@ -53,7 +53,7 @@ class CompraModel {
           }
 
 
-        // Procesar la imagen
+        // Procesar la imagen.........
         $nombreArchivo = $this->procesarImagen($factura);
 
         // Preparar la consulta SQL
@@ -85,11 +85,11 @@ class CompraModel {
   $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
   $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
   if (mysqli_num_rows($resultado_usuario) == 0) {
-      // El usuario no existe, retorna falso
+      // El usuario no existe, retorna falso..........
       return false;
   }
 
-  // Verificar si el proveedor existe antes de insertar la compra
+  // Verificar si el proveedor existe antes de insertar la compra....
   $consulta_proveedor = "SELECT * FROM proveedores WHERE id_proveedor = '$id_proveedor'";
   $resultado_proveedor = mysqli_query($this->conexion, $consulta_proveedor);
   if (mysqli_num_rows($resultado_proveedor) == 0) {
