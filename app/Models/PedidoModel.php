@@ -15,7 +15,7 @@ class PedidoModel {
     }
 
 
-    //insertando base datos tabla pedidos
+    //insertando base datos tabla pedidos......
     public function insertarPedido($nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario) {
         // Escapar los datos para evitar inyecciones SQL
         $nombre_pedido = mysqli_real_escape_string($this->conexion, $nombre_pedido);
@@ -80,7 +80,7 @@ class PedidoModel {
         $consulta_anterior = "SELECT archivo FROM pedidos WHERE id_pedido = '$id_pedido'";
         $resultado_anterior = mysqli_query($this->conexion, $consulta_anterior);
         $fila_anterior = mysqli_fetch_assoc($resultado_anterior);
-        $nombreArchivo = $fila_anterior['archivo']; // Valor por defecto es el anterior
+        $nombreArchivo = $fila_anterior['archivo']; // Valor por defecto es el anterior.....
     
         // Procesar la nueva imagen si se proporciona
         if ($archivo['error'] === UPLOAD_ERR_OK) {
