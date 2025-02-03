@@ -35,7 +35,7 @@ class PedidoModel {
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
         if (mysqli_num_rows($resultado_usuario) == 0) {
-            // El usuario no existe, retorna falso
+            // El usuario no existe, retorna falso.....
             return false;
         }
         
@@ -56,7 +56,7 @@ class PedidoModel {
   
 
       public function actualizarPedido($id_pedido, $nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario) {
-        // Escapar los datos para evitar inyecciones SQL
+        // Escapar los datos para evitar inyecciones SQL.....
         $nombre_pedido = mysqli_real_escape_string($this->conexion, $nombre_pedido);
         $precio = mysqli_real_escape_string($this->conexion, $precio);
         $estado = mysqli_real_escape_string($this->conexion, $estado);
