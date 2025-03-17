@@ -79,9 +79,32 @@ if (!$resultados) {
             background-color: #000;
             color: #f5f5f5;
         }
-        .table th, .table td {
-            color: #fff;
-        }
+        .table-container {
+    background-color: #f8f9fa; /* Fondo del contenedor */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.table {
+    border: 1px solid #ddd; /* Bordes de la tabla */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color:hsl(263, 93.20%, 17.30%); /* Color de encabezados */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Color alternativo para filas impares */
+}
+
+.table tbody tr:hover {
+    background-color: #d1ecf1; /* Efecto hover */
+}
 
 
         .panel {
@@ -90,7 +113,7 @@ if (!$resultados) {
     border: 1px solid #333;
     padding: 20px;
     border-radius: 8px;
-    background-color: #234DF0; 
+    background-color:hsl(240, 0.90%, 21.00%); 
 }
 
 .column {
@@ -206,11 +229,8 @@ h2 {
 
     
     
-    <div class="container-fluid">
-    <div class="table-container">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="thead-light">
+    <table class="table table-bordered table-hover">
+    <thead class="bg-primary text-white">
                 <tr>
                     <th>Id</th>
                     <th>Pedido</th>

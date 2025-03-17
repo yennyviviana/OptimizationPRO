@@ -59,7 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $modelo = new CompraModel($mysqli);
 
     // Insert product using the corresponding model method.........
-    $resultado = $modelo->insertarCompra($productos_comprados, $detalles_productos, $precio_unitario, $precio_compra, $total_compra, $estado_actual, $metodo_pago, $fecha_compra, $fecha_entrega, $codigo_inventario, $id_proveedor, $id_usuario, $factura);
+    $resultado = $modelo->insertarCompra($productos_comprados, $detalles_productos, 
+    $precio_unitario, $precio_compra, $total_compra, $estado_actual, $metodo_pago, $fecha_compra, 
+    $fecha_entrega, $codigo_inventario, $id_proveedor, $id_usuario, $factura);
 
     // Verify if the insertion was successful........
     if ($resultado) {

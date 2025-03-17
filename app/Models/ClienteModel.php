@@ -41,7 +41,8 @@ class ClienteModel {
     }
 
 
-    public function ActualizarCliente($id_cliente,$nombre, $apellido, $email, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion) {
+    public function ActualizarCliente($id_cliente,$nombre, $apellido, $email, $telefono, 
+    $direccion, $ciudad, $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion) {
         // Escapa las variables para prevenir inyección SQL.....
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
@@ -58,13 +59,16 @@ class ClienteModel {
  
 
         // Actualiza sin manejar imágenes o archivos......
-$consulta = "UPDATE clientes SET nombre= '$nombre', apellido = '$apellido', email= '$email',telefono = '$telefono', direccion = '$direccion',  ciudad = '$ciudad', estado = '$estado', codigo_postal = '$codigo_postal', pais = '$pais', fecha_creacion= '$fecha_creacion, fecha_modificacion= '$fecha_modificacion WHERE id_cliente = '$id_cliente'";
+ $consulta = "UPDATE clientes SET nombre= '$nombre', apellido = '$apellido', email= '$email',telefono = 
+'$telefono', direccion = '$direccion',  ciudad = '$ciudad', estado = '$estado', codigo_postal = 
+'$codigo_postal', pais = '$pais', fecha_creacion= '$fecha_creacion, fecha_modificacion= 
+'$fecha_modificacion WHERE id_cliente = '$id_cliente'";
 
 // Ejecutar la consulta
 if (mysqli_query($this->conexion, $consulta)) {
-    return true; // La actualización fue exitosa.....
+    return true; 
 } else {
-    return false; // Hubo un error en la actualización.......
+    return false; 
 }
 
 

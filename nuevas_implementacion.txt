@@ -1,4 +1,5 @@
-1. Revisión y mejora de funcionalidades existentes
+1. Revisión y mejora de funcionalidades existentes...
+
 CRUD: revisa que las funcionalidades sean fáciles de usar y tengan una interfaz amigable. 
 Asegúrar  que la validación de datos esté bien implementada y que el manejo de errores esté cubierto.
 Filtros: Los filtros son esenciales para la usabilidad, pero revisa si hay más tipos de filtros que

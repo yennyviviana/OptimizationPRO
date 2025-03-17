@@ -106,7 +106,7 @@ while ($financiera = $resultados->fetch_assoc()) {
     border: 1px solid #333;
     padding: 20px;
     border-radius: 8px;
-    background-color: #234DF0; 
+    background-color:hsl(240, 0.90%, 21.00%); 
 }
 
 .column {
@@ -219,9 +219,10 @@ h2 {
         </button>
     </form>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead class="thead-light">
+     
+    
+    <table class="table table-bordered table-hover">
+    <thead class="bg-primary text-white">
                 <tr>
                     <th>Id</th>
                     <th>Fecha</th>

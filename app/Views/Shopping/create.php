@@ -106,13 +106,13 @@ if (!$resultados) {
         }
 
 
-        .panel {
+ .panel {
     display: flex;
     justify-content: space-between;
     border: 1px solid #333;
     padding: 20px;
     border-radius: 8px;
-    background-color: #234DF0; 
+    background-color:hsl(240, 0.90%, 21.00%); 
 }
 
 .column {
@@ -229,16 +229,9 @@ h2 {
 
     
     
-    <div class="container-fluid">
-    <div class="table-container">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="thead-light">
-                <tr>
-
-
-
-            <tr>
+    <table class="table table-bordered table-hover">
+    <thead class="bg-primary text-white">
+             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Productos</th>
                 <th scope="col">Detalles</th>
