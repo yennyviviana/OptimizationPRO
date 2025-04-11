@@ -73,129 +73,8 @@ if (!$resultados) {
     <title>Módulo de pedidos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Estilos personalizados */
-        body {
-            background-color: #000;
-            color: #f5f5f5;
-        }
-        .table-container {
-    background-color: #f8f9fa; /* Fondo del contenedor */
-    padding: 20px;
-    border-radius: 10px;
-}
+    <link href="style.css" type="text/css" rel="stylesheet">
 
-.table {
-    border: 1px solid #ddd; /* Bordes de la tabla */
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.table th {
-    background-color:hsl(263, 93.20%, 17.30%); /* Color de encabezados */
-    color: white;
-    text-align: center;
-    font-weight: bold;
-}
-
-.table tbody tr:nth-child(odd) {
-    background-color: #f2f2f2; /* Color alternativo para filas impares */
-}
-
-.table tbody tr:hover {
-    background-color: #d1ecf1; /* Efecto hover */
-}
-
-
-        .panel {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid #333;
-    padding: 20px;
-    border-radius: 8px;
-    background-color:hsl(240, 0.90%, 21.00%); 
-}
-
-.column {
-    width: 48%;
-}
-
-h2 {
-    color: whitesmoke; 
-}
-
-.nav {
-    display: flex;
-    align-items: center;
-    float: left;
-    margin-left: 20px;
-}
-
-.nav a {
-    color: whitesmoke; 
-    text-decoration: none;
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 10px;
-}
-
-.nav a:hover {
-    background-color: darkblue;
-    color: #000; 
-}
-.nav .active {
-    color: #ff6f61;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #333;
-    color: #ff6f61; 
-}
-
-.btn:hover {
-    background-color: #ff6f61;
-    color: #fff; 
-}
-
-
-.btn-borrar {
-    display: inline-block;
-    padding: 7px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #ff4d4d; 
-    color: #fff;
-}
-
-.btn-borrar:hover {
-    background-color: #c82333;
-}
-
-.btn-editar {
-    display: inline-block;
-    padding: 7px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color:  blue;
-    color: #fff;
-}
-
-.btn-editar:hover {
-    background-color:  #0B1CDB;
-}
-
-
-    </style>
 </head>
 <body>
 
@@ -216,8 +95,6 @@ h2 {
 
     <br>
 <div class="container-fluid">
-    
-
     <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
@@ -227,6 +104,9 @@ h2 {
         </button>
     </form>
 
+
+
+    <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf.</button>
     
     
     <table class="table table-bordered table-hover">
@@ -240,7 +120,6 @@ h2 {
                     <th>Descripción</th>
                     <th>Seguimiento</th>
                     <th>Tiempo Entrega</th>
-                    <th>Información</th>
                     <th>Método Pago</th>
                     <th>Archivo</th>
                     <th>Fecha pedido</th>
@@ -259,7 +138,6 @@ h2 {
                         <td><?php echo htmlspecialchars($pedido['descripcion']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['numero_seguimiento']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['tiempo_entrega_horas']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['informacion_pedido']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['metodo_pago']); ?></td>
                         <td><img src="../../public/img/pedidos-imagen/<?php echo $pedido['archivo']; ?>" width="100"></td>
                         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
@@ -359,6 +237,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         xhr.send('searchQuery=' + encodeURIComponent(searchQuery));
     });
+});
+</script>
+
+
+<script>
+    
+document.getElementById('exportPdf').addEventListener('click', function (e) {
+    e.preventDefault();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("Este es un PDF generado con jsPDF", 10, 10);
+    doc.save('documento.pdf');
+});
+
+document.getElementById('help').addEventListener('click', function (e) {
+    e.preventDefault();
+    const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
+    helpModal.show();
 });
 </script>
 

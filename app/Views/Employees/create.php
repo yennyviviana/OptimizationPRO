@@ -85,9 +85,32 @@ if (!$resultados) {
             background-color: #000;
             color: #f5f5f5;
         }
-        .table th, .table td {
-            color: #fff;
-        }
+        .table-container {
+    background-color: #f8f9fa; /* Fondo del contenedor */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.table {
+    border: 1px solid #ddd; /* Bordes de la tabla */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color:hsl(263, 93.20%, 17.30%); /* Color de encabezados */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Color alternativo para filas impares */
+}
+
+.table tbody tr:hover {
+    background-color: #d1ecf1; /* Efecto hover */
+}
 
 
         .panel {
@@ -178,6 +201,8 @@ h2 {
 }
 
 
+
+
     </style>
 </head>
 <body>
@@ -186,7 +211,7 @@ h2 {
         <div class="column">
             <h2>Módulo de  empleados</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Employees-2'>Insert Pedidos</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Employees-2'>Insertar  empleados</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>

@@ -56,15 +56,15 @@ class ClienteModel {
         $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
         $fecha_modificacion = mysqli_real_escape_string($this->conexion, $fecha_modificacion);
 
- 
+    }
 
-        // Actualiza sin manejar imágenes o archivos......
+        //Actualiza sin manejar imágenes o archivos......
  $consulta = "UPDATE clientes SET nombre= '$nombre', apellido = '$apellido', email= '$email',telefono = 
 '$telefono', direccion = '$direccion',  ciudad = '$ciudad', estado = '$estado', codigo_postal = 
 '$codigo_postal', pais = '$pais', fecha_creacion= '$fecha_creacion, fecha_modificacion= 
 '$fecha_modificacion WHERE id_cliente = '$id_cliente'";
 
-// Ejecutar la consulta
+Ejecutar la consulta
 if (mysqli_query($this->conexion, $consulta)) {
     return true; 
 } else {
