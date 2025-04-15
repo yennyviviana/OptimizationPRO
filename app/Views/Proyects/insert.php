@@ -8,6 +8,9 @@ require_once __DIR__ . '/../../Controllers/ProyectoController.php';
 ?>
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,67 +22,73 @@ require_once __DIR__ . '/../../Controllers/ProyectoController.php';
     <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="style.css" type="text/css" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
+    <!-- Incluimos el CSS de CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div id="form-background">
-            <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-               
+  
+<div class="container py-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><i class="fas fa-box"></i> Registrar Pedido</h4>
+        </div>
+        <div class="card-body">
+            <form action="insert.php?da=Proyects-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="row g-3">
 
-            <div class="form-group">
-                    <label for="">Nombre proyecto</label>
-                    <textarea id="nombre_proyecto" name="nombre_proyecto" class="form-control" required placeholder="nombre_proyecto"></textarea>
-                    <div class="invalid-feedback">Por favor ingrese  el nombre proyecto.</div>
+                    <!-- Columna izquierda -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nombre_proyecto">Nombre_proyecto</label>
+                            <input type="text" id="nombre_proyecto" name="nombre_proyecto" class="form-control" required placeholder="Nombre del proyecto">
+                            <div class="invalid-feedback">Ingrese el nombre del proyecto.</div>
+                        </div>
+
+                       
+
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="3" required placeholder="Descripción del pedido"></textarea>
+                            <div class="invalid-feedback">Ingrese la descripción.</div>
+                        </div>
+                    </div>
+
+                 
+                       
+
+                        <div class="form-group">
+                            <label for="fecha_pedido">Fecha de inicio</label>
+                            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha_fin">Fecha fin</label>
+                            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" required>
+                        </div>
+
+                     
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <select id="estado" name="estado" class="form-select" required>
+                                <option value="">Seleccione una opción</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="cancelado">Cancelado</option>
+                                <option value="en stock">En stock</option>
+                                <option value="entregado">Entregado</option>
+                            </select>
+                            <div class="invalid-feedback">Seleccione el estado del pedido.</div>
+                        </div>
+
+
+                <div class="text-end mt-4">
+                    <button type="submit" name="boton" class="btn btn-success px-4">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="descripcion">Descripcion</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" required placeholder="descripcion"></textarea>
-                    <div class="invalid-feedback">Por favor ingrese la descripcion.</div>
-                </div>
-
-
-
-                <div class="form-group">
-        <label for="fecha_adquisicion">Fecha inicio:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" min="0" required>
-    </div>
-
-          
-    <div class="form-group">
-        <label for="fecha_fin">Fecha fin:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" min="0" required>
-    </div>
-
-
-    <div class="form-group">
-                <label for="estado"><i class="fas fa-toggle-on"></i> Estado:</label>
-                <select id="estado" name="estado" required class="form-control">
-                    <option value="pendiente">Pediente</option>
-                    <option value="en progreso">En progreso</option>
-                    <option value="completado">Completado</option>
-                </select>
-            </div>
-                  
-
-
-            <div class="form-group">
-    <label for="archivos">Imagen</label>
-    <input type="file" id="imagen_proyecto" name="imagen_proyecto" class="form-control-file" required>
-    <div class="invalid-feedback">Por favor seleccione al menos una imagen proyecto.</div>
-</div>
-
-
-    
-    <button type="submit" name="boton" class="btn btn-primary">Guardar</button>
             </form>
         </div>
     </div>
-
-   
-
-
-</body>
-</html>
+</div>
