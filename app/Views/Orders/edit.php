@@ -1,6 +1,6 @@
 <?php
 // Incluir el modelo y el archivo de configuración de la base de datos
-require_once __DIR__ . '/../../Models/PedidoModel.php';
+require_once __DIR__ . '/../../Models/OrderModel.php';
 require_once __DIR__ . '/../../Config/database.php';
 
 session_start();
@@ -106,153 +106,128 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD pedidos</title>
-    <!-- Agregamos los estilos de Bootstrap para los iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Incluimos el CSS de Bootstrap -->
+    <title>Editar Pedido</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Incluimos el CSS de CKEditor -->
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-    <style>
-        #form-background {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Ajuste de estilos para el editor CKEditor */
-        .ck-editor__editable {
-            min-height: 150px;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="form-background">
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-edit"></i> Editar Pedido</h4>
+        </div>
+        <div class="card-body">
             <?php if ($pedido): ?>
             <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-                <div class="form-group">
-                    <label for="nombre_pedido">Nombre</label>
-                    <input type="text" id="nombre_pedido" name="nombre_pedido" value="<?php echo htmlspecialchars($pedido['nombre_pedido']); ?>" class="form-control" required placeholder="Ingresar nombre pedido">
-                    <div class="invalid-feedback">Nombre del pedido.</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombre_pedido">Nombre del Pedido</label>
+                        <input type="text" id="nombre_pedido" name="nombre_pedido" value="<?php echo htmlspecialchars($pedido['nombre_pedido']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el nombre del pedido.</div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="precio">Precio</label>
+                        <input type="number" id="precio" name="precio" value="<?php echo htmlspecialchars($pedido['precio']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el precio.</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="estado">Estado</label>
+                        <select id="estado" name="estado" class="form-control" required>
+                            <option value="aprobado" <?php if ($pedido['estado'] == 'aprobado') echo 'selected'; ?>>Aprobado</option>
+                            <option value="cancelado" <?php if ($pedido['estado'] == 'cancelado') echo 'selected'; ?>>Cancelado</option>
+                            <option value="en stock" <?php if ($pedido['estado'] == 'en stock') echo 'selected'; ?>>En stock</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="metodo_pago">Método de Pago</label>
+                        <select id="metodo_pago" name="metodo_pago" class="form-control" required>
+                            <option value="credito" <?php if ($pedido['metodo_pago'] == 'credito') echo 'selected'; ?>>Crédito</option>
+                            <option value="Paypal" <?php if ($pedido['metodo_pago'] == 'Paypal') echo 'selected'; ?>>Paypal</option>
+                            <option value="transferencia" <?php if ($pedido['metodo_pago'] == 'transferencia') echo 'selected'; ?>>Transferencia</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input type="number" id="precio" name="precio" value="<?php echo htmlspecialchars($pedido['precio']); ?>" class="form-control" required placeholder="Precio">
-                    <div class="invalid-feedback">Por favor ingrese el precio</div>
-                </div>
-
-                <label for="estado"><i class="fas fa-users"></i> Estado:</label>
-                <select id="estado" name="estado" required class="form-control">
-                    <option value="aprobado" <?php if ($pedido['estado'] == 'aprobado') echo 'selected'; ?>>Aprobado</option>
-                    <option value="cancelado" <?php if ($pedido['estado'] == 'cancelado') echo 'selected'; ?>>Cancelado</option>
-                    <option value="en stock" <?php if ($pedido['estado'] == 'en stock') echo 'selected'; ?>>En stock</option>
-                </select>
-                
-                <div class="form-group">
-                    <label for="direccion">Direccion</label>
-                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($pedido['direccion']); ?>" class="form-control" required placeholder="Ingresar direccion">
-                    <div class="invalid-feedback">Por favor ingrese la direccion.</div>
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($pedido['direccion']); ?>" class="form-control" required>
+                    <div class="invalid-feedback">Por favor ingrese la dirección.</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="descripcion">Descripcion</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" required placeholder="Descripcion"><?php echo htmlspecialchars($pedido['descripcion']); ?></textarea>
-                    <div class="invalid-feedback">Por favor ingrese la descripcion.</div>
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" required><?php echo htmlspecialchars($pedido['descripcion']); ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="numero_seguimiento">Numero seguimiento</label>
-                    <input type="number" id="numero_seguimiento" name="numero_seguimiento" value="<?php echo htmlspecialchars($pedido['numero_seguimiento']); ?>" class="form-control" required placeholder="Numero seguimiento">
-                    <div class="invalid-feedback">Numero de seguimiento.</div>
+                    <label for="informacion_pedido">Información del Pedido</label>
+                    <textarea id="informacion_pedido" name="informacion_pedido" class="form-control" required><?php echo htmlspecialchars($pedido['informacion_pedido']); ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="informacion_pedido">Información:</label>
-                    <textarea id="informacion_pedido" name="informacion_pedido" class="form-control" required placeholder="Información"><?php echo htmlspecialchars($pedido['informacion_pedido']); ?></textarea>
-                    <div class="invalid-feedback">Por favor ingrese información.</div>
+                    <label for="numero_seguimiento">Número de Seguimiento</label>
+                    <input type="number" id="numero_seguimiento" name="numero_seguimiento" value="<?php echo htmlspecialchars($pedido['numero_seguimiento']); ?>" class="form-control" required>
+                    <div class="invalid-feedback">Por favor ingrese el número de seguimiento.</div>
                 </div>
 
-                <label for="metodo_pago"><i class="fas fa-users"></i> Método de pago:</label>
-                <select id="metodo_pago" name="metodo_pago" required class="form-control">
-                    <option value="credito" <?php if ($pedido['metodo_pago'] == 'credito') echo 'selected'; ?>>Credito</option>
-                    <option value="Paypal" <?php if ($pedido['metodo_pago'] == 'Paypal') echo 'selected'; ?>>Paypal</option>
-                    <option value="transferencia" <?php if ($pedido['metodo_pago'] == 'transferencia') echo 'selected'; ?>>Transferencia</option>
-                </select>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fecha_entrega">Fecha de Entrega</label>
+                        <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Tiempo Transcurrido (Días y Horas)</label>
+                        <span id="tiempo_entrega_horas" class="form-control"><?php echo htmlspecialchars($pedido['tiempo_entrega_horas']); ?></span>
+                    </div>
+                </div>
 
                 <div class="form-group">
-                    <label for="archivo">Archivos</label>
+                    <label for="archivo">Archivos Adjuntos</label>
                     <input type="file" id="archivo" name="archivo" class="form-control-file" multiple required>
-                    <div class="invalid-feedback">Por favor seleccione al menos un archivo.</div>
-                </div>
-
-              
-                <div class="form-group">
-                    <label for="fecha_entrega">Fecha de entrega:</label>
-                    <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Tiempo transcurrido (Días y Horas):</label>
-                    <span id="tiempo_entrega_horas" class="form-control"><?php echo htmlspecialchars($pedido['tiempo_entrega_horas']); ?></span>
+                    <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
                 </div>
 
                 <input type="hidden" name="id_pedido" value="<?php echo htmlspecialchars($pedido['id_pedido']); ?>">
-                <button type="submit" name="boton" class="btn btn-primary">Guardar</button>
+
+                <button type="submit" name="boton" class="btn btn-success"><i class="fas fa-save"></i> Guardar Cambios</button>
             </form>
-            <?php else: ?>
-              
             <?php endif; ?>
         </div>
     </div>
+</div>
 
-    <script>
-        // Inicializamos CKEditor en el textarea con ID "descripcion"
-        CKEDITOR.replace('descripcion');
-        // Inicializa CKEditor en el textarea con ID "informacion_pedido"
-        CKEDITOR.replace('informacion_pedido');
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+    CKEDITOR.replace('descripcion');
+    CKEDITOR.replace('informacion_pedido');
 
-        document.getElementById('fecha_entrega').addEventListener('change', function() {
-            var fechaEntrega = new Date(this.value); // Obtener la fecha de entrega seleccionada
-            var fechaPedido = new Date(); // Obtener la fecha actual
-            var tiempoEntregaMilisegundos = fechaEntrega - fechaPedido; // Calcular la diferencia en milisegundos
+    document.getElementById('fecha_entrega').addEventListener('change', function () {
+        const fechaEntrega = new Date(this.value);
+        const fechaPedido = new Date();
+        const diferencia = fechaEntrega - fechaPedido;
 
-            // Convertir la diferencia de milisegundos a días y horas
-            var dias = Math.floor(tiempoEntregaMilisegundos / (1000 * 60 * 60 * 24));
-            var horas = Math.floor((tiempoEntregaMilisegundos % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-            // Mostrar el tiempo transcurrido en el span correspondiente
-            document.getElementById('tiempo_entrega_horas').textContent = dias + " días y " + horas + " horas";
-        });
-    </script>
+        document.getElementById('tiempo_entrega_horas').textContent = dias + " días y " + horas + " horas";
+    });
+</script>
 </body>
 </html>
+
 <?php
 // Cierra la conexión a la base de datos
 mysqli_close($mysqli);

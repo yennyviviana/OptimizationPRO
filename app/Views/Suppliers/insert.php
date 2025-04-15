@@ -19,37 +19,7 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Incluimos el CSS de CKEditor -->
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-    <style>
-        #form-background {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Ajuste de estilos para el editor CKEditor */
-        .ck-editor__editable {
-            min-height: 150px;
-        }
-    </style>
+    <link href="style.css" type="text/css" rel="stylesheet"> 
 </head>
 <body>
     <div class="container">

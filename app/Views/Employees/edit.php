@@ -124,168 +124,133 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD empleados</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-    <style>
-        #form-background {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .ck-editor__editable {
-            min-height: 150px;
-        }
-
-        #camera-container {
-            display: none;
-            text-align: center;
-        }
-
-        #camera-preview, #captured-image {
-            max-width: 100%;
-            height: auto;
-            display: none;
-            margin-top: 10px;
-        }
-
-        #delete-photo {
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Empleado</title>
+  <!-- Bootstrap 5 y Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- CKEditor -->
+  <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+  <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-    <div id="form-background">
-        <form action="" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-            <h1>Actualizar Empleado</h1>
-
-            <div class="form-group">
-                <label for="nombre_completo">Empleado:</label>
-                <input type="text" id="nombre_completo" name="nombre_completo" value="<?php echo htmlspecialchars($empleado['nombre_completo'] ?? ''); ?>" class="form-control" required placeholder="Ingresar empleado">
-                <div class="invalid-feedback">Por favor ingrese el nombre del empleado.</div>
+<div class="container py-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0"><i class="fas fa-user-edit"></i> Actualizar Empleado</h4>
+    </div>
+    <div class="card-body">
+      <form action="" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <!-- Columna izquierda -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="nombre_completo" class="form-label">Empleado:</label>
+              <input type="text" id="nombre_completo" name="nombre_completo" value="<?php echo htmlspecialchars($empleado['nombre_completo'] ?? ''); ?>" class="form-control" required placeholder="Ingresar empleado">
+              <div class="invalid-feedback">Por favor ingrese el nombre del empleado.</div>
             </div>
-
-            <div class="form-group">
-                <label for="cargo">Cargo</label>
-                <input type="text" id="cargo" name="cargo" value="<?php echo htmlspecialchars($empleado['cargo'] ?? ''); ?>" class="form-control" required placeholder="Ingresar cargo">
-                <div class="invalid-feedback">Por favor ingrese el cargo del empleado.</div>
+            <div class="mb-3">
+              <label for="cargo" class="form-label">Cargo</label>
+              <input type="text" id="cargo" name="cargo" value="<?php echo htmlspecialchars($empleado['cargo'] ?? ''); ?>" class="form-control" required placeholder="Ingresar cargo">
+              <div class="invalid-feedback">Por favor ingrese el cargo del empleado.</div>
             </div>
-
-            <div class="form-group">
-                <label for="numero_horas">Número de Horas (Días y Horas)</label>
-                <input type="number" id="numero_horas" name="numero_horas" value="<?php echo htmlspecialchars($empleado['numero_horas'] ?? ''); ?>" class="form-control" required>
-                <div class="invalid-feedback">Por favor ingrese las horas trabajadas.</div>
+            <div class="mb-3">
+              <label for="numero_horas" class="form-label">Número de Horas</label>
+              <input type="number" id="numero_horas" name="numero_horas" value="<?php echo htmlspecialchars($empleado['numero_horas'] ?? ''); ?>" class="form-control" required>
+              <div class="invalid-feedback">Por favor ingrese las horas trabajadas.</div>
             </div>
-
-            <div class="form-group">
-                <label for="precio_hora">Precio Hora</label>
-                <input type="number" id="precio_hora" name="precio_hora" value="<?php echo htmlspecialchars($empleado['precio_hora'] ?? ''); ?>" class="form-control" required placeholder="Precio por hora">
-                <div class="invalid-feedback">Por favor ingrese el precio por hora.</div>
+            <div class="mb-3">
+              <label for="precio_hora" class="form-label">Precio Hora</label>
+              <input type="number" id="precio_hora" name="precio_hora" value="<?php echo htmlspecialchars($empleado['precio_hora'] ?? ''); ?>" class="form-control" required placeholder="Precio por hora">
+              <div class="invalid-feedback">Por favor ingrese el precio por hora.</div>
             </div>
-
-            <div class="form-group">
-                <label for="salario">Salario</label>
-                <input type="number" id="salario" name="salario" value="<?php echo htmlspecialchars($empleado['salario'] ?? ''); ?>" class="form-control" required placeholder="Salario del empleado">
-                <div class="invalid-feedback">Por favor ingrese el salario del empleado.</div>
+            <div class="mb-3">
+              <label for="salario" class="form-label">Salario</label>
+              <input type="number" id="salario" name="salario" value="<?php echo htmlspecialchars($empleado['salario'] ?? ''); ?>" class="form-control" required placeholder="Salario del empleado">
+              <div class="invalid-feedback">Por favor ingrese el salario del empleado.</div>
             </div>
-
-            <label for="estado"><i class="fas fa-users"></i> Estado:</label>
-            <select id="estado" name="estado" required class="form-control">
+            <div class="mb-3">
+              <label for="estado" class="form-label"><i class="fas fa-users"></i> Estado:</label>
+              <select id="estado" name="estado" required class="form-select">
                 <option value="activo" <?php echo ($empleado['estado'] === 'activo') ? 'selected' : ''; ?>>Activo</option>
                 <option value="inactivo" <?php echo ($empleado['estado'] === 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>
-            </select>
-            <div class="invalid-feedback">Por favor seleccione el estado.</div>
-
-            <div class="form-group">
-                <label for="departamento">Departamento</label>
-                <input type="text" id="departamento" name="departamento" value="<?php echo htmlspecialchars($empleado['departamento'] ?? ''); ?>" class="form-control" required placeholder="Ingresar departamento">
-                <div class="invalid-feedback">Por favor ingrese el departamento.</div>
+              </select>
+              <div class="invalid-feedback">Por favor seleccione el estado.</div>
             </div>
-
-            <div class="form-group">
-                <label for="documento_identidad">Documento de Identidad</label>
-                <input type="text" id="documento_identidad" name="documento_identidad" value="<?php echo htmlspecialchars($empleado['documento_identidad'] ?? ''); ?>" class="form-control" required placeholder="Ingresar documento de identidad">
-                <div class="invalid-feedback">Por favor ingrese el documento de identidad.</div>
+            <div class="mb-3">
+              <label for="departamento" class="form-label">Departamento</label>
+              <input type="text" id="departamento" name="departamento" value="<?php echo htmlspecialchars($empleado['departamento'] ?? ''); ?>" class="form-control" required placeholder="Ingresar departamento">
+              <div class="invalid-feedback">Por favor ingrese el departamento.</div>
             </div>
-
-            <div class="form-group">
-                <label for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($empleado['direccion'] ?? ''); ?>" class="form-control" required placeholder="Ingresar dirección">
-                <div class="invalid-feedback">Por favor ingrese la dirección.</div>
+          </div>
+          <!-- Columna derecha -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="documento_identidad" class="form-label">Documento de Identidad</label>
+              <input type="text" id="documento_identidad" name="documento_identidad" value="<?php echo htmlspecialchars($empleado['documento_identidad'] ?? ''); ?>" class="form-control" required placeholder="Ingresar documento de identidad">
+              <div class="invalid-feedback">Por favor ingrese el documento de identidad.</div>
             </div>
-
-            <div class="form-group">
-                <label for="ciudad">Ciudad</label>
-                <input type="text" id="ciudad" name="ciudad" value="<?php echo htmlspecialchars($empleado['ciudad'] ?? ''); ?>" class="form-control" required placeholder="Ingresar ciudad">
-                <div class="invalid-feedback">Por favor ingrese la ciudad.</div>
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($empleado['direccion'] ?? ''); ?>" class="form-control" required placeholder="Ingresar dirección">
+              <div class="invalid-feedback">Por favor ingrese la dirección.</div>
             </div>
-
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($empleado['telefono'] ?? ''); ?>" class="form-control" required placeholder="Ingresar teléfono">
-                <div class="invalid-feedback">Por favor ingrese el teléfono.</div>
+            <div class="mb-3">
+              <label for="ciudad" class="form-label">Ciudad</label>
+              <input type="text" id="ciudad" name="ciudad" value="<?php echo htmlspecialchars($empleado['ciudad'] ?? ''); ?>" class="form-control" required placeholder="Ingresar ciudad">
+              <div class="invalid-feedback">Por favor ingrese la ciudad.</div>
             </div>
-
-            <div class="form-group">
-                <label for="pais">País</label>
-                <input type="text" id="pais" name="pais" value="<?php echo htmlspecialchars($empleado['pais'] ?? ''); ?>" class="form-control" required placeholder="Ingresar país">
-                <div class="invalid-feedback">Por favor ingrese el país.</div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($empleado['telefono'] ?? ''); ?>" class="form-control" required placeholder="Ingresar teléfono">
+              <div class="invalid-feedback">Por favor ingrese el teléfono.</div>
             </div>
-
-            <div class="form-group">
-                <label for="descripcion_profesional">Descripción Profesional</label>
-                <textarea id="descripcion_profesional" name="descripcion_profesional" class="form-control" required><?php echo htmlspecialchars($empleado['descripcion_profesional'] ?? ''); ?></textarea>
-                <div class="invalid-feedback">Por favor ingrese la descripción profesional.</div>
+            <div class="mb-3">
+              <label for="pais" class="form-label">País</label>
+              <input type="text" id="pais" name="pais" value="<?php echo htmlspecialchars($empleado['pais'] ?? ''); ?>" class="form-control" required placeholder="Ingresar país">
+              <div class="invalid-feedback">Por favor ingrese el país.</div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Actualizar Empleado</button>
-            <a href="empleados.php" class="btn btn-danger">Cancelar</a>
-        </form>
+            <div class="mb-3">
+              <label for="descripcion_profesional" class="form-label">Descripción Profesional</label>
+              <textarea id="descripcion_profesional" name="descripcion_profesional" class="form-control" required placeholder="Ingresar descripción profesional"><?php echo htmlspecialchars($empleado['descripcion_profesional'] ?? ''); ?></textarea>
+              <div class="invalid-feedback">Por favor ingrese la descripción profesional.</div>
+            </div>
+          </div>
+        </div>
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-success px-4">
+            <i class="fas fa-save"></i> Actualizar Empleado
+          </button>
+          <a href="empleados.php" class="btn btn-danger ms-2">Cancelar</a>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
+<!-- Scripts de Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Habilitar validación de formularios de Bootstrap
-    (function () {
-        'use strict';
-        const forms = document.querySelectorAll('.needs-validation');
-        Array.prototype.slice.call(forms).forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    })();
+  // Habilitar validación de formularios de Bootstrap
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
 </script>
-
+<!-- Inicializamos CKEditor para el textarea de descripción profesional -->
+<script>
+  CKEDITOR.replace('descripcion_profesional');
+</script>
 </body>
 </html>

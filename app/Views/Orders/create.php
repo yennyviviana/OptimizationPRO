@@ -70,7 +70,7 @@ if (!$resultados) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo de pedidos</title>
+    <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet">
@@ -80,13 +80,13 @@ if (!$resultados) {
 
     <div class="panel">
         <div class="column">
-            <h2>Módulo de pedidos</h2>
+            <h2>Orders Module</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Orders-2'>Insert Pedidos</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Orders-2'>Order Insert</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
-                                 Regresar
+                                Go back
                             </a>
                         </li>
             </ul>
@@ -98,9 +98,9 @@ if (!$resultados) {
     <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
-               placeholder="Buscar pedidos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
+               placeholder="Search orders..." value="<?php echo htmlspecialchars($searchQuery); ?>">
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-search"></i> Buscar
+            <i class="fas fa-search"></i>Search
         </button>
     </form>
 

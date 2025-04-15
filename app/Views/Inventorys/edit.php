@@ -142,43 +142,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
     <!-- Incluimos el CSS de CKEditor -->
     <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
-    <style>
-        #form-background {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Ajuste de estilos para el editor CKEditor */
-        .ck-editor__editable {
-            min-height: 150px;
-        }
-    </style>
+    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
-
 <body>
-    
+
 
 <div class="container">
         <div id="form-background">
