@@ -116,25 +116,33 @@ if (!$resultados) {
     <table class="table table-bordered table-hover">
     <thead class="bg-primary text-white">
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">contratacion</th>
-                <th scope="col"> Horas</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Salario</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Departamento</th>
-                <th scope="col">identidad</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Ciudad</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Pais</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Documentacion</th>
-                <th scope="col">Creacion</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Acciones</th>
+            <tr>
+  <th scope="col">Id</th>
+  <th scope="col">Nombre</th>
+  <th scope="col">Cargo</th>
+  <th scope="col">Tipo Contrato</th>
+  <th scope="col">Fecha Contratación</th>
+  <th scope="col">Horas Trabajo</th>
+  <th scope="col">Tarifa Hora</th>
+  <th scope="col">Salario</th>
+  <th scope="col">Estado</th>
+  <th scope="col">Departamento</th>
+  <th scope="col">Tipo Documento</th>
+  <th scope="col">Documento Identidad</th>
+  <th scope="col">Dirección</th>
+  <th scope="col">Ciudad</th>
+  <th scope="col">País</th>
+  <th scope="col">Teléfono</th>
+  <th scope="col">Correo</th>
+  <th scope="col">Fecha Nacimiento</th>
+  <th scope="col">Género</th>
+  <th scope="col">Estado Civil</th>
+  <th scope="col">Imagen</th>
+  <th scope="col">Documentación</th>
+  <th scope="col">Descripción</th>
+  <th scope="col">Creación</th>
+  <th scope="col">Modificación</th>
+   <th scope="col">Acciones</th>
     </thead>
     <tbody>
     <?php while ($empleado = $resultados->fetch_assoc()): ?>  
@@ -143,23 +151,33 @@ if (!$resultados) {
     
     <tr>
     <td><?php echo htmlspecialchars($empleado['id_empleado']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['nombre_completo']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['nombre']); ?></td>
         <td><?php echo htmlspecialchars($empleado['cargo']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['tipo_contrato']); ?></td>
         <td><?php echo htmlspecialchars($empleado['fecha_contratacion']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['numero_horas']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['precio_hora']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['horas_trabajo']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['tarifa_hora']); ?></td>
         <td><?php echo htmlspecialchars($empleado['salario']); ?></td>
         <td><?php echo htmlspecialchars($empleado['estado']); ?></td>
         <td><?php echo htmlspecialchars($empleado['departamento']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['tipo_documento']); ?></td>
         <td><?php echo htmlspecialchars($empleado['documento_identidad']); ?></td>
         <td><?php echo htmlspecialchars($empleado['direccion']); ?></td>
         <td><?php echo htmlspecialchars($empleado['ciudad']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['telefono']); ?></td>
         <td><?php echo htmlspecialchars($empleado['pais']); ?></td>
-<td><img src="../../public/img/empleados/<?php echo $empleado['imagen']; ?>" width="100" alt=""></td>
-<td><img src="../../public/img/empleados/<?php echo $empleado['documentacion_archivo']; ?>" width="100" alt=""></td>
-<td><?php echo htmlspecialchars($empleado['fecha_creacion']); ?></td>
-<td><?php echo htmlspecialchars($empleado['descripcion_profesional']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['telefono']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['correo']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['fecha_nacimiento']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['genero']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['estado_civil']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['documentacion']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['descripcion']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['fecha_creacion']); ?></td>
+        <td><?php echo htmlspecialchars($empleado['fecha_modificacion']); ?></td>
+
+<td><img src="../../public/img/empleados/<?php echo $empleado['Imagen']; ?>" width="100" alt=""></td>
+<td><img src="../../public/img/empleados/<?php echo $empleado['documentacion']; ?>" width="100" alt=""></td>
+
         <td>
               
                   <!-- Botón para editar -->  
