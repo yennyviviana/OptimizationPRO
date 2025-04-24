@@ -15,44 +15,52 @@ class EmpleadoModel {
         }
     }
     
-    public function insertarEmpleado($nombre_completo, $cargo, $fecha_contratacion, $numero_horas, $precio_hora, $salario, $estado, $departamento, $documento_identidad, $direccion, $ciudad, $telefono, $pais, $imagen, $documentacion_archivo, $fecha_creacion, $descripcion_profesional) {
+    public function insertarEmpleado($nombre, $cargo, $tipo_contrato, $fecha_contratacion, $horas_trabajo, $tarifa_hora, $salario, $estado, $departamento,$tipo_documento, $documento_identidad, $direccion, $ciudad,$pais,  $telefono, $correo, $fecha_nacimiento,$genero, $estado_civil, $documentacion, $descripcion, $fecha_creacion, $fecha_modificacion) {
         // Validar los archivos de imagen y documentación
-        if ($imagen === null || $documentacion_archivo === null) {
+        if ($Imagen === null || $documentacion === null) {
             echo "Error: Los archivos de imagen y/o documentación no pueden ser nulos.";
             return false;
         }
     
         // Escapar las variables para prevenir inyección SQL
-        $nombre_completo = mysqli_real_escape_string($this->conexion, $nombre_completo);
+        $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $cargo = mysqli_real_escape_string($this->conexion, $cargo);
+        $tipo_contrato = mysqli_real_escape_string($this->conexion, $tipo_contrato);
         $fecha_contratacion = mysqli_real_escape_string($this->conexion, $fecha_contratacion);
-        $numero_horas = mysqli_real_escape_string($this->conexion, $numero_horas);
-        $precio_hora = mysqli_real_escape_string($this->conexion, $precio_hora);
+        $horas_trabajo = mysqli_real_escape_string($this->conexion, $horas_trabajo);
+        $tarifa_hora = mysqli_real_escape_string($this->conexion, $tarifa_hora);
         $salario = mysqli_real_escape_string($this->conexion, $salario);
         $estado = mysqli_real_escape_string($this->conexion, $estado);
         $departamento = mysqli_real_escape_string($this->conexion, $departamento);
+        $tipo_documento = mysqli_real_escape_string($this->conexion, $tipo_documento);
         $documento_identidad = mysqli_real_escape_string($this->conexion, $documento_identidad);
         $direccion = mysqli_real_escape_string($this->conexion, $direccion);
         $ciudad = mysqli_real_escape_string($this->conexion, $ciudad);
-        $telefono = mysqli_real_escape_string($this->conexion, $telefono);
         $pais = mysqli_real_escape_string($this->conexion, $pais);
+        $telefono = mysqli_real_escape_string($this->conexion, $telefono);
+        $correo = mysqli_real_escape_string($this->conexion, $correo);
+        $fecha_nacimiento = mysqli_real_escape_string($this->conexion, $fecha_nacimiento);
+        $genero = mysqli_real_escape_string($this->conexion, $genero);
+        $estado_civil = mysqli_real_escape_string($this->conexion, $estado_civil);
         $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
-        $descripcion_profesional = mysqli_real_escape_string($this->conexion, $descripcion_profesional);
+        $descripcion = mysqli_real_escape_string($this->conexion, $descripcion_profesional);
+        $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
+        $fecha_modificacion = mysqli_real_escape_string($this->conexion, $fecha_nacimiento);
     
         // Procesar la imagen de perfil
-        $nombreArchivoImagen = $this->procesarArchivo($imagen, 'imagen');
+        $nombreArchivoImagen = $this->procesarArchivo($Imagen, 'Imagen');
     
         // Procesar el archivo de documentación
-        $nombreArchivoDocumento = $this->procesarArchivo($documentacion_archivo, 'documento');
+        $nombreArchivoDocumento = $this->procesarArchivo($documentacion, 'documento');
     
         // Verificar si se procesaron correctamente los archivos
         if ($nombreArchivoImagen === false || $nombreArchivoDocumento === false) {
             return false; // Hubo un error en el procesamiento de archivos
         }
     
-        // Preparar la consulta SQL para insertar el empleado
-        $consulta = "INSERT INTO empleados (nombre_completo, cargo, fecha_contratacion, numero_horas, precio_hora, salario, estado, departamento, documento_identidad, direccion, ciudad, telefono, pais, imagen, documentacion_archivo, fecha_creacion, descripcion_profesional) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // Preparar la consulta SQL para insertar el empleado.......
+        $consulta = "INSERT INTO empleados (nombre, cargo, tipo_contrato, fecha_contratacion, horas_trabajo, tarifa_hora, salario, estado, departamento,tipo_documento, documento_identidad, direccion, ciudad,pais, telefono, correo, fecha_nacimiento,genero, estado_civil, documentacion, descripcion, fecha_creacion, fecha_modificacion) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
         // Preparar la declaración
         $stmt = $this->conexion->prepare($consulta);
@@ -62,7 +70,7 @@ class EmpleadoModel {
         }
     
         // Vincular los parámetros
-        $stmt->bind_param("sssddssssssssssss", $nombre_completo, $cargo, $fecha_contratacion, $numero_horas, $precio_hora, $salario, $estado, $departamento, $documento_identidad, $direccion, $ciudad, $telefono, $pais, $nombreArchivoImagen, $nombreArchivoDocumento, $fecha_creacion, $descripcion_profesional);
+        $stmt->bind_param("sssddssssssssssss",$nombre, $cargo, $tipo_contrato, $fecha_contratacion, $horas_trabajo, $tarifa_hora, $salario, $estado, $departamento,$tipo_documento, $documento_identidad, $direccion, $ciudad,$pais,  $telefono, $correo, $fecha_nacimiento,$genero, $estado_civil, $Imagen, $documentacion, $descripcion, $$fecha_creacion, $fecha_modificacion);
     
         // Ejecutar la consulta
         if ($stmt->execute()) {
@@ -81,7 +89,7 @@ class EmpleadoModel {
             return false; // El archivo es nulo o no tiene las claves necesarias
         }
     
-        $directorioBase = __DIR__ . '/../public/img/empleados/';
+        $directorioBase = __DIR__ . '/../public/img/uploads/empleados/';
     
         // Crear el directorio si no existe
         if (!is_dir($directorioBase)) {
@@ -106,7 +114,7 @@ class EmpleadoModel {
     }
     
     private function eliminarArchivos($nombreArchivoImagen, $nombreArchivoDocumento) {
-        $directorioBase = __DIR__ . '/../public/img/empleados/';
+        $directorioBase = __DIR__ .'/../public/img/uploads/empleados/';
     
         // Eliminar la imagen de perfil si existe
         if ($nombreArchivoImagen) {

@@ -175,7 +175,7 @@ if (!$resultados) {
         <td><?php echo htmlspecialchars($empleado['fecha_creacion']); ?></td>
         <td><?php echo htmlspecialchars($empleado['fecha_modificacion']); ?></td>
 
-<td><img src="../../public/img/empleados/<?php echo $empleado['Imagen']; ?>" width="100" alt=""></td>
+<td><img src="'/../public/img/uploads/empleados/<?php echo $empleado['Imagen']; ?>" width="100" alt=""></td>
 <td><img src="../../public/img/empleados/<?php echo $empleado['documentacion']; ?>" width="100" alt=""></td>
 
         <td>

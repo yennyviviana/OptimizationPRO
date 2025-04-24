@@ -17,29 +17,37 @@ if($mysqli->connect_error){
 // Verifica si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Captura los datos del formulario
-    $nombre_completo = $_POST['nombre_completo'] ?? '';
+    $nombre = $_POST['nombre'] ?? '';
     $cargo = $_POST['cargo'] ?? '';
+    $tipo_contrato = $_POST['tipo_contrato'] ?? '';
     $fecha_contratacion = date('Y-m-d h:i:s');
-    $numero_horas = $_POST['numero_horas'] ?? 0;
-    $precio_hora = $_POST['precio_hora'] ?? 0;
+    $horas_trabajo = $_POST['horas_trabajo'] ?? 0;
     $salario = $_POST['salario'] ?? 0;
     $estado = $_POST['estado'] ?? '';
     $departamento = $_POST['departamento'] ?? '';
+    $tipo_documento = $_POST['tipo_documento'] ?? '';
     $documento_identidad = $_POST['documento_identidad'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $ciudad = $_POST['ciudad'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
     $pais = $_POST['pais'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $correo = $_POST['correo'] ?? '';
+    $$fecha_nacimiento = date('Y-m-d H:i:s'); 
+    $genero = $_POST['genero'] ?? '';
+    $estado_civil = $_POST['estado_civil'] ?? '';
     $imagen = $_FILES['imagen'] ?? null;
-    $documentacion_archivo = $_FILES['documentacion_archivo'] ?? null;
+    $documentacion= $_FILES['documentacion'] ?? null;
+    $descripcion= $_FILES['descripcion'] ?? null;
     $fecha_creacion = date('Y-m-d H:i:s');
-    $descripcion_profesional = $_POST['descripcion_profesional'] ?? '';
+    $fecha_modificacion= date('Y-m-d H:i:s');
+    
+    
     
     // Instancia el modelo.....
     $modelo = new EmpleadoModel($mysqli);
 
     // Insertar el empleado usando el método del modelo.....
-    $resultado = $modelo->insertarEmpleado($nombre_completo, $cargo, $fecha_contratacion, $numero_horas, $precio_hora, $salario, $estado, $departamento, $documento_identidad, $direccion, $ciudad, $telefono, $pais, $imagen, $documentacion_archivo, $fecha_creacion, $descripcion_profesional);
+    $resultado = $modelo->insertarEmpleado($nombre, $cargo, $tipo_contrato, $fecha_contratacion, $horas_trabajo, $tarifa_hora, $salario, $estado, $departamento,$tipo_documento, $documento_identidad, $direccion, $ciudad,$pais,  $telefono, $correo, $fecha_nacimiento,$genero, $estado_civil, $Imagen, $documentacion, $descripcion, $$fecha_creacion, $fecha_modificacion);
 
     // Verifica si la inserción fue exitosa
     if ($resultado) {
