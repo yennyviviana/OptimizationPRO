@@ -24,8 +24,10 @@ if ($mysqli->connect_error) {
 // Verifica si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Captura los datos del formulario
-    $nombre_completo = $_POST['nombre_completo'] ?? '';
+    $nombre = $_POST['nombre_completo'] ?? '';
     $cargo = $_POST['cargo'] ?? '';
+    $tipo_contrato = $_POST['tipo_contrato'] ?? '';
+    
     $fecha_contratacion = date('Y-m-d H:i:s');
     $numero_horas = $_POST['numero_horas'] ?? 0;
     $precio_hora = $_POST['precio_hora'] ?? 0;

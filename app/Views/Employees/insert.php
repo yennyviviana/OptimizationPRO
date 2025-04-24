@@ -31,10 +31,10 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
           <!-- Columna izquierda -->
           <div class="col-md-6">
             <div class="mb-3">
-              <label for="nombre_completo" class="form-label">Empleado:</label>
+              <label for="nombre" class="form-label">Nombre::</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" id="nombre_completo" name="nombre_completo" class="form-control" required placeholder="Ingresar empleado">
+                <input type="text" id="nombre" name="nombre" class="form-control" required placeholder="Ingresar nombre">
               </div>
               <div class="invalid-feedback">Por favor ingrese el nombre del empleado.</div>
             </div>
@@ -48,6 +48,19 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
               <div class="invalid-feedback">Por favor ingrese el cargo del empleado.</div>
             </div>
 
+
+            <div class="mb-3">
+              <label for="tipo_contrato" class="form-label">Tipo de contrato</label>
+              <select id="tipo_contrato" name ="tipo_contrato"</option>
+                <option value="indefinido">Indefinido</option>
+                <option value="prestacion de servicios">prestacion de servicios</option>
+                <option value="fijo">Fijo</option>
+                <option value="aprendizaje">aprendizaje</option>
+                <option value="contrato de obra o labor">Contrato de obra o labor</option>
+              </select>
+              <div class="invalid-feedback">Por favor seleccione el tipo de contrato.</div>
+            </div>
+
             <div class="mb-3">
               <label for="fecha_contratacion" class="form-label">Fecha de Contratación</label>
               <input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" required>
@@ -55,14 +68,14 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
             </div>
 
             <div class="mb-3">
-              <label for="numero_horas" class="form-label">Número de Horas</label>
-              <input type="number" id="numero_horas" name="numero_horas" class="form-control" required placeholder="Días u horas trabajadas">
-              <div class="invalid-feedback">Por favor ingrese las horas trabajadas.</div>
+              <label for="horas_trabajo" class="form-label"> Horas de trabajo</label>
+              <input type="number" id="horas_trabajo" name="horas_trabajo" class="form-control" required placeholder="Días u horas trabajadas">
+              <div class="invalid-feedback">Por favor ingrese las horas trabajo.</div>
             </div>
 
             <div class="mb-3">
-              <label for="precio_hora" class="form-label">Precio Hora</label>
-              <input type="number" id="precio_hora" name="precio_hora" class="form-control" required placeholder="Precio por hora">
+              <label for="tarifa_hora" class="form-label">tarifa</label>
+              <input type="number" id="tarifa_hora" name="tarifa_hora" class="form-control" required placeholder="Tarifa hora">
               <div class="invalid-feedback">Por favor ingrese el precio por hora.</div>
             </div>
 
@@ -95,23 +108,29 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
               <div class="invalid-feedback">Por favor seleccione el departamento del empleado.</div>
             </div>
 
+            <div class="form-group">
+              <label for="tipo_documento">tipo documento</label>
+                <select id="tipo_documento" name="tipo_documento" class="form-select" required>
+                  <option value="">Seleccione una opción</option>
+                  <option value="CC">Cedula</option>
+                  <option value="TI">Tarjeta de identidad</option>
+                  <option value="Passaporte">Passaporte</option>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione su  tipo de documento.</div>
+              </div>
+            </div>
+
             <div class="mb-3">
               <label for="documento_identidad" class="form-label">Documento de Identidad</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                <input type="text" id="documento_identidad" name="documento_identidad" class="form-control" required placeholder="Documento de identidad">
+                <input type="number" id="documento_identidad" name="documento_identidad" class="form-control" required placeholder="Documento de identidad">
               </div>
               <div class="invalid-feedback">Por favor ingrese el documento de identidad.</div>
             </div>
 
-            <div class="mb-3">
-              <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
-              <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control" required>
-              <div class="invalid-feedback">Por favor ingrese la fecha de creación.</div>
-            </div>
-          </div>
 
-          <!-- Columna derecha -->
+             <!-- Columna derecha -->
           <div class="col-md-6">
             <div class="mb-3">
               <label for="direccion" class="form-label">Dirección</label>
@@ -131,14 +150,16 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
               <div class="invalid-feedback">Por favor ingrese la ciudad de residencia.</div>
             </div>
 
+
             <div class="mb-3">
-              <label for="telefono" class="form-label">Teléfono</label>
+              <label for="pais" class="form-label">Pais</label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                <input type="text" id="telefono" name="telefono" class="form-control" required placeholder="Teléfono de contacto">
+                <span class="input-group-text"><i class="fas fa-city"></i></span>
+                <input type="text" id="ciudad" name="pais" class="form-control" required placeholder="Pais">
               </div>
-              <div class="invalid-feedback">Por favor ingrese el teléfono de contacto.</div>
+              <div class="invalid-feedback">Por favor ingrese el pais de residencia.</div>
             </div>
+
 
             <div class="mb-3">
               <label for="pais" class="form-label">País</label>
@@ -153,25 +174,99 @@ require_once __DIR__ . '/../../Controllers/EmpleadoController.php';
               <div class="invalid-feedback">Por favor seleccione el país del empleado.</div>
             </div>
 
+
             <div class="mb-3">
-              <label for="documentacion_archivo" class="form-label">Documentación</label>
-              <input type="file" id="documentacion_archivo" name="documentacion_archivo" class="form-control" required>
-              <div class="invalid-feedback">Por favor seleccione un archivo de documentación.</div>
+              <label for="telefono" class="form-label">Teléfono</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                <input type="text" id="telefono" name="telefono" class="form-control" required placeholder="Teléfono de contacto">
+              </div>
+              <div class="invalid-feedback">Por favor ingrese el teléfono de contacto.</div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="email" id="email" name="correo" class="form-control" required placeholder="Ingresar correo">
+                <div class="invalid-feedback">Por favor ingrese su correo electrónico.</div>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="descripcion_profesional" class="form-label">Descripción Profesional</label>
-              <textarea id="descripcion_profesional" name="descripcion_profesional" class="form-control" required placeholder="Descripción profesional"></textarea>
-              <div class="invalid-feedback">Por favor ingrese la descripción profesional.</div>
+              <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+              <input type="date" id="ha_nacimiento" name="fecha_nacimiento" class="form-control" required>
+              <div class="invalid-feedback">Por favor ingrese la fecha de nacimiento.</div>
+            </div>
+          </div>
+
+
+          
+          <div class="mb-3">
+              <label for="genero" class="form-label">Genero</label>
+              <select id="genero" name="genero" class="form-select" required>
+                <option value="">Seleccione un genero</option>
+                <option value="femenino">Femenino</option>
+                <option value="femenino">Masculino</option>
+                <option value="prefiero no decir">Prefiero no decir</option>
+                
+              </select>
+              <div class="invalid-feedback">Por favor seleccione el genero.</div>
             </div>
 
+
             <div class="mb-3">
-              <label for="imagen" class="form-label">Imagen</label>
-              <input type="file" accept="image/*" capture="camera" id="imagen" name="imagen" class="form-control" required>
+              <label for="estado_civil" class="form-label">Estado civil</label>
+              <select id="estado_civil" name="genero" class="form-select" required>
+              <option value="">Seleccione un estado civil...</option>
+                <option value="">Soltero</option>
+                <option value="femenino">Casado</option>
+                <option value="femenino">Divorciado</option>
+                <option value="Prefiero no decir">Prefiero no decir</option>
+                
+              </select>
+              <div class="invalid-feedback">Por favor seleccione el genero.</div>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="Imagen" class="form-label">Imagen</label>
+              <input type="file" accept="image/*" capture="camera" id="Imagen" name="Imagen" class="form-control" required>
               <div class="invalid-feedback">Por favor seleccione una imagen.</div>
             </div>
           </div>
         </div>
+
+
+            <div class="mb-3">
+              <label for="documentacion_archivo" class="form-label">Documentación</label>
+              <input type="file" id="documentacion" name="documentacion" class="form-control" required>
+              <div class="invalid-feedback">Por favor seleccione un archivo de documentación.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción</label>
+              <textarea id="descripcion" name="descripcion" class="form-control" required placeholder="Descripción"></textarea>
+              <div class="invalid-feedback">Por favor ingrese la descripción profesional.</div>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+              <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control" required>
+              <div class="invalid-feedback">Por favor ingrese la fecha de creación.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+              <label for="fecha_modificacion" class="form-label">fecha de modificacion</label>
+              <input type="date" id="fecha_modificacion" name="fecha_modificacion" class="form-control" required>
+              <div class="invalid-feedback">Por favor ingrese la fecha de modificacion.</div>
+            </div>
+          </div>
+
+          
 
         <div class="text-end mt-4">
           <button type="submit" name="boton" class="btn btn-success px-4">
