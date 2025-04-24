@@ -81,7 +81,7 @@ if (!$resultados) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo de pedidos</title>
+    <title>Módulo de  clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet"> 
@@ -124,19 +124,23 @@ if (!$resultados) {
              
                         
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Email</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Ciudad</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Codigo Postal</th>
-                <th scope="col"> Pais</th>
-                <th scope="col"> Fecha Creacion</th>
-                <th scope="col"> fecha Modificacion</th>
-                <th scope="col">Acciones</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+           <th scope="col">Email</th>
+           <th scope="col">Tipo Documento</th>
+          <th scope="col">Documento Identidad</th>
+         <th scope="col">Telefono</th>
+         <th scope="col">Direccion</th>
+         <th scope="col">Ciudad</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Codigo Postal</th>
+        <th scope="col">Pais</th>
+        <th scope="col">Notas</th>
+        <th scope="col">Fecha Creacion</th>
+        <th scope="col">Fecha Modificacion</th>
+        <th scope="col">Acciones</th>
+
     </thead>
     <tbody>     
     <?php while ($cliente = $resultados->fetch_assoc()): ?>
@@ -147,12 +151,15 @@ if (!$resultados) {
         <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
         <td><?php echo htmlspecialchars($cliente['apellido']); ?></td>
         <td><?php echo htmlspecialchars($cliente['email']); ?></td>
+        <td><?php echo htmlspecialchars($cliente['documento_identidad']); ?></td>
+        <td><?php echo htmlspecialchars($cliente['tipo_documento']); ?></td>
         <td><?php echo htmlspecialchars($cliente['telefono']); ?></td>
         <td><?php echo htmlspecialchars($cliente['direccion']); ?></td>
         <td><?php echo htmlspecialchars($cliente['ciudad']); ?></td>
         <td><?php echo htmlspecialchars($cliente['estado']); ?></td>
         <td><?php echo htmlspecialchars($cliente['codigo_postal']); ?></td>
         <td><?php echo htmlspecialchars($cliente['pais']); ?></td>
+        <td><?php echo htmlspecialchars($cliente['notas']); ?></td>
         <td><?php echo htmlspecialchars($cliente['fecha_creacion']); ?></td>
         <td><?php echo htmlspecialchars($cliente['fecha_modificacion']); ?></td>
        

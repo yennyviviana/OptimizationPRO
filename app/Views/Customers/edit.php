@@ -23,28 +23,35 @@ if ($mysqli->connect_error) {
 // Check if form is submitted (POST method)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Captura los datos del formulario y valida su existencia
-    $nombre = $_POST['nombre'] ?? '';
-    $apellido = $_POST['apellido'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
-    $direccion = $_POST['direccion'] ?? '';
-    $ciudad = $_POST['ciudad'] ?? '';
-    $estado = $_POST['estado'] ?? '';
-    $codigo_postal = $_POST['codigo_postal'] ?? '';
-    $pais = $_POST['pais'] ?? '';
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+    $documento_identidad = $_POST['documento_identidad'];
+    $tipo_documento = $_POST['tipo_documento'];
+    $telefono = $_POST['telefono'];
+    $direccion = $_POST['direccion'];
+    $ciudad = $_POST['ciudad'];
+    $estado = $_POST['estado'];
+    $codigo_postal = $_POST['codigo_postal'];
+    $pais = $_POST['pais'];
+    $notas = $_POST['notas'];
     $fecha_creacion = date('Y-m-d H:i:s');
     $fecha_modificacion = $_POST['fecha_modificacion'];
+
 
     // Escapar los valores para prevenir inyecciones SQL
     $nombre = $mysqli->real_escape_string($nombre);
     $apellido = $mysqli->real_escape_string($apellido);
     $email = $mysqli->real_escape_string($email);
+    $documento_identidad = $mysqli->real_escape_string($documento_identidad);
+    $tipo_documento = $mysqli->real_escape_string($tipo_documento);
     $telefono = $mysqli->real_escape_string($telefono);
     $direccion = $mysqli->real_escape_string($direccion);
     $ciudad = $mysqli->real_escape_string($ciudad);
     $estado = $mysqli->real_escape_string($estado);
     $codigo_postal = $mysqli->real_escape_string($codigo_postal);
     $pais = $mysqli->real_escape_string($pais);
+    $notas = $mysqli->real_escape_string($notas);
     $fecha_creacion = $mysqli->real_escape_string($fecha_creacion);
     $fecha_modificacion = $mysqli->real_escape_string($fecha_modificacion);
 
@@ -53,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Actualizar el cliente en la base de datos
-        $consulta = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', email='$email', telefono='$telefono', direccion='$direccion', ciudad='$ciudad', estado='$estado', codigo_postal='$codigo_postal', pais='$pais', fecha_creacion='$fecha_creacion', fecha_modificacion='$fecha_modificacion' WHERE id_cliente='$llave'";
+        $consulta = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', email='$email', documento_identidad ='$documento_identidad', tipo_documento = '$tipo_documento', telefono='$telefono', direccion='$direccion', ciudad='$ciudad', estado='$estado', codigo_postal='$codigo_postal', pais='$pais', notas= '$notas', fecha_creacion='$fecha_creacion', fecha_modificacion='$fecha_modificacion' WHERE id_cliente='$llave'";
         
         $resultado = $mysqli->query($consulta);
         
@@ -192,6 +199,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
             </div>
 
+
+            <div class="form-group">
+              <label for="documento_identidad">documento_identidad</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                <input type="number" id="documento_identidad" name="documento_identidad" class="form-control" value="<?php echo htmlspecialchars($cliente['documento_identidad'] ?? ''); ?>"  required placeholder="Ingresar número de teléfono">
+                <div class="invalid-feedback">Por favor ingrese  el documento de identidad.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tipo_documento">tipo documento</label>
+                <select id="tipo_documento" name="tipo_documento" class="form-select" required>
+                  <option value="">Seleccione una opción</option>
+                  <option value="Cedula" <?php if (isset($cliente['tipo_documento']) && $cliente['tipo_documento'] == 'Cedula') echo 'selected'; ?>>Cedula</option>
+                  <option value="Tarjeta_identidad" <?php if (isset($cliente['tipo_documento']) && $cliente['Tarjeta_identidad'] == 'Tarjeta_identidad') echo 'selected'; ?>>Tarjeta de identidad</option>
+                  <option value="Passaporte"  <?php if (isset($cliente['tipo_documento']) && $cliente['tipo_documento'] == 'Passaporte') echo 'selected'; ?>>Passaporte</option>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione su  tipo de documento.</div>
+              </div>
+            </div>
             <div class="form-group">
               <label for="telefono">Teléfono</label>
               <div class="input-group">
@@ -258,6 +286,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="invalid-feedback">Por favor seleccione su país.</div>
               </div>
             </div>
+
+
+            <div class="form-group">
+                            <label for="notas">Notas</label>
+                            <textarea id="notas" name="notas"  value="<?php echo htmlspecialchars($cliente['notas']); ?>" class="form-control" rows="3" required placeholder="notas"></textarea>
+                            <div class="invalid-feedback">Ingrese la  nota.</div>
+                        </div>
+                    </div>
 
             <div class="form-group">
               <label for="fecha_creacion">Fecha de Creación</label>

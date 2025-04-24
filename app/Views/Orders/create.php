@@ -50,7 +50,7 @@ $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 // Construir la consulta SQL con filtro si hay búsqueda
 if (!empty($searchQuery)) {
     $consulta = "SELECT * FROM pedidos WHERE 
-                 nombre_pedido LIKE '%$searchQuery%' OR 
+          nombre_pedido LIKE '%$searchQuery%' OR 
                  estado LIKE '%$searchQuery%' OR 
                  direccion LIKE '%$searchQuery%'
                  ORDER BY id_pedido";
@@ -113,14 +113,16 @@ if (!$resultados) {
     <thead class="bg-primary text-white">
                 <tr>
                     <th>Id</th>
-                    <th>Pedido</th>
-                    <th>Precio</th>
+                    <th>Referencia</th>
+                    <th>Total</th>
                     <th>Estado</th>
                     <th>Dirección</th>
-                    <th>Descripción</th>
-                    <th>Seguimiento</th>
-                    <th>Tiempo Entrega</th>
-                    <th>Método Pago</th>
+                    <th>observaciones</th>
+                    <th>Tracking</th>
+                    <th>Tiempo Estimado</th>
+                    <th>Detalles</th>
+                    <th>Usuario</th>
+                    <th>Metodo pago</th>
                     <th>Archivo</th>
                     <th>Fecha pedido</th>
                     <th>Fecha entrega</th>
@@ -131,20 +133,22 @@ if (!$resultados) {
                 <?php while ($pedido = $resultados->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($pedido['id_pedido']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['nombre_pedido']); ?></td>
-                        <td>$ <?php echo number_format($pedido['precio'], 2, ',', '.'); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['referencia']); ?></td>
+                        <td>$ <?php echo number_format($pedido['total'], 2, ',', '.'); ?></td>
                         <td><?php echo htmlspecialchars($pedido['estado']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['direccion']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['descripcion']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['numero_seguimiento']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['tiempo_entrega_horas']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['direccion_entrega']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['observaciones']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['tracking']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['detalles']); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['metodo_pago']); ?></td>
-                        <td><img src="../../public/img/pedidos-imagen/<?php echo $pedido['archivo']; ?>" width="100"></td>
+                        <td><img src="../../public/img/uploads/pedidos/<?php echo $pedido['archivo_adjunto']; ?>" width="100"></td>
                         <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
                         <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
                         <td>
                             <a href="edit.php?da=Orders-3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-sm btn-primary">Editar</a>
-                            <a href="#" class="btn btn-sm btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo']; ?>')">Borrar</a>
+                            <a href="#" class="btn btn-sm btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo_adjunto']; ?>')">Borrar</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

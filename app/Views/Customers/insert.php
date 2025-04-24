@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../Controllers/ClienteController.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Pedidos</title>
+    <title>Clientes</title>
     <!-- Estilos de Bootstrap y Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -101,12 +101,25 @@ require_once __DIR__ . '/../../Controllers/ClienteController.php';
               </div>
             </div>
 
+
             <div class="form-group">
-              <label for="telefono">Teléfono</label>
+              <label for="documento_identidad">documento_identidad</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                <input type="tel" id="telefono" name="telefono" class="form-control" required placeholder="Ingresar número de teléfono">
-                <div class="invalid-feedback">Por favor ingrese su número de teléfono.</div>
+                <input type="number" id="documento_identidad" name="documento_identidad" class="form-control" required placeholder="Ingresar número de teléfono">
+                <div class="invalid-feedback">Por favor ingrese  el documento de identidad.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tipo_documento">tipo documento</label>
+                <select id="tipo_documento" name="tipo_documento" class="form-select" required>
+                  <option value="">Seleccione una opción</option>
+                  <option value="CC">Cedula</option>
+                  <option value="TI">Tarjeta de identidad</option>
+                  <option value="Passaporte">Passaporte</option>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione su  tipo de documento.</div>
               </div>
             </div>
 
@@ -118,6 +131,17 @@ require_once __DIR__ . '/../../Controllers/ClienteController.php';
                 <div class="invalid-feedback">Por favor ingrese su dirección.</div>
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                <input type="tel" id="telefono" name="telefono" class="form-control" required placeholder="Ingresar número de teléfono">
+                <div class="invalid-feedback">Por favor ingrese su número de teléfono.</div>
+              </div>
+            </div>
+
+           
 
             <div class="form-group">
               <label for="ciudad">Ciudad</label>
@@ -171,6 +195,14 @@ require_once __DIR__ . '/../../Controllers/ClienteController.php';
                 <div class="invalid-feedback">Por favor seleccione su país.</div>
               </div>
             </div>
+
+
+            <div class="form-group">
+                            <label for="notas">Notas</label>
+                            <textarea id="notas" name="notas" class="form-control" rows="3" required placeholder="notas"></textarea>
+                            <div class="invalid-feedback">Ingrese la  nota.</div>
+                        </div>
+                    </div>
 
             <div class="form-group">
               <label for="fecha_creacion">Fecha de Creación</label>

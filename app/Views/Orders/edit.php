@@ -1,6 +1,6 @@
 <?php
 // Incluir el modelo y el archivo de configuración de la base de datos
-require_once __DIR__ . '/../../Models/OrderModel.php';
+require_once __DIR__ . '/../../Models/PedidoModel.php';
 require_once __DIR__ . '/../../Config/database.php';
 
 session_start();
@@ -33,15 +33,19 @@ $pedido = null;
 // Verificar si se ha enviado un formulario para actualizar el proveedor
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //capturar los datos enviados POST
-    $nombre_pedido = $_POST['nombre_pedido'];
-    $precio = $_POST['precio'];
+    $referencia = $_POST['referencia'];
+    $total = $_POST['total'];
     $estado = $_POST['estado'];
-    $direccion = $_POST['direccion'];
-    $descripcion = $_POST['descripcion'];
-    $numero_seguimiento = $_POST['numero_seguimiento'];
-    $informacion_pedido = $_POST['informacion_pedido'];
+    $direccion_entrega = $_POST['direccion_entrega'];
+    $observaciones = $_POST['observaciones'];
+    $tracking = $_POST['tracking'];
+    $tiempo_estimado_horas = $_POST['tiempo_estimado_horas'];
+    $detalles = $_POST['detalles'];
     $metodo_pago = $_POST['metodo_pago'];
-    $archivo = $_FILES['archivo'];
+    $metodo_pago = $_POST['metodo_pago'];
+    $archivo_adjunto =$_FILES['archivo_adjunto'];
+    $fecha_pedido = $_POST['fecha_pedido'];
+    $fecha_entrega = $_POST['fecha_entrega'];
     $id_usuario = $_SESSION['id_usuario'];
     
 
@@ -51,20 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Convertir las fechas a objetos DateTime
     $fecha_pedido_objeto = new DateTime($fecha_pedido);
-    $fecha_entrega_objeto = new DateTime($fecha_entrega);
+    $fecha_estimada_objeto = new DateTime($fecha_entrega);
 
     // Calcular la diferencia entre las fechas
-    $diferencia = $fecha_pedido_objeto->diff($fecha_entrega_objeto);
+    $diferencia = $fecha_pedido_objeto->diff($fecha_estimada_objeto);
 
     // Formatear la diferencia en días y horas
-    $tiempo_entrega_horas = $diferencia->format('%d días y %h horas');
+    $tiempo_estimado_horas = $diferencia->format('%d días y %h horas');
 
     // Crear una instancia del modelo de proveedor
     $pedidoModel = new PedidoModel($mysqli);
 
     try {
         // Actualizar el pedido en la base de datos
-        $resultado = $pedidoModel->actualizarPedido($llave,$nombre_pedido, $precio, $estado, $direccion, $descripcion, $numero_seguimiento, $tiempo_entrega_horas, $informacion_pedido, $metodo_pago, $archivo, $fecha_pedido, $fecha_entrega, $id_usuario);
+        $resultado = $pedidoModel->actualizarPedido($llave,$referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
         if ($resultado) {
             echo "Pedido actualizado correctamente.";
         } else {
@@ -128,15 +132,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="nombre_pedido">Nombre del Pedido</label>
-                        <input type="text" id="nombre_pedido" name="nombre_pedido" value="<?php echo htmlspecialchars($pedido['nombre_pedido']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el nombre del pedido.</div>
+                        <label for="referencia"><Ri:a>Referencia</Ri:a></label>
+                        <input type="number" id="referencia" name="referencia" value="<?php echo htmlspecialchars($pedido['referencia']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese la referencia.</div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="precio">Precio</label>
-                        <input type="number" id="precio" name="precio" value="<?php echo htmlspecialchars($pedido['precio']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el precio.</div>
+                        <label for="total">Total</label>
+                        <input type="number" id="total" name="total" value="<?php echo htmlspecialchars($pedido['total']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el total.</div>
                     </div>
                 </div>
 
@@ -150,6 +154,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </select>
                     </div>
 
+                    <div class="form-group">
+                    <label for="direccion_entrega">Dirección de entrega</label>
+                    <input type="text" id="direccion_entrega" name="direccion_entrega" value="<?php echo htmlspecialchars($pedido['direccion_entrega']); ?>" class="form-control" required>
+                    <div class="invalid-feedback">Por favor ingrese la dirección de entrega.</div>
+                </div>
+
+
+                
+                <div class="form-group">
+                    <label for="observaciones">observaciones</label>
+                    <textarea id="observaciones" name="observaciones" class="form-control" required><?php echo htmlspecialchars($pedido['observaciones']); ?></textarea>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="tracking">$tracking</label>
+                    <input type="number" id="tracking" name="tracking" value="<?php echo htmlspecialchars($pedido['tracking']); ?>" class="form-control" required>
+                    <div class="invalid-feedback">Por favor ingrese el tracking.</div>
+                </div>
+
+
+                
+                <div class="form-group col-md-6">
+                        <label for="tiempo_estimado_horas">Tiempo de entrega</label>
+                        <input type="number" id="total" name="tiempo_estimado_horas" value="<?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el total estimado en horas.</div>
+                    </div>
+                </div>
+               
+
+                <div class="form-group">
+                    <label for="detalles">Detalles</label>
+                    <textarea id="detalles" name="detalles" class="form-control" required><?php echo htmlspecialchars($pedido['detalles']); ?></textarea>
+                </div>
+
+                
                     <div class="form-group col-md-6">
                         <label for="metodo_pago">Método de Pago</label>
                         <select id="metodo_pago" name="metodo_pago" class="form-control" required>
@@ -160,44 +201,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($pedido['direccion']); ?>" class="form-control" required>
-                    <div class="invalid-feedback">Por favor ingrese la dirección.</div>
-                </div>
 
                 <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" required><?php echo htmlspecialchars($pedido['descripcion']); ?></textarea>
+                    <label for="archivo">Archivos Adjuntos</label>
+                    <input type="file" id="archivo_adjunto" name="archivo_adjunto" class="form-control-file" multiple required>
+                    <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
                 </div>
 
-                <div class="form-group">
-                    <label for="informacion_pedido">Información del Pedido</label>
-                    <textarea id="informacion_pedido" name="informacion_pedido" class="form-control" required><?php echo htmlspecialchars($pedido['informacion_pedido']); ?></textarea>
-                </div>
 
-                <div class="form-group">
-                    <label for="numero_seguimiento">Número de Seguimiento</label>
-                    <input type="number" id="numero_seguimiento" name="numero_seguimiento" value="<?php echo htmlspecialchars($pedido['numero_seguimiento']); ?>" class="form-control" required>
-                    <div class="invalid-feedback">Por favor ingrese el número de seguimiento.</div>
-                </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fecha_entrega">Fecha de Entrega</label>
                         <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>
                     </div>
+                    
+                    <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Tiempo Transcurrido (Días y Horas)</label>
-                        <span id="tiempo_entrega_horas" class="form-control"><?php echo htmlspecialchars($pedido['tiempo_entrega_horas']); ?></span>
+                        <label for="fecha_pedido">Fecha de pedido</label>
+                        <input type="date" id="fecha_pedido" name="fecha_pedido" value="<?php echo htmlspecialchars($pedido['fecha_pedido']); ?>" class="form-control" required>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="archivo">Archivos Adjuntos</label>
-                    <input type="file" id="archivo" name="archivo" class="form-control-file" multiple required>
-                    <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
-                </div>
+                    
 
                 <input type="hidden" name="id_pedido" value="<?php echo htmlspecialchars($pedido['id_pedido']); ?>">
 
@@ -211,8 +235,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
-    CKEDITOR.replace('descripcion');
-    CKEDITOR.replace('informacion_pedido');
+    CKEDITOR.replace('detalles');
+   
 
     document.getElementById('fecha_entrega').addEventListener('change', function () {
         const fechaEntrega = new Date(this.value);
@@ -222,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-        document.getElementById('tiempo_entrega_horas').textContent = dias + " días y " + horas + " horas";
+        document.getElementById('tiempo_estimado_horas').textContent = dias + " días y " + horas + " horas";
     });
 </script>
 </body>

@@ -24,12 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
+    $documento_identidad = $_POST['documento_identidad'];
+    $tipo_documento = $_POST['tipo_documento'];
     $telefono = $_POST['telefono'];
     $direccion = $_POST['direccion'];
     $ciudad = $_POST['ciudad'];
     $estado = $_POST['estado'];
     $codigo_postal = $_POST['codigo_postal'];
     $pais = $_POST['pais'];
+    $notas = $_POST['notas'];
     $fecha_creacion = date('Y-m-d H:i:s');
     $fecha_modificacion = $_POST['fecha_modificacion'];
 
@@ -37,8 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $modelo = new ClienteModel($mysqli);
 
     //  insertar el cliente usando el método del modelo........
-    $resultado = $modelo->insertarCliente($nombre, $apellido, $email, $telefono, $direccion, $ciudad, 
-    $estado, $codigo_postal, $pais, $fecha_creacion, $fecha_modificacion);
+    $resultado = $modelo->insertarCliente($nombre, $apellido, $email, $documento_identidad, $tipo_documento, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $notas, $fecha_creacion, $fecha_modificacion);
 
     
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../../Models/OrderModel.php';
-require_once __DIR__ . '/../../Controllers/OrderController.php';
+require_once __DIR__ . '/../../Models/PedidoModel.php';
+require_once __DIR__ . '/../../Controllers/PedidoController.php';
 
 ?>
 
@@ -37,15 +37,15 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
                     <!-- Columna izquierda -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nombre_pedido">Nombre del Pedido</label>
-                            <input type="text" id="nombre_pedido" name="nombre_pedido" class="form-control" required placeholder="Nombre del pedido">
-                            <div class="invalid-feedback">Ingrese el nombre del pedido.</div>
+                            <label for="referencia">Referencia</label>
+                            <input type="number" id="referencia" name="referencia" class="form-control" required placeholder="referencia">
+                            <div class="invalid-feedback">Ingrese la referencia.</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="precio">Precio</label>
-                            <input type="number" id="precio" name="precio" class="form-control" required placeholder="Precio">
-                            <div class="invalid-feedback">Ingrese el precio.</div>
+                            <label for="total">Total</label>
+                            <input type="number" id="total" name="total" class="form-control" required placeholder="Total">
+                            <div class="invalid-feedback">Ingrese el Total.</div>
                         </div>
 
                         <div class="form-group">
@@ -61,25 +61,52 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
                         </div>
 
                         <div class="form-group">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" id="direccion" name="direccion" class="form-control" required placeholder="Dirección">
-                            <div class="invalid-feedback">Ingrese la dirección.</div>
+                            <label for="direccion_entrega">Direccion de entrega</label>
+                            <input type="text" id="direccion_entrega" name="direccion_entrega" class="form-control" required placeholder="Dirección de entrega">
+                            <div class="invalid-feedback">Ingrese la dirección de entrega.</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control" rows="3" required placeholder="Descripción del pedido"></textarea>
-                            <div class="invalid-feedback">Ingrese la descripción.</div>
+                            <label for="observaciones">Observaciones</label>
+                            <textarea id="observaciones" name="observaciones" class="form-control" rows="3" required placeholder="Observaciones"></textarea>
+                            <div class="invalid-feedback">Ingrese la  observacion.</div>
                         </div>
                     </div>
 
                     <!-- Columna derecha -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="numero_seguimiento">Número de Seguimiento</label>
-                            <input type="number" id="numero_seguimiento" name="numero_seguimiento" class="form-control" required placeholder="Número de seguimiento">
+                            <label for="tracking">Tracking</label>
+                            <input type="number" id="tracking" name="tracking" class="form-control" required placeholder="tracking">
                             <div class="invalid-feedback">Ingrese el número de seguimiento.</div>
                         </div>
+
+
+                        <div class="form-group">
+                            <label>Tiempo Estimado</label>
+                            <input type="number" readonly class="form-control bg-light" id="tiempo_estimado_horas	">
+                            <input type="hidden" name="tiempo_estimado_horas" id="tiempo_estimado_horas	">
+                        </div>
+                    
+
+                        <div class="form-group">
+                            <label for="detalles">Detalles</label>
+                            <textarea id="detalles" name="detalles" class="form-control" rows="3" required placeholder="detalles"></textarea>
+                            <div class="invalid-feedback">Ingrese el detalle del pedido.</div>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+              <label for="id_proyecto" class="form-label">Usuario:</label>
+              <select class="form-select" id="id_usuario" name="id_usuario" required>
+                <option value="">Selecciona el usuario</option>
+                <?php foreach ($usuarios as $usuario): ?>
+                  <option value="<?php echo $usuario['id_proyecto']; ?>"><?php echo $usuario['id_usuario']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <div class="invalid-feedback">Por favor seleccione el usuario.</div>
+
 
                         <div class="form-group">
                             <label for="metodo_pago">Método de Pago</label>
@@ -93,8 +120,8 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
                         </div>
 
                         <div class="form-group">
-                            <label for="archivo">Archivo</label>
-                            <input type="file" id="archivo" name="archivo" class="form-control" required>
+                            <label for="archivo">Archivo adjunto</label>
+                            <input type="file" id="archivo_adjunto" name="archivo_adjunto" class="form-control" required>
                             <div class="invalid-feedback">Seleccione al menos un archivo.</div>
                         </div>
 
@@ -108,14 +135,7 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
                             <input type="date" id="fecha_entrega" name="fecha_entrega" class="form-control" required>
                         </div>
 
-                        <div class="form-group">
-                            <label>Tiempo Transcurrido</label>
-                            <input type="text" readonly class="form-control bg-light" id="tiempo_entrega_horas">
-                            <input type="hidden" name="tiempo_entrega_horas" id="tiempo_entrega_horas_valor">
-                        </div>
-                    </div>
-                </div>
-
+                       
                 <div class="text-end mt-4">
                     <button type="submit" name="boton" class="btn btn-success px-4">
                         <i class="fas fa-save"></i> Guardar
@@ -127,7 +147,11 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
 </div>
 
 
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
+    CKEDITOR.replace('detalles');
+
     // Validación visual Bootstrap
     (() => {
         'use strict';
@@ -146,8 +170,8 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
     // Cálculo del tiempo entre fechas
     const fechaPedido = document.getElementById('fecha_pedido');
     const fechaEntrega = document.getElementById('fecha_entrega');
-    const tiempoEntrega = document.getElementById('tiempo_entrega_horas');
-    const tiempoHidden = document.getElementById('tiempo_entrega_horas_valor');
+    const tiempoEntrega = document.getElementById('tiempo_estimado_hora');
+    const tiempoHidden = document.getElementById('tiempo_estimado_hora_valor');
 
     function calcularTiempo() {
         if (fechaPedido.value && fechaEntrega.value) {
@@ -158,10 +182,10 @@ require_once __DIR__ . '/../../Controllers/OrderController.php';
                 const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const texto = `${dias} días y ${horas} horas`;
-                tiempoEntrega.value = texto;
+                tiempoEstimado.value = texto;
                 tiempoHidden.value = texto;
             } else {
-                tiempoEntrega.value = "Fechas inválidas";
+                tiempoEstimado.value = "Fechas inválidas";
                 tiempoHidden.value = "";
             }
         }
