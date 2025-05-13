@@ -9,119 +9,101 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Validar y obtener el valor de 'lla' de $_GET
-$llave = isset($_GET['lla']) ? intval($_GET['lla']) : 0;
-if ($llave <= 0) {
-    exit("Error: 'lla' debe ser un valor numérico válido.");
-}
 
-$mysqli = new mysqli('localhost', 'root', '', 'sofware_erp');
-$mysqli->set_charset("utf8");
-if ($mysqli->connect_error) {
-    die('Error en la conexión: ' . $mysqli->connect_error);
-}
-
-// Verifica si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Captura los datos del formulario
-    $nombre = $_POST['nombre_completo'] ?? '';
+    $nombre = $_POST['nombre'] ?? '';
     $cargo = $_POST['cargo'] ?? '';
     $tipo_contrato = $_POST['tipo_contrato'] ?? '';
-    
     $fecha_contratacion = date('Y-m-d H:i:s');
-    $numero_horas = $_POST['numero_horas'] ?? 0;
-    $precio_hora = $_POST['precio_hora'] ?? 0;
+    $horas_trabajo = $_POST['horas_trabajo'] ?? 0;
     $salario = $_POST['salario'] ?? 0;
     $estado = $_POST['estado'] ?? '';
     $departamento = $_POST['departamento'] ?? '';
+    $tipo_documento = $_POST['tipo_documento'] ?? '';
     $documento_identidad = $_POST['documento_identidad'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $ciudad = $_POST['ciudad'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
     $pais = $_POST['pais'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $correo = $_POST['correo'] ?? '';
+    $fecha_nacimiento = $_POST['fecha_nacimiento'] ?? date('Y-m-d');
+    $genero = $_POST['genero'] ?? '';
+    $estado_civil = $_POST['estado_civil'] ?? '';
+    $descripcion = $_POST['descripcion'] ?? '';
     $fecha_creacion = date('Y-m-d H:i:s');
-    $descripcion_profesional = $_POST['descripcion_profesional'] ?? '';
+    $fecha_modificacion = date('Y-m-d H:i:s');
 
-    // Escapar las variables para prevenir inyección SQL
-    $nombre_completo = mysqli_real_escape_string($mysqli, $nombre_completo);
-    $cargo = mysqli_real_escape_string($mysqli, $cargo);
-    $numero_horas = mysqli_real_escape_string($mysqli, $numero_horas);
-    $precio_hora = mysqli_real_escape_string($mysqli, $precio_hora);
-    $salario = mysqli_real_escape_string($mysqli, $salario);
-    $estado = mysqli_real_escape_string($mysqli, $estado);
-    $departamento = mysqli_real_escape_string($mysqli, $departamento);
-    $documento_identidad = mysqli_real_escape_string($mysqli, $documento_identidad);
-    $direccion = mysqli_real_escape_string($mysqli, $direccion);
-    $ciudad = mysqli_real_escape_string($mysqli, $ciudad);
-    $telefono = mysqli_real_escape_string($mysqli, $telefono);
-    $pais = mysqli_real_escape_string($mysqli, $pais);
-    $fecha_creacion = mysqli_real_escape_string($mysqli, $fecha_creacion);
-    $descripcion_profesional = mysqli_real_escape_string($mysqli, $descripcion_profesional);
+    // Procesar archivos
+    $imagen = $_FILES['imagen'] ?? null;
+    $documentacion = $_FILES['documentacion'] ?? null;
 
-    // Crear una instancia del modelo de empleado
-    $empleadoModel = new EmpleadoModel($mysqli);
+    $nombreArchivoImagen = procesarArchivo($imagen, 'imagen');
+    $nombreArchivoDocumento = procesarArchivo($documentacion, 'documentacion');
 
-    try {
-        // Actualizar el empleado en la base de datos
-        $consulta = "UPDATE empleados SET 
-            nombre_completo='$nombre_completo',
-            cargo='$cargo',
-            fecha_contratacion='$fecha_contratacion',
-            numero_horas='$numero_horas',
-            precio_hora='$precio_hora',
-            salario='$salario',
-            estado='$estado',
-            departamento='$departamento',
-            documento_identidad='$documento_identidad',
-            direccion='$direccion',
-            ciudad='$ciudad',
-            telefono='$telefono',
-            pais='$pais',
-            fecha_creacion='$fecha_creacion',
-            descripcion_profesional='$descripcion_profesional' 
-            WHERE id_empleado='$llave'";
-        
-        $resultado = $mysqli->query($consulta);
-        
-        if ($resultado) {
-            echo "Empleado actualizado correctamente.";
-        } else {
-            echo "Error al actualizar el empleado: " . $mysqli->error;
-        }
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+    if ($nombreArchivoImagen === false || $nombreArchivoDocumento === false) {
+        exit("Error al subir los archivos.");
     }
-} else {
-    // Obtener los datos del empleado para mostrar en el formulario
-    $query = "SELECT * FROM empleados WHERE id_empleado = ?";
-    $stmt = $mysqli->prepare($query);
 
-    if ($stmt) {
-        // Vincular el parámetro de 'id_empleado' a la consulta preparada
-        $stmt->bind_param("i", $llave);
+    // Preparar consulta
+    $stmt = $mysqli->prepare("INSERT INTO empleados (
+        nombre, cargo, tipo_contrato, fecha_contratacion, horas_trabajo, salario,
+        estado, departamento, tipo_documento, documento_identidad, direccion, ciudad, pais,
+        telefono, correo, fecha_nacimiento, genero, estado_civil,
+        imagen, documentacion, descripcion, fecha_creacion, fecha_modificacion
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        // Ejecutar la consulta preparada
-        $stmt->execute();
+    if (!$stmt) {
+        eliminarArchivos($nombreArchivoImagen, $nombreArchivoDocumento);
+        die("Error en la consulta: " . $mysqli->error);
+    }
 
-        // Obtener el resultado de la consulta
-        $result = $stmt->get_result();
+    $stmt->bind_param("ssssddsssssssssssssssss",
+        $nombre, $cargo, $tipo_contrato, $fecha_contratacion, $horas_trabajo, $salario,
+        $estado, $departamento, $tipo_documento, $documento_identidad, $direccion, $ciudad, $pais,
+        $telefono, $correo, $fecha_nacimiento, $genero, $estado_civil,
+        $nombreArchivoImagen, $nombreArchivoDocumento, $descripcion, $fecha_creacion, $fecha_modificacion
+    );
 
-        if ($result) {
-            // Recuperar los datos del empleado como un array asociativo
-            $empleado = $result->fetch_assoc();
-
-            // Cerrar la consulta preparada
-            $stmt->close();
-        } else {
-            // Manejar el caso en que no se pudo obtener el resultado de la consulta
-            exit("Error al ejecutar la consulta.");
-        }
+    if ($stmt->execute()) {
+        echo "Empleado registrado correctamente.";
     } else {
-        // Manejar el caso en que la consulta preparada no se pudo preparar
-        exit("Error al preparar la consulta.");
+        eliminarArchivos($nombreArchivoImagen, $nombreArchivoDocumento);
+        echo "Error al registrar empleado: " . $stmt->error;
     }
+
+    $stmt->close();
+    $mysqli->close();
+}
+
+function procesarArchivo($archivo, $tipo) {
+    if ($archivo === null || !isset($archivo['error']) || !isset($archivo['name']) || !isset($archivo['tmp_name'])) {
+        return false;
+    }
+
+    $directorioBase = __DIR__ . '/../public/img/uploads/empleados/';
+    if (!is_dir($directorioBase)) {
+        mkdir($directorioBase, 0777, true);
+    }
+
+    if ($archivo['error'] === UPLOAD_ERR_OK) {
+        $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
+        $nombreArchivo = uniqid('empleado_') . '_' . $tipo . '.' . $extension;
+        $rutaArchivo = $directorioBase . $nombreArchivo;
+        if (move_uploaded_file($archivo['tmp_name'], $rutaArchivo)) {
+            return $nombreArchivo;
+        }
+    }
+
+    return false;
+}
+
+function eliminarArchivos($imagen, $documento) {
+    $ruta = __DIR__ . '/../public/img/uploads/empleados/';
+    if ($imagen && file_exists($ruta . $imagen)) unlink($ruta . $imagen);
+    if ($documento && file_exists($ruta . $documento)) unlink($ruta . $documento);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

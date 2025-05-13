@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
 
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,14 +18,23 @@ require_once __DIR__ . '/../../Controllers/CompraController.php';
     <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- CSS de CKEditor -->
-   <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
-   <link href="style.css" type="text/css" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
+    <!-- Incluimos el CSS de CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
    
-<div class="container">
-    <div id="form-background">
+
+<div class="container py-5">
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><i class="fas fa-box"></i> Registrar Compras</h4>
+        </div>
+        <div class="card-body">
         <form action="insert.php?da=2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
            
         <div class="form-group">

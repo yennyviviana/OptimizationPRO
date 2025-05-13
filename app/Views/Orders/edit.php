@@ -112,14 +112,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Pedido</title>
+    <title>CRUD pedidos</title>
+    <!-- Agregamos los estilos de Bootstrap para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
+    <!-- Incluimos el CSS de CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-5 mb-5">
@@ -132,11 +141,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="referencia"><Ri:a>Referencia</Ri:a></label>
+                        <label for="referencia">Referencia</label>
                         <input type="number" id="referencia" name="referencia" value="<?php echo htmlspecialchars($pedido['referencia']); ?>" class="form-control" required>
                         <div class="invalid-feedback">Por favor ingrese la referencia.</div>
                     </div>
-
                     <div class="form-group col-md-6">
                         <label for="total">Total</label>
                         <input type="number" id="total" name="total" value="<?php echo htmlspecialchars($pedido['total']); ?>" class="form-control" required>
@@ -153,44 +161,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <option value="en stock" <?php if ($pedido['estado'] == 'en stock') echo 'selected'; ?>>En stock</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                    <label for="direccion_entrega">Dirección de entrega</label>
-                    <input type="text" id="direccion_entrega" name="direccion_entrega" value="<?php echo htmlspecialchars($pedido['direccion_entrega']); ?>" class="form-control" required>
-                    <div class="invalid-feedback">Por favor ingrese la dirección de entrega.</div>
+                    <div class="form-group col-md-6">
+                        <label for="direccion_entrega">Dirección de entrega</label>
+                        <input type="text" id="direccion_entrega" name="direccion_entrega" value="<?php echo htmlspecialchars($pedido['direccion_entrega']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese la dirección de entrega.</div>
+                    </div>
                 </div>
 
-
-                
                 <div class="form-group">
-                    <label for="observaciones">observaciones</label>
+                    <label for="observaciones">Observaciones</label>
                     <textarea id="observaciones" name="observaciones" class="form-control" required><?php echo htmlspecialchars($pedido['observaciones']); ?></textarea>
                 </div>
 
-
-
-                <div class="form-group">
-                    <label for="tracking">$tracking</label>
-                    <input type="number" id="tracking" name="tracking" value="<?php echo htmlspecialchars($pedido['tracking']); ?>" class="form-control" required>
-                    <div class="invalid-feedback">Por favor ingrese el tracking.</div>
-                </div>
-
-
-                
-                <div class="form-group col-md-6">
-                        <label for="tiempo_estimado_horas">Tiempo de entrega</label>
-                        <input type="number" id="total" name="tiempo_estimado_horas" value="<?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el total estimado en horas.</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="tracking">Tracking</label>
+                        <input type="number" id="tracking" name="tracking" value="<?php echo htmlspecialchars($pedido['tracking']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el tracking.</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tiempo_estimado_horas">Tiempo de entrega (horas)</label>
+                        <input type="number" id="tiempo_estimado_horas" name="tiempo_estimado_horas" value="<?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?>" class="form-control" required>
+                        <div class="invalid-feedback">Por favor ingrese el tiempo estimado en horas.</div>
                     </div>
                 </div>
-               
 
                 <div class="form-group">
                     <label for="detalles">Detalles</label>
                     <textarea id="detalles" name="detalles" class="form-control" required><?php echo htmlspecialchars($pedido['detalles']); ?></textarea>
                 </div>
 
-                
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="metodo_pago">Método de Pago</label>
                         <select id="metodo_pago" name="metodo_pago" class="form-control" required>
@@ -199,33 +200,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <option value="transferencia" <?php if ($pedido['metodo_pago'] == 'transferencia') echo 'selected'; ?>>Transferencia</option>
                         </select>
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="archivo_adjunto">Archivos Adjuntos</label>
+                        <input type="file" id="archivo_adjunto" name="archivo_adjunto[]" class="form-control-file" multiple required>
+                        <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
+                    </div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="archivo">Archivos Adjuntos</label>
-                    <input type="file" id="archivo_adjunto" name="archivo_adjunto" class="form-control-file" multiple required>
-                    <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
-                </div>
-
-
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fecha_entrega">Fecha de Entrega</label>
                         <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>
                     </div>
-                    
-                    <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fecha_pedido">Fecha de pedido</label>
                         <input type="date" id="fecha_pedido" name="fecha_pedido" value="<?php echo htmlspecialchars($pedido['fecha_pedido']); ?>" class="form-control" required>
                     </div>
-                    
+                </div>
 
                 <input type="hidden" name="id_pedido" value="<?php echo htmlspecialchars($pedido['id_pedido']); ?>">
 
-                <button type="submit" name="boton" class="btn btn-success"><i class="fas fa-save"></i> Guardar Cambios</button>
+                <div class="text-end mt-4">
+                    <button type="submit" name="boton" class="btn btn-success"><i class="fas fa-save"></i> Guardar Cambios</button>
+                </div>
             </form>
             <?php endif; ?>
         </div>

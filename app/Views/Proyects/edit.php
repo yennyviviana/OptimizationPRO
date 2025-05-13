@@ -94,6 +94,11 @@ if ($stmt) {
 ?>
 
 
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -103,43 +108,19 @@ if ($stmt) {
     <!-- Agregamos los estilos de Bootstrap para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Incluimos el CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        #form-background {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Ajuste de estilos para el editor CKEditor */
-        .ck-editor__editable {
-            min-height: 150px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
-<body>
-  
 
+<body>
+
+<div class="container py-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-dark text-white">
 <div class="container">
         <div id="form-background">
             <?php if ($proyecto): ?>
@@ -147,7 +128,7 @@ if ($stmt) {
 
             <div class="form-group">
                     <label for="">Nombre proyecto</label>
-                    <textarea id="nombre_proyecto" name="nombre_proyecto"  value="<?php echo htmlspecialchars($proyecto['nombre_proyecto']); ?>" class="form-control" required placeholder="nombre_proyecto"></textarea>
+                    <textarea id="nombre_proyecto" name="nombre_proyecto"  value="<?php echo htmlspecialchars($proyecto['nombre_proyecto']); ?>" class="form-control" required placeholder="nombre del proyecto"></textarea>
                     <div class="invalid-feedback">Por favor ingrese  el nombre proyecto.</div>
                 </div>
 

@@ -64,7 +64,7 @@ if ($resultProjects->num_rows > 0) {
 }
 
 // Fetch orders from the database......
-$sqlOrders = "SELECT id_pedido, nombre_pedido FROM pedidos";
+$sqlOrders = "SELECT id_pedido, referencia FROM pedidos";
 $resultOrders = $mysqli->query($sqlOrders);
 
 $orders = [];

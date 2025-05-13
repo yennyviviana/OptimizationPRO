@@ -31,7 +31,7 @@ require_once __DIR__ . '/../../Controllers/InventarioController.php';
       </div>
       <div class="card-body">
         <form action="insert.php?da=Inventorys-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-          <h2>Inventarios</h2>
+         
           <div class="row">
             <!-- Columna izquierda -->
             <div class="col-md-6">
