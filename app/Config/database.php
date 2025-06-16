@@ -14,7 +14,7 @@ if (!$mysqli) {
     die('Error al conectarse a MySQL: ' . mysqli_connect_error());
 }
 
-// Establecer el juego de caracteres a UTF-8
+// Establecer el juego de caracteres a UTF-8....
 mysqli_set_charset($mysqli, 'utf8');
 
 

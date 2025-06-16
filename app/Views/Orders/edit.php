@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Actualizar el pedido en la base de datos
         $resultado = $pedidoModel->actualizarPedido($llave,$referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
         if ($resultado) {
-            echo "Pedido actualizado correctamente.";
+            //echo "Pedido actualizado correctamente.";
         } else {
             echo "Error al actualizar el pedido.";
         }
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container mt-5 mb-5">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0"><i class="fas fa-edit"></i> Editar Pedido</h4>
+            <h4 class="mb-0"><i class="fas fa-edit"></i>  Pedido actualizado correctamente.</h4>
         </div>
         <div class="card-body">
             <?php if ($pedido): ?>

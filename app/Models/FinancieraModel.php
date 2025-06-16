@@ -91,9 +91,9 @@ class FinancieraModel {
     
         // Verificar si la actualización fue exitosa
         if ($resultado) {
-            return true; // La actualización fue exitosa
+            return true; 
         } else {
-            return false; // Hubo un error al actualizar
+            return false; 
         }
     }
 

@@ -31,11 +31,9 @@ if (isset($_POST['boton'])) {
 
  // Verifica si la inserción fue exitosa
  if ($resultado) {
-    // Redirecciona al usuario a la página principal con un mensaje de éxito
     header("Location: create.php?da=2");
     exit();
 } else {
-    // En caso de error, muestra un mensaje al usuario
     echo "Error al insertar el proveedor.";
 }
 

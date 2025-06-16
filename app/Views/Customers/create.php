@@ -9,7 +9,6 @@ if(!isset($_SESSION['id_usuario'])){
 
 
 
-
 define('db_host', 'localhost');
 define('db_username', 'root');
 define('db_password', '');
@@ -49,13 +48,10 @@ $total_registros = $total_resultados->fetch_assoc()['total'];
 $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 
-
-
-
 // Obtener el término de búsqueda
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
-// Construir la consulta SQL con filtro si hay búsqueda
+// Construir la consulta SQL con filtro si hay búsqueda....
 if (!empty($searchQuery)) {
     $consulta = "SELECT * FROM  clientes WHERE 
                  nombre LIKE '%$searchQuery%' OR 
@@ -72,7 +68,6 @@ if (!$resultados) {
     die("Error al ejecutar la consulta: " . $mysqli->error);
 }
 ?>
-
 
 
 
@@ -151,8 +146,9 @@ if (!$resultados) {
         <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
         <td><?php echo htmlspecialchars($cliente['apellido']); ?></td>
         <td><?php echo htmlspecialchars($cliente['email']); ?></td>
-        <td><?php echo htmlspecialchars($cliente['documento_identidad']); ?></td>
-        <td><?php echo htmlspecialchars($cliente['tipo_documento']); ?></td>
+ <td><img src="../../public/files/uploads/clientes/<?php echo $pedido['documento_identidad']; ?>" width="100"></td>
+        
+    <td><?php echo htmlspecialchars($cliente['tipo_documento']); ?></td>
         <td><?php echo htmlspecialchars($cliente['telefono']); ?></td>
         <td><?php echo htmlspecialchars($cliente['direccion']); ?></td>
         <td><?php echo htmlspecialchars($cliente['ciudad']); ?></td>

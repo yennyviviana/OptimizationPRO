@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 
 if (!isset($_SESSION['id_usuario'])) {
@@ -72,12 +72,176 @@ if (!$resultados) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Bootstrap 5 CSS (en <head>) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap 5 JS + Popper.js (al final del body) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
 
+
+<style>
+/* Estilos personalizados */
+body {
+    background-color: #fff;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-container {
+    background-color: #1a1a1a; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
+.table {
+    max-width: 1200px; /* puedes reducir a 1000 o 900px si es muy ancha */
+    margin: 0 auto; /* centra horizontalmente */
+    overflow-x: auto; /* para que en móviles haya scroll horizontal */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+
+
+.table th {
+    background-color: hsl(263, 93.20%, 17.30%);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+}
+
+.table td {
+    padding: 10px;
+    color: #333;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #d1ecf1;
+    transition: background-color 0.3s;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: hsl(240, 0.90%, 21.00%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.column {
+    width: 48%;
+}
+
+h2 {
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    background-color: darkblue;
+    color: #000;
+}
+
+.nav .active {
+    color: #ff6f61;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+.icono-editar {
+  color: #007bff; /* azul Bootstrap */
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.icono-editar:hover {
+  color: #0056b3;
+}
+
+.icono-borrar {
+  color: #dc3545; /* rojo Bootstrap */
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.icono-borrar:hover {
+  color: #a71d2a;
+}
+
+  .mi-estilo-modal {
+    border: 3px solid #007bff;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  }
+
+  .modal-body {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .modal-body p span {
+    font-weight: bold;
+    color: #0066cc;
+  }
+
+
+  .modal-title{
+    color: #000;
+  }
+/* Ajuste de estilos para el editor CKEditor */
+.ck-editor__editable {
+    min-height: 150px;
+}
+</style>
     <div class="panel">
         <div class="column">
             <h2>Orders Module</h2>
@@ -105,57 +269,102 @@ if (!$resultados) {
     </form>
 
 
-
-    <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf.</button>
     
-    
-    <table class="table table-bordered table-hover">
-    <thead class="bg-primary text-white">
-                <tr>
-                    <th>Id</th>
-                    <th>Referencia</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                    <th>Dirección</th>
-                    <th>observaciones</th>
-                    <th>Tracking</th>
-                    <th>Tiempo Estimado</th>
-                    <th>Detalles</th>
-                    <th>Usuario</th>
-                    <th>Metodo pago</th>
-                    <th>Archivo</th>
-                    <th>Fecha pedido</th>
-                    <th>Fecha entrega</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($pedido = $resultados->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($pedido['id_pedido']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['referencia']); ?></td>
-                        <td>$ <?php echo number_format($pedido['total'], 2, ',', '.'); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['estado']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['direccion_entrega']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['observaciones']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['tracking']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['detalles']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['id_usuario']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['metodo_pago']); ?></td>
-                        <td><img src="../../public/img/uploads/pedidos/<?php echo $pedido['archivo_adjunto']; ?>" width="100"></td>
-                        <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
-                        <td><?php echo htmlspecialchars($pedido['fecha_entrega']); ?></td>
-                        <td>
-                            <a href="edit.php?da=Orders-3&lla=<?php echo $pedido['id_pedido']; ?>" class="btn btn-sm btn-primary">Editar</a>
-                            <a href="#" class="btn btn-sm btn-danger" onclick="borrarPedido(<?php echo $pedido['id_pedido']; ?>, '<?php echo $pedido['archivo_adjunto']; ?>')">Borrar</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
+  <!-- Tabla principal -->
+<div class="table">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Referencia</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Fecha Entrega</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php while ($pedido = $resultados->fetch_assoc()): ?>
+      <tr>
+        <td><?= htmlspecialchars($pedido['id_pedido']) ?></td>
+        <td><?= htmlspecialchars($pedido['referencia']) ?></td>
+        <td>$ <?= number_format($pedido['total'], 2, ',', '.') ?></td>
+        <td><?= htmlspecialchars($pedido['estado']) ?></td>
+        <td><?= htmlspecialchars($pedido['fecha_entrega']) ?></td>
+        <td>
+          <button class="btn btn-sm btn-info" 
+            data-bs-toggle="modal" 
+            data-bs-target="#detalleModal"
+            data-id="<?= $pedido['id_pedido'] ?>"
+            data-referencia="<?= htmlspecialchars($pedido['referencia']) ?>"
+            data-direccion="<?= htmlspecialchars($pedido['direccion_entrega']) ?>"
+            data-observaciones="<?= htmlspecialchars($pedido['observaciones']) ?>"
+            data-tracking="<?= htmlspecialchars($pedido['tracking']) ?>"
+            data-tiempo="<?= htmlspecialchars($pedido['tiempo_estimado_horas']) ?>"
+            data-usuario="<?= htmlspecialchars($pedido['id_usuario']) ?>"
+            data-metodo="<?= htmlspecialchars($pedido['metodo_pago']) ?>"
+            data-archivo="<?= $pedido['archivo_adjunto'] ?>"
+            data-fecha_pedido="<?= htmlspecialchars($pedido['fecha_pedido']) ?>"
+            data-detalles="<?= htmlspecialchars($pedido['detalles']) ?>"
+          >Ver detalles</button>
+          <a href="edit.php?da=Orders-3&lla=<?= $pedido['id_pedido'] ?>" title="Editar">
+            <i class="fas fa-edit icono-editar"></i>
+          </a>
+          
+          <a href="#" title="Borrar" onclick="borrarPedido(<?= $pedido['id_pedido'] ?>, '<?= $pedido['archivo_adjunto'] ?>')">
+            <i class="fas fa-trash-alt icono-borrar"></i>
+          </a>
+        </td>
+      </tr>
+      <?php endwhile; ?>
+    </tbody>
+  </table>
 </div>
+
+<!-- Modal Detalles -->
+      <div class="modal-header bg-primary text-white">
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles del Pedido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Referencia:</strong> <span id="modal-referencia"></span></p>
+        <p><strong>Dirección:</strong> <span id="modal-direccion"></span></p>
+        <p><strong>Observaciones:</strong> <span id="modal-observaciones"></span></p>
+        <p><strong>Tracking:</strong> <span id="modal-tracking"></span></p>
+        <p><strong>Tiempo estimado:</strong> <span id="modal-tiempo"></span> horas</p>
+        <p><strong>Usuario:</strong> <span id="modal-usuario"></span></p>
+        <p><strong>Método de pago:</strong> <span id="modal-metodo"></span></p>
+        <p><strong>Archivo:</strong><br><img id="modal-archivo" src="" width="150"></p>
+        <p><strong>Fecha pedido:</strong> <span id="modal-fecha-pedido"></span></p>
+        <p><strong>Detalles:</strong> <span id="modal-detalles"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script para llenar el modal -->
+<script>
+  const detalleModal = document.getElementById('detalleModal');
+  detalleModal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+    document.getElementById('modal-referencia').textContent = button.getAttribute('data-referencia');
+    document.getElementById('modal-direccion').textContent = button.getAttribute('data-direccion');
+    document.getElementById('modal-observaciones').textContent = button.getAttribute('data-observaciones');
+    document.getElementById('modal-tracking').textContent = button.getAttribute('data-tracking');
+    document.getElementById('modal-tiempo').textContent = button.getAttribute('data-tiempo');
+    document.getElementById('modal-usuario').textContent = button.getAttribute('data-usuario');
+    document.getElementById('modal-metodo').textContent = button.getAttribute('data-metodo');
+    document.getElementById('modal-fecha-pedido').textContent = button.getAttribute('data-fecha_pedido');
+    document.getElementById('modal-detalles').textContent = button.getAttribute('data-detalles');
+    const archivo = button.getAttribute('data-archivo');
+    document.getElementById('modal-archivo').src = '../../public/files/uploads/pedidos/' + archivo;
+  });
+</script>
+
 
  <!-- Paginación....... -->
  <nav>

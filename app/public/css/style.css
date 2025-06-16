@@ -1,4 +1,6 @@
-* {
+ 
+ 
+ * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -6,8 +8,7 @@
 }
 
 body {
-    background-color: #555;
-    background-image: url('public/ia.jpg');
+     background-color: black;
      background-size: cover;
     background-position: center; 
     background-repeat: no-repeat; 
@@ -31,12 +32,12 @@ body {
 }
 
 .dark-theme {
-    background-color: #333;
+    background-color:hsl(0, 0.00%, 4.70%);
     color: #fff;
 }
 
 .dark-theme nav.sidebar {
-    background-color: #222;
+    background-color: #070707;
 }
 
 .dark-theme .nav-link {
@@ -48,7 +49,7 @@ body {
 }
 
 header {
-    background-color: #555;
+    background-color: hsl(0, 33%, 93%);
     color: #fff;
     max-width: 1100px;
     margin: auto;
@@ -96,7 +97,7 @@ header {
     
     .nav a:hover{
         background-color: hwb(342 4% 51%);
-        color: #000000;
+        color:hsl(0, 27.70%, 90.80%);
     }
     
   
@@ -119,7 +120,7 @@ header {
 }
 
 .form-background {
-    background-color: rgb(18, 14, 20);
+    background-color: #1b1a1b;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(8, 8, 8, 0.102);
@@ -210,3 +211,18 @@ input[type="submit"]:hover {
 .wrapper {
     flex-direction: column;
 }
+
+
+.table.table-dark.table-striped {
+    background-color: #1f1f2f; /* un azul oscuro bonito */
+    color: #fff; /* texto blanco para que se vea */
+}
+
+.table.table-dark.table-striped td,
+.table.table-dark.table-striped th {
+    border: 1px solid #444;
+    padding: 0.75rem;
+}
+
+
+

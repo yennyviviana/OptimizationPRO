@@ -129,7 +129,7 @@ if (isset($_REQUEST['nombre_usuario'])) {
             <?php if ($alert_type == 'success'): ?>
                 setTimeout(function() {
                     window.location.href = 'index.php';
-                }, 2000); // Redirige después de 2 segundos
+                }, 2000); 
             <?php endif; ?>
         });
     </script>

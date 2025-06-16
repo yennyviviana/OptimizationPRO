@@ -40,7 +40,7 @@ class PedidoModel {
         }
         
 
-          // Procesar la imagen
+          //sProcesar la imagen.......
           $nombreArchivo = $this->procesarArchivo($archivo_adjunto);
        
           // Preparar la consulta SQL
@@ -75,18 +75,19 @@ class PedidoModel {
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
         if (mysqli_num_rows($resultado_usuario) == 0) {
-            return false; // El usuario no existe
+            return false; 
         }
     
         // Obtener el nombre del archivo anterior
         $consulta_anterior = "SELECT archivo_adjunto FROM pedidos WHERE id_pedido = '$id_pedido'";
         $resultado_anterior = mysqli_query($this->conexion, $consulta_anterior);
         $fila_anterior = mysqli_fetch_assoc($resultado_anterior);
-        $nombreArchivo = $fila_anterior['archivo_adjunto']; // Valor por defecto
+        $nombreArchivo = $fila_anterior['archivo_adjunto']; 
     
         // Procesar la nuevo archivo si se proporciona
         if ($archivo_adjunto['error'] === UPLOAD_ERR_OK) {
-            $nombreArchivo = $this->procesarImagen($archivo_adjunto); // Procesar nueva imagen
+            // Procesar nueva imagen
+            $nombreArchivo = $this->procesarArchivo($archivo_adjunto); 
         }
     
         // Construir la consulta de actualización......                                                                                                                                                                                                                                                       
@@ -94,44 +95,28 @@ class PedidoModel {
     
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La actualización fue exitosa
+            return true; 
         } else {
-            return false; // error en la actualización
+            return false; 
         }
-    }
     
-/*private function procesarImagen($imagen) {
-    $destino = __DIR__ . "../../public/img/uploads/pedidos/";
-    $nombreImagen = basename($imagen['name']);
+
+        }
+    
+        private function procesarArchivo($archivo_adjunto)  {
+    $destino = __DIR__ . "../../public/files/uploads/pedidos/";
+    $nombreImagen = basename($archivo_adjunto['name']);
     $rutaImagen = $destino . $nombreImagen;
-    move_uploaded_file($imagen['tmp_name'], $rutaImagen);
-    return $nombreImagen;*/
+    move_uploaded_file($archivo_adjunto['tmp_name'], $rutaImagen);
+    return $nombreImagen;
 
 
-    private function procesarArchivo($archivo_adjunto) {
-        $destino = __DIR__ . "/../../public/files/uploads/pedidos/";
-        
-        // Crear carpeta si no existe
-        if (!file_exists($destino)) {
-            mkdir($destino, 0777, true);
-        }
-    
-        $nombreArchivo = basename($archivo_adjunto['name']);
-        $rutaArchivo = $destino . $nombreArchivo;
-    
-        // Validar tipo MIME (opcional pero recomendado)
-        $permitidos = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-        if (!in_array($archivo_adjunto['type'], $permitidos)) {
-            throw new Exception("Tipo de archivo no permitido.");
-        }
-    
-        if (!move_uploaded_file($archivo_adjunto['tmp_name'], $rutaArchivo)) {
-            throw new Exception("No se pudo mover el archivo.");
-        }
-    
-        return $nombreArchivo;
-    }
-    
 }
+
+  }
+      
+
+
+
 
 //var_dump($_POST);

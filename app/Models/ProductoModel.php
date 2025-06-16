@@ -45,10 +45,10 @@ class ProductoModel {
 
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La inserción fue exitosa
+            return true; 
         } else {
             echo "Error al insertar el producto: " . mysqli_error($this->conexion);
-            return false; // Hubo un error en la inserción
+            return false; 
         }
     }
 
@@ -68,14 +68,14 @@ class ProductoModel {
         $consulta_proveedor = "SELECT * FROM proveedores WHERE id_proveedor = '$id_proveedor'";
         $resultado_proveedor = mysqli_query($this->conexion, $consulta_proveedor);
         if (mysqli_num_rows($resultado_proveedor) == 0) {
-            // El proveedor no existe, retorna falso
+        
             return false;
         }
 
         // Procesar la imagen si es necesario
         $nombreArchivo = $this->procesarImagen($archivo);
         if ($nombreArchivo === false) {
-            return false; // Hubo un error procesando la imagen
+            return false; 
         }
 
         // Preparar la consulta SQL
@@ -95,10 +95,10 @@ class ProductoModel {
 
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La actualización fue exitosa
+            return true; 
         } else {
             echo "Error al actualizar el producto: " . mysqli_error($this->conexion);
-            return false; // Hubo un error en la actualización
+            return false; 
         }
     }
 

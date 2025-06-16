@@ -84,9 +84,172 @@ if (!$resultados) {
     <title>Módulo de pedidos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="style.css" type="text/css" rel="stylesheet"> 
 </head>
 <body>
+
+<style>
+/* Estilos personalizados */
+body {
+    background-color: #000;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-container {
+    background-color: #1a1a1a; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.table {
+    max-width: 1200px; /* puedes reducir a 1000 o 900px si es muy ancha */
+    margin: 0 auto; /* centra horizontalmente */
+    overflow-x: auto; /* para que en móviles haya scroll horizontal */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+
+
+.table th {
+    background-color: hsl(263, 93.20%, 17.30%);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+}
+
+.table td {
+    padding: 10px;
+    color: #333;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #d1ecf1;
+    transition: background-color 0.3s;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: hsl(240, 0.90%, 21.00%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.column {
+    width: 48%;
+}
+
+h2 {
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    background-color: darkblue;
+    color: #000;
+}
+
+.nav .active {
+    color: #ff6f61;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+.btn-borrar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ff4d4d;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.btn-borrar:hover {
+    background-color: #c82333;
+}
+
+.btn-editar {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: blue;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.btn-editar:hover {
+    background-color: #0B1CDB;
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Ajuste de estilos para el editor CKEditor */
+.ck-editor__editable {
+    min-height: 150px;
+}
+</style>
 
     <div class="panel">
         <div class="column">
@@ -117,7 +280,7 @@ if (!$resultados) {
     </form>
 
     
-    
+    <table class="table">
     <table class="table table-bordered table-hover">
     <thead class="bg-primary text-white">
              

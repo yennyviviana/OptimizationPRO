@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../Models/ClienteModel.php';
 
-//inicio de session...
 session_start(); 
 
 if (!isset($_SESSION['id_usuario'])) {
@@ -36,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha_creacion = date('Y-m-d H:i:s');
     $fecha_modificacion = $_POST['fecha_modificacion'];
 
-    // Instancia el modelo.....
+    // Instancia el modelo.......
     $modelo = new ClienteModel($mysqli);
 
     //  insertar el cliente usando el método del modelo........
@@ -46,15 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verifica si la inserción fue exitosa.......
     if ($resultado) {
-        // Redirecciona al usuario a la página principal con un mensaje de éxito......
         header("Location: create.php?da=2");
         exit();
     } else {
-        // En caso de error, muestra un mensaje al usuario.......
         echo "Error al insertar el pedido.";
     }
 
-    // Cierra la conexión a la base de datos......
+   
     mysqli_close($mysqli);
 }
 

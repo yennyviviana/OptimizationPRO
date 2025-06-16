@@ -105,7 +105,7 @@ class InventarioModel {
         if (mysqli_query($this->conexion, $consulta)) {
             return true;
         } else {
-            // "Error al actualizar el inventario: " . mysqli_error($this->conexion);
+             "Error al actualizar el inventario: " . mysqli_error($this->conexion);
             return false;
         }
     }

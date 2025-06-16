@@ -63,13 +63,12 @@ mysqli_set_charset($mysqli, 'utf8');
     // Inserta el pedido usando el método correspondiente del modelo......
     $resultado = $modelo->insertarPedido($referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
 
-    // Verifica si la inserción fue exitosa
+   
     if ($resultado) {
-        // Redirecciona al usuario a la página principal con un mensaje de éxito
+       
         header("Location: create.php?da=2");
         exit();
     } else {
-        // En caso de error, muestra un mensaje al usuario.....
         echo "Error al insertar el pedido.";
     }
 

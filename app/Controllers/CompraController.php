@@ -65,11 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify if the insertion was successful........
     if ($resultado) {
-        // Redirect the user to the main page with a success message
         header("Location: create.php?da=2");
         exit();
     } else {
-        // In case of error, display a message to the user.........
         echo "Error al insertar el producto.";
     }
 

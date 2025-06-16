@@ -55,7 +55,7 @@ class EmpleadoModel {
     
         // Verificar si se procesaron correctamente los archivos
         if ($nombreArchivoImagen === false || $nombreArchivoDocumento === false) {
-            return false; // Hubo un error en el procesamiento de archivos
+            return false; 
         }
     
         // Preparar la consulta SQL para insertar el empleado.......
@@ -79,14 +79,14 @@ class EmpleadoModel {
             // Hubo un error en la inserción, eliminar los archivos subidos
             $this->eliminarArchivos($nombreArchivoImagen, $nombreArchivoDocumento);
             echo "Error al insertar el empleado: " . $stmt->error;
-            return false; // Hubo un error en la inserción del empleado
+            return false;
         }
     }
     
     private function procesarArchivo($archivo, $tipo) {
         // Verificar que el archivo no sea nulo y contenga las claves necesarias
         if ($archivo === null || !isset($archivo['error']) || !isset($archivo['name']) || !isset($archivo['tmp_name'])) {
-            return false; // El archivo es nulo o no tiene las claves necesarias
+            return false; 
         }
     
         $directorioBase = __DIR__ . '/../public/img/uploads/empleados/';
@@ -104,12 +104,12 @@ class EmpleadoModel {
     
             // Mover el archivo al directorio de destino
             if (move_uploaded_file($archivo['tmp_name'], $rutaArchivo)) {
-                return $nombreArchivo; // Devolver el nombre del archivo procesado
+                return $nombreArchivo;
             } else {
-                return false; // Retornar false si hay un error al mover el archivo
+                return false; 
             }
         } else {
-            return false; // Retornar false si hay un error en la subida del archivo
+            return false; 
         }
     }
     
@@ -120,7 +120,7 @@ class EmpleadoModel {
         if ($nombreArchivoImagen) {
             $rutaImagen = $directorioBase . $nombreArchivoImagen;
             if (file_exists($rutaImagen)) {
-                unlink($rutaImagen); // Eliminar archivo de imagen
+                unlink($rutaImagen); 
             }
         }
     
@@ -128,7 +128,7 @@ class EmpleadoModel {
         if ($nombreArchivoDocumento) {
             $rutaDocumento = $directorioBase . $nombreArchivoDocumento;
             if (file_exists($rutaDocumento)) {
-                unlink($rutaDocumento); // Eliminar archivo de documentación
+                unlink($rutaDocumento); 
             }
         }
     }

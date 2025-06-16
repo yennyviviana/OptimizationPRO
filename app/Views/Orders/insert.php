@@ -99,7 +99,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
                             <select class="form-select" id="id_usuario" name="id_usuario" required>
                                 <option value="">Seleccione el usuario</option>
                                 <?php foreach ($usuarios as $usuario): ?>
-                                    <option value="<?php echo $usuario['id_proyecto']; ?>">
+                                    <option value="<?php echo $usuario['id_usuario']; ?>">
                                         <?php echo $usuario['id_usuario']; ?>
                                     </option>
                                 <?php endforeach; ?>

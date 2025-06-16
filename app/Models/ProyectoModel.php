@@ -30,7 +30,7 @@ class ProyectoModel {
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
         if (mysqli_num_rows($resultado_usuario) == 0) {
-            return false; // El usuario no existe
+            return false; 
         }
 
         // Procesar la imagen si se proporciona
@@ -66,18 +66,18 @@ class ProyectoModel {
         $consulta_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($this->conexion, $consulta_usuario);
         if (mysqli_num_rows($resultado_usuario) == 0) {
-            return false; // El usuario no existe
+            return false;
         }
     
         // Obtener el nombre del archivo anterior
         $consulta_anterior = "SELECT imagen_proyecto FROM proyectos WHERE id_proyecto = '$id_proyecto'";
         $resultado_anterior = mysqli_query($this->conexion, $consulta_anterior);
         $fila_anterior = mysqli_fetch_assoc($resultado_anterior);
-        $nombreArchivo = $fila_anterior['imagen_proyecto']; // Valor por defecto es el anterior
+        $nombreArchivo = $fila_anterior['imagen_proyecto'];
     
         // Procesar la nueva imagen si se proporciona
         if ($imagen_proyecto['error'] === UPLOAD_ERR_OK) {
-            $nombreArchivo = $this->procesarImagen($imagen_proyecto); // Procesar nueva imagen
+            $nombreArchivo = $this->procesarImagen($imagen_proyecto); 
         }
     
         // Construir la consulta de actualización
@@ -85,9 +85,9 @@ class ProyectoModel {
     
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La actualización fue exitosa
+            return true;
         } else {
-            return false; // Hubo un error en la actualización
+            return false; 
         }
     }
     

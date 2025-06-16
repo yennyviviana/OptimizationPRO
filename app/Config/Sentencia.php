@@ -5,13 +5,14 @@ class  Sentencia{
 	public  $sentencia;
     public  $conexion;
 	public  $tabla;
-	public  $Resultado;
+	public  $resultado;
 
-	function __construct($sentencia, $conexion, $Resultado,$tabla) {
+	function __construct($sentencia, $conexion, $resultado,$tabla) {
 	
 		$this->sentencia = $sentencia;
 		$this->conexion = $conexion;
 		$this->tabla = $tabla;
+		$this->resultado = $resultado;
 	
 	}
 	

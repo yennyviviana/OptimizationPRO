@@ -34,9 +34,9 @@ class ProveedorModel {
 
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La inserción fue exitosa
+            return true; 
         } else {
-            return false; // Hubo un error en la inserción
+            return false; 
         }
     }
 
@@ -62,9 +62,9 @@ class ProveedorModel {
 
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
-            return true; // La actualización fue exitosa
+            return true; 
         } else {
-            return false; // Hubo un error en la actualización
+            return false; 
         }
     }
 
