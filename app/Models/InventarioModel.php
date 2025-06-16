@@ -41,7 +41,7 @@ class InventarioModel {
         }
 
 
-        // Verificar si el producto existe antes de insertar el inventario
+        // Verificar si el producto existe antes de insertar el inventario.....
         $consulta_producto = "SELECT * FROM productos WHERE id_producto = '$id_producto'";
         $resultado_producto = mysqli_query($this->conexion, $consulta_producto);
         if (mysqli_num_rows($resultado_producto) == 0) {
@@ -64,7 +64,7 @@ class InventarioModel {
         if (mysqli_query($this->conexion, $consulta)) {
             return true; // La inserción fue exitosa.....
         } else {
-            // "Error al  insertar el inventario: " . mysqli_error($this->conexion);
+             "Error al  insertar el inventario: " . mysqli_error($this->conexion);
             return false; // Hubo un error en la inserción..........
         }
     }

@@ -94,6 +94,7 @@ require_once __DIR__ . '/../../Controllers/FinancieraController.php';
               </select>
               <div class="invalid-feedback">Por favor seleccione un código de inventario.</div>
             </div>
+
             <div class="mb-3">
               <label for="id_producto" class="form-label">Producto:</label>
               <select class="form-select" id="id_producto" name="id_producto" required>
@@ -104,6 +105,7 @@ require_once __DIR__ . '/../../Controllers/FinancieraController.php';
               </select>
               <div class="invalid-feedback">Por favor seleccione un producto.</div>
             </div>
+            
             <div class="mb-3">
               <label for="id_compra" class="form-label">Compra:</label>
               <select class="form-select" id="id_compra" name="id_compra" required>

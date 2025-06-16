@@ -25,6 +25,17 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
 <body>
          
 
+<style>
+/* Estilos personalizados */
+body {
+    background-color: #000;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+</style>
+
+
 
 <div class="container py-5">
     <div class="card shadow-lg">

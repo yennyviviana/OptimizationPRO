@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../../Models/ProveedorModel.php';
 require_once __DIR__ . '/../../Controllers/ProveedorController.php';
 
+
+
 ?>
 
 
@@ -12,7 +14,7 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD pedidos</title>
+    <title>Insertar Proveedor.</title>
     <!-- Agregamos los estilos de Bootstrap para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Incluimos el CSS de Bootstrap -->
@@ -22,10 +24,19 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
     <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
     <!-- Incluimos el CSS de CKEditor -->
     <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
-    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
  
+
+<style>
+/* Estilos personalizados */
+body {
+    background-color: #000;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+</style>
 
 <div class="container py-5">
     <div class="card shadow-lg">
@@ -89,28 +100,18 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
                 </div>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="lista_productos">Productos</label>
-                <select id="lista_productos"
-                        name="lista_productos"
-                        class="form-select"
-                        required>
-                    <option value="">Seleccione un producto</option>
-                    <option value="producto 1">Producto 1</option>
-                    <option value="producto 2">Producto 2</option>
-                    <option value="producto 3">Producto 3</option>
-                    <option value="producto 4">Producto 4</option>
-                    <option value="producto 5">Producto 5</option>
-                    <option value="producto 6">Producto 6</option>
-                    <option value="producto 7">Producto 7</option>
-                    <option value="producto 8">Producto 8</option>
-                    <option value="producto 9">Producto 9</option>
-                    <option value="producto 10">Producto 10</option>
-                </select>
-                <div class="invalid-feedback">
-                    Por favor seleccione un producto.
-                </div>
+
+             <div class="mb-3">
+              <label for="id_producto" class="form-label">Producto:</label>
+              <select class="form-select" id="id_producto" name="id_producto" required>
+                <option value="">Selecciona un Producto</option>
+                <?php foreach ($products as $product): ?>
+                  <option value="<?php echo $product['id_producto']; ?>"><?php echo $product['nombre_producto']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <div class="invalid-feedback">Por favor seleccione un producto.</div>
             </div>
+           
 
             <div class="form-group mb-3">
                 <label for="condiciones_pago">Condición de Pago</label>
@@ -151,11 +152,17 @@ require_once __DIR__ . '/../../Controllers/ProveedorController.php';
                           class="form-control"
                           rows="4"
                           required
-                          placeholder="Descripción del pedido"></textarea>
+                          placeholder="Descripción del proveedor"></textarea>
                 <div class="invalid-feedback">
                     Por favor ingrese la descripción.
                 </div>
             </div>
+
+
+            <div class="mb-3">
+  <label for="historial_pedidos" class="form-label">Historial de pedidos</label>
+  <textarea class="form-control" id="historial_pedidos" name="historial_pedidos" rows="4" placeholder="Ej: Pedido 01/06/2025 - 10 unidades de papel..."></textarea>
+</div>
 
             <div class="form-group mb-4">
                 <label for="archivo">Archivo Adjunto</label>

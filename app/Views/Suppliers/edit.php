@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
     $correo_electronico = $_POST['correo_electronico'];
-    $lista_productos = $_POST['lista_productos'];
     $condiciones_pago = $_POST['condiciones_pago'];
     $metodo_pago = $_POST['metodo_pago'];
     $descripcion = $_POST['descripcion'];
+    $historial_pedidos= $_POST['historial_pedidos'];
     $archivo = $_FILES['archivo'];
 
     // Crear una instancia del modelo de proveedor
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Actualizar el pedido en la base de datos
-        $resultado = $proveedorModel->actualizarProveedor($llave, $nombre_empresa, $direccion, $telefono, $correo_electronico, $lista_productos, $condiciones_pago, $metodo_pago, $descripcion, $archivo);
+        $resultado = $proveedorModel->actualizarProveedor($llave,$nombre_empresa, $direccion, $telefono, $correo_electronico, $condiciones_pago, $metodo_pago, $descripcion,$id_producto, $historial_pedidos, $archivo);
         if ($resultado) {
             echo "Proveedor actualizado correctamente.";
         } else {
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: " . $e->getMessage();
     }
 } else {
-    // Obtener los datos del pedido para mostrar en el formulario
+    // Obtener los datos del proveedor para mostrar en el formulario
     $query = "SELECT * FROM proveedores WHERE id_proveedor = ?";
     $stmt = $mysqli->prepare($query);
 
@@ -84,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Error al preparar la consulta.");
     }
 }
+
+var_dump($_POST);
 ?>
 
 
@@ -108,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<body>
     <div class="container">
         <div id="form-background">
         <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
@@ -138,18 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
                
 
-               <label for="lista_productos"><i class="fas fa-users"></i> Productos:</label>
-                <select id="lista_productos" name="lista_productos" required class="form-control">
-                    <option value="producto 1" <?php if (isset($proveedor['lista_productos']) && $proveedor['lista_productos'] == 'producto 1') echo 'selected'; ?>>Producto 1</option>
-                    <option value="producto 2" <?php if (isset($proveedor['lista_productos']) && $proveedor['lista_productos'] == 'producto 2') echo 'selected'; ?>>Producto 2</option>
-                    <option value="producto 3" <?php if (isset($proveedor['lista_productos']) && $proveedor['lista_productos'] == 'producto 3') echo 'selected'; ?>>Producto 3</option>
-                    <option value="producto 4" <?php if (isset($proveedor['lista_productos']) && $proveedor['lista_productos'] == 'producto 4') echo 'selected'; ?>>Producto 4</option>
-                    <option value="producto 5" <?php if (isset($proveedor['lista_productos']) && $proveedor['lista_productos'] == 'producto 5') echo 'selected'; ?>>Producto 5</option>
-                  <!--- mas opciones -->
-                  
-                </select>
-
-
+            
                 <label for="condiciones_pago"><i class="fas fa-users"></i> Condicion de Pago:</label>
                 <select id="condiciones_pago" name="condiciones_pago" required class="form-control">
                     <option value="">Seleccione una opcion</option>
@@ -177,6 +167,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                
 
+            <div class="mb-3">
+  <label for="historial_pedidos" class="form-label">Historial de pedidos</label>
+  <textarea class="form-control" id="historial_pedidos" name="historial_pedidos" rows="4" placeholder="Ej: Pedido 01/06/2025 - 10 unidades de papel..."></textarea>
+</div>
+l
+
+
+    <div class="mb-3">
+              <label for="id_producto" class="form-label">Producto:</label>
+              <select class="form-select" id="id_producto" name="id_producto" required>
+                <option value="">Selecciona un Producto</option>
+                <?php foreach ($products as $product): ?>
+                  <option value="<?php echo $product['id_producto']; ?>"><?php echo $product['nombre_producto']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <div class="invalid-feedback">Por favor seleccione un producto.</div>
+            </div>
+           
 
         <div class="form-group">
     <label for="archivos">archivo</label>

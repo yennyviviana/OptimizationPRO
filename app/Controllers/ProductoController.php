@@ -9,7 +9,7 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Fetch providers from the database
+// Fetch providers from the database....
 $sql = "SELECT id_proveedor, nombre_empresa FROM proveedores";
 $result = $mysqli->query($sql);
 

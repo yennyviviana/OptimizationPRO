@@ -28,7 +28,7 @@ $borrarConsulta = "DELETE FROM proveedores WHERE id_proveedor = $llave";
 if ($mysqli->query($borrarConsulta) === TRUE) {
     // Eliminar la imagen asociada al registro si la consulta de eliminación fue exitosa
     if (!empty($imagen)) {
-        unlink("../../public/img/proveedores-imagen/" . $imagen);
+        unlink("../../public/files/uploads/proveedores/" . $imagen);
     }
     // Imprimir un mensaje de confirmación
     echo "Proveedor eliminado correctamente.";

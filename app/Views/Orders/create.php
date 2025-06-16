@@ -73,10 +73,7 @@ if (!$resultados) {
     <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!-- Bootstrap 5 CSS (en <head>) -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap 5 JS + Popper.js (al final del body) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -86,7 +83,7 @@ if (!$resultados) {
 <style>
 /* Estilos personalizados */
 body {
-    background-color: #fff;
+    background-color: #000;
     color: #f5f5f5;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -100,7 +97,7 @@ body {
 
 
 .table {
-    max-width: 1200px; /* puedes reducir a 1000 o 900px si es muy ancha */
+    max-width: 1200px; 
     margin: 0 auto; /* centra horizontalmente */
     overflow-x: auto; /* para que en móviles haya scroll horizontal */
     background-color: white;
@@ -242,6 +239,7 @@ h2 {
     min-height: 150px;
 }
 </style>
+
     <div class="panel">
         <div class="column">
             <h2>Orders Module</h2>
