@@ -3,6 +3,10 @@
 date_default_timezone_set("America/Bogota");
 require_once('Config/database.php');
 
+
+$message = '';
+$alert_type = '';
+
 if (isset($_REQUEST['nombre_usuario'])) {
     $nombre_usuario = stripslashes($_POST['nombre_usuario']);
     $apellido_usuario = stripslashes($_POST['apellido_usuario']);
