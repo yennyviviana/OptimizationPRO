@@ -73,8 +73,8 @@ body {
                         </div>
 
                         <div class="form-group">
-                            <label for="direccion_entrega">Dirección de entrega</label>
-                            <input type="text" id="direccion_entrega" name="direccion_entrega" class="form-control" required placeholder="Dirección de entrega">
+                            <label for="direccion">Dirección de entrega</label>
+                            <input type="text" id="direccion" name="direccion" class="form-control" required placeholder="Dirección de entrega">
                             <div class="invalid-feedback">Ingrese la dirección de entrega.</div>
                         </div>
 
@@ -99,11 +99,7 @@ body {
                             <input type="hidden" name="tiempo_estimado_horas" id="tiempo_estimado_horas">
                         </div>
 
-                        <div class="form-group">
-                            <label for="detalles">Detalles</label>
-                            <textarea id="detalles" name="detalles" class="form-control" rows="3" required placeholder="Detalles del pedido"></textarea>
-                            <div class="invalid-feedback">Ingrese los detalles del pedido.</div>
-                        </div>
+                        
 
                         <div class="form-group">
                             <label for="id_usuario">Usuario</label>

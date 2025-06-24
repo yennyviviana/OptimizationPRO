@@ -20,7 +20,7 @@ if (!$mysqli) {
 mysqli_set_charset($mysqli, 'utf8');
 
 
-// Establecer los valores de paginación
+// Establecer los valores de paginación......
 $registros_por_pagina = 10;  // Número de registros por página
 $página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
 $inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor de OFFSET
@@ -75,11 +75,9 @@ if (!$resultados) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
-
-
+    
 <style>
 /* Estilos personalizados */
 body {
@@ -98,8 +96,8 @@ body {
 
 .table {
     max-width: 1200px; 
-    margin: 0 auto; /* centra horizontalmente */
-    overflow-x: auto; /* para que en móviles haya scroll horizontal */
+    margin: 0 auto;
+    overflow-x: auto; 
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -195,7 +193,7 @@ h2 {
 }
 
 .icono-editar {
-  color: #007bff; /* azul Bootstrap */
+  color: #007bff;
   font-size: 20px;
   transition: 0.3s;
 }
@@ -205,7 +203,7 @@ h2 {
 }
 
 .icono-borrar {
-  color: #dc3545; /* rojo Bootstrap */
+  color: #dc3545; 
   font-size: 20px;
   transition: 0.3s;
 }
@@ -267,9 +265,8 @@ h2 {
     </form>
 
 
-    
-  <!-- Tabla principal -->
-<div class="table">
+
+    <div class="table">
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -277,7 +274,15 @@ h2 {
         <th>Referencia</th>
         <th>Total</th>
         <th>Estado</th>
+        <th>Fecha Pedido</th>
         <th>Fecha Entrega</th>
+        <th>Dirección</th>
+        <th>Observaciones</th>
+        <th>Tracking</th>
+        <th>Tiempo Estimado (horas)</th>
+        <th>Usuario</th>
+        <th>Método de Pago</th>
+        <th>Archivo</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -286,29 +291,27 @@ h2 {
       <tr>
         <td><?= htmlspecialchars($pedido['id_pedido']) ?></td>
         <td><?= htmlspecialchars($pedido['referencia']) ?></td>
-        <td>$ <?= number_format($pedido['total'], 2, ',', '.') ?></td>
+        <td><?= number_format($pedido['total'], 2) ?></td>
         <td><?= htmlspecialchars($pedido['estado']) ?></td>
+        <td><?= htmlspecialchars($pedido['fecha_pedido']) ?></td>
         <td><?= htmlspecialchars($pedido['fecha_entrega']) ?></td>
+        <td><?= htmlspecialchars($pedido['direccion']) ?></td>
+        <td><?= htmlspecialchars($pedido['observaciones']) ?></td>
+        <td><?= htmlspecialchars($pedido['tracking']) ?></td>
+        <td><?= htmlspecialchars($pedido['tiempo_estimado_horas']) ?></td>
+        <td><?= htmlspecialchars($pedido['id_usuario']) ?></td>
+        <td><?= htmlspecialchars($pedido['metodo_pago']) ?></td>
         <td>
-          <button class="btn btn-sm btn-info" 
-            data-bs-toggle="modal" 
-            data-bs-target="#detalleModal"
-            data-id="<?= $pedido['id_pedido'] ?>"
-            data-referencia="<?= htmlspecialchars($pedido['referencia']) ?>"
-            data-direccion="<?= htmlspecialchars($pedido['direccion_entrega']) ?>"
-            data-observaciones="<?= htmlspecialchars($pedido['observaciones']) ?>"
-            data-tracking="<?= htmlspecialchars($pedido['tracking']) ?>"
-            data-tiempo="<?= htmlspecialchars($pedido['tiempo_estimado_horas']) ?>"
-            data-usuario="<?= htmlspecialchars($pedido['id_usuario']) ?>"
-            data-metodo="<?= htmlspecialchars($pedido['metodo_pago']) ?>"
-            data-archivo="<?= $pedido['archivo_adjunto'] ?>"
-            data-fecha_pedido="<?= htmlspecialchars($pedido['fecha_pedido']) ?>"
-            data-detalles="<?= htmlspecialchars($pedido['detalles']) ?>"
-          >Ver detalles</button>
+          <?php if (!empty($pedido['archivo_adjunto'])): ?>
+            <img src="../../public/files/uploads/pedidos/<?= htmlspecialchars($pedido['archivo_adjunto']) ?>" width="80">
+          <?php else: ?>
+            Sin archivo
+          <?php endif; ?>
+        </td>
+        <td>
           <a href="edit.php?da=Orders-3&lla=<?= $pedido['id_pedido'] ?>" title="Editar">
             <i class="fas fa-edit icono-editar"></i>
           </a>
-          
           <a href="#" title="Borrar" onclick="borrarPedido(<?= $pedido['id_pedido'] ?>, '<?= $pedido['archivo_adjunto'] ?>')">
             <i class="fas fa-trash-alt icono-borrar"></i>
           </a>
@@ -319,155 +322,22 @@ h2 {
   </table>
 </div>
 
-<!-- Modal Detalles -->
-      <div class="modal-header bg-primary text-white">
-<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Detalles del Pedido</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Referencia:</strong> <span id="modal-referencia"></span></p>
-        <p><strong>Dirección:</strong> <span id="modal-direccion"></span></p>
-        <p><strong>Observaciones:</strong> <span id="modal-observaciones"></span></p>
-        <p><strong>Tracking:</strong> <span id="modal-tracking"></span></p>
-        <p><strong>Tiempo estimado:</strong> <span id="modal-tiempo"></span> horas</p>
-        <p><strong>Usuario:</strong> <span id="modal-usuario"></span></p>
-        <p><strong>Método de pago:</strong> <span id="modal-metodo"></span></p>
-        <p><strong>Archivo:</strong><br><img id="modal-archivo" src="" width="150"></p>
-        <p><strong>Fecha pedido:</strong> <span id="modal-fecha-pedido"></span></p>
-        <p><strong>Detalles:</strong> <span id="modal-detalles"></span></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Script para llenar el modal -->
-<script>
-  const detalleModal = document.getElementById('detalleModal');
-  detalleModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    document.getElementById('modal-referencia').textContent = button.getAttribute('data-referencia');
-    document.getElementById('modal-direccion').textContent = button.getAttribute('data-direccion');
-    document.getElementById('modal-observaciones').textContent = button.getAttribute('data-observaciones');
-    document.getElementById('modal-tracking').textContent = button.getAttribute('data-tracking');
-    document.getElementById('modal-tiempo').textContent = button.getAttribute('data-tiempo');
-    document.getElementById('modal-usuario').textContent = button.getAttribute('data-usuario');
-    document.getElementById('modal-metodo').textContent = button.getAttribute('data-metodo');
-    document.getElementById('modal-fecha-pedido').textContent = button.getAttribute('data-fecha_pedido');
-    document.getElementById('modal-detalles').textContent = button.getAttribute('data-detalles');
-    const archivo = button.getAttribute('data-archivo');
-    document.getElementById('modal-archivo').src = '../../public/files/uploads/pedidos/' + archivo;
-  });
-</script>
-
-
- <!-- Paginación....... -->
- <nav>
-        <ul class="pagination">
-            <?php if ($página_actual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="Primera">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $página_actual - 1 ?>" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-
-            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                <li class="page-item <?= ($i == $página_actual) ? 'active' : '' ?>">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($página_actual < $total_paginas): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $página_actual + 1 ?>" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $total_paginas ?>" aria-label="Última">
-                        <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
-</div>
-
 
 <script>
 function borrarPedido(id, imagen) {
-    if (confirm('¿Está seguro de borrar el pedido?')) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'delete.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert('Pedido eliminado correctamente.');
-                location.reload();
-            } else {
-                alert('Error al eliminar el pedido.');
-            }
-        };
-        xhr.send('id_pedido=' + id + '&imagen=' + imagen);
-    }
+  if (confirm('¿Está seguro de borrar el pedido?')) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'delete.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        alert('Pedido eliminado correctamente.');
+        location.reload();
+      } else {
+        alert('Error al eliminar el pedido.');
+      }
+    };
+    xhr.send('id_pedido=' + id + '&imagen=' + imagen);
+  }
 }
 </script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('input[name="search-query"]');
-    const resultsTable = document.querySelector('tbody');
-
-    searchInput.addEventListener('input', function () {
-        const searchQuery = searchInput.value;
-
-        // Crear una solicitud AJAX
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Actualizar la tabla con los resultados......
-                resultsTable.innerHTML = xhr.responseText;
-            } else {
-                console.error('Error al realizar la búsqueda.');
-            }
-        };
-
-        xhr.send('searchQuery=' + encodeURIComponent(searchQuery));
-    });
-});
-</script>
-
-
-<script>
-    
-document.getElementById('exportPdf').addEventListener('click', function (e) {
-    e.preventDefault();
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.text("Este es un PDF generado con jsPDF", 10, 10);
-    doc.save('documento.pdf');
-});
-
-document.getElementById('help').addEventListener('click', function (e) {
-    e.preventDefault();
-    const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
-    helpModal.show();
-});
-</script>
-
-</body>
-</html>

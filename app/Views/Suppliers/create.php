@@ -88,13 +88,9 @@ if (!$resultados) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
-
-
 <style>
-/* Estilos personalizados */
 body {
     background-color: #000;
     color: #f5f5f5;
@@ -108,7 +104,6 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
-
 .table {
     max-width: 1200px; 
     margin: 0 auto; /* centra horizontalmente */
@@ -118,8 +113,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
 }
-
-
 
 .table th {
     background-color: hsl(263, 93.20%, 17.30%);
@@ -243,17 +236,14 @@ h2 {
     color: #0066cc;
   }
 
-
   .modal-title{
     color: #000;
   }
-/* Ajuste de estilos para el editor CKEditor */
+
 .ck-editor__editable {
     min-height: 150px;
 }
 </style>
-
-
 
     <div class="panel">
         <div class="column">

@@ -34,11 +34,10 @@ mysqli_set_charset($mysqli, 'utf8');
     $referencia = $_POST['referencia'];
     $total = $_POST['total'];
     $estado = $_POST['estado'];
-    $direccion_entrega = $_POST['direccion_entrega'];
+    $direccion = $_POST['direccion'];
     $observaciones = $_POST['observaciones'];
     $tracking = $_POST['tracking'];
     $tiempo_estimado_horas = $_POST['tiempo_estimado_horas'];
-    $detalles = $_POST['detalles'];
     $metodo_pago = $_POST['metodo_pago'];
     $metodo_pago = $_POST['metodo_pago'];
     $archivo_adjunto =$_FILES['archivo_adjunto'];
@@ -61,7 +60,7 @@ mysqli_set_charset($mysqli, 'utf8');
     $tiempo_estimado_horas  = $diferencia->format('%d días y %h horas');
 
     // Inserta el pedido usando el método correspondiente del modelo......
-    $resultado = $modelo->insertarPedido($referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
+    $resultado = $modelo->insertarPedido($referencia, $total, $estado, $direccion, $observaciones, $tracking, $tiempo_estimado_horas,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
 
    
     if ($resultado) {
@@ -72,6 +71,6 @@ mysqli_set_charset($mysqli, 'utf8');
         echo "Error al insertar el pedido.";
     }
 
-    // Cierra la conexión a la base de datos
+    
     mysqli_close($mysqli);
 }

@@ -109,8 +109,7 @@ header("Location: index.php");
 
 
 <br>
-
-              <a href="recuperar_contrasena.php"><i class="fa fa-question-circle"></i> 
+ <a href="recuperar_contrasena.php"><i class="fa fa-question-circle"></i> 
               ¿Olvidaste tu contraseña?</a>
 
 

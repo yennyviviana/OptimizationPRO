@@ -16,16 +16,15 @@ class PedidoModel {
 
 
     //insertando base datos tabla pedidos......
-    public function insertarPedido($referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario){
+    public function insertarPedido($referencia, $total, $estado, $direccion, $observaciones, $tracking, $tiempo_estimado_horas,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario){
         // Escapar los datos para evitar inyecciones SQL
         $referencia = mysqli_real_escape_string($this->conexion, $referencia);
         $total = mysqli_real_escape_string($this->conexion, $total);
         $estado = mysqli_real_escape_string($this->conexion, $estado);
-        $direccion_entrega = mysqli_real_escape_string($this->conexion, $direccion_entrega);
+        $direccion = mysqli_real_escape_string($this->conexion, $direccion);
         $observaciones = mysqli_real_escape_string($this->conexion, $observaciones);
         $tracking = mysqli_real_escape_string($this->conexion, $tracking);
         $tiempo_estimado_horas	 = mysqli_real_escape_string($this->conexion, $tiempo_estimado_horas);
-        $detalles = mysqli_real_escape_string($this->conexion, $detalles);
         $metodo_pago = mysqli_real_escape_string($this->conexion, $metodo_pago);
         $fecha_pedido = mysqli_real_escape_string($this->conexion, $fecha_pedido);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
@@ -43,8 +42,8 @@ class PedidoModel {
           //sProcesar la imagen.......
           $nombreArchivo = $this->procesarArchivo($archivo_adjunto);
        
-          // Preparar la consulta SQL
-          $consulta = "INSERT INTO pedidos(referencia,total, estado, direccion_entrega, observaciones, tracking, tiempo_estimado_horas,detalles, metodo_pago, archivo_adjunto, fecha_pedido, fecha_entrega, id_usuario) VALUES ( '$referencia', '$total', '$estado', '$direccion_entrega', '$observaciones', '$tracking', '$tiempo_estimado_horas','$detalles','$metodo_pago','$archivo_adjunto', '$fecha_pedido', '$fecha_entrega', '$id_usuario')";
+          // Preparar la consulta SQL.....
+          $consulta = "INSERT INTO pedidos(referencia,total, estado, direccion, observaciones, tracking, tiempo_estimado_horas, metodo_pago, archivo_adjunto, fecha_pedido, fecha_entrega, id_usuario) VALUES ( '$referencia', '$total', '$estado', '$direccion', '$observaciones', '$tracking', '$tiempo_estimado_horas','$metodo_pago','$archivo_adjunto', '$fecha_pedido', '$fecha_entrega', '$id_usuario')";
       
           // Ejecutar la consulta
           if (mysqli_query($this->conexion, $consulta)) {
@@ -55,16 +54,15 @@ class PedidoModel {
       }
   
 
-      public function actualizarPedido($id_pedido,$referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario) {
+      public function actualizarPedido($id_pedido,$referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario) {
         // Escapar los datos para evitar inyecciones SQL.....
         $referencia = mysqli_real_escape_string($this->conexion, $referencia);
         $total = mysqli_real_escape_string($this->conexion, $total);
         $estado = mysqli_real_escape_string($this->conexion, $estado);
-        $direccion_entrega = mysqli_real_escape_string($this->conexion, $direccion_entrega);
+        $direccion = mysqli_real_escape_string($this->conexion, $direccion);
         $observaciones = mysqli_real_escape_string($this->conexion, $observaciones);
         $tracking = mysqli_real_escape_string($this->conexion, $tracking);
         $tiempo_estimado_horas	 = mysqli_real_escape_string($this->conexion, $tiempo_estimado_horas);
-        $detalles = mysqli_real_escape_string($this->conexion, $detalles);
         $metodo_pago = mysqli_real_escape_string($this->conexion, $metodo_pago);
         $fecha_pedido = mysqli_real_escape_string($this->conexion, $fecha_pedido);
         $fecha_entrega = mysqli_real_escape_string($this->conexion, $fecha_entrega);
@@ -91,7 +89,7 @@ class PedidoModel {
         }
     
         // Construir la consulta de actualización......                                                                                                                                                                                                                                                       
-        $consulta = "UPDATE pedidos SET  referencia ='$referencia', total = '$total', estado = '$estado', direccion_entrega = '$direccion_entrega', observaciones = '$observaciones', tracking = '$tracking', tiempo_estimado_horas = '$tiempo_estimado_horas', detalles ='$detalles', metodo_pago = '$metodo_pago', archivo_adjunto = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
+        $consulta = "UPDATE pedidos SET  referencia ='$referencia', total = '$total', estado = '$estado', direccion_entrega = '$direccion', observaciones = '$observaciones', tracking = '$tracking', tiempo_estimado_horas = '$tiempo_estimado_horas', metodo_pago = '$metodo_pago', archivo_adjunto = '$nombreArchivo', fecha_pedido = '$fecha_pedido', fecha_entrega = '$fecha_entrega', id_usuario = '$id_usuario' WHERE id_pedido = '$id_pedido'";
     
         // Ejecutar la consulta
         if (mysqli_query($this->conexion, $consulta)) {
@@ -119,4 +117,4 @@ class PedidoModel {
 
 
 
-//var_dump($_POST);
+var_dump($_POST);
