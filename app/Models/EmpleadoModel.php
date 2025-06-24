@@ -25,38 +25,19 @@ class EmpleadoModel {
         // Escapar las variables para prevenir inyección SQL
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $cargo = mysqli_real_escape_string($this->conexion, $cargo);
-        $tipo_contrato = mysqli_real_escape_string($this->conexion, $tipo_contrato);
-        $fecha_contratacion = mysqli_real_escape_string($this->conexion, $fecha_contratacion);
-        $horas_trabajo = mysqli_real_escape_string($this->conexion, $horas_trabajo);
-        $tarifa_hora = mysqli_real_escape_string($this->conexion, $tarifa_hora);
-        $salario = mysqli_real_escape_string($this->conexion, $salario);
         $estado = mysqli_real_escape_string($this->conexion, $estado);
         $departamento = mysqli_real_escape_string($this->conexion, $departamento);
         $tipo_documento = mysqli_real_escape_string($this->conexion, $tipo_documento);
         $documento_identidad = mysqli_real_escape_string($this->conexion, $documento_identidad);
         $direccion = mysqli_real_escape_string($this->conexion, $direccion);
-        $ciudad = mysqli_real_escape_string($this->conexion, $ciudad);
-        $pais = mysqli_real_escape_string($this->conexion, $pais);
         $telefono = mysqli_real_escape_string($this->conexion, $telefono);
-        $correo = mysqli_real_escape_string($this->conexion, $correo);
-        $fecha_nacimiento = mysqli_real_escape_string($this->conexion, $fecha_nacimiento);
-        $genero = mysqli_real_escape_string($this->conexion, $genero);
-        $estado_civil = mysqli_real_escape_string($this->conexion, $estado_civil);
-        $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
-        $descripcion = mysqli_real_escape_string($this->conexion, $descripcion_profesional);
-        $fecha_creacion = mysqli_real_escape_string($this->conexion, $fecha_creacion);
-        $fecha_modificacion = mysqli_real_escape_string($this->conexion, $fecha_nacimiento);
+      
     
-        // Procesar la imagen de perfil
-        $nombreArchivoImagen = $this->procesarArchivo($Imagen, 'Imagen');
+      
     
         // Procesar el archivo de documentación
-        $nombreArchivoDocumento = $this->procesarArchivo($documentacion, 'documento');
-    
-        // Verificar si se procesaron correctamente los archivos
-        if ($nombreArchivoImagen === false || $nombreArchivoDocumento === false) {
-            return false; 
-        }
+        $nombreArchivoDocumento = $this->procesarArchivo($documento_identidad, 'documento');
+
     
         // Preparar la consulta SQL para insertar el empleado.......
         $consulta = "INSERT INTO empleados (nombre, cargo, tipo_contrato, fecha_contratacion, horas_trabajo, tarifa_hora, salario, estado, departamento,tipo_documento, documento_identidad, direccion, ciudad,pais, telefono, correo, fecha_nacimiento,genero, estado_civil, documentacion, descripcion, fecha_creacion, fecha_modificacion) 
@@ -89,7 +70,7 @@ class EmpleadoModel {
             return false; 
         }
     
-        $directorioBase = __DIR__ . '/../public/img/uploads/empleados/';
+        $directorioBase = __DIR__ . '/../public/files/uploads/empleados/';
     
         // Crear el directorio si no existe
         if (!is_dir($directorioBase)) {
