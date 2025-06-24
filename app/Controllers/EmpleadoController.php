@@ -25,9 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $documento_identidad = $_POST['documento_identidad'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
-    $documento_identidad= $_FILES['documento_identidad'] ?? null;
-    
-    
+   
     
     
     // Instancia el modelo.....

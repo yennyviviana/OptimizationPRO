@@ -1,13 +1,9 @@
-<?php
-
+ <?php
 session_start();
 
-
-if(!isset($_SESSION['id_usuario'])){
+if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
 }
-
-
 
 define('db_host', 'localhost');
 define('db_username', 'root');
@@ -24,8 +20,7 @@ if (!$mysqli) {
 mysqli_set_charset($mysqli, 'utf8');
 
 
-
-// Establecer los valores de paginación
+// Establecer los valores de paginación......
 $registros_por_pagina = 10;  // Número de registros por página
 $página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
 $inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor de OFFSET
@@ -49,15 +44,14 @@ $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 
 
-
 // Obtener el término de búsqueda
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 
 // Construir la consulta SQL con filtro si hay búsqueda
 if (!empty($searchQuery)) {
     $consulta = "SELECT * FROM  empleados WHERE 
-                 nombre_completo LIKE '%$searchQuery%' OR 
-                 cargo LIKE '%$searchQuery%' OR 
+          nombre_completo LIKE '%$searchQuery%' OR 
+                 estado LIKE '%$searchQuery%' OR 
                  direccion LIKE '%$searchQuery%'
                  ORDER BY id_empleado";
 } else {
@@ -76,22 +70,183 @@ if (!$resultados) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo de pedidos</title>
+    <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="style.css" type="text/css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    
+<style>
+/* Estilos personalizados */
+body {
+    background-color: #000;
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-container {
+    background-color: #1a1a1a; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
+.table {
+    max-width: 1200px; 
+    margin: 0 auto;
+    overflow-x: auto; 
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+
+
+.table th {
+    background-color: hsl(263, 93.20%, 17.30%);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+}
+
+.table td {
+    padding: 10px;
+    color: #333;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #d1ecf1;
+    transition: background-color 0.3s;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: hsl(240, 0.90%, 21.00%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.column {
+    width: 48%;
+}
+
+h2 {
+    color: whitesmoke;
+    margin-bottom: 15px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    background-color: darkblue;
+    color: #000;
+}
+
+.nav .active {
+    color: #ff6f61;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #333;
+    color: #ff6f61;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+.icono-editar {
+  color: #007bff;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.icono-editar:hover {
+  color: #0056b3;
+}
+
+.icono-borrar {
+  color: #dc3545; 
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.icono-borrar:hover {
+  color: #a71d2a;
+}
+
+  .mi-estilo-modal {
+    border: 3px solid #007bff;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  }
+
+  .modal-body {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .modal-body p span {
+    font-weight: bold;
+    color: #0066cc;
+  }
+
+
+  .modal-title{
+    color: #000;
+  }
+/* Ajuste de estilos para el editor CKEditor */
+.ck-editor__editable {
+    min-height: 150px;
+}
+</style>
 
     <div class="panel">
         <div class="column">
-            <h2>Módulo de  empleados</h2>
+            <h2>Orders Module</h2>
             <ul class="nav">
-                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Employees-2'>Insertar  empleados</a></li>
+                <li><i class="fas fa-edit icon"></i><a href='insert.php?da=Orders-2'>Order Insert</a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="/OptimizationPRO/app/main.php">
                                 <span data-feather="Home"></span>
-                                 Regresar
+                                Go back
                             </a>
                         </li>
             </ul>
@@ -100,173 +255,74 @@ if (!$resultados) {
 
     <br>
 <div class="container-fluid">
-    
-
     <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
-               placeholder="Buscar pedidos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
+               placeholder="Search orders..." value="<?php echo htmlspecialchars($searchQuery); ?>">
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-search"></i> Buscar
+            <i class="fas fa-search"></i>Search
         </button>
     </form>
 
-    
-    
-    <table class="table table-bordered table-hover">
-    <thead class="bg-primary text-white">
-            <tr>
-            <tr>
-  <th scope="col">Id</th>
-  <th scope="col">Nombre</th>
-  <th scope="col">Cargo</th>
-  <th scope="col">Estado</th>
-  <th scope="col">Departamento</th>
-  <th scope="col">Tipo Documento</th>
-  <th scope="col">Documento Identidad</th>
-  <th scope="col">Dirección</th>
-  <th scope="col">Teléfono</th>
-  <th scope="col">Acciones</th>
+
+    <div class="table">
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Estado</th>
+        <th>Departamento</th>
+        <th>Tipo Documento</th>
+        <th>Documento</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Acciones</th> <!-- ✅ Solo columna de acciones -->
+      </tr>
     </thead>
     <tbody>
-    <?php while ($empleado = $resultados->fetch_assoc()): ?>  
-
-
-    
-    <tr>
-    <td><?php echo htmlspecialchars($empleado['id_empleado']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['nombre_completo']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['cargo']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['estado']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['departamento']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['tipo_documento']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['documento_identidad']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['direccion']); ?></td>
-        <td><?php echo htmlspecialchars($empleado['telefono']); ?></td>
-        
-
-<td><img src="../../public/img/empleados/<?php echo $empleado['documento_identidad']; ?>" width="100" alt=""></td>
-
+      <?php while ($empleado = $resultados->fetch_assoc()): ?>
+      <tr>
+        <td><?= htmlspecialchars($empleado['id_empleado']) ?></td>
+        <td><?= htmlspecialchars($empleado['nombre_completo']) ?></td>
+        <td><?= htmlspecialchars($empleado['cargo']) ?></td>
+        <td><?= htmlspecialchars($empleado['estado']) ?></td>
+        <td><?= htmlspecialchars($empleado['departamento']) ?></td>
+        <td><?= htmlspecialchars($empleado['tipo_documento']) ?></td>
+        <td><?= htmlspecialchars($empleado['documento_identidad']) ?></td>
+        <td><?= htmlspecialchars($empleado['direccion']) ?></td>
+        <td><?= htmlspecialchars($empleado['telefono']) ?></td>
         <td>
-              
-                  <!-- Botón para editar -->  
-                <a href="edit.php?da=Employees-3&lla=<?php echo $empleado['id_empleado']; ?>"  class="btn btn-custom-green btn-editar">
-                <i class="fas fa-edit icon"></i> Editar
-
-<!-- Botón de Borrar -->
-<a href="#" class="btn btn-danger btn-borrar" onclick="borrarEmpleado(<?php echo $empleado['id_empleado']; ?>,  '<?php echo $empleado['documento_identidad']; ?>')">
-    <i class="fas fa-trash-alt"></i> Borrar
-</a>
-</tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
- <!-- Paginación -->
- <nav>
-        <ul class="pagination">
-            <?php if ($página_actual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="Primera">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $página_actual - 1 ?>" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-
-            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                <li class="page-item <?= ($i == $página_actual) ? 'active' : '' ?>">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($página_actual < $total_paginas): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $página_actual + 1 ?>" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?= $total_paginas ?>" aria-label="Última">
-                        <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
+          <a href="edit.php?da=Employees-3&lla=<?= $empleado['id_empleado'] ?>" class="btn btn-sm btn-success mb-1">
+            <i class="fas fa-edit"></i> Editar
+          </a>
+          <a href="#" class="btn btn-sm btn-danger" onclick="borrarEmpleado(<?= $empleado['id_empleado'] ?>, '<?= $empleado['documento_identidad'] ?>')">
+            <i class="fas fa-trash-alt"></i> Borrar
+          </a>
+        </td>
+      </tr>
+      <?php endwhile; ?>
+    </tbody>
+  </table>
 </div>
 
 
 <script>
-function borrarEmpleado(id, imagen, documentacionArchivo) {
-    if (confirm('¿Está seguro de borrar el empleado?')) {
-        // Realizar una petición AJAX para borrar el pedido
-        var xhr = new XMLHttpRequest();
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Éxito en la eliminación del pedido
-                    alert('Empleado eliminado correctamente.');
-                    // Recargar la página para reflejar los cambios
-                    location.reload();
-                } else {
-                    // Error al eliminar el pedido
-                    alert('Error al eliminar el empleado.');
-                }
-            }
-        };
-
-        // Configurar la URL de la petición AJAX
-        var url = 'delete.php?lla=' + encodeURIComponent(id) + 
-                  '&imagen=' + encodeURIComponent(imagen) + 
-                  '&documentacion_archivo=' + encodeURIComponent(documentacionArchivo);
-
-        // Configurar la petición AJAX
-        xhr.open('GET', url, true);
-        // Enviar la petición
-        xhr.send();
-    }
+function borrarEmpleado(id, imagen) {
+  if (confirm('¿Está seguro de borrar el empleado?')) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'delete.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        alert('Empleado eliminado correctamente.');
+        location.reload();
+      } else {
+        alert('Error al eliminar el  empleado.');
+      }
+    };
+    xhr.send('id_empleado=' + id + '&imagen=' + imagen);
+  }
 }
 </script>
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('input[name="search-query"]');
-    const resultsTable = document.querySelector('tbody');
-
-    searchInput.addEventListener('input', function () {
-        const searchQuery = searchInput.value;
-
-        // Crear una solicitud AJAX
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Actualizar la tabla con los resultados
-                resultsTable.innerHTML = xhr.responseText;
-            } else {
-                console.error('Error al realizar la búsqueda.');
-            }
-        };
-
-        xhr.send('searchQuery=' + encodeURIComponent(searchQuery));
-    });
-});
-</script>
-
-
-</body>
-</html>
