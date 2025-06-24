@@ -1,5 +1,5 @@
 <?php
-// Conexión a la base de datos.......
+header('Content-Type: application/json');
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
@@ -11,11 +11,29 @@ if (!$mysqli) {
 }
 mysqli_set_charset($mysqli, 'utf8');
 
-// Verifica si hay datos POST y la acción que se quiere realizar
+// Cargar eventos (GET)
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $result = $mysqli->query("SELECT id, title, start, end FROM eventos");
+    $events = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $events[] = [
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'start' => $row['start'],
+            'end' => $row['end']
+        ];
+    }
+
+    echo json_encode($events);
+    $mysqli->close();
+    exit;
+}
+
+// Procesar acciones (POST)
 $action = $_POST['action'] ?? null;
 
 if ($action === 'create') {
-    // Crear un nuevo evento
     $title = $_POST['title'] ?? '';
     $start = $_POST['start'] ?? '';
     $end = $_POST['end'] ?? '';
@@ -30,7 +48,6 @@ if ($action === 'create') {
     }
     $stmt->close();
 } elseif ($action === 'edit') {
-    // Editar un evento existente
     $id = $_POST['id'] ?? 0;
     $title = $_POST['title'] ?? '';
     $start = $_POST['start'] ?? '';
@@ -46,7 +63,6 @@ if ($action === 'create') {
     }
     $stmt->close();
 } elseif ($action === 'delete') {
-    // Eliminar un evento
     $id = $_POST['id'] ?? 0;
 
     $stmt = $mysqli->prepare("DELETE FROM eventos WHERE id = ?");
@@ -59,7 +75,6 @@ if ($action === 'create') {
     }
     $stmt->close();
 } else {
-    // Acción no válida
     echo json_encode(['success' => false, 'error' => 'Acción no válida']);
 }
 

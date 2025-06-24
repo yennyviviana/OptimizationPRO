@@ -69,6 +69,13 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
     opacity: 1 !important;
 }
 
+
+ .evento-pasado {
+    text-decoration: line-through;
+    opacity: 0.5;
+    color: #000;
+  }
+
 </style>
 </head>
 <body>
@@ -181,10 +188,10 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="eventForm">
-      <div class="modal-header">
-  <h5 class="modal-title" id="eventModalLabel">Gestionar Evento</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="eventModalLabel">Gestionar Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
 
         <div class="modal-body">
           <div class="mb-3">
@@ -201,7 +208,6 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
           </div>
         </div>
         <div class="modal-footer">
-          <!-- Botones dinámicos -->
           <button type="button" id="saveEventButton" class="btn btn-primary">Crear</button>
           <button type="button" id="editEventButton" class="btn btn-success" style="display: none;">Guardar Cambios</button>
           <button type="button" id="deleteEventButton" class="btn btn-danger" style="display: none;">Eliminar</button>
@@ -219,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalBootstrap = new bootstrap.Modal(modalEl);
     let selectedEventId = null; 
 
-    const events = [ // Ejemplo de eventos
+    const events = [
         { title: 'Evento 1', start: '2025-01-20T10:00:00', end: '2025-01-20T12:00:00', id: 1 },
         { title: 'Evento 2', start: '2025-01-20T14:00:00', end: '2025-01-20T16:00:00', id: 2 },
     ];
@@ -229,36 +235,39 @@ document.addEventListener('DOMContentLoaded', function () {
         locale: 'es',
         editable: true,
         selectable: true,
-        events: events,
+      events: 'Views/eventos.php',
+
+
         dateClick: function (info) {
-            // Limpiar formulario para Crear.....
             document.getElementById('eventForm').reset();
             document.getElementById('start').value = info.dateStr + "T09:00";
             document.getElementById('end').value = info.dateStr + "T10:00";
-
             selectedEventId = null;
-            modalBootstrap.show();
-
-            // Mostrar solo el botón Crear.......
             toggleButtons({ save: true });
+            modalBootstrap.show();
         },
+
         eventClick: function (info) {
             const event = info.event;
             document.getElementById('title').value = event.title;
             document.getElementById('start').value = event.start.toISOString().slice(0, 16);
             document.getElementById('end').value = event.end ? event.end.toISOString().slice(0, 16) : '';
-
             selectedEventId = event.id;
-            modalBootstrap.show();
-
-            // Mostrar los botones Editar y Eliminar........
             toggleButtons({ edit: true, delete: true });
+            modalBootstrap.show();
+        },
+
+        eventDidMount: function(info) {
+            const now = new Date();
+            const eventEnd = info.event.end || info.event.start;
+            if (new Date(eventEnd) < now) {
+                info.el.classList.add('evento-pasado');
+            }
         }
     });
 
     calendar.render();
 
-    // Botón Crear..........
     document.getElementById('saveEventButton').addEventListener('click', function () {
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
@@ -280,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Editar........
     document.getElementById('editEventButton').addEventListener('click', function () {
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
@@ -305,7 +313,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Eliminar........
     document.getElementById('deleteEventButton').addEventListener('click', function () {
         fetch('Views/eventos.php', {
             method: 'POST',
@@ -324,17 +331,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Botón Cerrar (cerrar el modal con JavaScript).....
     document.getElementById('closeModalButton').addEventListener('click', function () {
-        modalBootstrap.hide(); // Cerrar el modal programáticamente
+        modalBootstrap.hide();
     });
-    // Función para alternar botones según la acción..........
+
     function toggleButtons({ save = false, edit = false, delete: del = false }) {
         document.getElementById('saveEventButton').style.display = save ? 'block' : 'none';
         document.getElementById('editEventButton').style.display = edit ? 'block' : 'none';
         document.getElementById('deleteEventButton').style.display = del ? 'block' : 'none';
     }
 });
+
 
         // Gráficos..........
         const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
