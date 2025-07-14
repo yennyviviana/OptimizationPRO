@@ -91,7 +91,7 @@ header("Location: index.php");
     
 
     <div class="logo-container">
-        <img src="public/img/1.jpg" width="1000" height="600" alt="imagen de de la ERP">
+        <img src="public/img/erp.png" width="1000" height="600" alt="imagen de de la ERP">
     </div>
       
     

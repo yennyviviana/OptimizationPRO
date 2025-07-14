@@ -56,7 +56,6 @@ if (isset($_REQUEST['nombre_usuario'])) {
     <link href="fontawesome/css/all.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/fed2435e21.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Custom CSS -->
     <link href="public/css/style.css" type="text/css" rel="stylesheet">
     <style>
            .responsive {
