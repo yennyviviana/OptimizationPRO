@@ -355,7 +355,7 @@ h2 {
   });
 </script>
 
-<!-- Función para borrar proveedor -->
+
 <script>
 function borrarProveedor(id, imagen) {
   if (confirm('¿Está seguro de borrar el proveedor?')) {

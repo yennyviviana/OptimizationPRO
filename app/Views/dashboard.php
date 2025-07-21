@@ -121,15 +121,43 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Startup's</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-    <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="addElement">Agregar Elemento.</button>
-    </div>
+    
+    
 
     <div class="btn-group mr-2">
-        <button class="btn btn-sm btn-outline-secondary" id="deleteElement">Eliminar.</button>
+       
         <button class="btn btn-sm btn-outline-secondary" id="exportPdf">Exportar Pdf.</button>
-        <!-- Botón para abrir el modal de ayuda -->
-        <button class="btn btn-sm btn-outline-secondary" id="help">Ayuda</button>
+
+        <!-- Botón "Ayuda" que abre el modal de chat -->
+<button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#chatModal">
+  Ayuda
+</button>
+
+        <!-- Modal de Chat -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chatModalLabel">Chat de Ayuda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí va el contenido del chat -->
+        <div id="chatMessages" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+          <!-- Mensajes aparecerán aquí -->
+        </div>
+        <div class="mt-3">
+          <input type="text" id="chatInput" class="form-control" placeholder="Escribe tu mensaje..." />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="sendChat">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
 </div>
 
@@ -456,6 +484,23 @@ document.getElementById('help').addEventListener('click', function (e) {
 });
 
 
+
+  document.getElementById('sendChat').addEventListener('click', function () {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (message !== '') {
+      const container = document.getElementById('chatMessages');
+      const msgDiv = document.createElement('div');
+      msgDiv.textContent = 'Tú: ' + message;
+      container.appendChild(msgDiv);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+    }
+  });
+
+
 </script>
+
+<script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

@@ -278,7 +278,7 @@ h2 {
         <th>Documento</th>
         <th>Dirección</th>
         <th>Teléfono</th>
-        <th>Acciones</th> <!-- ✅ Solo columna de acciones -->
+        <th>Acciones</th> 
       </tr>
     </thead>
     <tbody>

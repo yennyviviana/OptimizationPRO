@@ -26,8 +26,8 @@ mysqli_set_charset($mysqli, 'utf8');
 
     
 // Establecer los valores de paginación
-$registros_por_pagina = 10;  // Número de registros por página
-$página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual
+$registros_por_pagina = 10;  
+$página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
 $inicio = ($página_actual - 1) * $registros_por_pagina;  // Calcular el valor de OFFSET
 
 // Consulta SQL para obtener los registros
@@ -103,7 +103,6 @@ if (!$resultados) {
 <div class="container-fluid">
     
 
-    <!-- Formulario de búsqueda.....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
                placeholder="Buscar pedidos..." value="<?php echo htmlspecialchars($searchQuery); ?>">
@@ -154,9 +153,6 @@ if (!$resultados) {
         </table>
     </div>
 </div>
-
-
-
 
 
  <!-- Paginación....... -->
@@ -229,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.addEventListener('input', function () {
         const searchQuery = searchInput.value;
 
-        // Crear una solicitud AJAX
+        // Crear una solicitud AJAX......
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'search.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

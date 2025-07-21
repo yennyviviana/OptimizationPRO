@@ -265,64 +265,100 @@ h2 {
     </form>
 
 
-
-    <div class="table">
+   
+    <div class="table-responsive">
   <table class="table table-bordered table-hover">
-    <thead>
+    <thead class="bg-primary text-white">
       <tr>
-        <th>ID</th>
+        <th>ID Pedido</th>
         <th>Referencia</th>
         <th>Total</th>
         <th>Estado</th>
         <th>Fecha Pedido</th>
         <th>Fecha Entrega</th>
-        <th>Dirección</th>
-        <th>Observaciones</th>
-        <th>Tracking</th>
-        <th>Tiempo Estimado (horas)</th>
-        <th>Usuario</th>
-        <th>Método de Pago</th>
-        <th>Archivo</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <?php while ($pedido = $resultados->fetch_assoc()): ?>
-      <tr>
-        <td><?= htmlspecialchars($pedido['id_pedido']) ?></td>
-        <td><?= htmlspecialchars($pedido['referencia']) ?></td>
-        <td><?= number_format($pedido['total'], 2) ?></td>
-        <td><?= htmlspecialchars($pedido['estado']) ?></td>
-        <td><?= htmlspecialchars($pedido['fecha_pedido']) ?></td>
-        <td><?= htmlspecialchars($pedido['fecha_entrega']) ?></td>
-        <td><?= htmlspecialchars($pedido['direccion']) ?></td>
-        <td><?= htmlspecialchars($pedido['observaciones']) ?></td>
-        <td><?= htmlspecialchars($pedido['tracking']) ?></td>
-        <td><?= htmlspecialchars($pedido['tiempo_estimado_horas']) ?></td>
-        <td><?= htmlspecialchars($pedido['id_usuario']) ?></td>
-        <td><?= htmlspecialchars($pedido['metodo_pago']) ?></td>
-        <td>
-          <?php if (!empty($pedido['archivo_adjunto'])): ?>
-            <img src="../../public/files/uploads/pedidos/<?= htmlspecialchars($pedido['archivo_adjunto']) ?>" width="80">
-          <?php else: ?>
-            Sin archivo
-          <?php endif; ?>
-        </td>
-        <td>
-          <a href="edit.php?da=Orders-3&lla=<?= $pedido['id_pedido'] ?>" title="Editar">
-            <i class="fas fa-edit icono-editar"></i>
-          </a>
-          <a href="#" title="Borrar" onclick="borrarPedido(<?= $pedido['id_pedido'] ?>, '<?= $pedido['archivo_adjunto'] ?>')">
-            <i class="fas fa-trash-alt icono-borrar"></i>
-          </a>
-        </td>
-      </tr>
+        <tr>
+          <td><?= htmlspecialchars($pedido['id_pedido']) ?></td>
+          <td><?= htmlspecialchars($pedido['referencia']) ?></td>
+          <td><?= number_format($pedido['total'], 2) ?></td>
+          <td><?= htmlspecialchars($pedido['estado']) ?></td>
+          <td><?= htmlspecialchars($pedido['fecha_pedido']) ?></td>
+          <td><?= htmlspecialchars($pedido['fecha_entrega']) ?></td>
+          <td>
+            <?php if (!empty($pedido['archivo_adjunto'])): ?>
+              <img src="../../public/files/uploads/pedidos/<?= htmlspecialchars($pedido['archivo_adjunto']) ?>" width="80">
+            <?php else: ?>
+              Sin archivo
+            <?php endif; ?>
+
+            <button class="btn btn-sm btn-info"
+              data-bs-toggle="modal"
+              data-bs-target="#detalleModal"
+              data-direccion="<?= htmlspecialchars($pedido['direccion']) ?>"
+              data-observaciones="<?= htmlspecialchars($pedido['observaciones']) ?>"
+              data-tracking="<?= htmlspecialchars($pedido['tracking']) ?>"
+              data-tiempo_estimado_horas="<?= htmlspecialchars($pedido['tiempo_estimado_horas']) ?>"
+              data-archivo_adjunto="<?= htmlspecialchars($pedido['archivo_adjunto']) ?>"
+            >Ver detalles</button>
+
+            <a href="edit.php?da=Suppliers-3&lla=<?= $pedido['id_pedido'] ?>" title="Editar">
+              <i class="fas fa-edit icono-editar"></i>
+            </a>
+
+            <a href="#" title="Borrar" onclick="borrarPedido(<?= $pedido['id_pedido'] ?>, '<?= $pedido['archivo_adjunto'] ?>')">
+              <i class="fas fa-trash-alt icono-borrar"></i>
+            </a>
+          </td>
+        </tr>
       <?php endwhile; ?>
     </tbody>
   </table>
 </div>
 
+<!-- Modal Detalles -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="detalleModalLabel">Detalles del Pedido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Dirección:</strong> <span id="modal-direccion"></span></p>
+        <p><strong>Observaciones:</strong> <span id="modal-observaciones"></span></p>
+        <p><strong>Tracking:</strong> <span id="modal-tracking"></span></p>
+        <p><strong>Tiempo estimado (horas):</strong> <span id="modal-tiempo_estimado_horas"></span></p>
+        <p><strong>Archivo Adjunto:</strong><br>
+          <img id="modal-archivo_adjunto" src="" width="150">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script para llenar el modal con los datos -->
+<script>
+  const detalleModal = document.getElementById('detalleModal');
+  detalleModal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+
+    document.getElementById('modal-direccion').textContent = button.getAttribute('data-direccion');
+    document.getElementById('modal-observaciones').textContent = button.getAttribute('data-observaciones');
+    document.getElementById('modal-tracking').textContent = button.getAttribute('data-tracking');
+    document.getElementById('modal-tiempo_estimado_horas').textContent = button.getAttribute('data-tiempo_estimado_horas');
+    document.getElementById('modal-archivo_adjunto').src = '../../public/files/uploads/pedidos/' + button.getAttribute('data-archivo_adjunto');
+  });
+</script>
+
+
+     
+  
 <script>
 function borrarPedido(id, imagen) {
   if (confirm('¿Está seguro de borrar el pedido?')) {
