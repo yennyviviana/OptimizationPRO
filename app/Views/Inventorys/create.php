@@ -25,9 +25,6 @@ if (!$mysqli) {
 mysqli_set_charset($mysqli, 'utf8');
 
 
-
-
-
 // Establecer los valores de paginación
 $registros_por_pagina = 10;  // Número de registros por página
 $página_actual = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // Página actual

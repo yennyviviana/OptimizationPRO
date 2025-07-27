@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../Models/ClienteModel.php';
-
 session_start(); 
+
 
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
@@ -17,9 +17,9 @@ if($mysqli->connect_error){
     die('Error en la conexion' . $mysqli->connect_error);
     
 }
-// Verifica si se ha enviado el formulario.........
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Captura los datos del formulario.......
+// Verifica si se ha enviado el formulario.......
+  if ($_SERVER ['REQUEST_METHOD']  === 'POST'){
+    // Captura los datos del formulario.....
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $email = $_POST['email'];
@@ -35,13 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha_creacion = date('Y-m-d H:i:s');
     $fecha_modificacion = $_POST['fecha_modificacion'];
 
-    // Instancia el modelo.......
+    // Instancia el modelo......
     $modelo = new ClienteModel($mysqli);
 
     //  insertar el cliente usando el método del modelo........
     $resultado = $modelo->insertarCliente($nombre, $apellido, $email, $documento_identidad, $tipo_documento, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $notas, $fecha_creacion, $fecha_modificacion);
-
-    
 
     // Verifica si la inserción fue exitosa.......
     if ($resultado) {
@@ -51,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error al insertar el pedido.";
     }
 
-   
+   //cerrar conexion.
     mysqli_close($mysqli);
 }
 

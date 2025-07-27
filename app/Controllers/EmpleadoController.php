@@ -14,7 +14,7 @@ if($mysqli->connect_error){
     die('Error en la conexion' . $mysqli->connect_error);
 }
 
-// Verifica si se ha enviado el formulario
+// Verifica si se ha enviado el formulario......
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Captura los datos del formulario
     $nombre = $_POST['nombre'] ?? '';

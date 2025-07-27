@@ -46,9 +46,6 @@ $total_registros = $total_resultados->fetch_assoc()['total'];
 $total_paginas = ceil($total_registros / $registros_por_pagina);
 
 
-
-
-
 // Obtener el término de búsqueda
 $searchQuery = isset($_GET['search-query']) ? $_GET['search-query'] : '';
 

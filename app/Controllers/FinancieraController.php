@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Fetch inventory codes from the database.....
+// Fetch inventory codes from the database.......
 $sqlInventory = "SELECT codigo_inventario, nombre_producto FROM inventarios";
 $resultInventory = $mysqli->query($sqlInventory);
 $inventory = [];

@@ -152,8 +152,6 @@ if (!$resultados) {
 
         <tbody>
         <?php
-        
-
         // Iterar sobre los resultados y mostrarlos
         while ($producto = $resultados->fetch_assoc()) {
         ?>
@@ -192,9 +190,6 @@ if (!$resultados) {
     </table>
 
    
-
-
-
  <!-- Paginación -->
  <nav>
         <ul class="pagination">

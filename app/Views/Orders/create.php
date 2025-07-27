@@ -255,7 +255,7 @@ h2 {
 
     <br>
 <div class="container-fluid">
-    <!-- Formulario de búsqueda.....-->
+    <!-- Formulario de búsqueda .....-->
     <form method="GET" class="d-flex justify-content-center mb-3">
         <input type="text" name="search-query" class="form-control w-50 me-2" 
                placeholder="Search orders..." value="<?php echo htmlspecialchars($searchQuery); ?>">

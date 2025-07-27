@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Servir archivos estáticos del dashboard
+// Servir archivos estáticos del dashboard.......
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {

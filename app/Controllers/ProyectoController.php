@@ -19,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : $_SESSION['id_usuario'];
     $imagen_proyecto = isset($_FILES['imagen_proyecto']) ? $_FILES['imagen_proyecto'] : null;
 
+    
     // Crea la instancia del modelo y llama al método de inserción......
     $modelo = new ProyectoModel($mysqli);
-    $resultado = $modelo->insertarProyecto($nombre_proyecto, $descripcion, $fecha_inicio, $fecha_fin, $estado, $id_usuario, $imagen_proyecto);
+    $resultado = $modelo->insertarProyecto($nombre_proyecto, $descripcion,
+     $fecha_inicio, $fecha_fin, $estado, $id_usuario, $imagen_proyecto);
 
     // Verifica si la inserción fue exitosa
     if ($resultado) {

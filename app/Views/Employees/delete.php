@@ -33,7 +33,6 @@ if ($mysqli->query($borrarConsulta) === TRUE) {
     // Imprimir un mensaje de confirmación
     echo "Empleado eliminado correctamente.";
 } else {
-    // Imprimir mensaje de error si la consulta de eliminación falla
     echo "Error al intentar eliminar el registro: " . $mysqli->error;
 }
 

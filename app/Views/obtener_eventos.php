@@ -8,7 +8,7 @@ define('db_dbname', 'sofware_erp');
 
 
 try {
-    // Consulta para obtener los eventos
+    // Consulta para obtener los eventos.....
     $query = "SELECT title, start, end FROM eventos";
     $result = $conn->query($query);
 

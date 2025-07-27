@@ -43,7 +43,9 @@ if ($resultProducts->num_rows > 0) {
     
     
 // Inserta el pedido usando el método  del modelo.....
-    $resultado = $modelo->insertarProveedor($nombre_empresa, $direccion, $telefono, $correo_electronico, $condiciones_pago, $metodo_pago, $descripcion,$id_producto, $historial_pedidos, $archivo);
+    $resultado = $modelo->insertarProveedor($nombre_empresa, $direccion, $telefono,
+    $correo_electronico, $condiciones_pago, $metodo_pago, $descripcion,$id_producto,
+     $historial_pedidos, $archivo);
 
 
  // Verifica si la inserción fue exitosa.....

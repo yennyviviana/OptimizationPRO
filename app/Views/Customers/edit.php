@@ -20,7 +20,7 @@ if ($mysqli->connect_error) {
     die('Error en la conexion' . $mysqli->connect_error);
 }
 
-// Check if form is submitted (POST method)
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Captura los datos del formulario y valida su existencia
     $nombre = $_POST['nombre'];
@@ -60,7 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Actualizar el cliente en la base de datos
-        $consulta = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', email='$email', documento_identidad ='$documento_identidad', tipo_documento = '$tipo_documento', telefono='$telefono', direccion='$direccion', ciudad='$ciudad', estado='$estado', codigo_postal='$codigo_postal', pais='$pais', notas= '$notas', fecha_creacion='$fecha_creacion', fecha_modificacion='$fecha_modificacion' WHERE id_cliente='$llave'";
+        $consulta = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', 
+        email='$email', documento_identidad ='$documento_identidad', tipo_documento = '$tipo_documento',
+         telefono='$telefono', direccion='$direccion', ciudad='$ciudad', estado='$estado', codigo_postal=
+         '$codigo_postal', pais='$pais', notas= '$notas', fecha_creacion='$fecha_creacion', 
+         fecha_modificacion='$fecha_modificacion' WHERE id_cliente='$llave'";
         
         $resultado = $mysqli->query($consulta);
         
@@ -76,29 +80,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos del cliente para mostrar en el formulario
     $query = "SELECT * FROM clientes WHERE id_cliente = ?";
     $stmt = $mysqli->prepare($query);
-
     if ($stmt) {
-        // Vincular el parámetro de 'id_cliente' a la consulta preparada
         $stmt->bind_param("i", $llave);
-
-        // Ejecutar la consulta preparada
         $stmt->execute();
-
-        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
-
         if ($result) {
-            // Recuperar los datos del cliente como un array asociativo
+        // Recuperar los datos del cliente como un array asociativo
             $cliente = $result->fetch_assoc();
-
-            // Cerrar la consulta preparada
             $stmt->close();
         } else {
-            // Manejar el caso en que no se pudo obtener el resultado de la consulta
             exit("Error al ejecutar la consulta.");
         }
     } else {
-        // Manejar el caso en que la consulta preparada no se pudo preparar
         exit("Error al preparar la consulta.");
     }
 }
@@ -147,20 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-  
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editar Cliente</title>
-  <!-- Bootstrap 5 y Font Awesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
 <div class="container py-5">
   <div class="card shadow-lg">
@@ -325,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </div>
 
-<!-- Scripts de Bootstrap 5 -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

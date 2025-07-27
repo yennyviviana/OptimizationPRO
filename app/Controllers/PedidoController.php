@@ -16,10 +16,10 @@ define('db_username', 'root');
 define('db_password', '');
 define('db_dbname', 'sofware_erp');
 
-// Conectar a MySQL y seleccionar la base de datos.
+// Conectar a MySQL y seleccionar la base de datos
 $mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
 
-// Verificar que la conexión sea exitosa
+// Verificar que la conexión sea exitosa......
 if (!$mysqli) {
     die('Error al conectarse a MySQL: ' . mysqli_connect_error());
 }
@@ -27,10 +27,10 @@ if (!$mysqli) {
 // Establecer juego de caracteres UTF-8zvc c
 mysqli_set_charset($mysqli, 'utf8');
 
-    // Crea una instancia del modelo
+    // Crea una instancia del modelo.....
     $modelo = new PedidoModel($mysqli);
 
-    // Capturar los datos enviados POST
+    // Capturar los datos enviados POST.....
     $referencia = $_POST['referencia'];
     $total = $_POST['total'];
     $estado = $_POST['estado'];
@@ -49,14 +49,14 @@ mysqli_set_charset($mysqli, 'utf8');
     $fecha_pedido = date('Y-m-d h:i:s');
     $fecha_entrega = $_POST['fecha_entrega'];
 
-    // Convertir las fechas a objetos DateTime
+    // Convertir las fechas a objetos DateTime......
     $fecha_pedido_objeto = new DateTime($fecha_pedido);
     $fecha_entrega_objeto = new DateTime($fecha_entrega);
 
-    // Calcular la diferencia entre las fechas
+    // Calcular la diferencia entre las fechas......
     $diferencia = $fecha_pedido_objeto->diff($fecha_entrega_objeto);
 
-    // Formatear la diferencia en días y horas
+    // Formatear la diferencia en días y horas......
     $tiempo_estimado_horas  = $diferencia->format('%d días y %h horas');
 
     // Inserta el pedido usando el método correspondiente del modelo......

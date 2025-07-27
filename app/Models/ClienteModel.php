@@ -14,7 +14,10 @@ class ClienteModel {
         }
     }
 
-    public function insertarCliente($nombre, $apellido, $email, $documento_identidad, $tipo_documento, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $notas, $fecha_creacion, $fecha_modificacion) {
+    public function insertarCliente($nombre, $apellido, $email, $documento_identidad, 
+    $tipo_documento, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, 
+    $notas, $fecha_creacion, $fecha_modificacion) {
+        
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
         $email = mysqli_real_escape_string($this->conexion, $email);
@@ -40,7 +43,10 @@ class ClienteModel {
         }
     }
 
-    public function ActualizarCliente($id_cliente, $nombre, $apellido, $email, $documento_identidad, $tipo_documento, $telefono, $direccion, $ciudad, $estado, $codigo_postal, $pais, $notas, $fecha_creacion, $fecha_modificacion) {
+    public function ActualizarCliente($id_cliente, $nombre, $apellido, $email, 
+    $documento_identidad, $tipo_documento, $telefono, $direccion, $ciudad, $estado,
+     $codigo_postal, $pais, $notas, $fecha_creacion, $fecha_modificacion) {
+
         $nombre = mysqli_real_escape_string($this->conexion, $nombre);
         $apellido = mysqli_real_escape_string($this->conexion, $apellido);
         $email = mysqli_real_escape_string($this->conexion, $email);

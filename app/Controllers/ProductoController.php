@@ -9,7 +9,7 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Fetch providers from the database....
+// Fetch providers from the database......
 $sql = "SELECT id_proveedor, nombre_empresa FROM proveedores";
 $result = $mysqli->query($sql);
 
@@ -21,9 +21,9 @@ if ($result->num_rows > 0) {
 }
 
 if ($_POST) {
-    echo '<pre>'; // Add these lines for debugging
-    print_r($_POST); // Add these lines for debugging
-    echo '</pre>'; //  lines for debugging.....
+    echo '<pre>'; //debugging
+    print_r($_POST); //debugging
+    echo '</pre>'; //debugging.....
 
     if (isset($_POST['id_proveedor'])) {
         $id_proveedor = $_POST['id_proveedor'];
@@ -48,10 +48,14 @@ if ($_POST) {
         $detalles= $_POST['detalles'];
         $archivo = $_FILES['archivo'];
         $codigo_barras= $_POST['codigo_barras'];
-        // Insert product using the corresponding model method
-        $resultado = $modelo->insertarProducto($nombre_producto,$precio,$cantidad_stock,$categoria_productos,$estado,$fecha_adquisicion,$fecha_vencimiento,$id_proveedor,$detalles,$archivo,$codigo_barras);
 
-        // Verify if the insertion was successful
+        // Insert product using the corresponding model method
+        $resultado = $modelo->insertarProducto($nombre_producto,$precio,
+        $cantidad_stock,$categoria_productos,$estado,$fecha_adquisicion,
+        $fecha_vencimiento,$id_proveedor,$detalles,$archivo,$codigo_barras);
+
+
+        // Verify if the insertion was successful.....
         if ($resultado) {
             header("Location: create.php?da=2");
             exit();

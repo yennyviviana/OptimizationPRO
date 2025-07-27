@@ -43,7 +43,7 @@ switch ($dato) {
 
 
 
-    // Case of Suppliers
+    // Case of Suppliers......
     case 'Suppliers-1':
         require_once('Views/Suppliers/create.php');
         break;
@@ -57,7 +57,7 @@ switch ($dato) {
         require_once('Views/Suppliers/delete.php');
         break;
 
-    // Case of Shopping
+    // Case of Shopping......
     case 'Shopping-1':
         require_once('Views/Shopping/create.php');
         break;
@@ -71,7 +71,7 @@ switch ($dato) {
         require_once('Views/Shopping/delete.php');
         break;
 
-    // Case of Customers
+    // Case of Customers.....
     case 'Customers-1':
         require_once('Views/Customers/create.php');
         break;
@@ -85,8 +85,7 @@ switch ($dato) {
         require_once('Views/Customers/delete.php');
         break;
 
-    // Repeat for other categories...
-    // Case of Employees
+    // Case of Employees......
     case 'Employees-1':
         require_once('Views/Employees/create.php');
         break;

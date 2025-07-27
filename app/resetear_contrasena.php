@@ -19,7 +19,7 @@ $mysqli = mysqli_connect(db_host,db_username,db_password,db_dbname);
             $nueva_contrasena = $_POST['nueva_contrasena'];
             $id_usuario = $stmt->fetch_assoc()['id'];
 
-            // Actualizar contraseña en la base de datos
+            // Actualizar contraseña en la base de datos......
             $stmt = $conn->prepare("UPDATE usuarios SET password = ?, token_recuperacion = NULL, token_expiracion = NULL WHERE id_usuario = ?");
             $stmt->bind_param("si", password_hash($nueva_contrasena, PASSWORD_DEFAULT), $id_usuario);
             $stmt->execute();

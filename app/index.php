@@ -1,5 +1,8 @@
-<?php 
+<?php
+
 require 'Config/database.php';
+
+
 session_start();
 
 
@@ -72,7 +75,6 @@ header("Location: index.php");
  }
 }
 ?> 
-
 
 <!DOCTYPE html>
 <html lang="es">

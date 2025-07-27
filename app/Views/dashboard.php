@@ -179,8 +179,7 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
   </div>
 </div>
 
-
-                <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
+          <button class="btn btn-sm btn-outline-secondary" id="toggle-theme">
           <i data-feather="moon"></i> Cambiar Tema......
        </button>
  </div>
@@ -317,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.getElementById('editEventButton').addEventListener('click', function () {
+    document.getElementById('editEventButton').addEventListener('click', function () {   
         const title = document.getElementById('title').value;
         const start = document.getElementById('start').value;
         const end = document.getElementById('end').value;
@@ -331,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.success) {
                 const event = calendar.getEventById(selectedEventId);
-                event.setProp('title', title);
+                event.setProp('title', title);               
                 event.setStart(start);
                 event.setEnd(end);
                 modalBootstrap.hide();
@@ -422,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleThemeButton = document.getElementById('toggle-theme');
     const body = document.body;
 
-    // Si ya hay un tema oscuro en la sesión (en caso de recargar la página), lo aplicamos
+    // Si ya hay un tema oscuro 
     if (localStorage.getItem('dark-theme') === 'true') {
         body.classList.add('dark-theme');
         feather.replace(); // Vuelve a cargar el ícono si es necesario.......
@@ -437,23 +436,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Cambiar el ícono de luna a sol dependiendo del tema..........
         if (isDarkTheme) {
-            toggleThemeButton.innerHTML = '<i data-feather="sun"></i> Cambiar Tema'; // Muestra el ícono de sol
+            toggleThemeButton.innerHTML = '<i data-feather="sun"></i> Cambiar Tema'; 
         } else {
-            toggleThemeButton.innerHTML = '<i data-feather="moon"></i> Cambiar Tema'; // Vuelve a mostrar la luna
+            toggleThemeButton.innerHTML = '<i data-feather="moon"></i> Cambiar Tema';
         }
 
-        feather.replace(); // Vuelve a cargar los íconos después del cambio
+        feather.replace();
     });
 });
 
 
 document.getElementById('addElement').addEventListener('click', function (e) {
-    e.preventDefault(); // Evitar el comportamiento por defecto (si es necesario)
+    e.preventDefault(); // Evitar el comportamiento por defecto 
     alert('Elemento agregado con éxito');
-    // Puedes agregar elementos dinámicamente aquí, por ejemplo:
+    // Puedes agregar elementos dinámicamente....
     const newElement = document.createElement('div');
     newElement.textContent = 'Nuevo Elemento';
-    document.body.appendChild(newElement); // Lo agrega al body (puedes elegir otro contenedor)
+    document.body.appendChild(newElement); 
 });
 
 
