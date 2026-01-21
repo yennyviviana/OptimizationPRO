@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../../Models/PedidoModel.php';
 require_once __DIR__ . '/../../Controllers/PedidoController.php';
 
+
+
 ?>
 
 
@@ -12,9 +14,7 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD pedidos</title>
-    <!-- Agregamos los estilos de Bootstrap para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Incluimos el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
@@ -26,7 +26,6 @@ require_once __DIR__ . '/../../Controllers/PedidoController.php';
          
 
 <style>
-/* Estilos personalizados */
 body {
     background-color: #000;
     color: #f5f5f5;
@@ -35,177 +34,173 @@ body {
 
 </style>
 
-
-
+  
 <div class="container py-5">
-    <div class="card shadow-lg">
-        <div class="card-header bg-dark text-white">
-            <h4 class="mb-0"><i class="fas fa-box"></i> Registrar Pedido</h4>
-        </div>
-        <div class="card-body">
-            <form action="insert.php?da=Orders-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-                <div class="row g-3">
+  <div class="card shadow-lg">
+    <div class="card-header bg-dark text-white">
+      <h4 class="mb-0"><i class="fas fa-user-plus"></i> Registrar pedido</h4>
+    </div>
+    <div class="card-body">
+      <form action="insert.php?da=insert-2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <div class="row g-3">
+        
+          <div class="col-md-6">
 
-                    <!-- Columna izquierda -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="referencia">Referencia</label>
-                            <input type="number" id="referencia" name="referencia" class="form-control" required placeholder="Referencia">
-                            <div class="invalid-feedback">Ingrese la referencia.</div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="total">Total</label>
-                            <input type="number" id="total" name="total" class="form-control" required placeholder="Total del pedido">
-                            <div class="invalid-feedback">Ingrese el total.</div>
-                        </div>
+    <div class="form-group">
+        <label for="estado">Estado del pedido</label>
+        <select id="estado" name="estado" class="form-select" required>
+            <option value="">Seleccione</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="aprobado">Aprobado</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+    </div>
 
-                        <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <select id="estado" name="estado" class="form-select" required>
-                                <option value="">Seleccione una opción</option>
-                                <option value="aprobado">Aprobado</option>
-                                <option value="cancelado">Cancelado</option>
-                                <option value="en stock">En stock</option>
-                                <option value="entregado">Entregado</option>
-                            </select>
-                            <div class="invalid-feedback">Seleccione el estado del pedido.</div>
-                        </div>
+     <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea id="descripcion" name="descripcion"
+                  class="form-control" rows="3"></textarea>
+    </div>
 
-                        <div class="form-group">
-                            <label for="direccion">Dirección de entrega</label>
-                            <input type="text" id="direccion" name="direccion" class="form-control" required placeholder="Dirección de entrega">
-                            <div class="invalid-feedback">Ingrese la dirección de entrega.</div>
-                        </div>
+    <div class="form-group">
+        <label for="direccion">Dirección de entrega</label>
+        <input type="text" id="direccion" name="direccion"
+               class="form-control" required>
+    </div>
 
-                        <div class="form-group">
-                            <label for="observaciones">Observaciones</label>
-                            <textarea id="observaciones" name="observaciones" class="form-control" rows="3" required placeholder="Observaciones del pedido"></textarea>
-                            <div class="invalid-feedback">Ingrese las observaciones.</div>
-                        </div>
-                    </div>
+    <div class="form-group">
+        <label for="informacion_pedido">Observaciones</label>
+        <textarea id="informacion_pedido" name="informacion_pedido"
+                  class="form-control" rows="3"></textarea>
+    </div>
 
-                    <!-- Columna derecha -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="tracking">Tracking</label>
-                            <input type="number" id="tracking" name="tracking" class="form-control" required placeholder="Número de seguimiento">
-                            <div class="invalid-feedback">Ingrese el número de seguimiento.</div>
-                        </div>
+  
+    <div class="form-group">
+    <label>Número de seguimiento</label>
+    <input type="text" class="form-control bg-light"
+           value="Se genera automáticamente" readonly>
 
-                        <div class="form-group">
-                            <label for="tiempo_estimado_horas">Tiempo Estimado (Horas)</label>
-                            <input type="number" readonly class="form-control bg-light" id="tiempo_estimado_horas_visible" placeholder="Calculado automáticamente">
-                            <input type="hidden" name="tiempo_estimado_horas" id="tiempo_estimado_horas">
-                        </div>
+    <!-- valor real que viaja -->
+    <input type="hidden" name="numero_seguimiento" id="numero_seguimiento">
+</div>
 
-                        
 
-                        <div class="form-group">
-                            <label for="id_usuario">Usuario</label>
-                            <select class="form-select" id="id_usuario" name="id_usuario" required>
-                                <option value="">Seleccione el usuario</option>
-                                <?php foreach ($usuarios as $usuario): ?>
-                                    <option value="<?php echo $usuario['id_usuario']; ?>">
-                                        <?php echo $usuario['id_usuario']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="invalid-feedback">Seleccione el usuario.</div>
-                        </div>
+   <div class="form-group">
+    <label>Tiempo estimado (horas)</label>
+    <input type="number" class="form-control bg-light"
+           value="Calculado automáticamente" readonly>
 
-                        <div class="form-group">
-                            <label for="metodo_pago">Método de Pago</label>
-                            <select id="metodo_pago" name="metodo_pago" class="form-select" required>
-                                <option value="">Seleccione una opción</option>
-                                <option value="credito">Crédito</option>
-                                <option value="Paypal">Paypal</option>
-                                <option value="transferencia">Transferencia</option>
-                            </select>
-                            <div class="invalid-feedback">Seleccione el método de pago.</div>
-                        </div>
+    <!-- valor real que viaja -->
+    <input type="hidden" name="tiempo_entrega_horas" id="tiempo_entrega_horas">
+</div>
 
-                        <div class="form-group">
-                            <label for="archivo_adjunto">Archivo Adjunto</label>
-                            <input type="file" id="archivo_adjunto" name="archivo_adjunto" class="form-control" required>
-                            <div class="invalid-feedback">Adjunte un archivo.</div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="fecha_pedido">Fecha del Pedido</label>
-                            <input type="date" id="fecha_pedido" name="fecha_pedido" class="form-control" required>
-                            <div class="invalid-feedback">Seleccione la fecha del pedido.</div>
-                        </div>
+   
 
-                        <div class="form-group">
-                            <label for="fecha_entrega">Fecha de Entrega</label>
-                            <input type="date" id="fecha_entrega" name="fecha_entrega" class="form-control" required>
-                            <div class="invalid-feedback">Seleccione la fecha de entrega.</div>
-                        </div>
-                    </div>
+    <h5 class="mt-4">Detalle del pedido</h5>
 
-                    <div class="text-end mt-4">
-                        <button type="submit" name="boton" class="btn btn-success px-4">
-                            <i class="fas fa-save"></i> Guardar
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total línea</th>
+            </tr>
+        </thead>
+        <tbody id="detallePedido">
+            <!-- Filas dinámicas con JS -->
+        </tbody>
+    </table>
+
+   
+  <div class="row mt-3">
+    <div class="col-md-4">
+        <label>Subtotal</label>
+        <input type="number" id="subtotal" name="subtotal"
+               class="form-control bg-light" readonly>
+    </div>
+
+    <div class="col-md-4">
+        <label>Impuestos (IVA 19%)</label>
+        <input type="number" id="impuestos" name="impuestos"
+               class="form-control bg-light" readonly>
+    </div>
+
+    <div class="col-md-4">
+        <label>Total</label>
+        <input type="number" id="total" name="total"
+               class="form-control bg-light" readonly>
     </div>
 </div>
 
 
+ 
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <label>Fecha del pedido</label>
+            <input type="date" name="fecha_pedido" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <input type="date" id="fecha_entrega" name="fecha_entrega" class="form-control">
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        </div>
+    </div>
+
+   
+    <button type="submit" name="boton" class="btn btn-success">
+              Guardar pedido
+</button>
+</div>
+
+</form>
+
 <script>
-    CKEDITOR.replace('detalles');
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Validación visual Bootstrap
-    (() => {
-        'use strict';
-        const forms = document.querySelectorAll('.needs-validation');
-        forms.forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            });
-        });
-    })();
+    console.log('JS cargado correctamente');
 
-    // Cálculo del tiempo entre fechas
-    const fechaPedido = document.getElementById('fecha_pedido');
-    const fechaEntrega = document.getElementById('fecha_entrega');
-    const tiempoEntrega = document.getElementById('tiempo_estimado_hora');
-    const tiempoHidden = document.getElementById('tiempo_estimado_hora_valor');
+    
+    let subtotal = 100000;
+    let impuestos = subtotal * 0.19;
+    let total = subtotal + impuestos;
 
-    function calcularTiempo() {
-        if (fechaPedido.value && fechaEntrega.value) {
-            const start = new Date(fechaPedido.value);
-            const end = new Date(fechaEntrega.value);
-            const diff = end - start;
-            if (diff >= 0) {
-                const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const texto = `${dias} días y ${horas} horas`;
-                tiempoEstimado.value = texto;
-                tiempoHidden.value = texto;
-            } else {
-                tiempoEstimado.value = "Fechas inválidas";
-                tiempoHidden.value = "";
+    document.getElementById('subtotal').value = subtotal.toFixed(2);
+    document.getElementById('impuestos').value = impuestos.toFixed(2);
+    document.getElementById('total').value = total.toFixed(2);
+
+    // ======================
+    // DATOS AUTOMÁTICOS
+    // ======================
+    document.getElementById('numero_seguimiento').value =
+        'SEG-' + Date.now();
+
+    document.getElementById('tiempo_entrega_horas').value = 24;
+
+    // ======================
+    // CALCULAR TIEMPO POR FECHA
+    // ======================
+    let fechaEntrega = document.getElementById('fecha_entrega');
+
+    if (fechaEntrega) {
+        fechaEntrega.addEventListener('change', function () {
+            let hoy = new Date();
+            let entrega = new Date(this.value);
+
+            let diffMs = entrega - hoy;
+            let horas = Math.ceil(diffMs / (1000 * 60 * 60));
+
+            if (horas > 0) {
+                document.getElementById('tiempo_entrega_horas').value = horas;
             }
-        }
+        });
     }
 
-    fechaPedido.addEventListener('change', calcularTiempo);
-    fechaEntrega.addEventListener('change', calcularTiempo);
+});
 </script>
 
- 
 
 </body>
-</html>

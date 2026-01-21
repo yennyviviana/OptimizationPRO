@@ -2,75 +2,79 @@
 
 include_once __DIR__ . '/../Models/PedidoModel.php';
 
-session_start(); 
+session_start();
+
 if (!isset($_SESSION['id_usuario'])) {
     header("Location: index.php");
     exit();
 }
 
-// Verifica si se ha presionado el botón de guardar
 if (isset($_POST['boton'])) {
 
-define('db_host', 'localhost');
-define('db_username', 'root');
-define('db_password', '');
-define('db_dbname', 'sofware_erp');
+    
+    $mysqli = mysqli_connect('localhost', 'root', '', 'sofware_erp');
 
-// Conectar a MySQL y seleccionar la base de datos
-$mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
+    if (!$mysqli) {
+        die('Error al conectar MySQL: ' . mysqli_connect_error());
+    }
 
-// Verificar que la conexión sea exitosa......
-if (!$mysqli) {
-    die('Error al conectarse a MySQL: ' . mysqli_connect_error());
-}
+    mysqli_set_charset($mysqli, 'utf8');
 
-// Establecer juego de caracteres UTF-8zvc c
-mysqli_set_charset($mysqli, 'utf8');
-
-    // Crea una instancia del modelo.....
+    
     $modelo = new PedidoModel($mysqli);
 
-    // Capturar los datos enviados POST.....
-    $referencia = $_POST['referencia'];
-    $total = $_POST['total'];
-    $estado = $_POST['estado'];
-    $direccion = $_POST['direccion'];
-    $observaciones = $_POST['observaciones'];
-    $tracking = $_POST['tracking'];
-    $tiempo_estimado_horas = $_POST['tiempo_estimado_horas'];
-    $metodo_pago = $_POST['metodo_pago'];
-    $metodo_pago = $_POST['metodo_pago'];
-    $archivo_adjunto =$_FILES['archivo_adjunto'];
-    $fecha_pedido = $_POST['fecha_pedido'];
-    $fecha_entrega = $_POST['fecha_entrega'];
-    $id_usuario = $_SESSION['id_usuario'];
+    
+    $estado              = $_POST['estado'];
+    $direccion           = $_POST['direccion'];
+    $descripcion         = $_POST['descripcion'] ?? '';
+    $informacion_pedido  = $_POST['informacion_pedido'] ?? '';
+    $numero_seguimiento  = $_POST['numero_seguimiento'] ?? null;
+    $fecha_pedido = date('Y-m-d H:i:s');
+    $fecha_entrega       = $_POST['fecha_entrega'] ?? null;
+    $id_usuario          = $_SESSION['id_usuario'];
+    $tiempo_entrega_horas = $_POST['tiempo_entrega_horas'] ?? null;
 
-    // Capturar la fecha de entrega proporcionada por el usuario.....
-    $fecha_pedido = date('Y-m-d h:i:s');
-    $fecha_entrega = $_POST['fecha_entrega'];
+              
+    $subtotal = 0;
 
-    // Convertir las fechas a objetos DateTime......
-    $fecha_pedido_objeto = new DateTime($fecha_pedido);
-    $fecha_entrega_objeto = new DateTime($fecha_entrega);
+    if (!empty($_POST['cantidad']) && !empty($_POST['precio'])) {
+        for ($i = 0; $i < count($_POST['cantidad']); $i++) {
+            $subtotal += (int)$_POST['cantidad'][$i] * (float)$_POST['precio'][$i];
+        }
+    }
 
-    // Calcular la diferencia entre las fechas......
-    $diferencia = $fecha_pedido_objeto->diff($fecha_entrega_objeto);
+    $impuestos = $subtotal * 0.19;
+    $total     = $subtotal + $impuestos;
 
-    // Formatear la diferencia en días y horas......
-    $tiempo_estimado_horas  = $diferencia->format('%d días y %h horas');
+    
+    $tiempo_entrega_horas = filter_input(
+    INPUT_POST,
+    'tiempo_entrega_horas',
+    FILTER_VALIDATE_INT
+);
 
-    // Inserta el pedido usando el método correspondiente del modelo......
-    $resultado = $modelo->insertarPedido($referencia, $total, $estado, $direccion, $observaciones, $tracking, $tiempo_estimado_horas,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
+    
+    $resultado = $modelo->insertarPedido(
+        $total,
+        $estado,
+        $direccion,
+        $descripcion,
+        $numero_seguimiento,
+        $tiempo_entrega_horas,
+        $informacion_pedido,
+        $subtotal,
+        $impuestos,
+        $fecha_pedido,
+        $fecha_entrega,
+        $id_usuario
+    );
 
-   
     if ($resultado) {
-       
         header("Location: create.php?da=2");
         exit();
     } else {
-        echo "Error al insertar el pedido.";
+        echo " Error al insertar el pedido";
     }
 
-    
     mysqli_close($mysqli);
 }
