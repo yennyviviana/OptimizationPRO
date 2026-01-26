@@ -77,7 +77,25 @@ body {
                   class="form-control" rows="3"></textarea>
     </div>
 
-  
+    <div class="mb-3">
+  <label for="id_usuario" class="form-label">Usuario:</label>
+
+  <select class="form-select" id="id_usuario" name="id_usuario" required>
+    <option value="">Selecciona un Usuario</option>
+
+    <?php foreach ($usuarios as $usuario): ?>
+      <option value="<?php echo $usuario['id_usuario']; ?>">
+        <?php echo $usuario['nombre_usuario']; ?>
+      </option>
+    <?php endforeach; ?>
+
+  </select>
+
+  <div class="invalid-feedback">Por favor seleccione un usuario.</div>
+</div>
+
+
+
     <div class="form-group">
     <label>Número de seguimiento</label>
     <input type="text" class="form-control bg-light"

@@ -75,6 +75,7 @@ if (!$resultados) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ <link href="pedido.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
@@ -108,23 +109,33 @@ if (!$resultados) {
 
 
    
-    <div class="table-responsive">
-  <table class="table table-bordered table-hover">
+ <table class="table table-bordered table-hover">
     <thead class="bg-primary text-white">
-      <tr>
-        <th>ID Pedido</th>
-        <th>Referencia</th>
-        <th>Total</th>
-        <th>Estado</th>
-        <th>Fecha Pedido</th>
-        <th>Fecha Entrega</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
+  <tr>
+    <th>ID Pedido</th>
+    <th>ID Usuario</th>
+    <th>Total</th>
+    <th>Estado</th>
+    <th>Dirección</th>
+    <th>Descripción</th>
+    <th>Seguimiento</th>
+    <th>Tiempo</th>
+    <th>Información</th>
+    <th>Subtotal</th>
+    <th>Impuestos</th>
+    <th>Fecha Pedido</th>
+    <th>Fecha Entrega</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+
     <tbody>
       <?php while ($pedido = $resultados->fetch_assoc()): ?>
         <tr>
           <td><?= htmlspecialchars($pedido['id_pedido']) ?></td>
+
+           <td><?= htmlspecialchars($pedido['id_usuario']) ?></td>
+           
           <td><?= number_format($pedido['total'], 2) ?></td>
           <td><?= htmlspecialchars($pedido['estado']) ?></td>
            <td><?= htmlspecialchars($pedido['direccion']) ?></td>
@@ -136,17 +147,25 @@ if (!$resultados) {
                        <td><?= htmlspecialchars($pedido['impuestos']) ?></td>
                        <td><?= htmlspecialchars($pedido['fecha_pedido']) ?></td>
                       <td><?= htmlspecialchars($pedido['fecha_entrega']) ?></td>
-                      <td><?= htmlspecialchars($pedido['id_usuario']) ?></td>
+                 
 
 
-            <a href="edit.php?da=Suppliers-3&lla=<?= $pedido['id_pedido'] ?>" title="Editar">
-              <i class="fas fa-edit icono-editar"></i>
-            </a>
+<td>
 
-            <a href="#" title="Borrar" onclick="borrarPedido(<?= $pedido['id_pedido'] ?>"title="borrar">
-              <i class="fas fa-trash-alt icono-borrar"></i>
-            </a>
-          </td>
+  <a href="edit.php?da=Orders-3&lla=<?php echo $pedido['id_usuario']; ?>"
+     class="btn btn-primary btn-sm">
+    <i class="fas fa-edit"></i> Editar
+  </a>
+
+  <a href="#"
+     class="btn btn-danger btn-sm btn-borrar"
+     onclick="borrarPedido(<?php echo $pedido['id_usuario']; ?>)">
+    <i class="fas fa-trash-alt"></i> Borrar
+  </a>
+</td>
+
+
+
         </tr>
       <?php endwhile; ?>
     </tbody>

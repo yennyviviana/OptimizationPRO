@@ -1,7 +1,7 @@
 <?php
-// Incluir el modelo y el archivo de configuración de la base de datos
-require_once __DIR__ . '/../../Models/PedidoModel.php';
+require_once __DIR__ . '/../../Models/ClienteModel.php';
 require_once __DIR__ . '/../../Config/database.php';
+require_once __DIR__ . '/../../Models/PedidoModel.php';
 
 session_start();
 
@@ -10,247 +10,184 @@ if (!isset($_SESSION['id_usuario'])) {
     exit();
 }
 
-// Validar y obtener el valor de 'da' y 'lla' de $_GET
+$mysqli = new mysqli('localhost', 'root', '', 'sofware_erp');
+$mysqli->set_charset("utf8");
+if ($mysqli->connect_error) {
+    die('Error en la conexion: ' . $mysqli->connect_error);
+}
+
+$PedidoModel = new PedidoModel($mysqli);
+
+// Validar si se pasó un ID de pedido
 $llave = isset($_GET['lla']) ? intval($_GET['lla']) : 0;
-if ($llave <= 0) {
-    exit("Error: 'lla' debe ser un valor numérico válido.");
-}
-
-// Conectar a MySQL y seleccionar la base de datos.
-$mysqli = mysqli_connect(db_host, db_username, db_password, db_dbname);
-
-// Verificar que la conexión sea exitosa
-if (!$mysqli) {
-    die('Error al conectarse a MySQL: ' . mysqli_connect_error());
-}
-
-// Establecer juego de caracteres UTF-8
-mysqli_set_charset($mysqli, 'utf8');
-
-// Inicializar la variable $pedido
 $pedido = null;
-
-// Verificar si se ha enviado un formulario para actualizar el proveedor
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //capturar los datos enviados POST
-    $referencia = $_POST['referencia'];
-    $total = $_POST['total'];
-    $estado = $_POST['estado'];
-    $direccion_entrega = $_POST['direccion_entrega'];
-    $observaciones = $_POST['observaciones'];
-    $tracking = $_POST['tracking'];
-    $tiempo_estimado_horas = $_POST['tiempo_estimado_horas'];
-    $detalles = $_POST['detalles'];
-    $metodo_pago = $_POST['metodo_pago'];
-    $metodo_pago = $_POST['metodo_pago'];
-    $archivo_adjunto =$_FILES['archivo_adjunto'];
-    $fecha_pedido = $_POST['fecha_pedido'];
-    $fecha_entrega = $_POST['fecha_entrega'];
-    $id_usuario = $_SESSION['id_usuario'];
-    
-
-    // Capturar la fecha de entrega proporcionada por el usuario
-    $fecha_pedido = date('Y-m-d H:i:s');
-    $fecha_entrega = $_POST['fecha_entrega'];
-
-    // Convertir las fechas a objetos DateTime
-    $fecha_pedido_objeto = new DateTime($fecha_pedido);
-    $fecha_estimada_objeto = new DateTime($fecha_entrega);
-
-    // Calcular la diferencia entre las fechas
-    $diferencia = $fecha_pedido_objeto->diff($fecha_estimada_objeto);
-
-    // Formatear la diferencia en días y horas
-    $tiempo_estimado_horas = $diferencia->format('%d días y %h horas');
-
-    // Crear una instancia del modelo de proveedor
-    $pedidoModel = new PedidoModel($mysqli);
-
-    try {
-        // Actualizar el pedido en la base de datos
-        $resultado = $pedidoModel->actualizarPedido($llave,$referencia, $total, $estado, $direccion_entrega, $observaciones, $tracking, $tiempo_estimado_horas,$detalles,$metodo_pago, $archivo_adjunto, $fecha_pedido, $fecha_entrega, $id_usuario);
-        if ($resultado) {
-            //echo "Pedido actualizado correctamente.";
-        } else {
-            echo "Error al actualizar el pedido.";
-        }
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
-} else {
-    // Obtener los datos del pedido para mostrar en el formulario
-    $query = "SELECT * FROM pedidos WHERE id_pedido = ?";
-    $stmt = $mysqli->prepare($query);
-
-    if ($stmt) {
-        // Vincular el parámetro de 'id_proveedor' a la consulta preparada
-        $stmt->bind_param("i", $llave);
-
-        // Ejecutar la consulta preparada
-        $stmt->execute();
-
-        // Obtener el resultado de la consulta
-        $result = $stmt->get_result();
-
-        if ($result) {
-            // Recuperar los datos del pedido como un array asociativo
-            $pedido = $result->fetch_assoc();
-
-            // Cerrar la consulta preparada
-            $stmt->close();
-        } else {
-            // Manejar el caso en que no se pudo obtener el resultado de la consulta
-            exit("Error al ejecutar la consulta.");
-        }
-    } else {
-        // Manejar el caso en que la consulta preparada no se pudo preparar
-        exit("Error al preparar la consulta.");
-    }
+if ($llave > 0) {
+    $pedido = $PedidoModel->getPedidoById($llave);
 }
 
+// Obtener lista de usuarios
+$usuarios = $PedidoModel->getUsuarios();
 
+// Procesar POST para actualizar
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pedido) {
+    $estado              = $_POST['estado'];
+    $direccion           = $_POST['direccion'];
+    $descripcion         = $_POST['descripcion'] ?? '';
+    $informacion_pedido  = $_POST['informacion_pedido'] ?? '';
+    $numero_seguimiento  = $_POST['numero_seguimiento'] ?? $pedido['numero_seguimiento'];
+    $fecha_pedido        = $_POST['fecha_pedido'] ?? $pedido['fecha_pedido'];
+    $fecha_entrega       = $_POST['fecha_entrega'] ?? $pedido['fecha_entrega'];
+    $id_usuario          = $_POST['id_usuario'] ?? $pedido['id_usuario'];
+    $tiempo_entrega_horas = $_POST['tiempo_entrega_horas'] ?? $pedido['tiempo_entrega_horas'];
+
+    $subtotal = $pedido['subtotal'] ?? 0;
+    $impuestos = $subtotal * 0.19;
+    $total = $subtotal + $impuestos;
+
+    $updated = $PedidoModel->updatePedido($llave, [
+        'estado' => $estado,
+        'direccion' => $direccion,
+        'descripcion' => $descripcion,
+        'informacion_pedido' => $informacion_pedido,
+        'subtotal' => $subtotal,
+        'impuestos' => $impuestos,
+        'total' => $total,
+        'fecha_entrega' => $fecha_entrega
+    ]);
+
+    if ($updated) {
+        $pedido = $PedidoModel->getPedidoById($llave); // recargar datos actualizados
+        $mensaje = "Pedido actualizado correctamente";
+    } else {
+        $mensaje = "Error al actualizar el pedido";
+    }
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD pedidos</title>
-    <!-- Agregamos los estilos de Bootstrap para los iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Incluimos el CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a2e0e6a0b5.js" crossorigin="anonymous"></script>
-    <!-- Incluimos el CSS de CKEditor -->
-    <script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
-    <link href="style.css" type="text/css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar Pedido</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.ckeditor.com/4.24.0/standard/ckeditor.js"></script>
 </head>
 <body>
-<div class="container mt-5 mb-5">
+<div class="container py-5">
+
+<?php if ($pedido): ?>
     <div class="card shadow-lg">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0"><i class="fas fa-edit"></i>  Pedido actualizado correctamente.</h4>
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><i class="fas fa-user-edit"></i> Editar Pedido #<?php echo $pedido['id_pedido']; ?></h4>
         </div>
         <div class="card-body">
-            <?php if ($pedido): ?>
-            <form action="edit.php?lla=<?php echo $llave; ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="referencia">Referencia</label>
-                        <input type="number" id="referencia" name="referencia" value="<?php echo htmlspecialchars($pedido['referencia']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese la referencia.</div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="total">Total</label>
-                        <input type="number" id="total" name="total" value="<?php echo htmlspecialchars($pedido['total']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el total.</div>
-                    </div>
-                </div>
+            <?php if (isset($mensaje)): ?>
+                <div class="alert alert-info"><?php echo $mensaje; ?></div>
+            <?php endif; ?>
+            <form method="POST" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="estado">Estado del pedido</label>
+                            <select id="estado" name="estado" class="form-select" required>
+                                <option value="">Seleccione</option>
+                                <?php
+                                $estados = ['pendiente','aprobado','en_proceso','entregado','cancelado'];
+                                foreach ($estados as $e) {
+                                    $selected = ($pedido['estado'] === $e) ? 'selected' : '';
+                                    echo "<option value='$e' $selected>$e</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="estado">Estado</label>
-                        <select id="estado" name="estado" class="form-control" required>
-                            <option value="aprobado" <?php if ($pedido['estado'] == 'aprobado') echo 'selected'; ?>>Aprobado</option>
-                            <option value="cancelado" <?php if ($pedido['estado'] == 'cancelado') echo 'selected'; ?>>Cancelado</option>
-                            <option value="en stock" <?php if ($pedido['estado'] == 'en stock') echo 'selected'; ?>>En stock</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="direccion_entrega">Dirección de entrega</label>
-                        <input type="text" id="direccion_entrega" name="direccion_entrega" value="<?php echo htmlspecialchars($pedido['direccion_entrega']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese la dirección de entrega.</div>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="3"><?php echo htmlspecialchars($pedido['descripcion']); ?></textarea>
+                        </div>
 
-                <div class="form-group">
-                    <label for="observaciones">Observaciones</label>
-                    <textarea id="observaciones" name="observaciones" class="form-control" required><?php echo htmlspecialchars($pedido['observaciones']); ?></textarea>
-                </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección de entrega</label>
+                            <input type="text" id="direccion" name="direccion" class="form-control"
+                                   value="<?php echo htmlspecialchars($pedido['direccion']); ?>" required>
+                        </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="tracking">Tracking</label>
-                        <input type="number" id="tracking" name="tracking" value="<?php echo htmlspecialchars($pedido['tracking']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el tracking.</div>
+                        <div class="form-group">
+                            <label for="informacion_pedido">Observaciones</label>
+                            <textarea id="informacion_pedido" name="informacion_pedido" class="form-control"
+                                      rows="3"><?php echo htmlspecialchars($pedido['informacion_pedido']); ?></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_usuario">Usuario:</label>
+                            <select class="form-select" id="id_usuario" name="id_usuario" required>
+                                <option value="">Selecciona un Usuario</option>
+                                <?php foreach ($usuarios as $usuario): 
+                                    $selected = ($pedido['id_usuario'] == $usuario['id_usuario']) ? 'selected' : '';
+                                ?>
+                                    <option value="<?php echo $usuario['id_usuario']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $usuario['nombre_usuario']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Número de seguimiento</label>
+                            <input type="text" class="form-control bg-light" value="<?php echo $pedido['numero_seguimiento']; ?>" readonly>
+                            <input type="hidden" name="numero_seguimiento" value="<?php echo $pedido['numero_seguimiento']; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tiempo estimado (horas)</label>
+                            <input type="number" class="form-control bg-light" value="<?php echo $pedido['tiempo_entrega_horas']; ?>" readonly>
+                            <input type="hidden" name="tiempo_entrega_horas" value="<?php echo $pedido['tiempo_entrega_horas']; ?>">
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <label>Subtotal</label>
+                                <input type="number" name="subtotal" class="form-control bg-light" value="<?php echo $pedido['subtotal']; ?>" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Impuestos (IVA 19%)</label>
+                                <input type="number" name="impuestos" class="form-control bg-light" value="<?php echo $pedido['impuestos']; ?>" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total</label>
+                                <input type="number" name="total" class="form-control bg-light" value="<?php echo $pedido['total']; ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label>Fecha del pedido</label>
+                                <input type="date" name="fecha_pedido" class="form-control" value="<?php echo date('Y-m-d', strtotime($pedido['fecha_pedido'])); ?>" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Fecha de entrega</label>
+                                <input type="date" name="fecha_entrega" class="form-control" value="<?php echo date('Y-m-d', strtotime($pedido['fecha_entrega'])); ?>">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success mt-3">Actualizar pedido</button>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="tiempo_estimado_horas">Tiempo de entrega (horas)</label>
-                        <input type="number" id="tiempo_estimado_horas" name="tiempo_estimado_horas" value="<?php echo htmlspecialchars($pedido['tiempo_estimado_horas']); ?>" class="form-control" required>
-                        <div class="invalid-feedback">Por favor ingrese el tiempo estimado en horas.</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="detalles">Detalles</label>
-                    <textarea id="detalles" name="detalles" class="form-control" required><?php echo htmlspecialchars($pedido['detalles']); ?></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="metodo_pago">Método de Pago</label>
-                        <select id="metodo_pago" name="metodo_pago" class="form-control" required>
-                            <option value="credito" <?php if ($pedido['metodo_pago'] == 'credito') echo 'selected'; ?>>Crédito</option>
-                            <option value="Paypal" <?php if ($pedido['metodo_pago'] == 'Paypal') echo 'selected'; ?>>Paypal</option>
-                            <option value="transferencia" <?php if ($pedido['metodo_pago'] == 'transferencia') echo 'selected'; ?>>Transferencia</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="archivo_adjunto">Archivos Adjuntos</label>
-                        <input type="file" id="archivo_adjunto" name="archivo_adjunto[]" class="form-control-file" multiple required>
-                        <div class="invalid-feedback">Debe seleccionar al menos un archivo.</div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="fecha_entrega">Fecha de Entrega</label>
-                        <input type="date" id="fecha_entrega" name="fecha_entrega" value="<?php echo htmlspecialchars($pedido['fecha_entrega']); ?>" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="fecha_pedido">Fecha de pedido</label>
-                        <input type="date" id="fecha_pedido" name="fecha_pedido" value="<?php echo htmlspecialchars($pedido['fecha_pedido']); ?>" class="form-control" required>
-                    </div>
-                </div>
-
-                <input type="hidden" name="id_pedido" value="<?php echo htmlspecialchars($pedido['id_pedido']); ?>">
-
-                <div class="text-end mt-4">
-                    <button type="submit" name="boton" class="btn btn-success"><i class="fas fa-save"></i> Guardar Cambios</button>
                 </div>
             </form>
-            <?php endif; ?>
         </div>
     </div>
+
+<?php else: ?>
+    <div class="alert alert-warning text-center mt-5">
+        Pedido no encontrado o ha sido eliminado.
+    </div>
+    <div class="text-center">
+        <a href="insert.php" class="btn btn-primary mt-3">Volver a la lista de pedidos</a>
+    </div>
+<?php endif; ?>
+
 </div>
-
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script>
-    CKEDITOR.replace('detalles');
-   
-
-    document.getElementById('fecha_entrega').addEventListener('change', function () {
-        const fechaEntrega = new Date(this.value);
-        const fechaPedido = new Date();
-        const diferencia = fechaEntrega - fechaPedido;
-
-        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-        document.getElementById('tiempo_estimado_horas').textContent = dias + " días y " + horas + " horas";
-    });
-</script>
 </body>
 </html>
-
-<?php
-// Cierra la conexión a la base de datos
-mysqli_close($mysqli);
-?>
